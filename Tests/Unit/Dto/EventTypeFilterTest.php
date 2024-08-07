@@ -4,7 +4,7 @@ namespace DWenzel\T3events\Tests\Unit\Dto;
 
 use DWenzel\T3events\Domain\Repository\EventTypeRepository;
 use DWenzel\T3events\Dto\EventTypeFilter;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /***************************************************************
@@ -48,7 +48,7 @@ class EventTypeFilterTest extends UnitTestCase
         $this->subject->injectEventTypeRepository($this->eventTypeRepository);
     }
 
-    public function testGetOptionsRepositoryReturnsEventTypeRepository()
+    public function testGetOptionsRepositoryReturnsEventTypeRepository(): void
     {
         $this->assertSame(
             $this->eventTypeRepository,

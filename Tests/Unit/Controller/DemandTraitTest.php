@@ -17,7 +17,7 @@ use DWenzel\T3events\Domain\Model\Dto\VenueAwareDemandInterface;
 use DWenzel\T3events\Domain\Repository\PeriodConstraintRepositoryInterface;
 use DWenzel\T3events\Utility\SettingsUtility;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Class DemandTraitTest
@@ -56,7 +56,7 @@ class DemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function overwriteDemandObjectSetsGenres()
+    public function overwriteDemandObjectSetsGenres(): void
     {
         $demand = $this->getMockForAbstractClass(
             GenreAwareDemandInterface::class,
@@ -73,7 +73,7 @@ class DemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function overwriteDemandObjectSetsGenre()
+    public function overwriteDemandObjectSetsGenre(): void
     {
         // support for legacy field 'genre'
         $demand = $this->getMockForAbstractClass(
@@ -91,7 +91,7 @@ class DemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function overwriteDemandObjectSetsVenues()
+    public function overwriteDemandObjectSetsVenues(): void
     {
         $demand = $this->getMockForAbstractClass(
             VenueAwareDemandInterface::class,
@@ -108,7 +108,7 @@ class DemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function overwriteDemandObjectSetsEventType()
+    public function overwriteDemandObjectSetsEventType(): void
     {
         /** @var EventTypeAwareDemandInterface|\PHPUnit_Framework_MockObject_MockObject $demand */
         $demand = $this->getMockBuilder(EventTypeAwareDemandInterface::class)->getMock();
@@ -123,7 +123,7 @@ class DemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function overwriteDemandObjectSetsEventLocations()
+    public function overwriteDemandObjectSetsEventLocations(): void
     {
         /** @var EventLocationAwareDemandInterface|\PHPUnit_Framework_MockObject_MockObject $demand */
         $demand = $this->getMockBuilder(EventLocationAwareDemandInterface::class)->getMock();
@@ -138,7 +138,7 @@ class DemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function overwriteDemandObjectSetsCategoryConjunction()
+    public function overwriteDemandObjectSetsCategoryConjunction(): void
     {
         $demand = $this->getMockForAbstractClass(
             AbstractDemand::class,
@@ -156,7 +156,7 @@ class DemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function overwriteDemandObjectSetsSearch()
+    public function overwriteDemandObjectSetsSearch(): void
     {
         $fieldNames = 'foo,bar';
         $search = 'baz';
@@ -193,7 +193,7 @@ class DemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function overwriteDemandObjectSetsSortBy()
+    public function overwriteDemandObjectSetsSortBy(): void
     {
         $demand = $this->getMockForAbstractClass(
             AbstractDemand::class, [], '', true, true, true, ['setSortBy']
@@ -211,7 +211,7 @@ class DemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function overwriteDemandObjectSetsSortOrder()
+    public function overwriteDemandObjectSetsSortOrder(): void
     {
         $demand = $this->getMockForAbstractClass(
             AbstractDemand::class, [], '', true, true, true, ['setOrder']
@@ -230,7 +230,7 @@ class DemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function overwriteDemandObjectSetsDefaultSortDirectionAscending()
+    public function overwriteDemandObjectSetsDefaultSortDirectionAscending(): void
     {
         $demand = $this->getMockForAbstractClass(
             AbstractDemand::class, [], '', true, true, true, ['setSortDirection']
@@ -248,7 +248,7 @@ class DemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function overwriteDemandObjectSetsSortDirectionDescending()
+    public function overwriteDemandObjectSetsSortDirectionDescending(): void
     {
         $demand = $this->getMockForAbstractClass(
             AbstractDemand::class, [], '', true, true, true, ['setSortDirection']
@@ -266,7 +266,7 @@ class DemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function overwriteDemandObjectSetsStartDate()
+    public function overwriteDemandObjectSetsStartDate(): void
     {
         /** @var PeriodAwareDemandInterface|\PHPUnit_Framework_MockObject_MockObject $demand */
         $demand = $this->getMockBuilder(PeriodAwareDemandInterface::class)->getMock();
@@ -286,7 +286,7 @@ class DemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function overwriteDemandObjectSetsEndDate()
+    public function overwriteDemandObjectSetsEndDate(): void
     {
         /** @var PerformanceDemand|\PHPUnit_Framework_MockObject_MockObject $demand */
         $demand = $this->getMockBuilder(PerformanceDemand::class)->getMock();
@@ -306,7 +306,7 @@ class DemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function overWriteDemandSetsPeriodAllForInvalidStartDate()
+    public function overWriteDemandSetsPeriodAllForInvalidStartDate(): void
     {
         /** @var PerformanceDemand|\PHPUnit_Framework_MockObject_MockObject $demand */
         $demand = $this->getMockBuilder(PerformanceDemand::class)->getMock();
@@ -352,7 +352,7 @@ class DemandTraitTest extends UnitTestCase
      * @test
      * @dataProvider emptyOverwriteDemandKeysDataProvider
      */
-    public function overWriteDemandNeverSetsEmptyValues($key)
+    public function overWriteDemandNeverSetsEmptyValues($key): void
     {
         $method = 'set' . ucfirst($key);
         $demand = $this->getMockBuilder(

@@ -68,7 +68,7 @@ class PerformanceStatus extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $title
      * @return void
      */
-    public function setTitle($title)
+    public function setTitle($title): void
     {
         $this->title = $title;
     }
@@ -89,7 +89,7 @@ class PerformanceStatus extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param integer $priority
      * @return void
      */
-    public function setPriority($priority)
+    public function setPriority($priority): void
     {
         $this->priority = $priority;
     }
@@ -110,7 +110,7 @@ class PerformanceStatus extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $cssClass
      * @return string cssClass
      */
-    public function setCssClass($cssClass)
+    public function setCssClass($cssClass): void
     {
         $this->cssClass = $cssClass;
     }

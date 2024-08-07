@@ -3,7 +3,7 @@ namespace DWenzel\T3events\Tests\Unit\Controller;
 
 use DWenzel\T3events\Controller\EventDemandFactoryTrait;
 use DWenzel\T3events\Domain\Factory\Dto\EventDemandFactory;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /***************************************************************
  *  Copyright notice
@@ -42,7 +42,7 @@ class EventDemandFactoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function eventDemandFactoryCanBeInjected()
+    public function eventDemandFactoryCanBeInjected(): void
     {
         /** @var EventDemandFactory|\PHPUnit_Framework_MockObject_MockObject $eventDemandFactory */
         $eventDemandFactory = $this->getMockBuilder(EventDemandFactory::class)

@@ -3,7 +3,7 @@
 namespace DWenzel\T3events\Tests\Unit\Dto;
 
 use DWenzel\T3events\Dto\Option;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /***************************************************************
  *  Copyright notice
@@ -37,7 +37,7 @@ class OptionTest extends UnitTestCase
         $this->subject = new Option();
     }
 
-    public function testGetValueInitiallyReturnsEmptyString()
+    public function testGetValueInitiallyReturnsEmptyString(): void
     {
         $this->assertSame(
             '',
@@ -45,7 +45,7 @@ class OptionTest extends UnitTestCase
         );
     }
 
-    public function testValueCanBeSet()
+    public function testValueCanBeSet(): void
     {
         $value = 'foo';
         $this->subject->setValue($value);
@@ -55,7 +55,7 @@ class OptionTest extends UnitTestCase
         );
     }
 
-    public function testGetLabelInitiallyReturnsEmptyString()
+    public function testGetLabelInitiallyReturnsEmptyString(): void
     {
         $this->assertSame(
             '',
@@ -63,7 +63,7 @@ class OptionTest extends UnitTestCase
         );
     }
 
-    public function testLabelCanBeSet()
+    public function testLabelCanBeSet(): void
     {
         $label = 'bar';
         $this->subject->setLabel($label);
@@ -73,7 +73,7 @@ class OptionTest extends UnitTestCase
         );
     }
 
-    public function testSetValueReturnsInstance()
+    public function testSetValueReturnsInstance(): void
     {
         $value = 'boom';
         $this->assertSame(
@@ -82,7 +82,7 @@ class OptionTest extends UnitTestCase
         );
     }
 
-    public function testSetLabelReturnsInstance()
+    public function testSetLabelReturnsInstance(): void
     {
         $label = 'boom';
         $this->assertSame(

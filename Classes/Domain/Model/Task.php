@@ -95,7 +95,7 @@ class Task extends AbstractEntity
      * @param string $name
      * @return void
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -116,7 +116,7 @@ class Task extends AbstractEntity
      * @param integer $action
      * @return void
      */
-    public function setAction($action)
+    public function setAction($action): void
     {
         $this->action = $action;
     }
@@ -137,7 +137,7 @@ class Task extends AbstractEntity
      * @param integer $periodDuration
      * @return void
      */
-    public function setPeriodDuration($periodDuration)
+    public function setPeriodDuration($periodDuration): void
     {
         $this->periodDuration = $periodDuration;
     }
@@ -158,7 +158,7 @@ class Task extends AbstractEntity
      * @param \DWenzel\T3events\Domain\Model\PerformanceStatus $oldStatus
      * @return void
      */
-    public function setOldStatus($oldStatus)
+    public function setOldStatus($oldStatus): void
     {
         $this->oldStatus = $oldStatus;
     }
@@ -179,7 +179,7 @@ class Task extends AbstractEntity
      * @param \DWenzel\T3events\Domain\Model\PerformanceStatus $newStatus
      * @return void
      */
-    public function setNewStatus($newStatus)
+    public function setNewStatus($newStatus): void
     {
         $this->newStatus = $newStatus;
     }
@@ -200,7 +200,7 @@ class Task extends AbstractEntity
      * @param string $folder
      * @return void
      */
-    public function setFolder($folder)
+    public function setFolder($folder): void
     {
         $this->folder = $folder;
     }
@@ -220,7 +220,7 @@ class Task extends AbstractEntity
      *
      * @param string $period A string describing the period constraint. Allowed: all, pastOnly, futureOnly
      */
-    public function setPeriod($period)
+    public function setPeriod($period): void
     {
         $this->period = $period;
     }

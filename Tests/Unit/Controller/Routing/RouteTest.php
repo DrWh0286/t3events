@@ -3,7 +3,7 @@ namespace DWenzel\T3events\Tests\Unit\Controller\Routing;
 
 use DWenzel\T3events\Controller\Routing\Route;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * This file is part of the TYPO3 CMS project.
@@ -45,7 +45,7 @@ class RouteTest extends UnitTestCase
     /**
      * @test
      */
-    public function getOriginInitialValue()
+    public function getOriginInitialValue(): void
     {
         $this->assertSame(
             self::DUMMY_ORIGIN,
@@ -56,7 +56,7 @@ class RouteTest extends UnitTestCase
     /**
      * @test
      */
-    public function getMethodReturnsInitialValue()
+    public function getMethodReturnsInitialValue(): void
     {
         $this->assertSame(
             Route::METHOD_REDIRECT,
@@ -83,7 +83,7 @@ class RouteTest extends UnitTestCase
      * @dataProvider setMethodDataProvider
      * @test
      */
-    public function setMethodForStringSetsMethod($argument, $expectedValue)
+    public function setMethodForStringSetsMethod($argument, $expectedValue): void
     {
         $this->subject->setMethod($argument);
         $this->assertSame(
@@ -95,7 +95,7 @@ class RouteTest extends UnitTestCase
     /**
      * @test
      */
-    public function setMethodReturnsObject()
+    public function setMethodReturnsObject(): void
     {
         $this->assertSame(
             $this->subject,
@@ -106,7 +106,7 @@ class RouteTest extends UnitTestCase
     /**
      * @test
      */
-    public function getOptionReturnsDefaultOptions()
+    public function getOptionReturnsDefaultOptions(): void
     {
         $expectedOptions = [
             SI::ACTION_NAME => null,
@@ -128,7 +128,7 @@ class RouteTest extends UnitTestCase
     /**
      * @test
      */
-    public function getOptionInitiallyReturnsNull()
+    public function getOptionInitiallyReturnsNull(): void
     {
         $this->assertNull(
             $this->subject->getOption('invalidOptionName')
@@ -138,7 +138,7 @@ class RouteTest extends UnitTestCase
     /**
      * @test
      */
-    public function setOptionSetsOption()
+    public function setOptionSetsOption(): void
     {
         $optionName = 'foo';
         $value = 'bar';
@@ -152,7 +152,7 @@ class RouteTest extends UnitTestCase
     /**
      * @test
      */
-    public function setOptionReturnsObject()
+    public function setOptionReturnsObject(): void
     {
         $this->assertSame(
             $this->subject,
@@ -163,7 +163,7 @@ class RouteTest extends UnitTestCase
     /**
      * @test
      */
-    public function setOptionsSetsOptions()
+    public function setOptionsSetsOptions(): void
     {
         $options = [
             'foo' => 'bar'
@@ -179,7 +179,7 @@ class RouteTest extends UnitTestCase
     /**
      * @test
      */
-    public function setOptionsReturnsObject()
+    public function setOptionsReturnsObject(): void
     {
         $this->assertSame(
             $this->subject,
@@ -190,7 +190,7 @@ class RouteTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasOptionReturnsTrueIfOptionIsSet()
+    public function hasOptionReturnsTrueIfOptionIsSet(): void
     {
         $optionName = 'foo';
         $value = 'bar';
@@ -203,7 +203,7 @@ class RouteTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasOptionReturnsFalseIfOptionIsNotSet()
+    public function hasOptionReturnsFalseIfOptionIsNotSet(): void
     {
         $this->assertFalse(
             $this->subject->hasOption('nameOfUnSetOption')

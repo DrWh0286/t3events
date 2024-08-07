@@ -1,7 +1,7 @@
 <?php
 namespace DWenzel\T3events\Tests\Unit\Resource;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use DWenzel\T3events\Resource\VectorImage;
 
 /***************************************************************
@@ -40,7 +40,7 @@ class VectorImageTest extends UnitTestCase
     /**
      * @test
      */
-    public function hideElementsDoesNotSetAttributeForMissingElements()
+    public function hideElementsDoesNotSetAttributeForMissingElements(): void
     {
         $unchangedSubject = clone $this->subject;
         $nonExistingElementIds = ['foo'];
@@ -55,7 +55,7 @@ class VectorImageTest extends UnitTestCase
     /**
      * @test
      */
-    public function hideElementsSetsAttributeForExistingElement()
+    public function hideElementsSetsAttributeForExistingElement(): void
     {
         $this->subject = $this->getAccessibleMock(
             VectorImage::class, ['getElementById'], [], '', true
@@ -84,7 +84,7 @@ class VectorImageTest extends UnitTestCase
     /**
      * @test
      */
-    public function showElementsDoesNotSetAttributeForMissingElements()
+    public function showElementsDoesNotSetAttributeForMissingElements(): void
     {
         $unchangedSubject = clone $this->subject;
         $nonExistingElementIds = ['foo'];
@@ -99,7 +99,7 @@ class VectorImageTest extends UnitTestCase
     /**
      * @test
      */
-    public function showElementsSetsAttributeForExistingElement()
+    public function showElementsSetsAttributeForExistingElement(): void
     {
         $this->subject = $this->getAccessibleMock(
             \DWenzel\T3events\Resource\VectorImage::class, ['getElementById'], [], '', true
@@ -128,7 +128,7 @@ class VectorImageTest extends UnitTestCase
     /**
      * @test
      */
-    public function replaceNodeTextDoesNotChangeDocumentIfElementDoesNotExist()
+    public function replaceNodeTextDoesNotChangeDocumentIfElementDoesNotExist(): void
     {
         $nonExistingElementId = 'foo';
         $this->subject = $this->getAccessibleMock(

@@ -33,7 +33,7 @@ class Router implements SingletonInterface, RouterInterface
      * @param Route $route A route
      * @param string|null $identifier Optional identifier
      */
-    public function addRoute($route, $identifier = null)
+    public function addRoute($route, $identifier = null): void
     {
         if (is_null($identifier)) {
             $identifier = $route->getOrigin();

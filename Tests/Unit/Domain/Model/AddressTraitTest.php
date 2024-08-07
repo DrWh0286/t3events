@@ -21,7 +21,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model;
  ***************************************************************/
 
 use DWenzel\T3events\Domain\Model\AddressTrait;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DWenzel\T3events\Domain\Model\AddressTrait.
@@ -52,7 +52,7 @@ class AddressTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function getAddressReturnsInitialValueForString()
+    public function getAddressReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -63,7 +63,7 @@ class AddressTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function setAddressForStringSetsAddress()
+    public function setAddressForStringSetsAddress(): void
     {
         $this->subject->setAddress('Conceived at T3CON10');
 
@@ -77,7 +77,7 @@ class AddressTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function getZipReturnsInitialValueForString()
+    public function getZipReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -88,7 +88,7 @@ class AddressTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function setZipForStringSetsZip()
+    public function setZipForStringSetsZip(): void
     {
         $this->subject->setZip('Conceived at T3CON10');
 
@@ -102,7 +102,7 @@ class AddressTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function getCityReturnsInitialValueForString()
+    public function getCityReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -113,7 +113,7 @@ class AddressTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function setCityForStringSetsCity()
+    public function setCityForStringSetsCity(): void
     {
         $this->subject->setCity('Conceived at T3CON10');
 
@@ -127,7 +127,7 @@ class AddressTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function getCountryReturnsInitialValueForString()
+    public function getCountryReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -138,7 +138,7 @@ class AddressTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function setCountryForStringSetsCountry()
+    public function setCountryForStringSetsCountry(): void
     {
         $this->subject->setCountry('Conceived at T3CON10');
 

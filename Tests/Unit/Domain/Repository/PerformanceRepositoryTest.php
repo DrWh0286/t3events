@@ -8,7 +8,7 @@ use DWenzel\T3events\Domain\Model\Dto\Search;
 use DWenzel\T3events\Domain\Repository\PerformanceRepository;
 use DWenzel\T3events\Tests\Unit\Object\MockObjectManagerTrait;
 use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Qom\ComparisonInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Qom\ConstraintInterface;
@@ -77,7 +77,7 @@ class PerformanceRepositoryTest extends UnitTestCase
      * @test
      * @covers ::createConstraintsFromDemand
      */
-    public function createConstraintsFromDemandReturnsDefaultConstraints()
+    public function createConstraintsFromDemandReturnsDefaultConstraints(): void
     {
         $demand = $this->getMockPerformanceDemand(['getEventLocations']);
         $this->subject = $this->getAccessibleMock(
@@ -109,7 +109,7 @@ class PerformanceRepositoryTest extends UnitTestCase
      * @test
      * @covers ::createConstraintsFromDemand
      */
-    public function createConstraintsFromDemandCallsCreateStatusConstraints()
+    public function createConstraintsFromDemandCallsCreateStatusConstraints(): void
     {
         $this->subject = $this->getAccessibleMock(
             PerformanceRepository::class,
@@ -130,7 +130,7 @@ class PerformanceRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function createConstraintsFromDemandBuildsEventLocationConstraints()
+    public function createConstraintsFromDemandBuildsEventLocationConstraints(): void
     {
         $locationIds = '1,2,3';
         $this->subject = $this->getAccessibleMock(
@@ -160,7 +160,7 @@ class PerformanceRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function createConstraintsFromDemandCombinesStatusConstraintsLogicalOr()
+    public function createConstraintsFromDemandCombinesStatusConstraintsLogicalOr(): void
     {
         $this->subject = $this->getAccessibleMock(
             PerformanceRepository::class,
@@ -191,7 +191,7 @@ class PerformanceRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function createConstraintsFromDemandCombinesStatusConstraintsLogicalNotOr()
+    public function createConstraintsFromDemandCombinesStatusConstraintsLogicalNotOr(): void
     {
         $this->subject = $this->getAccessibleMock(
             PerformanceRepository::class,
@@ -226,7 +226,7 @@ class PerformanceRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function initializeObjectInitiallySetsRespectStoragePageFalse()
+    public function initializeObjectInitiallySetsRespectStoragePageFalse(): void
     {
         $mockQuerySettings = $this->getMockQuerySettings(['setRespectStoragePage']);
 
@@ -245,7 +245,7 @@ class PerformanceRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function initializeObjectSetsRespectStoragePageFromEmConfiguration()
+    public function initializeObjectSetsRespectStoragePageFromEmConfiguration(): void
     {
         $emSettings = [
             'respectPerformanceStoragePage' => false
@@ -299,7 +299,7 @@ class PerformanceRepositoryTest extends UnitTestCase
      * @param string $getter
      * @param string|null $value
      */
-    public function createConstraintsFromDemandDoesNotCreateConstraintsForEmptyValues($getter, $value)
+    public function createConstraintsFromDemandDoesNotCreateConstraintsForEmptyValues($getter, $value): void
     {
         $this->subject = $this->getAccessibleMock(
             PerformanceRepository::class,
@@ -376,7 +376,7 @@ class PerformanceRepositoryTest extends UnitTestCase
         $comparisonMethod,
         $propertyName,
         $operand
-    )
+    ): void
     {
         $this->subject = $this->getAccessibleMock(
             PerformanceRepository::class,
@@ -421,7 +421,7 @@ class PerformanceRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function createConstraintsFromDemandSetsStoragePages()
+    public function createConstraintsFromDemandSetsStoragePages(): void
     {
         $this->subject = $this->getAccessibleMock(
             PerformanceRepository::class,
@@ -455,7 +455,7 @@ class PerformanceRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function createConstraintsFromDemandCreatesPeriodConstraints()
+    public function createConstraintsFromDemandCreatesPeriodConstraints(): void
     {
         $this->subject = $this->getAccessibleMock(
             PerformanceRepository::class,
@@ -480,7 +480,7 @@ class PerformanceRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function createConstraintsFromDemandCombinesPeriodConstraintsLogicalAnd()
+    public function createConstraintsFromDemandCombinesPeriodConstraintsLogicalAnd(): void
     {
         $this->subject = $this->getAccessibleMock(
             PerformanceRepository::class,

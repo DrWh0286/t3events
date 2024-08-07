@@ -140,7 +140,7 @@ class EventLocation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity imple
      * @param string $name
      * @return void
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -161,7 +161,7 @@ class EventLocation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity imple
      * @param string $address
      * @return void
      */
-    public function setAddress($address)
+    public function setAddress($address): void
     {
         $this->address = $address;
     }
@@ -172,7 +172,7 @@ class EventLocation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity imple
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image Image
      * @return void
      */
-    public function addImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image)
+    public function addImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image): void
     {
         $this->image->attach($image);
     }
@@ -183,7 +183,7 @@ class EventLocation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity imple
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove Image
      * @return void
      */
-    public function removeImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove)
+    public function removeImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove): void
     {
         $this->image->detach($imageToRemove);
     }
@@ -204,7 +204,7 @@ class EventLocation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity imple
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $images Images
      * @return void
      */
-    public function setImage(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $image)
+    public function setImage(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $image): void
     {
         $this->image = $image;
     }
@@ -225,7 +225,7 @@ class EventLocation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity imple
      * @param string $zip
      * @return void
      */
-    public function setZip($zip)
+    public function setZip($zip): void
     {
         $this->zip = $zip;
     }
@@ -246,7 +246,7 @@ class EventLocation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity imple
      * @param string $place
      * @return void
      */
-    public function setPlace($place)
+    public function setPlace($place): void
     {
         $this->place = $place;
     }
@@ -267,7 +267,7 @@ class EventLocation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity imple
      * @param string $details
      * @return void
      */
-    public function setDetails($details)
+    public function setDetails($details): void
     {
         $this->details = $details;
     }
@@ -288,7 +288,7 @@ class EventLocation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity imple
      * @param string $www
      * @return void
      */
-    public function setWww($www)
+    public function setWww($www): void
     {
         $this->www = $www;
     }
@@ -309,7 +309,7 @@ class EventLocation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity imple
      * @param string $country
      * @return void
      */
-    public function setCountry($country)
+    public function setCountry($country): void
     {
         $this->country = $country;
     }
@@ -329,7 +329,7 @@ class EventLocation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity imple
      *
      * @var float $latitude
      */
-    public function setLatitude($latitude)
+    public function setLatitude($latitude): void
     {
         $this->latitude = $latitude;
     }
@@ -349,7 +349,7 @@ class EventLocation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity imple
      *
      * @var float $longitude
      */
-    public function setLongitude($longitude)
+    public function setLongitude($longitude): void
     {
         $this->longitude = $longitude;
     }

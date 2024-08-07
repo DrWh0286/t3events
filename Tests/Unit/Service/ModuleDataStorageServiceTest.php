@@ -5,7 +5,7 @@ namespace DWenzel\T3events\Tests\Unit\Service;
 use DWenzel\T3events\Domain\Model\Dto\ModuleData;
 use DWenzel\T3events\Service\ModuleDataStorageService;
 use DWenzel\T3events\Tests\Unit\Object\MockObjectManagerTrait;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -62,7 +62,7 @@ class ModuleDataStorageServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function getBackendUserAuthenticationReturnsAuthenticationFromGlobals()
+    public function getBackendUserAuthenticationReturnsAuthenticationFromGlobals(): void
     {
         self::assertSame(
             $GLOBALS['BE_USER'],
@@ -73,7 +73,7 @@ class ModuleDataStorageServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function persistModuleDataCanBePersisted()
+    public function persistModuleDataCanBePersisted(): void
     {
         $this->subject = $this->getAccessibleMock(
             ModuleDataStorageService::class, ['getBackendUserAuthentication']
@@ -95,7 +95,7 @@ class ModuleDataStorageServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function loadModuleDataInitiallyReturnsNewModuleDataObject()
+    public function loadModuleDataInitiallyReturnsNewModuleDataObject(): void
     {
         $key = 'foo';
         /** @var ObjectManager|MockObject $mockObjectManager */
@@ -116,7 +116,7 @@ class ModuleDataStorageServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function loadModuleDataReturnsModuleDataFromBackendUserAuthentication()
+    public function loadModuleDataReturnsModuleDataFromBackendUserAuthentication(): void
     {
         $this->subject = $this->getAccessibleMock(
             ModuleDataStorageService::class, ['getBackendUserAuthentication']

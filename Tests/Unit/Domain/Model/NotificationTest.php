@@ -20,7 +20,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model;
      *  This copyright notice MUST APPEAR in all copies of the script!
      ***************************************************************/
 use DWenzel\T3events\Domain\Model\Notification;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DWenzel\T3events\Domain\Model\Notification.
@@ -51,7 +51,7 @@ class NotificationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getRecipientReturnsInitialValueForString()
+    public function getRecipientReturnsInitialValueForString(): void
     {
         $this->assertNull(
             $this->subject->getRecipient()
@@ -61,7 +61,7 @@ class NotificationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setRecipientForStringSetsRecipient()
+    public function setRecipientForStringSetsRecipient(): void
     {
         $this->subject->setRecipient('Conceived at T3CON10');
 
@@ -74,7 +74,7 @@ class NotificationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getSenderReturnsInitialValueForString()
+    public function getSenderReturnsInitialValueForString(): void
     {
         $this->assertNull(
             $this->subject->getSender()
@@ -84,7 +84,7 @@ class NotificationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setSenderForStringSetsSender()
+    public function setSenderForStringSetsSender(): void
     {
         $this->subject->setSender('Conceived at T3CON10');
 
@@ -97,7 +97,7 @@ class NotificationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getSubjectReturnsInitialValueForString()
+    public function getSubjectReturnsInitialValueForString(): void
     {
         $this->assertNull(
             $this->subject->getSubject()
@@ -107,7 +107,7 @@ class NotificationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setSubjectForStringSetsSubject()
+    public function setSubjectForStringSetsSubject(): void
     {
         $this->subject->setSubject('Conceived at T3CON10');
 
@@ -120,7 +120,7 @@ class NotificationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getBodytextReturnsInitialValueForString()
+    public function getBodytextReturnsInitialValueForString(): void
     {
         $this->assertNull(
             $this->subject->getBodytext()
@@ -130,7 +130,7 @@ class NotificationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setBodytextForStringSetsBodytext()
+    public function setBodytextForStringSetsBodytext(): void
     {
         $this->subject->setBodytext('Conceived at T3CON10');
 
@@ -143,7 +143,7 @@ class NotificationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFormatReturnsInitialValueForString()
+    public function getFormatReturnsInitialValueForString(): void
     {
         $this->assertNull(
             $this->subject->getFormat()
@@ -153,7 +153,7 @@ class NotificationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setFormatForStringSetsFormat()
+    public function setFormatForStringSetsFormat(): void
     {
         $this->subject->setFormat('Conceived at T3CON10');
 
@@ -166,7 +166,7 @@ class NotificationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getSentAtForDateTimeInitiallyReturnsNull()
+    public function getSentAtForDateTimeInitiallyReturnsNull(): void
     {
         $this->assertNull(
             $this->subject->getSentAt()
@@ -176,7 +176,7 @@ class NotificationTest extends UnitTestCase
     /**
      * @test
      */
-    public function sentAtCanBeSet()
+    public function sentAtCanBeSet(): void
     {
         $sentAt = new \DateTime();
         $this->subject->setSentAt($sentAt);
@@ -190,7 +190,7 @@ class NotificationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getSenderEmailInitiallyReturnsNull()
+    public function getSenderEmailInitiallyReturnsNull(): void
     {
         $this->assertNull(
             $this->subject->getSenderEmail()
@@ -200,7 +200,7 @@ class NotificationTest extends UnitTestCase
     /**
      * @test
      */
-    public function senderEmailCanBeSet()
+    public function senderEmailCanBeSet(): void
     {
         $email = 'foo';
         $this->subject->setSenderEmail($email);
@@ -213,7 +213,7 @@ class NotificationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getSenderNameInitiallyReturnsNull()
+    public function getSenderNameInitiallyReturnsNull(): void
     {
         $this->assertNull(
             $this->subject->getSenderName()
@@ -223,7 +223,7 @@ class NotificationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getSenderEmailReturnsValueFromLegacyField()
+    public function getSenderEmailReturnsValueFromLegacyField(): void
     {
         $sender = 'bar';
         $this->subject->setSender($sender);
@@ -236,7 +236,7 @@ class NotificationTest extends UnitTestCase
     /**
      * @test
      */
-    public function senderNameCanBeSet()
+    public function senderNameCanBeSet(): void
     {
         $name = 'bar';
         $this->subject->setSenderName($name);

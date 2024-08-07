@@ -7,7 +7,7 @@ use DWenzel\T3events\Dto\Factory\FilterFactory;
 use DWenzel\T3events\Dto\FilterCollection;
 use DWenzel\T3events\Dto\FilterInterface;
 use DWenzel\T3events\Tests\Unit\Object\MockObjectManagerTrait;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
@@ -70,7 +70,7 @@ class FilterCollectionFactoryTest extends UnitTestCase
             ->willReturn($this->filterCollection);
     }
 
-    public function testCreateReturnsFilterCollection()
+    public function testCreateReturnsFilterCollection(): void
     {
         $configuration = [];
 
@@ -80,7 +80,7 @@ class FilterCollectionFactoryTest extends UnitTestCase
         );
     }
 
-    public function testCreateAddsFilterFromFactory()
+    public function testCreateAddsFilterFromFactory(): void
     {
         $filterKey = 'fooKey';
         $filterConfiguration = 'barValue';

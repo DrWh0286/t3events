@@ -3,7 +3,7 @@
 namespace DWenzel\T3events\Tests\Unit\Controller;
 
 use DWenzel\T3events\Domain\Repository\CompanyRepository;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /***************************************************************
  *  Copyright notice
@@ -42,7 +42,7 @@ class CompanyRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function companyRepositoryCanBeInjected()
+    public function companyRepositoryCanBeInjected(): void
     {
         /** @var CompanyRepository|\PHPUnit_Framework_MockObject_MockObject $companyRepository */
         $companyRepository = $this->getMockBuilder(CompanyRepository::class)

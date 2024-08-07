@@ -17,7 +17,7 @@ namespace DWenzel\T3events\Tests\Unit\Controller;
 
 use DWenzel\T3events\Controller\PersonDemandFactoryTrait;
 use DWenzel\T3events\Domain\Factory\Dto\PersonDemandFactory;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class PersonDemandFactoryTraitTest extends UnitTestCase
 {
@@ -39,7 +39,7 @@ class PersonDemandFactoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function personDemandFactoryCanBeInjected()
+    public function personDemandFactoryCanBeInjected(): void
     {
         /** @var PersonDemandFactory|\PHPUnit_Framework_MockObject_MockObject $personDemandFactory */
         $personDemandFactory = $this->getMockBuilder(PersonDemandFactory::class)

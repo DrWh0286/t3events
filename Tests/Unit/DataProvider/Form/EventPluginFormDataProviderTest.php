@@ -14,7 +14,7 @@ namespace DWenzel\T3events\Tests\Unit\DataProvider\Form;
 
 use DWenzel\T3events\DataProvider\Form\EventPluginFormDataProvider;
 use DWenzel\T3events\Hooks\BackendUtility;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Backend\Form\FormDataProviderInterface;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 /**
@@ -50,7 +50,7 @@ class EventPluginFormDataProviderTest extends UnitTestCase
     /**
      * @test
      */
-    public function addDataInitiallyReturnsOriginalResult()
+    public function addDataInitiallyReturnsOriginalResult(): void
     {
         $originalResult = ['foo'];
         $this->assertSame(
@@ -62,7 +62,7 @@ class EventPluginFormDataProviderTest extends UnitTestCase
     /**
      * @test
      */
-    public function backendUtilityCanBeInjected()
+    public function backendUtilityCanBeInjected(): void
     {
         $this->subject->__construct($this->backendUtility);
         $this->assertAttributeSame(
@@ -104,7 +104,7 @@ class EventPluginFormDataProviderTest extends UnitTestCase
      * @dataProvider validResultDataProvider
      * @param $result array Valid result
      */
-    public function addDataReturnsProcessesResult($result)
+    public function addDataReturnsProcessesResult($result): void
     {
         $dataStructure = $result['processedTca']['columns']['pi_flexform'][SI::CONFIG]['ds'];
         $conf = [];

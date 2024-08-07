@@ -58,7 +58,7 @@ class Venue extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $title
      * @return void
      */
-    public function setTitle($title)
+    public function setTitle($title): void
     {
         $this->title = $title;
     }
@@ -79,7 +79,7 @@ class Venue extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param string $link
      */
-    public function setLink($link)
+    public function setLink($link): void
     {
         $this->link = $link;
     }

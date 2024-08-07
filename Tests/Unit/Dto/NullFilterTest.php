@@ -3,7 +3,7 @@
 namespace DWenzel\T3events\Tests\Unit\Dto;
 
 use DWenzel\T3events\Dto\NullFilter;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /***************************************************************
@@ -38,7 +38,7 @@ class NullFilterTest extends UnitTestCase
         $this->subject = new NullFilter();
     }
 
-    public function testGetOptionsReturnsEmptyArray()
+    public function testGetOptionsReturnsEmptyArray(): void
     {
         $expected = [];
         $this->assertSame(
@@ -47,7 +47,7 @@ class NullFilterTest extends UnitTestCase
         );
     }
 
-    public function testCountReturnsZero()
+    public function testCountReturnsZero(): void
     {
         $this->assertSame(
             0,

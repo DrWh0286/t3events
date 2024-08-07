@@ -28,7 +28,7 @@ namespace DWenzel\T3events\Tests\Unit\Utility;
  ***************************************************************/
 
 use DWenzel\T3events\Utility\TableConfiguration;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 class TableConfigurationTest extends UnitTestCase
@@ -90,7 +90,7 @@ class TableConfigurationTest extends UnitTestCase
      * @param string $wizardName
      * @param string $expectedValue
      */
-    public function getWizardIconReturnsCorrectValue($wizardName, $expectedValue)
+    public function getWizardIconReturnsCorrectValue($wizardName, $expectedValue): void
     {
         $this->assertSame(
             $expectedValue,
@@ -129,7 +129,7 @@ class TableConfigurationTest extends UnitTestCase
      * @test
      * @dataProvider languageFilePathDataProvider
      */
-    public function getLanguageFilePathReturnsCorrectPaths($extensionName, $expectedPath)
+    public function getLanguageFilePathReturnsCorrectPaths($extensionName, $expectedPath): void
     {
         if (is_null($extensionName))
         {

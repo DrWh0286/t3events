@@ -20,7 +20,7 @@ namespace CPSIT\T3events\Tests\Unit\Domain\Model;
      *  GNU General Public License for more details.
      *  This copyright notice MUST APPEAR in all copies of the script!
      ***************************************************************/
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Class CompanyTest
@@ -49,7 +49,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function getNameReturnsInitialValueForString()
+    public function getNameReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -60,7 +60,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setNameForStringSetsName()
+    public function setNameForStringSetsName(): void
     {
         $this->subject->setName('Conceived at T3CON10');
 
@@ -74,7 +74,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function getAddressReturnsInitialValueForString()
+    public function getAddressReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -85,7 +85,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setAddressForStringSetsAddress()
+    public function setAddressForStringSetsAddress(): void
     {
         $this->subject->setAddress('Conceived at T3CON10');
 
@@ -99,7 +99,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function getZipReturnsInitialValueForString()
+    public function getZipReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -110,7 +110,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setZipForStringSetsZip()
+    public function setZipForStringSetsZip(): void
     {
         $this->subject->setZip('Conceived at T3CON10');
 
@@ -124,7 +124,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function getCityReturnsInitialValueForString()
+    public function getCityReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -135,7 +135,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setCityForStringSetsCity()
+    public function setCityForStringSetsCity(): void
     {
         $this->subject->setCity('Conceived at T3CON10');
 
@@ -149,7 +149,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function getCountryReturnsInitialValueForString()
+    public function getCountryReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -160,7 +160,7 @@ class CompanyTest extends UnitTestCase
     /**
      * @test
      */
-    public function setCountryForStringSetsCountry()
+    public function setCountryForStringSetsCountry(): void
     {
         $this->subject->setCountry('Conceived at T3CON10');
 

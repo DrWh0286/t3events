@@ -4,7 +4,7 @@ namespace DWenzel\T3events\Tests\Unit\Dto;
 
 use DWenzel\T3events\Domain\Repository\AudienceRepository;
 use DWenzel\T3events\Dto\AudienceFilter;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /***************************************************************
@@ -48,7 +48,7 @@ class AudienceFilterTest extends UnitTestCase
         $this->subject->injectAudienceRepository($this->audienceRepository);
     }
 
-    public function testGetOptionsRepositoryReturnsAudienceRepository()
+    public function testGetOptionsRepositoryReturnsAudienceRepository(): void
     {
         $this->assertSame(
             $this->audienceRepository,

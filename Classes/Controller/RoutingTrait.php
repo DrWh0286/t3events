@@ -29,7 +29,7 @@ trait RoutingTrait
     protected $router;
 
     /**
-     * @var Request
+     * @var \TYPO3\CMS\Extbase\Mvc\Request
      */
     protected $request;
 
@@ -38,7 +38,7 @@ trait RoutingTrait
      *
      * @param RouterInterface $router
      */
-    public function injectRouter(RouterInterface $router)
+    public function injectRouter(RouterInterface $router): void
     {
         $this->router = $router;
     }
@@ -52,7 +52,7 @@ trait RoutingTrait
      * @param string|null $identifier An identifier for the route. If empty a default identifier for controller class and action name will be used.
      * @return mixed|void
      */
-    public function dispatch(array $arguments = null, $identifier = null)
+    public function dispatch(array $arguments = null, $identifier = null): void
     {
         if (is_null($identifier)) {
             $identifier = $this->getOrigin();

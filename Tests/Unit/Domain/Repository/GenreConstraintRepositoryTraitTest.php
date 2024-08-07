@@ -5,7 +5,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
 use DWenzel\T3events\Domain\Model\Dto\GenreAwareDemandInterface;
 use DWenzel\T3events\Domain\Repository\GenreConstraintRepositoryTrait;
 use DWenzel\T3events\Tests\Unit\Domain\Repository\MockQueryTrait;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Persistence\Generic\Query;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -55,7 +55,7 @@ class GenreConstraintRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function createGenreConstraintsInitiallyReturnsEmptyArray()
+    public function createGenreConstraintsInitiallyReturnsEmptyArray(): void
     {
         $mockGenreAwareDemand = $this->getMockGenreAwareDemand();
         $demand = $mockGenreAwareDemand;
@@ -72,7 +72,7 @@ class GenreConstraintRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function createGenreConstraintsCreatesGenreConstraints()
+    public function createGenreConstraintsCreatesGenreConstraints(): void
     {
         $genreList = '1,2';
         $query = $this->getMockQuery(['contains']);

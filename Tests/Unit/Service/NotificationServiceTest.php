@@ -4,7 +4,7 @@ namespace DWenzel\T3events\Tests\Unit\Service;
 use DWenzel\T3events\Tests\Unit\Object\MockObjectManagerTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Mail\MailMessage;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use DWenzel\T3events\Domain\Model\Notification;
 use DWenzel\T3events\Service\NotificationService;
@@ -65,7 +65,7 @@ class NotificationServiceTest extends UnitTestCase
      * @param array $expectedRecipients
      * @dataProvider recipientDataProvider
      */
-    public function sendSetsRecipients($recipientArgument, $expectedRecipients)
+    public function sendSetsRecipients($recipientArgument, $expectedRecipients): void
     {
         $notification = new Notification();
         $notification->setRecipient($recipientArgument);
@@ -88,7 +88,7 @@ class NotificationServiceTest extends UnitTestCase
      * @param array $expectedRecipients
      * @dataProvider recipientDataProvider
      */
-    public function notifySetsRecipients($recipient, $expectedRecipients)
+    public function notifySetsRecipients($recipient, $expectedRecipients): void
     {
         $this->subject = $this->getAccessibleMock(
             NotificationService::class, ['dummy', 'buildTemplateView']

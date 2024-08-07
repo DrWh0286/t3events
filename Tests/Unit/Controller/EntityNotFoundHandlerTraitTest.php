@@ -4,7 +4,7 @@ namespace DWenzel\T3events\Tests\Unit\Controller;
 
 use DWenzel\T3events\Controller\EntityNotFoundHandlerTrait;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Request;
@@ -80,7 +80,7 @@ class EntityNotFoundHandlerTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function emptyHandleEntityNotFoundErrorConfigurationReturns()
+    public function emptyHandleEntityNotFoundErrorConfigurationReturns(): void
     {
         $this->subject->expects($this->never())
             ->method(SI::REDIRECT);
@@ -93,7 +93,7 @@ class EntityNotFoundHandlerTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function handleEntityNotFoundErrorConfigurationRedirectsToListView()
+    public function handleEntityNotFoundErrorConfigurationRedirectsToListView(): void
     {
         $this->subject->expects(self::once())
             ->method(SI::REDIRECT)
@@ -104,7 +104,7 @@ class EntityNotFoundHandlerTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function handleEntityNotFoundErrorConfigurationCallsPageNotFoundHandler()
+    public function handleEntityNotFoundErrorConfigurationCallsPageNotFoundHandler(): void
     {
         $mockFrontendController = $this->getAccessibleMock(
             TypoScriptFrontendController::class,
@@ -120,7 +120,7 @@ class EntityNotFoundHandlerTraitTest extends UnitTestCase
      * @test
      * @expectedException \InvalidArgumentException
      */
-    public function handleEntityNotFoundErrorConfigurationWithTooFeeOptionsForRedirectToPageThrowsError()
+    public function handleEntityNotFoundErrorConfigurationWithTooFeeOptionsForRedirectToPageThrowsError(): void
     {
         $this->subject->handleEntityNotFoundError('redirectToPage');
     }
@@ -130,7 +130,7 @@ class EntityNotFoundHandlerTraitTest extends UnitTestCase
      * @test
      * @expectedException \InvalidArgumentException
      */
-    public function handleEntityNotFoundErrorConfigurationWithTooManyOptionsForRedirectToPageThrowsError()
+    public function handleEntityNotFoundErrorConfigurationWithTooManyOptionsForRedirectToPageThrowsError(): void
     {
         $this->subject->handleEntityNotFoundError('redirectToPage, arg1, arg2, arg3');
     }
@@ -138,7 +138,7 @@ class EntityNotFoundHandlerTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function handleEntityNotFoundErrorConfigurationRedirectsToCorrectPage()
+    public function handleEntityNotFoundErrorConfigurationRedirectsToCorrectPage(): void
     {
         $mockUriBuilder = $this->getAccessibleMock(
             UriBuilder::class, ['setTargetPageUid', 'build']);
@@ -156,7 +156,7 @@ class EntityNotFoundHandlerTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function handleEntityNotFoundErrorConfigurationRedirectsToCorrectPageWithStatus()
+    public function handleEntityNotFoundErrorConfigurationRedirectsToCorrectPageWithStatus(): void
     {
         $mockUriBuilder = $this->getAccessibleMock(
             UriBuilder::class, ['setTargetPageUid', 'build', 'redirectToUri']);
@@ -177,7 +177,7 @@ class EntityNotFoundHandlerTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function handleEntityNotFoundErrorConfigurationRedirectsWithSSL()
+    public function handleEntityNotFoundErrorConfigurationRedirectsWithSSL(): void
     {
         $mockUriBuilder = $this->getAccessibleMock(
             UriBuilder::class,
@@ -208,7 +208,7 @@ class EntityNotFoundHandlerTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function handleEntityNotFoundErrorRedirectsToUriIfSignalSetsRedirectUri()
+    public function handleEntityNotFoundErrorRedirectsToUriIfSignalSetsRedirectUri(): void
     {
         /** @var Request|\PHPUnit_Framework_MockObject_MockObject $mockRequest */
         $mockRequest = $this->getMockBuilder(Request::class)->getMock();
@@ -250,7 +250,7 @@ class EntityNotFoundHandlerTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function handleEntityNotFoundErrorRedirectsIfSignalSetsRedirect()
+    public function handleEntityNotFoundErrorRedirectsIfSignalSetsRedirect(): void
     {
         $mockRequest = $this->getMockBuilder(Request::class)->getMock();
         $mockDispatcher = $this->getMockDispatcher();
@@ -302,7 +302,7 @@ class EntityNotFoundHandlerTraitTest extends UnitTestCase
      * @expectedException \TYPO3\CMS\Extbase\Property\Exception\TargetNotFoundException
      * @expectedExceptionCode 1464634137
      */
-    public function processRequestCallsEntityNotFoundHandler()
+    public function processRequestCallsEntityNotFoundHandler(): void
     {
         $errorHandlingConfig = 'fooHandling';
         $controllerName = 'foo';
@@ -341,7 +341,7 @@ class EntityNotFoundHandlerTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function handleEntityNotFoundErrorForwardsIfSignalSetsForward()
+    public function handleEntityNotFoundErrorForwardsIfSignalSetsForward(): void
     {
         /** @var Request|\PHPUnit_Framework_MockObject_MockObject $mockRequest */
         $mockRequest = $this->getMockBuilder(Request::class)->getMock();

@@ -5,7 +5,7 @@ namespace DWenzel\T3events\Tests\Unit\Controller;
 use DWenzel\T3events\Controller\SearchTrait;
 use DWenzel\T3events\Domain\Model\Dto\Search;
 use DWenzel\T3events\Domain\Model\Dto\SearchFactory;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /***************************************************************
@@ -45,7 +45,7 @@ class SearchTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function searchFactoryCanBeInjected()
+    public function searchFactoryCanBeInjected(): void
     {
         /** @var SearchFactory|MockObject $mockFactory */
         $mockFactory = $this->getMockBuilder(SearchFactory::class)->getMock();
@@ -62,7 +62,7 @@ class SearchTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function createSearchObjectGetsSearchFromFactory()
+    public function createSearchObjectGetsSearchFromFactory(): void
     {
         $searchRequest = ['foo'];
         $settings = ['bar'];

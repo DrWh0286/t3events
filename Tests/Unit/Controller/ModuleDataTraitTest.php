@@ -58,7 +58,7 @@ class ModuleDataTraitTest extends TestCase
     /**
      * @test
      */
-    public function moduleDataStorageServiceCanBeInjected()
+    public function moduleDataStorageServiceCanBeInjected(): void
     {
         $mockService = $this->getMockModuleDataStorageService();
 
@@ -72,7 +72,7 @@ class ModuleDataTraitTest extends TestCase
     /**
      * @test
      */
-    public function resetActionResetsAndPersistsModuleData()
+    public function resetActionResetsAndPersistsModuleData(): void
     {
         $moduleKey = 'foo';
 
@@ -103,7 +103,7 @@ class ModuleDataTraitTest extends TestCase
     /**
      * @test
      */
-    public function initializeActionMergesSettings()
+    public function initializeActionMergesSettings(): void
     {
         $expectedSettings = ['foo'];
         $this->subject = $this->getMockForTrait(
@@ -137,7 +137,7 @@ class ModuleDataTraitTest extends TestCase
     /**
      * @test
      */
-    public function getModuleDataInitiallyReturnsNull() {
+    public function getModuleDataInitiallyReturnsNull(): void {
         $this->assertNull(
             $this->subject->getModuleData()
         );
@@ -146,7 +146,7 @@ class ModuleDataTraitTest extends TestCase
     /**
      * @test
      */
-    public function moduleDataCanBeSet() {
+    public function moduleDataCanBeSet(): void {
         $moduleData = $this->getMockBuilder(ModuleData::class)->getMock();
         $this->subject->setModuleData($moduleData);
 

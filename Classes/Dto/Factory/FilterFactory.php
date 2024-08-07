@@ -37,10 +37,7 @@ class FilterFactory
      */
     protected $filterResolver;
 
-    /**
-     * @param FilterResolverInterface $filterResolver
-     */
-    public function injectFilterResolver(FilterResolverInterface $filterResolver)
+    public function __construct(\DWenzel\T3events\Dto\FilterResolverInterface $filterResolver)
     {
         $this->filterResolver = $filterResolver;
     }

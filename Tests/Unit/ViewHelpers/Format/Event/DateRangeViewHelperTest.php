@@ -18,7 +18,7 @@ namespace DWenzel\T3events\Tests\Unit\ViewHelpers\Location;
 use DWenzel\T3events\Domain\Model\Event;
 use DWenzel\T3events\Domain\Model\Performance;
 use DWenzel\T3events\ViewHelpers\Format\Event\DateRangeViewHelper;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Class DateRangeViewHelperTest
@@ -26,7 +26,7 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 class DateRangeViewHelperTest extends UnitTestCase
 {
     /**
-     * @var DateRangeViewHelper|\PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Core\Tests\AccessibleObjectInterface
+     * @var (object&\TYPO3\TestingFramework\Core\AccessibleObjectInterface&\PHPUnit\Framework\MockObject\MockObject)|(object&\TYPO3\TestingFramework\Core\AccessibleObjectInterface&\PHPUnit\Framework\MockObject\MockObject&DateRangeViewHelper)|(object&\TYPO3\TestingFramework\Core\AccessibleObjectInterface&\PHPUnit\Framework\MockObject\MockObject&DateRangeViewHelper&object&\TYPO3\TestingFramework\Core\AccessibleObjectInterface&\PHPUnit\Framework\MockObject\MockObject)
      */
     protected $subject;
 
@@ -110,7 +110,7 @@ class DateRangeViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function initializeArgumentsRegistersArguments()
+    public function initializeArgumentsRegistersArguments(): void
     {
         $this->subject = $this->getMockBuilder(DateRangeViewHelper::class)
             ->setMethods(['registerArgument'])->getMock();
@@ -133,7 +133,7 @@ class DateRangeViewHelperTest extends UnitTestCase
      * @param array $arguments
      * @param $expected
      */
-    public function renderReturnsExpectedString($arguments, $expected)
+    public function renderReturnsExpectedString($arguments, $expected): void
     {
         $this->subject->setArguments($arguments);
         $this->subject->expects($this->once())->method('initialize');

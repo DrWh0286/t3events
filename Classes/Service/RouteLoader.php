@@ -42,7 +42,7 @@ class RouteLoader
      * @param array|null $options Options for the route.
      * @internal param string $action The target action name
      */
-    public function register($origin, $method = null, array $options = null)
+    public function register($origin, $method = null, array $options = null): void
     {
         $route = $this->createRoute($origin);
 
@@ -61,7 +61,7 @@ class RouteLoader
      *
      * @param RouteLoaderDataProviderInterface $dataProvider
      */
-    public function loadFromProvider(RouteLoaderDataProviderInterface $dataProvider)
+    public function loadFromProvider(RouteLoaderDataProviderInterface $dataProvider): void
     {
         $configuration = $dataProvider->getConfiguration();
         foreach ($configuration as $routeConfiguration) {

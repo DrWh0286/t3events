@@ -19,7 +19,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
  *  GNU General Public License for more details.
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use DWenzel\T3events\Domain\Model\Dto\EventDemand;
 
 /**
@@ -56,7 +56,7 @@ class EventDemandTest extends UnitTestCase
      * @test
      * @covers ::getGenre
      */
-    public function getGenreReturnsInitialNull()
+    public function getGenreReturnsInitialNull(): void
     {
         $this->assertSame(null, $this->fixture->getGenre());
     }
@@ -65,7 +65,7 @@ class EventDemandTest extends UnitTestCase
      * @test
      * @covers ::setGenre
      */
-    public function setGenreForStringSetsGenre()
+    public function setGenreForStringSetsGenre(): void
     {
         $this->fixture->setGenre('1');
         $this->assertSame('1', $this->fixture->getGenre());
@@ -75,7 +75,7 @@ class EventDemandTest extends UnitTestCase
      * @test
      * @covers ::getVenue
      */
-    public function getVenueReturnsInitialNull()
+    public function getVenueReturnsInitialNull(): void
     {
         $this->assertSame(null, $this->fixture->getVenue());
     }
@@ -84,7 +84,7 @@ class EventDemandTest extends UnitTestCase
      * @test
      * @covers ::setVenue
      */
-    public function setVenueForStringSetsVenue()
+    public function setVenueForStringSetsVenue(): void
     {
         $this->fixture->setVenue('1');
         $this->assertSame('1', $this->fixture->getVenue());
@@ -94,7 +94,7 @@ class EventDemandTest extends UnitTestCase
      * @test
      * @covers ::getEventType
      */
-    public function getEventTypeReturnsInitialNull()
+    public function getEventTypeReturnsInitialNull(): void
     {
         $this->assertEquals(
             null,
@@ -106,7 +106,7 @@ class EventDemandTest extends UnitTestCase
      * @test
      * @covers ::setEventType
      */
-    public function setEventTypeForStringSetsEventType()
+    public function setEventTypeForStringSetsEventType(): void
     {
         $this->fixture->setEventType('1,2,3');
 
@@ -120,7 +120,7 @@ class EventDemandTest extends UnitTestCase
      * @test
      * @covers ::getCategoryConjunction
      */
-    public function getCategoryConjunctionReturnsInitialNull()
+    public function getCategoryConjunctionReturnsInitialNull(): void
     {
         $this->assertEquals(
             null,
@@ -132,7 +132,7 @@ class EventDemandTest extends UnitTestCase
      * @test
      * @covers ::setCategoryConjunction
      */
-    public function setCategoryConjunctionForStringSetsCategoryConjunction()
+    public function setCategoryConjunctionForStringSetsCategoryConjunction(): void
     {
         $this->fixture->setCategoryConjunction('asc');
 
@@ -145,7 +145,7 @@ class EventDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getStartDateFieldForStringReturnsStartDateFieldConstant()
+    public function getStartDateFieldForStringReturnsStartDateFieldConstant(): void
     {
         $this->assertSame(
             EventDemand::START_DATE_FIELD,
@@ -156,7 +156,7 @@ class EventDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getEndDateFieldForStringReturnsEndDateFieldConstant()
+    public function getEndDateFieldForStringReturnsEndDateFieldConstant(): void
     {
         $this->assertSame(
             EventDemand::END_DATE_FIELD,
@@ -167,7 +167,7 @@ class EventDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getCategoriesInitiallyReturnsNull()
+    public function getCategoriesInitiallyReturnsNull(): void
     {
         $this->assertNull(
             $this->fixture->getCategories()
@@ -177,7 +177,7 @@ class EventDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function categoriesCanBeSet()
+    public function categoriesCanBeSet(): void
     {
         $categories = '1,2,3';
         $this->fixture->setCategories($categories);
@@ -190,7 +190,7 @@ class EventDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getAudienceFieldReturnsClassConstant()
+    public function getAudienceFieldReturnsClassConstant(): void
     {
         $this->assertSame(
             EventDemand::AUDIENCE_FIELD,

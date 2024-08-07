@@ -58,7 +58,7 @@ class Organizer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $name
      * @return void
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -79,7 +79,7 @@ class Organizer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $link
      * @return void
      */
-    public function setLink($link)
+    public function setLink($link): void
     {
         $this->link = $link;
     }

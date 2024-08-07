@@ -35,7 +35,7 @@ trait PersonDemandFactoryTrait
      * @param PersonDemandFactory $personDemandFactory
      * @return void
      */
-    public function injectPersonDemandFactory(PersonDemandFactory $personDemandFactory)
+    public function injectPersonDemandFactory(PersonDemandFactory $personDemandFactory): void
     {
         $this->personDemandFactory = $personDemandFactory;
     }

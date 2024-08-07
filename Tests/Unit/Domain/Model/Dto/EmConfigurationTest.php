@@ -1,7 +1,7 @@
 <?php
 namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use DWenzel\T3events\Domain\Model\Dto\EmConfiguration;
 
 /***************************************************************
@@ -48,7 +48,7 @@ class EmConfigurationTest extends UnitTestCase
     /**
      * @test
      */
-    public function constructorSetsExistingProperty()
+    public function constructorSetsExistingProperty(): void
     {
         $configuration = [
             'respectPerformanceStoragePage' => true
@@ -64,7 +64,7 @@ class EmConfigurationTest extends UnitTestCase
     /**
      * @test
      */
-    public function isRespectPerformanceStoragePageInitiallyReturnsFalse()
+    public function isRespectPerformanceStoragePageInitiallyReturnsFalse(): void
     {
         $this->assertFalse(
             $this->subject->isRespectPerformanceStoragePage()
@@ -74,7 +74,7 @@ class EmConfigurationTest extends UnitTestCase
     /**
      * @test
      */
-    public function respectPerformanceStoragePageCanBeSet()
+    public function respectPerformanceStoragePageCanBeSet(): void
     {
         $this->subject->setRespectPerformanceStoragePage(true);
 

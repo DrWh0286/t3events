@@ -31,7 +31,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model;
  * @author Dirk Wenzel <wenzel@webfox01.de>
  * @author Michael Kasten <kasten@webfox01.de>
  */
-class OrganizerTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
+class OrganizerTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
 {
 
     /**
@@ -52,7 +52,7 @@ class OrganizerTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
     /**
      * @test
      */
-    public function getNameReturnsInitialValueForString()
+    public function getNameReturnsInitialValueForString(): void
     {
         $this->assertNull($this->fixture->getName());
     }
@@ -60,7 +60,7 @@ class OrganizerTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
     /**
      * @test
      */
-    public function setNameForStringSetsName()
+    public function setNameForStringSetsName(): void
     {
         $this->fixture->setName('Conceived at T3CON10');
 
@@ -73,7 +73,7 @@ class OrganizerTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
     /**
      * @test
      */
-    public function getLinkReturnsInitialValueForString()
+    public function getLinkReturnsInitialValueForString(): void
     {
         $this->assertNull($this->fixture->getLink());
     }
@@ -81,7 +81,7 @@ class OrganizerTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
     /**
      * @test
      */
-    public function setLinkForStringSetsLink()
+    public function setLinkForStringSetsLink(): void
     {
         $this->fixture->setLink('Conceived at T3CON10');
 

@@ -96,7 +96,7 @@ class Notification extends AbstractEntity
      *
      * @var string $recipient
      */
-    public function setRecipient($recipient)
+    public function setRecipient($recipient): void
     {
         $this->recipient = $recipient;
     }
@@ -116,7 +116,7 @@ class Notification extends AbstractEntity
      *
      * @var string $subject
      */
-    public function setSubject($subject)
+    public function setSubject($subject): void
     {
         $this->subject = $subject;
     }
@@ -138,7 +138,7 @@ class Notification extends AbstractEntity
      * @var string $sender
      * @deprecated Use setSenderEmail and setSenderName instead
      */
-    public function setSender($sender)
+    public function setSender($sender): void
     {
         $this->sender = $sender;
         $this->senderEmail = $sender;
@@ -159,7 +159,7 @@ class Notification extends AbstractEntity
      *
      * @var string $bodytext
      */
-    public function setBodytext($bodytext)
+    public function setBodytext($bodytext): void
     {
         $this->bodytext = $bodytext;
     }
@@ -179,7 +179,7 @@ class Notification extends AbstractEntity
      *
      * @var string $format
      */
-    public function setFormat($format)
+    public function setFormat($format): void
     {
         $this->format = $format;
     }
@@ -199,7 +199,7 @@ class Notification extends AbstractEntity
      *
      * @var \DateTime $sentAt
      */
-    public function setSentAt($sentAt)
+    public function setSentAt($sentAt): void
     {
         $this->sentAt = $sentAt;
     }
@@ -215,7 +215,7 @@ class Notification extends AbstractEntity
     /**
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $attachments
      */
-    public function setAttachments($attachments)
+    public function setAttachments($attachments): void
     {
         $this->attachments = $attachments;
     }
@@ -225,7 +225,7 @@ class Notification extends AbstractEntity
      *
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $fileReference
      */
-    public function addAttachment(FileReference $fileReference)
+    public function addAttachment(FileReference $fileReference): void
     {
         $this->attachments->attach($fileReference);
     }
@@ -235,7 +235,7 @@ class Notification extends AbstractEntity
      *
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $fileReference
      */
-    public function removeAttachment(FileReference $fileReference)
+    public function removeAttachment(FileReference $fileReference): void
     {
         $this->attachments->detach($fileReference);
     }
@@ -255,7 +255,7 @@ class Notification extends AbstractEntity
     /**
      * @param string $senderEmail
      */
-    public function setSenderEmail($senderEmail)
+    public function setSenderEmail($senderEmail): void
     {
         $this->senderEmail = $senderEmail;
         $this->sender = $senderEmail;
@@ -272,7 +272,7 @@ class Notification extends AbstractEntity
     /**
      * @param string $senderName
      */
-    public function setSenderName($senderName)
+    public function setSenderName($senderName): void
     {
         $this->senderName = $senderName;
     }

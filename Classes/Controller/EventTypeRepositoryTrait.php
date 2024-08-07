@@ -39,7 +39,7 @@ trait EventTypeRepositoryTrait
      * Injects the eventType repository
      * @param EventTypeRepository $eventTypeRepository
      */
-    public function injectEventTypeRepository(EventTypeRepository $eventTypeRepository)
+    public function injectEventTypeRepository(EventTypeRepository $eventTypeRepository): void
     {
         $this->eventTypeRepository = $eventTypeRepository;
     }

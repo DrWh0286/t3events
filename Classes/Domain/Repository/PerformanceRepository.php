@@ -50,7 +50,7 @@ class PerformanceRepository extends Repository implements
     /**
      * initializes the repository
      */
-    public function initializeObject()
+    public function initializeObject(): void
     {
         $emConfiguration = EmConfigurationUtility::getSettings();
         if (!(bool)$emConfiguration->isRespectPerformanceStoragePage()) {

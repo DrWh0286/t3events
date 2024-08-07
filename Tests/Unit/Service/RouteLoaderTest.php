@@ -20,7 +20,7 @@ use DWenzel\T3events\Controller\Routing\Router;
 use DWenzel\T3events\Controller\Routing\RouterInterface;
 use DWenzel\T3events\DataProvider\RouteLoader\RouteLoaderDataProviderInterface;
 use DWenzel\T3events\Service\RouteLoader;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 
@@ -75,7 +75,7 @@ class RouteLoaderTest extends UnitTestCase
     /**
      * @test
      */
-    public function registerAddsRouteToRouter()
+    public function registerAddsRouteToRouter(): void
     {
         $origin = 'foo|bar';
         $mockRoute = $this->getMockRoute();
@@ -92,7 +92,7 @@ class RouteLoaderTest extends UnitTestCase
     /**
      * @test
      */
-    public function registerSetsMethodOfRoute()
+    public function registerSetsMethodOfRoute(): void
     {
         $origin = 'foo|bar';
         $method = 'boom';
@@ -112,7 +112,7 @@ class RouteLoaderTest extends UnitTestCase
     /**
      * @test
      */
-    public function registerSetsOptionsOfRoute()
+    public function registerSetsOptionsOfRoute(): void
     {
         $origin = 'foo|bar';
         $options = ['boom'];
@@ -132,7 +132,7 @@ class RouteLoaderTest extends UnitTestCase
     /**
      * @test
      */
-    public function loadFromProviderGetsConfiguration()
+    public function loadFromProviderGetsConfiguration(): void
     {
         $config = [];
         /** @var RouteLoaderDataProviderInterface|MockObject $mockDataProvider */
@@ -150,7 +150,7 @@ class RouteLoaderTest extends UnitTestCase
     /**
      * @test
      */
-    public function loadFromProviderRegistersRoutes()
+    public function loadFromProviderRegistersRoutes(): void
     {
         $origin = 'origin';
         $method = SI::FORWARD;

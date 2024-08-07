@@ -4,7 +4,7 @@ namespace DWenzel\T3events\Tests\Unit\Controller;
 
 use DWenzel\T3events\Controller\FilterableControllerTrait;
 use DWenzel\T3events\Domain\Repository\AudienceRepository;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 /***************************************************************
@@ -115,7 +115,7 @@ class FilterableControllerTraitTest extends UnitTestCase
      * @test
      * @throws \ReflectionException
      */
-    public function getFilterOptionsInitiallyReturnsEmptyArray()
+    public function getFilterOptionsInitiallyReturnsEmptyArray(): void
     {
         $settings = [];
         $filterOptionsReflection = $this->getFilterOptionsReflection();
@@ -129,7 +129,7 @@ class FilterableControllerTraitTest extends UnitTestCase
      * @test
      * @throws \ReflectionException
      */
-    public function getFilterOptionsAddsAllOptionsForExistingRepositoryProperty()
+    public function getFilterOptionsAddsAllOptionsForExistingRepositoryProperty(): void
     {
         $this->subject = $this->getMockBuilder(DummyControllerWithAudienceRepository::class)
             ->setMethods(['translate'])->getMock();
@@ -158,7 +158,7 @@ class FilterableControllerTraitTest extends UnitTestCase
      * @test
      * @throws \ReflectionException
      */
-    public function getFilterOptionsAddsSelectedOptionsForAbstractDemandedRepositoryProperty()
+    public function getFilterOptionsAddsSelectedOptionsForAbstractDemandedRepositoryProperty(): void
     {
         $uidList = '1,3';
         $settings = [
@@ -191,7 +191,7 @@ class FilterableControllerTraitTest extends UnitTestCase
      * @test
      * @throws \ReflectionException
      */
-    public function getFilterOptionsAddsDefaultPeriodOptions()
+    public function getFilterOptionsAddsDefaultPeriodOptions(): void
     {
         $this->subject = $this->getAccessibleMock(
             DummyControllerWithAudienceRepository::class, ['translate']
@@ -217,7 +217,7 @@ class FilterableControllerTraitTest extends UnitTestCase
      * @test
      * @throws \ReflectionException
      */
-    public function getFilterOptionsAddsSelectedPeriodOptions()
+    public function getFilterOptionsAddsSelectedPeriodOptions(): void
     {
         $this->subject = $this->getMockForTrait(
             FilterableControllerTrait::class

@@ -30,7 +30,7 @@ trait TaskRepositoryTrait
      *
      * @param \DWenzel\T3events\Domain\Repository\TaskRepositoryInterface $taskRepository
      */
-    public function injectTaskRepository(TaskRepositoryInterface $taskRepository)
+    public function injectTaskRepository(TaskRepositoryInterface $taskRepository): void
     {
         $this->taskRepository = $taskRepository;
     }

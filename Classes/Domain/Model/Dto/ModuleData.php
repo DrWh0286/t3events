@@ -32,7 +32,7 @@ class ModuleData
      * Sets the demand
      * @param \DWenzel\T3events\Domain\Model\Dto\DemandInterface $demand
      */
-    public function setDemand(DemandInterface$demand)
+    public function setDemand(DemandInterface$demand): void
     {
         $this->demand = $demand;
     }
@@ -42,7 +42,7 @@ class ModuleData
      *
      * @param array $overwriteDemand
      */
-    public function setOverwriteDemand(array $overwriteDemand)
+    public function setOverwriteDemand(array $overwriteDemand): void
     {
         $this->overwriteDemand = $overwriteDemand;
     }

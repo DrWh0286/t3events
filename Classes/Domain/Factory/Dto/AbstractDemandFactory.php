@@ -85,7 +85,7 @@ abstract class AbstractDemandFactory
      * @param $demand
      * @param array $settings
      */
-    public function applySettings($demand, array $settings)
+    public function applySettings($demand, array $settings): void
     {
         if (
             isset($settings['sortBy']) &&

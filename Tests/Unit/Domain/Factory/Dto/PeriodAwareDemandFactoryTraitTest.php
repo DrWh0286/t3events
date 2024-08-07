@@ -4,7 +4,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Factory\Dto;
 
 use DWenzel\T3events\Domain\Factory\Dto\PeriodAwareDemandFactoryTrait;
 use DWenzel\T3events\Domain\Model\Dto\PeriodAwareDemandInterface;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 
@@ -96,7 +96,7 @@ class PeriodAwareDemandFactoryTraitTest extends UnitTestCase
      * @param array $settings
      * @param \DateTime $startDate
      */
-    public function setPeriodConstraintsSetsStartDate($settings, $startDate)
+    public function setPeriodConstraintsSetsStartDate($settings, $startDate): void
     {
         $mockDemand = $this->getMockPeriodAwareDemand();
 
@@ -113,7 +113,7 @@ class PeriodAwareDemandFactoryTraitTest extends UnitTestCase
      * @param array $settings
      * @param \DateTime $startDate
      */
-    public function setPeriodConstraintsSetsDate($settings, $startDate)
+    public function setPeriodConstraintsSetsDate($settings, $startDate): void
     {
         $mockDemand = $this->getMockPeriodAwareDemand();
 
@@ -138,7 +138,7 @@ class PeriodAwareDemandFactoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function setPeriodConstraintsSetsStartDateForPeriodTypeByDate()
+    public function setPeriodConstraintsSetsStartDateForPeriodTypeByDate(): void
     {
         $specificDateString = '1536656550';
         $timeZone = new \DateTimeZone(date_default_timezone_get());
@@ -162,7 +162,7 @@ class PeriodAwareDemandFactoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function setPeriodConstraintsSetsEndDateForPeriodTypeByDate()
+    public function setPeriodConstraintsSetsEndDateForPeriodTypeByDate(): void
     {
         $specificDateString = '1536656550';
         $timeZone = new \DateTimeZone(date_default_timezone_get());

@@ -28,8 +28,6 @@ use DWenzel\T3events\Utility\SettingsInterface as SI;
  */
 class PerformancesViewHelper extends AbstractTagBasedViewHelper
 {
-    use ConfigurationManagerTrait;
-
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\T3events\Domain\Model\Performance>
      */
@@ -42,21 +40,39 @@ class PerformancesViewHelper extends AbstractTagBasedViewHelper
      */
     protected $eventRepository;
 
-    /**
-     * injectEventRepository
-     *
-     * @param EventRepository $eventRepository
-     * @return void
-     */
-    public function injectEventRepository(EventRepository $eventRepository)
+    public function __construct(\DWenzel\T3events\Domain\Repository\EventRepository $eventRepository, protected \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager)
     {
         $this->eventRepository = $eventRepository;
+
+        $tsSettings = $this->configurationManager->getConfiguration(
+            \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
+            't3events',
+            't3events_events'
+        );
+        $originalSettings = $this->configurationManager->getConfiguration(
+            \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS
+        );
+
+        // start override
+        if (isset($tsSettings[SI::SETTINGS]['overrideFlexformSettingsIfEmpty'])) {
+            $overrideIfEmpty = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $tsSettings[SI::SETTINGS]['overrideFlexformSettingsIfEmpty'], true);
+            foreach ($overrideIfEmpty as $key) {
+                // if flexform setting is empty and value is available in TS
+                if ((!isset($originalSettings[$key]) || empty($originalSettings[$key]))
+                    && isset($tsSettings[SI::SETTINGS][$key])
+                ) {
+                    $originalSettings[$key] = $tsSettings[SI::SETTINGS][$key];
+                }
+            }
+        }
+
+        $this->settings = $originalSettings;
     }
 
     /**
      * Initialize Arguments
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::registerArgument('event', Event::class, 'Event whose performances should be rendered.', true);
         parent::registerArgument('tagName', 'string', 'Tag name to use for enclosing container', false, 'div');
@@ -191,40 +207,5 @@ class PerformancesViewHelper extends AbstractTagBasedViewHelper
         sort($prices);
 
         return (float)$prices[0];
-    }
-
-    /**
-     * Injects the Configuration Manager and is initializing the framework settings
-     *
-     * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager An instance of the Configuration Manager
-     * @return void
-     */
-    public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager)
-    {
-        $this->configurationManager = $configurationManager;
-
-        $tsSettings = $this->configurationManager->getConfiguration(
-            \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
-            't3events',
-            't3events_events'
-        );
-        $originalSettings = $this->configurationManager->getConfiguration(
-            \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS
-        );
-
-        // start override
-        if (isset($tsSettings[SI::SETTINGS]['overrideFlexformSettingsIfEmpty'])) {
-            $overrideIfEmpty = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $tsSettings[SI::SETTINGS]['overrideFlexformSettingsIfEmpty'], true);
-            foreach ($overrideIfEmpty as $key) {
-                // if flexform setting is empty and value is available in TS
-                if ((!isset($originalSettings[$key]) || empty($originalSettings[$key]))
-                    && isset($tsSettings[SI::SETTINGS][$key])
-                ) {
-                    $originalSettings[$key] = $tsSettings[SI::SETTINGS][$key];
-                }
-            }
-        }
-
-        $this->settings = $originalSettings;
     }
 }

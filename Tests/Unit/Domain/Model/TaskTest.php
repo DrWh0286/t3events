@@ -16,7 +16,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model;
  */
 use DWenzel\T3events\Domain\Model\PerformanceStatus;
 use DWenzel\T3events\Domain\Model\Task;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DWenzel\T3events\Domain\Model\Task.
@@ -39,7 +39,7 @@ class TaskTest extends UnitTestCase
     /**
      * @test
      */
-    public function getNameReturnsInitialValueForString()
+    public function getNameReturnsInitialValueForString(): void
     {
         $this->assertNull(
             $this->subject->getName()
@@ -49,7 +49,7 @@ class TaskTest extends UnitTestCase
     /**
      * @test
      */
-    public function setNameForStringSetsName()
+    public function setNameForStringSetsName(): void
     {
         $this->subject->setName('Conceived at T3CON10');
 
@@ -62,7 +62,7 @@ class TaskTest extends UnitTestCase
     /**
      * @test
      */
-    public function getActionReturnsInitialNull()
+    public function getActionReturnsInitialNull(): void
     {
         $this->assertNull(
             $this->subject->getAction()
@@ -72,7 +72,7 @@ class TaskTest extends UnitTestCase
     /**
      * @test
      */
-    public function setActionForIntegerSetsAction()
+    public function setActionForIntegerSetsAction(): void
     {
         $this->subject->setAction(12);
 
@@ -85,7 +85,7 @@ class TaskTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPeriodReturnsInitialNull()
+    public function getPeriodReturnsInitialNull(): void
     {
         $this->assertNull(
             $this->subject->getPeriod()
@@ -95,7 +95,7 @@ class TaskTest extends UnitTestCase
     /**
      * @test
      */
-    public function setPeriodForStringSetsPeriod()
+    public function setPeriodForStringSetsPeriod(): void
     {
         $period = 'foo';
         $this->subject->setPeriod($period);
@@ -108,7 +108,7 @@ class TaskTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPeriodDurationReturnsInitialNull()
+    public function getPeriodDurationReturnsInitialNull(): void
     {
         $this->assertNull(
             $this->subject->getPeriodDuration()
@@ -118,7 +118,7 @@ class TaskTest extends UnitTestCase
     /**
      * @test
      */
-    public function setPeriodDurationForIntegerSetsPeriodDuration()
+    public function setPeriodDurationForIntegerSetsPeriodDuration(): void
     {
         $this->subject->setPeriodDuration(-30000);
 
@@ -131,7 +131,7 @@ class TaskTest extends UnitTestCase
     /**
      * @test
      */
-    public function getOldStatusReturnsInitialNull()
+    public function getOldStatusReturnsInitialNull(): void
     {
         $this->assertNull(
             $this->subject->getOldStatus()
@@ -141,7 +141,7 @@ class TaskTest extends UnitTestCase
     /**
      * @test
      */
-    public function setOldStatusForPerformanceStatusSetsOldStatus()
+    public function setOldStatusForPerformanceStatusSetsOldStatus(): void
     {
         $status = new PerformanceStatus();
         $this->subject->setOldStatus($status);
@@ -155,7 +155,7 @@ class TaskTest extends UnitTestCase
     /**
      * @test
      */
-    public function getNewStatusReturnsInitialNull()
+    public function getNewStatusReturnsInitialNull(): void
     {
         $this->assertNull(
             $this->subject->getNewStatus()
@@ -165,7 +165,7 @@ class TaskTest extends UnitTestCase
     /**
      * @test
      */
-    public function setNewStatusForPerformanceStatusSetsNewStatus()
+    public function setNewStatusForPerformanceStatusSetsNewStatus(): void
     {
         $status = new PerformanceStatus();
         $this->subject->setNewStatus($status);
@@ -179,7 +179,7 @@ class TaskTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFolderReturnsInitialNull()
+    public function getFolderReturnsInitialNull(): void
     {
         $this->assertNull(
             $this->subject->getFolder()
@@ -189,7 +189,7 @@ class TaskTest extends UnitTestCase
     /**
      * @test
      */
-    public function setFolderForStringSetsFolder()
+    public function setFolderForStringSetsFolder(): void
     {
         $this->subject->setFolder('Conceived at T3CON10');
 

@@ -62,7 +62,7 @@ trait PeriodAwareDemandTrait
      * @param string $period A time limit for the demand
      * @return void
      */
-    public function setPeriod($period = '')
+    public function setPeriod($period = ''): void
     {
         $this->period = $period;
     }
@@ -83,7 +83,7 @@ trait PeriodAwareDemandTrait
      * @param \DateTime $date
      * @return void
      */
-    public function setDate($date)
+    public function setDate($date): void
     {
         $this->date = $date;
     }
@@ -100,7 +100,7 @@ trait PeriodAwareDemandTrait
      * @param string $type Type of period: day, month, year, date
      * @return void
      */
-    public function setPeriodType($type)
+    public function setPeriodType($type): void
     {
         $this->periodType = $type;
     }
@@ -117,7 +117,7 @@ trait PeriodAwareDemandTrait
      * @param int $start $start Start value for time period (day, month or year)
      * @return void
      */
-    public function setPeriodStart($start)
+    public function setPeriodStart($start): void
     {
         $this->periodStart = (int) $start;
     }
@@ -126,7 +126,7 @@ trait PeriodAwareDemandTrait
      * @param int $duration Duration value for period (days, months, years)
      * @return void
      */
-    public function setPeriodDuration($duration)
+    public function setPeriodDuration($duration): void
     {
         $this->periodDuration = (int) $duration;
     }
@@ -151,7 +151,7 @@ trait PeriodAwareDemandTrait
      * @param \DateTime $date Start date
      * @return void
      */
-    public function setStartDate($date)
+    public function setStartDate($date): void
     {
         $this->startDate = $date;
     }
@@ -168,7 +168,7 @@ trait PeriodAwareDemandTrait
      * @param \DateTime $date End date
      * @return void
      */
-    public function setEndDate($date)
+    public function setEndDate($date): void
     {
         $this->endDate = $date;
     }
@@ -184,7 +184,7 @@ trait PeriodAwareDemandTrait
     /**
      * @param boolean $respectEndDate
      */
-    public function setRespectEndDate($respectEndDate)
+    public function setRespectEndDate($respectEndDate): void
     {
         $this->respectEndDate = $respectEndDate;
     }

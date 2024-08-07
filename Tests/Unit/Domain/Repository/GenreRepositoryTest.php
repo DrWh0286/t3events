@@ -23,7 +23,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Repository;
 use DWenzel\T3events\Domain\Model\Dto\DemandInterface;
 use DWenzel\T3events\Domain\Repository\GenreRepository;
 use DWenzel\T3events\Tests\Unit\Domain\Model\Dto\MockDemandTrait;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
@@ -53,7 +53,7 @@ class GenreRepositoryTest extends UnitTestCase
      * @test
      * @covers ::createConstraintsFromDemand
      */
-    public function createConstraintsFromDemandInitiallyReturnsEmptyArray()
+    public function createConstraintsFromDemandInitiallyReturnsEmptyArray(): void
     {
         $demand = $this->getMockDemand();
         $query = $this->getMockQuery();

@@ -72,7 +72,7 @@ class TicketClass extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $title
      * @return void
      */
-    public function setTitle($title)
+    public function setTitle($title): void
     {
         $this->title = $title;
     }
@@ -93,7 +93,7 @@ class TicketClass extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $color
      * @return void
      */
-    public function setColor($color)
+    public function setColor($color): void
     {
         $this->color = $color;
     }
@@ -114,7 +114,7 @@ class TicketClass extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param float $price
      * @return float price
      */
-    public function setPrice($price)
+    public function setPrice($price): void
     {
         $this->price = $price;
     }
@@ -135,7 +135,7 @@ class TicketClass extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param integer $type
      * @return void
      */
-    public function setType($type)
+    public function setType($type): void
     {
         $this->type = $type;
     }

@@ -4,7 +4,7 @@ namespace DWenzel\T3events\Tests\Unit\Dto;
 
 use DWenzel\T3events\Domain\Repository\GenreRepository;
 use DWenzel\T3events\Dto\GenreFilter;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /***************************************************************
@@ -48,7 +48,7 @@ class GenreFilterTest extends UnitTestCase
         $this->subject->injectGenreRepository($this->genreRepository);
     }
 
-    public function testGetOptionsRepositoryReturnsGenreRepository()
+    public function testGetOptionsRepositoryReturnsGenreRepository(): void
     {
         $this->assertSame(
             $this->genreRepository,

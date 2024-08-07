@@ -40,7 +40,7 @@ class MetaTagViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBas
      *
      * @return void
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         $this->registerTagAttribute('name', 'string', 'Name of meta tag');
         $this->registerTagAttribute('property', 'string', 'Property of meta tag');
@@ -55,7 +55,7 @@ class MetaTagViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBas
      * @param boolean $forceAbsoluteUrl If set, absolute url is forced
      * @return void
      */
-    public function render($useCurrentDomain = false, $forceAbsoluteUrl = false)
+    public function render($useCurrentDomain = false, $forceAbsoluteUrl = false): void
     {
 
         // set current domain
@@ -66,7 +66,7 @@ class MetaTagViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBas
         // prepend current domain
         if ($forceAbsoluteUrl) {
             $path = $this->arguments['content'];
-            if (!\TYPO3\CMS\Core\Utility\GeneralUtility::isFirstPartOfStr($path, \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('TYPO3_SITE_URL'))) {
+            if (!\str_starts_with($path, \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('TYPO3_SITE_URL'))) {
                 $this->tag->addAttribute('content', \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('TYPO3_SITE_URL') . $this->arguments['content']);
             }
         }

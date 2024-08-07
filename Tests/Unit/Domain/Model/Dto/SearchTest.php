@@ -10,7 +10,7 @@ namespace DWenzel\T3events\Tests;
  * LICENSE.txt file that was distributed with this source code.
  * The TYPO3 project - inspiring people to share!
  */
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DWenzel\T3events\Domain\Model\Dto\Search.
@@ -44,7 +44,7 @@ class SearchTest extends UnitTestCase
     /**
      * @test
      */
-    public function getSubjectReturnsInitialValueForString()
+    public function getSubjectReturnsInitialValueForString(): void
     {
         $this->assertNull($this->fixture->getSubject());
     }
@@ -52,7 +52,7 @@ class SearchTest extends UnitTestCase
     /**
      * @test
      */
-    public function setSubjectForStringSetsSubject()
+    public function setSubjectForStringSetsSubject(): void
     {
         $this->fixture->setSubject('ping');
         $this->assertSame('ping', $this->fixture->getSubject());
@@ -61,7 +61,7 @@ class SearchTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFieldsReturnsInitialValueForString()
+    public function getFieldsReturnsInitialValueForString(): void
     {
         $this->assertNull($this->fixture->getFields());
     }
@@ -69,7 +69,7 @@ class SearchTest extends UnitTestCase
     /**
      * @test
      */
-    public function setFieldsForStringSetsFields()
+    public function setFieldsForStringSetsFields(): void
     {
         $this->fixture->setFields('ping');
         $this->assertSame('ping', $this->fixture->getFields());

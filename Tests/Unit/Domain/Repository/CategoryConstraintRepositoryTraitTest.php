@@ -4,7 +4,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
 
 use DWenzel\T3events\Domain\Model\Dto\CategoryAwareDemandInterface;
 use DWenzel\T3events\Domain\Repository\CategoryConstraintRepositoryTrait;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Persistence\Generic\Query;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -56,7 +56,7 @@ class CategoryConstraintRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function createCategoryConstraintsInitiallyReturnsEmptyArray()
+    public function createCategoryConstraintsInitiallyReturnsEmptyArray(): void
     {
         /** @var CategoryAwareDemandInterface|MockObject $demand */
         $demand = $this->getMockBuilder(CategoryAwareDemandInterface::class)
@@ -74,7 +74,7 @@ class CategoryConstraintRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function createCategoryConstraintsCreatesCategoryConstraints()
+    public function createCategoryConstraintsCreatesCategoryConstraints(): void
     {
         $categoryList = '1,2';
         /** @var QueryInterface|MockObject $query */

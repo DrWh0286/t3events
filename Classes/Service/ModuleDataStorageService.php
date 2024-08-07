@@ -55,7 +55,7 @@ class ModuleDataStorageService implements SingletonInterface
      * @param string $key
      * @return void
      */
-    public function persistModuleData(ModuleData $moduleData, $key)
+    public function persistModuleData(ModuleData $moduleData, $key): void
     {
         $this->getBackendUserAuthentication()->pushModuleData($key, serialize($moduleData));
     }

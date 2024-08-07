@@ -52,7 +52,7 @@ class FilterCollection implements Iterator, Countable
     /**
      * Moves to the next storage entry.
      */
-    public function next()
+    public function next(): void
     {
         next($this->storage);
     }
@@ -81,7 +81,7 @@ class FilterCollection implements Iterator, Countable
     /**
      * Rewinds to the first storage element
      */
-    public function rewind()
+    public function rewind(): void
     {
         reset($this->storage);
     }
@@ -91,7 +91,7 @@ class FilterCollection implements Iterator, Countable
      *
      * @param FilterInterface $filter
      */
-    public function attach(FilterInterface $filter)
+    public function attach(FilterInterface $filter): void
     {
         $this->storage[spl_object_hash($filter)] = $filter;
     }
@@ -112,7 +112,7 @@ class FilterCollection implements Iterator, Countable
      *
      * @param FilterInterface $filter
      */
-    public function detach(FilterInterface $filter)
+    public function detach(FilterInterface $filter): void
     {
         unset($this->storage[spl_object_hash($filter)]);
     }

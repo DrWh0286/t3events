@@ -31,7 +31,7 @@ class VectorImage extends \DOMDocument
      * @param string $nodeId
      * @param string $content
      */
-    public function replaceNodeText($nodeId, $content)
+    public function replaceNodeText($nodeId, $content): void
     {
         $element = $this->getElementById($nodeId);
         if ($element === null) {
@@ -69,7 +69,7 @@ class VectorImage extends \DOMDocument
      *
      * @param array $elementIds
      */
-    public function hideElements(array $elementIds)
+    public function hideElements(array $elementIds): void
     {
         $this->setElementsAttribute($elementIds, 'style', 'display:none');
     }
@@ -79,7 +79,7 @@ class VectorImage extends \DOMDocument
      *
      * @param array $elementIds
      */
-    public function showElements(array $elementIds)
+    public function showElements(array $elementIds): void
     {
         $this->setElementsAttribute($elementIds, 'style', 'display:inline');
     }

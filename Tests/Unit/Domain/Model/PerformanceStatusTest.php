@@ -20,7 +20,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model;
      *  This copyright notice MUST APPEAR in all copies of the script!
      ***************************************************************/
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DWenzel\T3events\Domain\Model\PerformanceStatus.
@@ -54,7 +54,7 @@ class PerformanceStatusTest extends UnitTestCase
     /**
      * @test
      */
-    public function getTitleReturnsInitialValueForString()
+    public function getTitleReturnsInitialValueForString(): void
     {
         $this->assertNull($this->fixture->getTitle());
     }
@@ -62,7 +62,7 @@ class PerformanceStatusTest extends UnitTestCase
     /**
      * @test
      */
-    public function setTitleForStringSetsTitle()
+    public function setTitleForStringSetsTitle(): void
     {
         $this->fixture->setTitle('Conceived at T3CON10');
 
@@ -75,7 +75,7 @@ class PerformanceStatusTest extends UnitTestCase
     /**
      * @test
      */
-    public function getCssClassReturnsInitialValueForString()
+    public function getCssClassReturnsInitialValueForString(): void
     {
         $this->assertNull($this->fixture->getCssClass());
     }
@@ -83,7 +83,7 @@ class PerformanceStatusTest extends UnitTestCase
     /**
      * @test
      */
-    public function setCssClassForStringSetsCssClass()
+    public function setCssClassForStringSetsCssClass(): void
     {
         $this->fixture->setCssClass('Conceived at T3CON10');
 
@@ -96,7 +96,7 @@ class PerformanceStatusTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPriorityReturnsInitialValueForInteger()
+    public function getPriorityReturnsInitialValueForInteger(): void
     {
         $this->assertSame(
             2147483647,
@@ -107,7 +107,7 @@ class PerformanceStatusTest extends UnitTestCase
     /**
      * @test
      */
-    public function setPriorityForIntegerSetsPriority()
+    public function setPriorityForIntegerSetsPriority(): void
     {
         $this->fixture->setPriority(12);
 

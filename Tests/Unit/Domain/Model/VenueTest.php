@@ -22,7 +22,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model;
  ***************************************************************/
 
 use DWenzel\T3events\Domain\Model\Venue;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DWenzel\T3events\Domain\Model\Venue.
@@ -56,7 +56,7 @@ class VenueTest extends UnitTestCase
     /**
      * @test
      */
-    public function getTitleReturnsInitialValueForString()
+    public function getTitleReturnsInitialValueForString(): void
     {
         $this->assertNull(
             $this->fixture->getTitle()
@@ -66,7 +66,7 @@ class VenueTest extends UnitTestCase
     /**
      * @test
      */
-    public function setTitleForStringSetsTitle()
+    public function setTitleForStringSetsTitle(): void
     {
         $this->fixture->setTitle('Conceived at T3CON10');
 
@@ -79,7 +79,7 @@ class VenueTest extends UnitTestCase
     /**
      * @test
      */
-    public function getLinkReturnsInitiallyNull()
+    public function getLinkReturnsInitiallyNull(): void
     {
         $this->assertNull(
             $this->fixture->getLink()
@@ -89,7 +89,7 @@ class VenueTest extends UnitTestCase
     /**
      * @test
      */
-    public function setLinkForStringSetsLink()
+    public function setLinkForStringSetsLink(): void
     {
         $link = 'foo';
         $this->fixture->setLink($link);

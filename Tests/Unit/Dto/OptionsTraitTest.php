@@ -7,7 +7,7 @@ use DWenzel\T3events\Domain\Repository\GenreRepository;
 use DWenzel\T3events\Dto\GenreFilter;
 use DWenzel\T3events\Dto\OptionsTrait;
 use DWenzel\T3events\Utility\SettingsInterface;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
@@ -63,14 +63,14 @@ class OptionsTraitTest extends UnitTestCase
             ->getMockForAbstractClass();
     }
 
-    public function testGetOptionsInitiallyReturnsIterable()
+    public function testGetOptionsInitiallyReturnsIterable(): void
     {
         $this->assertTrue(
             is_iterable($this->subject->getOptions())
         );
     }
 
-    public function testCountInitiallyReturnsZero()
+    public function testCountInitiallyReturnsZero(): void
     {
         $this->assertSame(
             0,
@@ -78,7 +78,7 @@ class OptionsTraitTest extends UnitTestCase
         );
     }
 
-    public function testConfigureGetsAllFromRepository()
+    public function testConfigureGetsAllFromRepository(): void
     {
         $config = [SettingsInterface::ALL];
         $this->repository->expects($this->once())
@@ -92,7 +92,7 @@ class OptionsTraitTest extends UnitTestCase
         );
     }
 
-    public function testConfigureGetsMultipleByUidFromRepository()
+    public function testConfigureGetsMultipleByUidFromRepository(): void
     {
         $config = ['1,4'];
         $this->repository->expects($this->once())

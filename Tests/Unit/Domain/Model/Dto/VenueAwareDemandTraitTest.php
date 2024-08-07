@@ -1,7 +1,7 @@
 <?php
 namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use DWenzel\T3events\Domain\Model\Dto\VenueAwareDemandTrait;
 
 /**
@@ -30,7 +30,7 @@ class VenueAwareDemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function getVenuesReturnsInitialValueForString()
+    public function getVenuesReturnsInitialValueForString(): void
     {
         $this->assertNull($this->subject->getVenues());
     }
@@ -38,7 +38,7 @@ class VenueAwareDemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function setVenuesForStringSetsVenue()
+    public function setVenuesForStringSetsVenue(): void
     {
         $this->subject->setVenues('foo');
         $this->assertSame(

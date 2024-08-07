@@ -1,7 +1,7 @@
 <?php
 namespace DWenzel\T3events\Tests\Unit\Domain\Model;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use DWenzel\T3events\Domain\Model\Content;
 
 /***************************************************************
@@ -49,7 +49,7 @@ class ContentTest extends UnitTestCase
     /**
      * @test
      */
-    public function crdateCanBeSet()
+    public function crdateCanBeSet(): void
     {
         $fieldValue = new \DateTime();
         $this->ttContentDomainModelInstance->setCrdate($fieldValue);
@@ -59,7 +59,7 @@ class ContentTest extends UnitTestCase
     /**
      * @test
      */
-    public function tstampCanBeSet()
+    public function tstampCanBeSet(): void
     {
         $fieldValue = new \DateTime();
         $this->ttContentDomainModelInstance->setTstamp($fieldValue);
@@ -69,7 +69,7 @@ class ContentTest extends UnitTestCase
     /**
      * @test
      */
-    public function cTypeCanBeSet()
+    public function cTypeCanBeSet(): void
     {
         $fieldValue = 'fo123';
         $this->ttContentDomainModelInstance->setCType($fieldValue);
@@ -79,7 +79,7 @@ class ContentTest extends UnitTestCase
     /**
      * @test
      */
-    public function headerCanBeSet()
+    public function headerCanBeSet(): void
     {
         $fieldValue = 'fo123';
         $this->ttContentDomainModelInstance->setHeader($fieldValue);
@@ -89,7 +89,7 @@ class ContentTest extends UnitTestCase
     /**
      * @test
      */
-    public function headerPositionCanBeSet()
+    public function headerPositionCanBeSet(): void
     {
         $fieldValue = 'fo123';
         $this->ttContentDomainModelInstance->setHeaderPosition($fieldValue);
@@ -99,7 +99,7 @@ class ContentTest extends UnitTestCase
     /**
      * @test
      */
-    public function bodytextCanBeSet()
+    public function bodytextCanBeSet(): void
     {
         $fieldValue = 'fo123';
         $this->ttContentDomainModelInstance->setBodytext($fieldValue);
@@ -109,7 +109,7 @@ class ContentTest extends UnitTestCase
     /**
      * @test
      */
-    public function colPosCanBeSet()
+    public function colPosCanBeSet(): void
     {
         $fieldValue = 1;
         $this->ttContentDomainModelInstance->setColPos($fieldValue);
@@ -119,7 +119,7 @@ class ContentTest extends UnitTestCase
     /**
      * @test
      */
-    public function imageCanBeSet()
+    public function imageCanBeSet(): void
     {
         $fieldValue = 'fo123';
         $this->ttContentDomainModelInstance->setImage($fieldValue);
@@ -129,7 +129,7 @@ class ContentTest extends UnitTestCase
     /**
      * @test
      */
-    public function imageWidthCanBeSet()
+    public function imageWidthCanBeSet(): void
     {
         $fieldValue = 123;
         $this->ttContentDomainModelInstance->setImagewidth($fieldValue);
@@ -139,7 +139,7 @@ class ContentTest extends UnitTestCase
     /**
      * @test
      */
-    public function imageOrientCanBeSet()
+    public function imageOrientCanBeSet(): void
     {
         $fieldValue = 'Test123';
         $this->ttContentDomainModelInstance->setImageorient($fieldValue);
@@ -149,7 +149,7 @@ class ContentTest extends UnitTestCase
     /**
      * @test
      */
-    public function imageCaptionCanBeSet()
+    public function imageCaptionCanBeSet(): void
     {
         $fieldValue = 'Test123';
         $this->ttContentDomainModelInstance->setImagecaption($fieldValue);
@@ -159,7 +159,7 @@ class ContentTest extends UnitTestCase
     /**
      * @test
      */
-    public function imageColsCanBeSet()
+    public function imageColsCanBeSet(): void
     {
         $fieldValue = 123;
         $this->ttContentDomainModelInstance->setImagecols($fieldValue);
@@ -169,7 +169,7 @@ class ContentTest extends UnitTestCase
     /**
      * @test
      */
-    public function imageBorderCanBeSet()
+    public function imageBorderCanBeSet(): void
     {
         $fieldValue = 123;
         $this->ttContentDomainModelInstance->setImageborder($fieldValue);
@@ -179,7 +179,7 @@ class ContentTest extends UnitTestCase
     /**
      * @test
      */
-    public function mediaCanBeSet()
+    public function mediaCanBeSet(): void
     {
         $fieldValue = 'Test 123';
         $this->ttContentDomainModelInstance->setMedia($fieldValue);
@@ -189,7 +189,7 @@ class ContentTest extends UnitTestCase
     /**
      * @test
      */
-    public function layoutCanBeSet()
+    public function layoutCanBeSet(): void
     {
         $fieldValue = 'Test 123';
         $this->ttContentDomainModelInstance->setLayout($fieldValue);
@@ -199,7 +199,7 @@ class ContentTest extends UnitTestCase
     /**
      * @test
      */
-    public function colsCanBeSet()
+    public function colsCanBeSet(): void
     {
         $fieldValue = 123;
         $this->ttContentDomainModelInstance->setCols($fieldValue);
@@ -209,7 +209,7 @@ class ContentTest extends UnitTestCase
     /**
      * @test
      */
-    public function subheaderCanBeSet()
+    public function subheaderCanBeSet(): void
     {
         $fieldValue = 'Test 123';
         $this->ttContentDomainModelInstance->setSubheader($fieldValue);
@@ -219,7 +219,7 @@ class ContentTest extends UnitTestCase
     /**
      * @test
      */
-    public function headerLinkCanBeSet()
+    public function headerLinkCanBeSet(): void
     {
         $fieldValue = 'Test 123';
         $this->ttContentDomainModelInstance->setHeaderLink($fieldValue);
@@ -229,7 +229,7 @@ class ContentTest extends UnitTestCase
     /**
      * @test
      */
-    public function imageLinkCanBeSet()
+    public function imageLinkCanBeSet(): void
     {
         $fieldValue = 'Test 123';
         $this->ttContentDomainModelInstance->setImageLink($fieldValue);
@@ -239,7 +239,7 @@ class ContentTest extends UnitTestCase
     /**
      * @test
      */
-    public function imageZoomCanBeSet()
+    public function imageZoomCanBeSet(): void
     {
         $fieldValue = 'Test 123';
         $this->ttContentDomainModelInstance->setImageZoom($fieldValue);
@@ -249,7 +249,7 @@ class ContentTest extends UnitTestCase
     /**
      * @test
      */
-    public function altTextCanBeSet()
+    public function altTextCanBeSet(): void
     {
         $fieldValue = 'Test 123';
         $this->ttContentDomainModelInstance->setAltText($fieldValue);
@@ -259,7 +259,7 @@ class ContentTest extends UnitTestCase
     /**
      * @test
      */
-    public function titleTextCanBeSet()
+    public function titleTextCanBeSet(): void
     {
         $fieldValue = 'Test 123';
         $this->ttContentDomainModelInstance->setTitleText($fieldValue);
@@ -269,7 +269,7 @@ class ContentTest extends UnitTestCase
     /**
      * @test
      */
-    public function headerLayoutCanBeSet()
+    public function headerLayoutCanBeSet(): void
     {
         $fieldValue = 'Test 123';
         $this->ttContentDomainModelInstance->setHeaderLayout($fieldValue);
@@ -279,7 +279,7 @@ class ContentTest extends UnitTestCase
     /**
      * @test
      */
-    public function listTypeCanBeSet()
+    public function listTypeCanBeSet(): void
     {
         $fieldValue = 'Test 123';
         $this->ttContentDomainModelInstance->setListType($fieldValue);

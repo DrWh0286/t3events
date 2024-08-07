@@ -31,7 +31,7 @@ trait SettingsUtilityTrait
      *
      * @param \DWenzel\T3events\Utility\SettingsUtility $settingsUtility
      */
-    public function injectSettingsUtility(SettingsUtility $settingsUtility)
+    public function injectSettingsUtility(SettingsUtility $settingsUtility): void
     {
         $this->settingsUtility = $settingsUtility;
     }

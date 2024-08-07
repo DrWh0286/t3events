@@ -14,7 +14,7 @@ namespace DWenzel\T3events\Tests\Unit\Utility;
  * The TYPO3 project - inspiring people to share!
  */
 use DWenzel\T3events\Utility\TemplateLayoutUtility;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Tests for  TemplateLayoutUtility
@@ -40,7 +40,7 @@ class TemplateLayoutUtilityTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasLayoutsInitiallyReturnsFalse()
+    public function hasLayoutsInitiallyReturnsFalse(): void
     {
         $extensionKey = 'foo';
         $this->assertFalse(
@@ -51,7 +51,7 @@ class TemplateLayoutUtilityTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasLayoutsReturnsTrueIfIssetInTYPO3ConfVars()
+    public function hasLayoutsReturnsTrueIfIssetInTYPO3ConfVars(): void
     {
         $extensionKey = 'foo';
         $GLOBALS['TYPO3_CONF_VARS']['EXT'][$extensionKey]['templateLayouts'] = ['bar'];
@@ -68,7 +68,7 @@ class TemplateLayoutUtilityTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasLayoutsReturnsTrueIfIssetInPagesTsConfig()
+    public function hasLayoutsReturnsTrueIfIssetInPagesTsConfig(): void
     {
         $extensionKey = 'foo';
         $pageTSKey = 'tx_' . $extensionKey . '.';
@@ -91,7 +91,7 @@ class TemplateLayoutUtilityTest extends UnitTestCase
     /**
      * @test
      */
-    public function getLayoutsInitiallyReturnsEmptyArray()
+    public function getLayoutsInitiallyReturnsEmptyArray(): void
     {
         $this->assertSame(
             [],
@@ -102,7 +102,7 @@ class TemplateLayoutUtilityTest extends UnitTestCase
     /**
      * @test
      */
-    public function getLayoutsReturnsValueFromTYPO3ConfVars()
+    public function getLayoutsReturnsValueFromTYPO3ConfVars(): void
     {
         $templateLayouts = [
             'foo' => 'bar'
@@ -119,7 +119,7 @@ class TemplateLayoutUtilityTest extends UnitTestCase
     /**
      * @test
      */
-    public function getLayoutsReturnsValueFromPageTSConfig()
+    public function getLayoutsReturnsValueFromPageTSConfig(): void
     {
         $extensionKey = 'foo';
         $pageTSKey = 'tx_' . $extensionKey . '.';

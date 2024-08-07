@@ -22,7 +22,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Repository;
 use DWenzel\T3events\Domain\Model\Dto\PeriodAwareDemandInterface;
 use DWenzel\T3events\Domain\Repository\PeriodConstraintRepositoryTrait;
 use DWenzel\T3events\Tests\Unit\Domain\Model\Dto\MockDemandTrait;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
@@ -93,7 +93,7 @@ class PeriodConstraintRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function createPeriodConstraintsInitiallyReturnsEmptyArray()
+    public function createPeriodConstraintsInitiallyReturnsEmptyArray(): void
     {
         $demand = $this->getMockPeriodAwareDemand();
         $this->assertSame(
@@ -108,7 +108,7 @@ class PeriodConstraintRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function createPeriodConstraintsAddsConstraintForFuture()
+    public function createPeriodConstraintsAddsConstraintForFuture(): void
     {
         $period = SI::FUTURE_ONLY;
         $timezone = new \DateTimeZone(date_default_timezone_get());
@@ -130,7 +130,7 @@ class PeriodConstraintRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function createPeriodConstraintsAddsConstraintForPast()
+    public function createPeriodConstraintsAddsConstraintForPast(): void
     {
         $period = SI::PAST_ONLY;
         $timezone = new \DateTimeZone(date_default_timezone_get());
@@ -175,7 +175,7 @@ class PeriodConstraintRepositoryTraitTest extends UnitTestCase
      * @param string $periodType
      * @param \DateTime $expectedStartDate
      */
-    public function createPeriodConstraintsSetsStartDateForSpecificPeriod($periodType, $expectedStartDate)
+    public function createPeriodConstraintsSetsStartDateForSpecificPeriod($periodType, $expectedStartDate): void
     {
         $period = SI::SPECIFIC;
         $periodStart = 0;
@@ -202,7 +202,7 @@ class PeriodConstraintRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function createPeriodConstraintsSetsStartDateForSpecificPeriodFromDemand()
+    public function createPeriodConstraintsSetsStartDateForSpecificPeriodFromDemand(): void
     {
         $period = SI::SPECIFIC;
         $periodType = 'byDate';
@@ -234,7 +234,7 @@ class PeriodConstraintRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function createPeriodConstraintsSetsEndDateForSpecificPeriodFromDemand()
+    public function createPeriodConstraintsSetsEndDateForSpecificPeriodFromDemand(): void
     {
         $period = SI::SPECIFIC;
         $periodType = 'byDate';
@@ -266,7 +266,7 @@ class PeriodConstraintRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function createPeriodConstraintsGetsRespectEndDateFromDemand()
+    public function createPeriodConstraintsGetsRespectEndDateFromDemand(): void
     {
         $this->demand->expects($this->once())
             ->method('isRespectEndDate');
@@ -277,7 +277,7 @@ class PeriodConstraintRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function createPeriodConstraintsAddsConstraintForFutureRespectingEndDate()
+    public function createPeriodConstraintsAddsConstraintForFutureRespectingEndDate(): void
     {
         $period = SI::FUTURE_ONLY;
         $timezone = new \DateTimeZone(date_default_timezone_get());
@@ -312,7 +312,7 @@ class PeriodConstraintRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function createPeriodConstraintsAddsConstraintForPastRespectingEndDate()
+    public function createPeriodConstraintsAddsConstraintForPastRespectingEndDate(): void
     {
         $period = SI::PAST_ONLY;
         $timezone = new \DateTimeZone(date_default_timezone_get());
@@ -346,7 +346,7 @@ class PeriodConstraintRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function createPeriodConstraintsAddsConstraintForSpecificRespectingEndDate()
+    public function createPeriodConstraintsAddsConstraintForSpecificRespectingEndDate(): void
     {
         $startDate = new \DateTime('@' . 7000);
         $endDate = new \DateTime('@' . 8000);

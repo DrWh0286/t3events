@@ -1,7 +1,7 @@
 <?php
 namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use DWenzel\T3events\Domain\Model\Dto\StatusAwareDemandTrait;
 
 /**
@@ -30,7 +30,7 @@ class StatusAwareDemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function getStatusReturnsInitialNull()
+    public function getStatusReturnsInitialNull(): void
     {
         $this->assertSame(null, $this->subject->getStatus());
     }
@@ -38,7 +38,7 @@ class StatusAwareDemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function setStatusForPerformanceStatusSetsStatus()
+    public function setStatusForPerformanceStatusSetsStatus(): void
     {
         $status = new \DWenzel\T3events\Domain\Model\PerformanceStatus();
 
@@ -50,7 +50,7 @@ class StatusAwareDemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function getStatusesReturnsInitialValueForString()
+    public function getStatusesReturnsInitialValueForString(): void
     {
         $this->assertNull($this->subject->getStatuses());
     }
@@ -58,7 +58,7 @@ class StatusAwareDemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function setStatusesForStringSetsStatuses()
+    public function setStatusesForStringSetsStatuses(): void
     {
         $this->subject->setStatuses('foo');
         $this->assertSame(
@@ -70,7 +70,7 @@ class StatusAwareDemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function isExcludeSelectesStatusesInitiallyReturnsNull()
+    public function isExcludeSelectesStatusesInitiallyReturnsNull(): void
     {
         $this->assertNull(
             $this->subject->isExcludeSelectedStatuses()
@@ -80,7 +80,7 @@ class StatusAwareDemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function excludeSelectedStatusesCanBeSet()
+    public function excludeSelectedStatusesCanBeSet(): void
     {
         $this->subject->setExcludeSelectedStatuses(true);
         $this->assertTrue(

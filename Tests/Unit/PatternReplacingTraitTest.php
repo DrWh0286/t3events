@@ -14,7 +14,7 @@ namespace DWenzel\T3events\Tests\Unit;
  * The TYPO3 project - inspiring people to share!
  */
 use DWenzel\T3events\PatternReplacingTrait;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Class PatternReplacingTraitTest
@@ -39,7 +39,7 @@ class PatternReplacingTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function replacePatternReplacesCorrectly()
+    public function replacePatternReplacesCorrectly(): void
     {
         $replacePatterns = [
             '~\R~u' => "\r\n"

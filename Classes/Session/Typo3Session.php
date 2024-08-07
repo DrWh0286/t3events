@@ -64,7 +64,7 @@ class Typo3Session implements SessionInterface
      * @param mixed $value
      * @return void
      */
-    public function set($identifier, $value)
+    public function set($identifier, $value): void
     {
         $this->data[$identifier] = $value;
         $GLOBALS['TSFE']->fe_user->setKey('ses', $this->namespace, $this->data);
@@ -89,7 +89,7 @@ class Typo3Session implements SessionInterface
         return null;
     }
 
-    public function clean()
+    public function clean(): void
     {
         $GLOBALS['TSFE']->fe_user->setKey('ses', $this->namespace, array());
         $GLOBALS['TSFE']->fe_user->storeSessionData();
@@ -101,7 +101,7 @@ class Typo3Session implements SessionInterface
      *
      * @param string $namespace
      */
-    public function setNamespace($namespace)
+    public function setNamespace($namespace): void
     {
         $this->namespace = $namespace;
     }

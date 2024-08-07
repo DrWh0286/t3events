@@ -37,7 +37,7 @@ trait ObjectManagerTrait
      * Injects the object manager
      * @var ObjectManager $objectManager
      */
-    public function injectObjectManager(ObjectManager $objectManager)
+    public function injectObjectManager(ObjectManager $objectManager): void
     {
         $this->objectManager = $objectManager;
     }

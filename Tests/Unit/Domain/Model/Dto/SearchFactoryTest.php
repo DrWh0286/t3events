@@ -6,7 +6,7 @@ use DWenzel\T3events\Domain\Model\Dto\Search;
 use DWenzel\T3events\Domain\Model\Dto\SearchFactory;
 use DWenzel\T3events\Tests\Unit\Object\MockObjectManagerTrait;
 use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
@@ -51,7 +51,7 @@ class SearchFactoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function getSetsSearchFields()
+    public function getSetsSearchFields(): void
     {
         $subject = 'foo';
         $searchFields = 'bar,baz';
@@ -78,7 +78,7 @@ class SearchFactoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function getSetsSearchSubject()
+    public function getSetsSearchSubject(): void
     {
         $subject = 'foo';
         $searchFields = 'bar,baz';
@@ -105,7 +105,7 @@ class SearchFactoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function getSetsLocationAndRadius()
+    public function getSetsLocationAndRadius(): void
     {
         $location = 'foo';
         $radius = 10;

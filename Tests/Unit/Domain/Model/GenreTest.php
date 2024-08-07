@@ -31,7 +31,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model;
  * @author Dirk Wenzel <wenzel@webfox01.de>
  * @author Michael Kasten <kasten@webfox01.de>
  */
-class GenreTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
+class GenreTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
 {
 
     /**
@@ -52,7 +52,7 @@ class GenreTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
     /**
      * @test
      */
-    public function getTitleReturnsInitialValueForString()
+    public function getTitleReturnsInitialValueForString(): void
     {
         $this->assertNull(
             $this->fixture->getTitle()
@@ -62,7 +62,7 @@ class GenreTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
     /**
      * @test
      */
-    public function setTitleForStringSetsTitle()
+    public function setTitleForStringSetsTitle(): void
     {
         $this->fixture->setTitle('Conceived at T3CON10');
 
@@ -75,7 +75,7 @@ class GenreTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
     /**
      * @test
      */
-    public function getLanguageUidReturnsInitialValueForInteger()
+    public function getLanguageUidReturnsInitialValueForInteger(): void
     {
         $this->assertNull(
             $this->fixture->getLanguageUid()
@@ -85,7 +85,7 @@ class GenreTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
     /**
      * @test
      */
-    public function getLanguageUidReturnsLanguageUid()
+    public function getLanguageUidReturnsLanguageUid(): void
     {
         $this->fixture->_setProperty('_languageUid', 5);
         $this->assertSame(
@@ -98,7 +98,7 @@ class GenreTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
     /**
      * @test
      */
-    public function getLinkReturnsInitiallyNull()
+    public function getLinkReturnsInitiallyNull(): void
     {
         $this->assertNull(
             $this->fixture->getLink()
@@ -108,7 +108,7 @@ class GenreTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
     /**
      * @test
      */
-    public function setLinkForStringSetsLink()
+    public function setLinkForStringSetsLink(): void
     {
         $link = 'foo';
         $this->fixture->setLink($link);

@@ -150,7 +150,7 @@ class GeoCoder
      *
      * @var \DWenzel\T3events\Domain\Model\GeoCodingInterface $object
      */
-    public function updateGeoLocation(GeoCodingInterface &$object)
+    public function updateGeoLocation(GeoCodingInterface &$object): void
     {
         $city = $object->getPlace();
         if (!empty($city)) {

@@ -2,7 +2,7 @@
 namespace DWenzel\T3events\Utility;
 
 use DWenzel\T3events\Utility\EmConfigurationUtility;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use DWenzel\T3events\Domain\Model\Dto\EmConfiguration;
 
 /***************************************************************
@@ -35,7 +35,7 @@ class EmConfigurationUtilityTest extends UnitTestCase
     /**
      * @test
      */
-    public function parseSettingsInitiallyReturnsEmptyArray()
+    public function parseSettingsInitiallyReturnsEmptyArray(): void
     {
         $this->assertEquals(
             [],
@@ -46,7 +46,7 @@ class EmConfigurationUtilityTest extends UnitTestCase
     /**
      * @test
      */
-    public function getSettingsReturnsEmConfigurationWithSettings()
+    public function getSettingsReturnsEmConfigurationWithSettings(): void
     {
         $emSettings = [
             'respectPerformanceStoragePage' => true

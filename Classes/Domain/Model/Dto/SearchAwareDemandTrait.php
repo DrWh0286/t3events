@@ -30,7 +30,7 @@ trait SearchAwareDemandTrait
      * @param \DWenzel\T3events\Domain\Model\Dto\Search $search A search object
      * @return void
      */
-    public function setSearch(Search $search)
+    public function setSearch(Search $search): void
     {
         $this->search = $search;
     }

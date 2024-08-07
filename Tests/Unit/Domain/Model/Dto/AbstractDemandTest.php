@@ -32,7 +32,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
  * @author Michael Kasten <kasten@webfox01.de>
  * @coversDefaultClass \DWenzel\T3events\Domain\Model\Dto\AbstractDemand
  */
-class AbstractDemandTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
+class AbstractDemandTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
 {
 
     /**
@@ -54,7 +54,7 @@ class AbstractDemandTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getLimit
      */
-    public function getLimitReturnsInitialValueForInteger()
+    public function getLimitReturnsInitialValueForInteger(): void
     {
         $this->assertSame(100, $this->fixture->getLimit());
     }
@@ -63,7 +63,7 @@ class AbstractDemandTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setLimit
      */
-    public function setLimitForIntegerSetsLimit()
+    public function setLimitForIntegerSetsLimit(): void
     {
         $this->fixture->setLimit(3);
         $this->assertSame(3, $this->fixture->getLimit());
@@ -73,7 +73,7 @@ class AbstractDemandTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setLimit
      */
-    public function setLimitCastsStringToInteger()
+    public function setLimitCastsStringToInteger(): void
     {
         $this->fixture->setLimit('2');
         $this->assertInternalType(
@@ -86,7 +86,7 @@ class AbstractDemandTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setLimit
      */
-    public function setLimitValidatesLimitGreaterThanZero()
+    public function setLimitValidatesLimitGreaterThanZero(): void
     {
         $this->fixture->setLimit(-1);
         $this->assertSame(
@@ -99,7 +99,7 @@ class AbstractDemandTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getOffset
      */
-    public function getOffsetReturnsInitialNull()
+    public function getOffsetReturnsInitialNull(): void
     {
         $this->assertNull($this->fixture->getOffset());
     }
@@ -108,7 +108,7 @@ class AbstractDemandTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setOffset
      */
-    public function setOffsetSetsDefaultValueZeroForInteger()
+    public function setOffsetSetsDefaultValueZeroForInteger(): void
     {
         $this->fixture->setOffset();
         $this->assertSame(
@@ -120,7 +120,7 @@ class AbstractDemandTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setOffset
      */
-    public function setOffsetSetsOffsetForInteger()
+    public function setOffsetSetsOffsetForInteger(): void
     {
         $this->fixture->setOffset(99);
         $this->assertSame(
@@ -132,7 +132,7 @@ class AbstractDemandTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getSortDirection
      */
-    public function getSortDirectionReturnsInitialNull()
+    public function getSortDirectionReturnsInitialNull(): void
     {
         $this->assertNull($this->fixture->getSortDirection());
     }
@@ -141,7 +141,7 @@ class AbstractDemandTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setSortDirection
      */
-    public function setSortDirectionForStringSetsSort()
+    public function setSortDirectionForStringSetsSort(): void
     {
         $this->fixture->setSortDirection('baz');
         $this->assertSame(
@@ -154,7 +154,7 @@ class AbstractDemandTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getSortBy
      */
-    public function getSortByReturnsInitiallyNull()
+    public function getSortByReturnsInitiallyNull(): void
     {
         $this->assertNull($this->fixture->getSortBy());
     }
@@ -163,7 +163,7 @@ class AbstractDemandTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setSortBy
      */
-    public function setSortByForStringSetsSortBy()
+    public function setSortByForStringSetsSortBy(): void
     {
         $this->fixture->setSortBy('my.sort.string.with.dots');
         $this->assertSame(
@@ -176,7 +176,7 @@ class AbstractDemandTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getStoragePages
      */
-    public function getStoragePagesReturnsInitialNull()
+    public function getStoragePagesReturnsInitialNull(): void
     {
         $this->assertNull($this->fixture->getStoragePages());
     }
@@ -185,7 +185,7 @@ class AbstractDemandTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setStoragePages
      */
-    public function setStoragePagesForStringSetsStoragePages()
+    public function setStoragePagesForStringSetsStoragePages(): void
     {
         $this->fixture->setStoragePages('15,78,39');
         $this->assertSame('15,78,39', $this->fixture->getStoragePages());
@@ -195,7 +195,7 @@ class AbstractDemandTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getUidList
      */
-    public function getUidListReturnsInitialNull()
+    public function getUidListReturnsInitialNull(): void
     {
         $this->assertNull($this->fixture->getUidList());
     }
@@ -204,7 +204,7 @@ class AbstractDemandTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setUidList
      */
-    public function setUidListForStringSetsUidList()
+    public function setUidListForStringSetsUidList(): void
     {
         $this->fixture->setUidList('1,3,5');
         $this->assertSame('1,3,5', $this->fixture->getUidList());
@@ -214,7 +214,7 @@ class AbstractDemandTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getCategoryConjunction
      */
-    public function getCategoryConjunctionReturnsInitialNull()
+    public function getCategoryConjunctionReturnsInitialNull(): void
     {
         $this->assertEquals(
             null,
@@ -226,7 +226,7 @@ class AbstractDemandTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setCategoryConjunction
      */
-    public function setCategoryConjunctionForStringSetsCategoryConjunction()
+    public function setCategoryConjunctionForStringSetsCategoryConjunction(): void
     {
         $this->fixture->setCategoryConjunction('asc');
 
@@ -240,7 +240,7 @@ class AbstractDemandTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getConstraintsConjunction
      */
-    public function getConstraintsConjunctionReturnsInitialNull()
+    public function getConstraintsConjunctionReturnsInitialNull(): void
     {
         $this->assertEquals(
             null,
@@ -252,7 +252,7 @@ class AbstractDemandTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setConstraintsConjunction
      */
-    public function setConstraintsConjunctionForStringSetsConstraintsConjunction()
+    public function setConstraintsConjunctionForStringSetsConstraintsConjunction(): void
     {
         $conjunction = 'foo';
         $this->fixture->setConstraintsConjunction($conjunction);
@@ -267,7 +267,7 @@ class AbstractDemandTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getOrder
      */
-    public function getOrderReturnsInitialNull()
+    public function getOrderReturnsInitialNull(): void
     {
         $this->assertEquals(
             null,
@@ -279,7 +279,7 @@ class AbstractDemandTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setOrder
      */
-    public function setOrderForStringSetsCategoryConjunction()
+    public function setOrderForStringSetsCategoryConjunction(): void
     {
         $order = 'fieldA|asc,fieldB|desc';
         $this->fixture->setOrder($order);

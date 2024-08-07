@@ -8,7 +8,7 @@ use DWenzel\T3events\DataProvider\Legend\PeriodFutureDataProvider;
 use DWenzel\T3events\DataProvider\Legend\PeriodPastDataProvider;
 use DWenzel\T3events\DataProvider\Legend\PeriodSpecificDataProvider;
 use DWenzel\T3events\DataProvider\Legend\PeriodUnknownDataProvider;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 
@@ -49,7 +49,7 @@ class PeriodDataProviderFactoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function getInitiallyReturnsPeriodUnknownDataProvider()
+    public function getInitiallyReturnsPeriodUnknownDataProvider(): void
     {
         $this->assertInstanceOf(
             PeriodUnknownDataProvider::class,
@@ -112,7 +112,7 @@ class PeriodDataProviderFactoryTest extends UnitTestCase
      * @param $expectedClass
      * @throws \DWenzel\T3events\InvalidConfigurationException
      */
-    public function getReturnsDataProvider($params, $expectedClass)
+    public function getReturnsDataProvider($params, $expectedClass): void
     {
         $this->assertInstanceOf(
             $expectedClass,

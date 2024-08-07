@@ -84,9 +84,13 @@ class PerformanceController
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(\DWenzel\T3events\Domain\Repository\PerformanceRepository $performanceRepository, \DWenzel\T3events\Domain\Repository\GenreRepository $genreRepository, \DWenzel\T3events\Domain\Repository\VenueRepository $venueRepository, \DWenzel\T3events\Domain\Repository\EventTypeRepository $eventTypeRepository)
     {
         $this->namespace = get_class($this);
+        $this->performanceRepository = $performanceRepository;
+        $this->genreRepository = $genreRepository;
+        $this->venueRepository = $venueRepository;
+        $this->eventTypeRepository = $eventTypeRepository;
     }
 
     /**
@@ -109,54 +113,10 @@ class PerformanceController
     }
 
     /**
-     * injectPerformanceRepository
-     *
-     * @param \DWenzel\T3events\Domain\Repository\PerformanceRepository $performanceRepository
-     * @return void
-     */
-    public function injectPerformanceRepository(PerformanceRepository $performanceRepository)
-    {
-        $this->performanceRepository = $performanceRepository;
-    }
-
-    /**
-     * injectGenreRepository
-     *
-     * @param \DWenzel\T3events\Domain\Repository\GenreRepository $genreRepository
-     * @return void
-     */
-    public function injectGenreRepository(GenreRepository $genreRepository)
-    {
-        $this->genreRepository = $genreRepository;
-    }
-
-    /**
-     * injectVenueRepository
-     *
-     * @param \DWenzel\T3events\Domain\Repository\VenueRepository $venueRepository
-     * @return void
-     */
-    public function injectVenueRepository(VenueRepository $venueRepository)
-    {
-        $this->venueRepository = $venueRepository;
-    }
-
-    /**
-     * injectEventTypeRepository
-     *
-     * @param \DWenzel\T3events\Domain\Repository\EventTypeRepository $eventTypeRepository
-     * @return void
-     */
-    public function injectEventTypeRepository(EventTypeRepository $eventTypeRepository)
-    {
-        $this->eventTypeRepository = $eventTypeRepository;
-    }
-
-    /**
      * initializes all actions
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
      */
-    public function initializeAction()
+    public function initializeAction(): void
     {
         $this->settings = $this->mergeSettings();
         $this->contentObject = $this->configurationManager->getContentObject();
@@ -180,7 +140,7 @@ class PerformanceController
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      */
-    public function listAction(array $overwriteDemand = null)
+    public function listAction(array $overwriteDemand = null): \Psr\Http\Message\ResponseInterface
     {
         if (!$overwriteDemand){
             $overwriteDemand = unserialize($this->session->get('tx_t3events_overwriteDemand'), ['allowed_classes' => false]);
@@ -199,6 +159,7 @@ class PerformanceController
 
         $this->emitSignal(__CLASS__, self::PERFORMANCE_LIST_ACTION, $templateVariables);
         $this->view->assignMultiple($templateVariables);
+        return $this->htmlResponse();
     }
 
     /**
@@ -209,7 +170,7 @@ class PerformanceController
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      */
-    public function showAction(Performance $performance)
+    public function showAction(Performance $performance): \Psr\Http\Message\ResponseInterface
     {
         $templateVariables = [
             SI::SETTINGS => $this->settings,
@@ -218,6 +179,7 @@ class PerformanceController
 
         $this->emitSignal(__CLASS__, self::PERFORMANCE_SHOW_ACTION, $templateVariables);
         $this->view->assignMultiple($templateVariables);
+        return $this->htmlResponse();
     }
 
     /**
@@ -227,7 +189,7 @@ class PerformanceController
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      */
-    public function quickMenuAction()
+    public function quickMenuAction(): \Psr\Http\Message\ResponseInterface
     {
         $overwriteDemand = unserialize($this->session->get('tx_t3events_overwriteDemand'), ['allowed_classes' => false]);
 
@@ -252,6 +214,7 @@ class PerformanceController
         $this->view->assignMultiple(
             $templateVariables
         );
+        return $this->htmlResponse();
     }
 
     /**

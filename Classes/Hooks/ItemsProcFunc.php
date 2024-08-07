@@ -49,7 +49,7 @@ class ItemsProcFunc
      * @param array &$config configuration array
      * @return void
      */
-    public function user_templateLayout(array &$config)
+    public function user_templateLayout(array &$config): void
     {
         $pageId = null;
         if (!empty($config['row']['pid']) && is_numeric($config['row']['pid'])) {

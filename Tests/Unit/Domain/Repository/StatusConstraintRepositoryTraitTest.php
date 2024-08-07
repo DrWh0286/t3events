@@ -22,7 +22,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
 use DWenzel\T3events\Domain\Model\Dto\StatusAwareDemandInterface;
 use DWenzel\T3events\Domain\Repository\StatusConstraintRepositoryTrait;
 use DWenzel\T3events\Tests\Unit\Domain\Repository\MockQueryTrait;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
@@ -77,7 +77,7 @@ class StatusConstraintRepositoryTraitTest extends UnitTestCase
      * @test
      * @covers ::createStatusConstraints
      */
-    public function createStatusConstraintsInitiallyReturnsEmptyArray()
+    public function createStatusConstraintsInitiallyReturnsEmptyArray(): void
     {
         $demand = $this->getMockStatusAwareDemand();
         $this->assertSame(
@@ -93,7 +93,7 @@ class StatusConstraintRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function createStatusConstraintsCreatesStatusesConstraints()
+    public function createStatusConstraintsCreatesStatusesConstraints(): void
     {
         $statusList = '1,2';
         $query = $this->getMockQuery(['in']);

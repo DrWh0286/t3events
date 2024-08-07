@@ -3,7 +3,7 @@
 namespace DWenzel\T3events\Tests\Unit\DataProvider\Legend;
 
 use DWenzel\T3events\DataProvider\Legend\AbstractPeriodDataProvider;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -42,7 +42,7 @@ class AbstractPeriodDataProviderTest extends UnitTestCase
     /**
      * @test
      */
-    public function respectEndDateIsInitiallyFalse()
+    public function respectEndDateIsInitiallyFalse(): void
     {
         $this->assertAttributeSame(
             false,
@@ -54,7 +54,7 @@ class AbstractPeriodDataProviderTest extends UnitTestCase
     /**
      * @test
      */
-    public function constructorSetsRespectEndDate()
+    public function constructorSetsRespectEndDate(): void
     {
         /** @noinspection ImplicitMagicMethodCallInspection */
         $this->subject->__construct(true);
@@ -68,7 +68,7 @@ class AbstractPeriodDataProviderTest extends UnitTestCase
     /**
      * @test
      */
-    public function getAllLayerIdsReturnsLayerIdsFromClassConstant()
+    public function getAllLayerIdsReturnsLayerIdsFromClassConstant(): void
     {
         $expectedLayerIds = GeneralUtility::trimExplode(',', AbstractPeriodDataProvider::ALL_LAYERS, true);
         $this->assertSame(
@@ -80,7 +80,7 @@ class AbstractPeriodDataProviderTest extends UnitTestCase
     /**
      * @test
      */
-    public function getVisibleLayerIdsReturnsInitialValue()
+    public function getVisibleLayerIdsReturnsInitialValue(): void
     {
         $expectedLayerIds = GeneralUtility::trimExplode(',', AbstractPeriodDataProvider::VISIBLE_LAYERS, true);
         $this->assertSame(
@@ -92,7 +92,7 @@ class AbstractPeriodDataProviderTest extends UnitTestCase
     /**
      * @test
      */
-    public function getVisibleLayersReturnsLayersRespectingEndDate()
+    public function getVisibleLayersReturnsLayersRespectingEndDate(): void
     {
         $allLayers = ['foo', 'bar'];
         $layersToHide = ['foo'];

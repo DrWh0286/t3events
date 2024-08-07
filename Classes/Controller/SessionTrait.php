@@ -26,7 +26,7 @@ trait SessionTrait
     /**
      * @param \DWenzel\T3events\Session\SessionInterface $session
      */
-    public function injectSession(SessionInterface $session)
+    public function injectSession(SessionInterface $session): void
     {
         $session->setNamespace($this->namespace);
         $this->session = $session;

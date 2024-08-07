@@ -2,7 +2,7 @@
 
 namespace DWenzel\T3events\Tests;
 use DWenzel\T3events\Domain\Model\Dto\ButtonDemand;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Core\Imaging\Icon;
 
 /***************************************************************
@@ -40,7 +40,7 @@ class ButtonDemandTest extends  UnitTestCase
     /**
      * @test
      */
-    public function getTableInitiallyReturnsNull() {
+    public function getTableInitiallyReturnsNull(): void {
         $this->assertNull(
             $this->subject->getTable()
         );
@@ -49,7 +49,7 @@ class ButtonDemandTest extends  UnitTestCase
     /**
      * @test
      */
-    public function setTableForStringSetsTable() {
+    public function setTableForStringSetsTable(): void {
         $table = 'foo';
         $this->subject->setTable($table);
         $this->assertSame(
@@ -61,7 +61,7 @@ class ButtonDemandTest extends  UnitTestCase
     /**
      * @test
      */
-    public function getActionInitiallyReturnsNull() {
+    public function getActionInitiallyReturnsNull(): void {
         $this->assertNull(
             $this->subject->getAction()
         );
@@ -70,7 +70,7 @@ class ButtonDemandTest extends  UnitTestCase
     /**
      * @test
      */
-    public function setActionForStringSetsAction() {
+    public function setActionForStringSetsAction(): void {
         $action = 'foo';
         $this->subject->setAction($action);
         $this->assertSame(
@@ -82,7 +82,7 @@ class ButtonDemandTest extends  UnitTestCase
     /**
      * @test
      */
-    public function getOverlayInitiallyReturnsNull() {
+    public function getOverlayInitiallyReturnsNull(): void {
         $this->assertNull(
             $this->subject->getOverlay()
         );
@@ -91,7 +91,7 @@ class ButtonDemandTest extends  UnitTestCase
     /**
      * @test
      */
-    public function setOverlayForStringSetsOverlay() {
+    public function setOverlayForStringSetsOverlay(): void {
         $overlay = 'foo';
         $this->subject->setOverlay($overlay);
         $this->assertSame(
@@ -103,7 +103,7 @@ class ButtonDemandTest extends  UnitTestCase
     /**
      * @test
      */
-    public function getLabelKeyInitiallyReturnsNull()
+    public function getLabelKeyInitiallyReturnsNull(): void
     {
         $this->assertNull(
             $this->subject->getLabelKey()
@@ -113,7 +113,7 @@ class ButtonDemandTest extends  UnitTestCase
     /**
      * @test
      */
-    public function setLabelKeyForStringSetsLabelKey()
+    public function setLabelKeyForStringSetsLabelKey(): void
     {
         $labelKey = 'foo';
         $this->subject->setLabelKey($labelKey);
@@ -126,7 +126,7 @@ class ButtonDemandTest extends  UnitTestCase
     /**
      * @test
      */
-    public function getIconKeyInitiallyReturnsNull()
+    public function getIconKeyInitiallyReturnsNull(): void
     {
         $this->assertNull(
             $this->subject->getIconKey()
@@ -136,7 +136,7 @@ class ButtonDemandTest extends  UnitTestCase
     /**
      * @test
      */
-    public function setIconKeyForStringSetsIconKey()
+    public function setIconKeyForStringSetsIconKey(): void
     {
         $iconKey = 'foo';
         $this->subject->setIconKey($iconKey);
@@ -149,7 +149,7 @@ class ButtonDemandTest extends  UnitTestCase
      /**
      * @test
      */
-    public function getIconSizeInitiallyDefaultValue()
+    public function getIconSizeInitiallyDefaultValue(): void
     {
         $this->assertSame(
             Icon::SIZE_DEFAULT,
@@ -160,7 +160,7 @@ class ButtonDemandTest extends  UnitTestCase
     /**
      * @test
      */
-    public function setIconSizeForStringSetsIconSize()
+    public function setIconSizeForStringSetsIconSize(): void
     {
         $iconSize = 'foo';
         $this->subject->setIconSize($iconSize);

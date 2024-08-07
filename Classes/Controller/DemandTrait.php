@@ -45,7 +45,7 @@ trait DemandTrait
      * @param DemandInterface $demand
      * @param array $overwriteDemand
      */
-    public function overwriteDemandObject(&$demand, $overwriteDemand)
+    public function overwriteDemandObject(&$demand, $overwriteDemand): void
     {
         if (!(bool)$overwriteDemand) {
             return;

@@ -5,7 +5,7 @@ namespace DWenzel\T3events\Tests\Unit\Dto;
 use DWenzel\T3events\Dto\FilterResolver;
 use DWenzel\T3events\Dto\FilterResolverInterface;
 use DWenzel\T3events\Dto\NullFilter;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /***************************************************************
  *  Copyright notice
@@ -39,7 +39,7 @@ class FilterResolverTest extends UnitTestCase
         $this->subject = new FilterResolver();
     }
 
-    public function testClassImplementsFilterResolverInterface()
+    public function testClassImplementsFilterResolverInterface(): void
     {
         $this->assertInstanceOf(
             FilterResolverInterface::class,
@@ -47,7 +47,7 @@ class FilterResolverTest extends UnitTestCase
         );
     }
 
-    public function testResolveReturnsNullFilterClassForInvalidKey()
+    public function testResolveReturnsNullFilterClassForInvalidKey(): void
     {
         $invalidKey = 'fOoBarBAz';
         $this->assertSame(

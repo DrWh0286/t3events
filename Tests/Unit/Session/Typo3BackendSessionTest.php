@@ -11,7 +11,7 @@ namespace DWenzel\T3events\Tests\Unit\Session;
  * The TYPO3 project - inspiring people to share!
  */
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use DWenzel\T3events\Session\Typo3BackendSession;
 
 /**
@@ -41,7 +41,7 @@ class Typo3BackendSessionTest extends UnitTestCase
     /**
      * @test
      */
-    public function constructorSetsNameSpace()
+    public function constructorSetsNameSpace(): void
     {
         $namespace = 'foo';
         $subject = new Typo3BackendSession($namespace);
@@ -55,7 +55,7 @@ class Typo3BackendSessionTest extends UnitTestCase
     /**
      * @test
      */
-    public function setNamespaceForStringSetsNamespace()
+    public function setNamespaceForStringSetsNamespace(): void
     {
         $namespace = 'foo';
         $this->subject->setNamespace($namespace);
@@ -69,7 +69,7 @@ class Typo3BackendSessionTest extends UnitTestCase
     /**
      * @test
      */
-    public function setSetsData()
+    public function setSetsData(): void
     {
         $value = 'foo';
         $identifier = 'bar';
@@ -84,7 +84,7 @@ class Typo3BackendSessionTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasReturnsInitiallyFalse()
+    public function hasReturnsInitiallyFalse(): void
     {
         $identifier = 'bar';
         $this->assertFalse(
@@ -95,7 +95,7 @@ class Typo3BackendSessionTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasReturnsTrueIfIdentifierIsSet()
+    public function hasReturnsTrueIfIdentifierIsSet(): void
     {
         $value = 'foo';
         $identifier = 'bar';
@@ -109,7 +109,7 @@ class Typo3BackendSessionTest extends UnitTestCase
     /**
      * @test
      */
-    public function cleanEmptiesData()
+    public function cleanEmptiesData(): void
     {
         $value = 'foo';
         $identifier = 'bar';

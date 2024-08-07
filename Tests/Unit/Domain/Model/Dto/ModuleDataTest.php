@@ -1,7 +1,7 @@
 <?php
 namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use DWenzel\T3events\Domain\Model\Dto\DemandInterface;
 use DWenzel\T3events\Domain\Model\Dto\ModuleData;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -48,7 +48,7 @@ class ModuleDataTest extends UnitTestCase
     /**
      * @test
      */
-    public function getDemandInitiallyReturnsNull()
+    public function getDemandInitiallyReturnsNull(): void
     {
         $this->assertNull(
             $this->subject->getDemand()
@@ -58,7 +58,7 @@ class ModuleDataTest extends UnitTestCase
     /**
      * @test
      */
-    public function demandCanBeSet()
+    public function demandCanBeSet(): void
     {
         /** @var DemandInterface|MockObject $demand */
         $demand = $this->getMockBuilder(DemandInterface::class)->getMock();
@@ -73,7 +73,7 @@ class ModuleDataTest extends UnitTestCase
     /**
      * @test
      */
-    public function getOverwriteDemandInitiallyReturnsNull()
+    public function getOverwriteDemandInitiallyReturnsNull(): void
     {
         $this->assertNull(
             $this->subject->getOverwriteDemand()
@@ -83,7 +83,7 @@ class ModuleDataTest extends UnitTestCase
     /**
      * @test
      */
-    public function overwriteDemandCanBeSet()
+    public function overwriteDemandCanBeSet(): void
     {
         $overwriteDemand = ['foo'];
         $this->subject->setOverwriteDemand($overwriteDemand);

@@ -19,7 +19,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
      *  GNU General Public License for more details.
      *  This copyright notice MUST APPEAR in all copies of the script!
      ***************************************************************/
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use DWenzel\T3events\Domain\Model\Dto\Search;
 use DWenzel\T3events\Domain\Model\Dto\SearchAwareDemandTrait;
 
@@ -51,7 +51,7 @@ class SearchAwareDemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function getSearchInitiallyReturnsNull()
+    public function getSearchInitiallyReturnsNull(): void
     {
         $this->assertNull(
             $this->subject->getSearch()
@@ -61,7 +61,7 @@ class SearchAwareDemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function setSearchForObjectSetsSearch()
+    public function setSearchForObjectSetsSearch(): void
     {
         $search = new Search();
         $this->subject->setSearch($search);

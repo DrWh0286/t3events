@@ -28,7 +28,7 @@ use DWenzel\T3events\Domain\Model\Genre;
 use DWenzel\T3events\Domain\Model\Organizer;
 use DWenzel\T3events\Domain\Model\Performance;
 use DWenzel\T3events\Domain\Model\Venue;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -51,7 +51,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getHeadlineReturnsInitialValueForString()
+    public function getHeadlineReturnsInitialValueForString(): void
     {
         $this->assertNull(
             $this->subject->getHeadline()
@@ -61,7 +61,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function setHeadlineForStringSetsHeadline()
+    public function setHeadlineForStringSetsHeadline(): void
     {
         $this->subject->setHeadline('Conceived at T3CON10');
 
@@ -74,7 +74,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getSubtitleReturnsInitialValueForString()
+    public function getSubtitleReturnsInitialValueForString(): void
     {
         $this->assertNull(
             $this->subject->getSubtitle()
@@ -84,7 +84,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function setSubtitleForStringSetsSubtitle()
+    public function setSubtitleForStringSetsSubtitle(): void
     {
         $this->subject->setSubtitle('Conceived at T3CON10');
 
@@ -97,7 +97,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getTeaserForStringReturnsInitiallyNull()
+    public function getTeaserForStringReturnsInitiallyNull(): void
     {
         $this->assertNull(
             $this->subject->getTeaser()
@@ -107,7 +107,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function setTeaserForStringSetsTeaser()
+    public function setTeaserForStringSetsTeaser(): void
     {
         $this->subject->setTeaser('foo');
 
@@ -120,7 +120,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getDescriptionReturnsInitialValueForString()
+    public function getDescriptionReturnsInitialValueForString(): void
     {
         $this->assertNull(
             $this->subject->getDescription()
@@ -130,7 +130,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function setDescriptionForStringSetsDescription()
+    public function setDescriptionForStringSetsDescription(): void
     {
         $this->subject->setDescription('Conceived at T3CON10');
 
@@ -143,7 +143,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getKeywordsReturnsInitialValueForString()
+    public function getKeywordsReturnsInitialValueForString(): void
     {
         $this->assertNull(
             $this->subject->getKeywords()
@@ -153,7 +153,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function setKeywordsForStringSetsKeywords()
+    public function setKeywordsForStringSetsKeywords(): void
     {
         $this->subject->setKeywords('Conceived at T3CON10');
 
@@ -166,7 +166,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getImagesReturnsInitialValueForObjectStorageContainingImages()
+    public function getImagesReturnsInitialValueForObjectStorageContainingImages(): void
     {
         $newObjectStorage = new ObjectStorage();
         $this->assertEquals(
@@ -178,7 +178,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function setImagesForObjectStorageContainingImagesSetsImages()
+    public function setImagesForObjectStorageContainingImagesSetsImages(): void
     {
         $images = new FileReference();
         $objectStorageHoldingExactlyOneImage = new ObjectStorage();
@@ -194,7 +194,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function addImagesToObjectStorageHoldingImages()
+    public function addImagesToObjectStorageHoldingImages(): void
     {
         $images = new FileReference();
         $objectStorageHoldingExactlyOneImage = new ObjectStorage();
@@ -210,7 +210,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function removeImagesFromObjectStorageHoldingImages()
+    public function removeImagesFromObjectStorageHoldingImages(): void
     {
         $images = new FileReference();
         $localObjectStorage = new ObjectStorage();
@@ -228,7 +228,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFilesReturnsInitialValueForObjectStorageContainingFiles()
+    public function getFilesReturnsInitialValueForObjectStorageContainingFiles(): void
     {
         $newObjectStorage = new ObjectStorage();
         $this->assertEquals(
@@ -240,7 +240,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function setFilesForObjectStorageContainingFilesSetsFiles()
+    public function setFilesForObjectStorageContainingFilesSetsFiles(): void
     {
         $files = new FileReference();
         $objectStorageHoldingExactlyOneImage = new ObjectStorage();
@@ -256,7 +256,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function addFilesToObjectStorageHoldingFiles()
+    public function addFilesToObjectStorageHoldingFiles(): void
     {
         $files = new FileReference();
         $objectStorageHoldingExactlyOneImage = new ObjectStorage();
@@ -272,7 +272,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function removeFilesFromObjectStorageHoldingFiles()
+    public function removeFilesFromObjectStorageHoldingFiles(): void
     {
         $files = new FileReference();
         $localObjectStorage = new ObjectStorage();
@@ -290,7 +290,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getRelatedReturnsInitialValueForObjectStorageContainingRelated()
+    public function getRelatedReturnsInitialValueForObjectStorageContainingRelated(): void
     {
         $newObjectStorage = new ObjectStorage();
         $this->assertEquals(
@@ -302,7 +302,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function setRelatedForObjectStorageContainingRelatedSetsRelated()
+    public function setRelatedForObjectStorageContainingRelatedSetsRelated(): void
     {
         $related = new Event();
         $objectStorageHoldingExactlyOneRelated = new ObjectStorage();
@@ -318,7 +318,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function addRelatedToObjectStorageHoldingRelated()
+    public function addRelatedToObjectStorageHoldingRelated(): void
     {
         $related = new Event();
         $objectStorageHoldingExactlyOneRelated = new ObjectStorage();
@@ -334,7 +334,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function removeRelatedFromObjectStorageHoldingRelated()
+    public function removeRelatedFromObjectStorageHoldingRelated(): void
     {
         $related = new Event();
         $localObjectStorage = new ObjectStorage();
@@ -352,7 +352,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getGenreReturnsInitialValueForObjectStorageContainingGenre()
+    public function getGenreReturnsInitialValueForObjectStorageContainingGenre(): void
     {
         $newObjectStorage = new ObjectStorage();
         $this->assertEquals(
@@ -364,7 +364,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function setGenreForObjectStorageContainingGenreSetsGenre()
+    public function setGenreForObjectStorageContainingGenreSetsGenre(): void
     {
         $genre = new Genre();
         $objectStorageHoldingExactlyOneGenre = new ObjectStorage();
@@ -380,7 +380,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function addGenreToObjectStorageHoldingGenre()
+    public function addGenreToObjectStorageHoldingGenre(): void
     {
         $genre = new Genre();
         $objectStorageHoldingExactlyOneGenre = new ObjectStorage();
@@ -396,7 +396,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function removeGenreFromObjectStorageHoldingGenre()
+    public function removeGenreFromObjectStorageHoldingGenre(): void
     {
         $genre = new Genre();
         $localObjectStorage = new ObjectStorage();
@@ -414,7 +414,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getVenueReturnsInitialValueForObjectStorageContainingVenue()
+    public function getVenueReturnsInitialValueForObjectStorageContainingVenue(): void
     {
         $newObjectStorage = new ObjectStorage();
         $this->assertEquals(
@@ -426,7 +426,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function setVenueForObjectStorageContainingVenueSetsVenue()
+    public function setVenueForObjectStorageContainingVenueSetsVenue(): void
     {
         $venue = new Venue();
         $objectStorageHoldingExactlyOneVenue = new ObjectStorage();
@@ -442,7 +442,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function addVenueToObjectStorageHoldingVenue()
+    public function addVenueToObjectStorageHoldingVenue(): void
     {
         $venue = new Venue();
         $objectStorageHoldingExactlyOneVenue = new ObjectStorage();
@@ -458,7 +458,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function removeVenueFromObjectStorageHoldingVenue()
+    public function removeVenueFromObjectStorageHoldingVenue(): void
     {
         $venue = new Venue();
         $localObjectStorage = new ObjectStorage();
@@ -476,7 +476,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getEventTypeReturnsInitialValueForEventType()
+    public function getEventTypeReturnsInitialValueForEventType(): void
     {
         $this->assertEquals(
             null,
@@ -487,7 +487,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function setEventTypeForEventTypeSetsEventType()
+    public function setEventTypeForEventTypeSetsEventType(): void
     {
         $dummyObject = new EventType();
         $this->subject->setEventType($dummyObject);
@@ -501,7 +501,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPerformancesReturnsInitialValueForObjectStorageContainingPerformance()
+    public function getPerformancesReturnsInitialValueForObjectStorageContainingPerformance(): void
     {
         $newObjectStorage = new ObjectStorage();
         $this->assertEquals(
@@ -513,7 +513,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function setPerformancesForObjectStorageContainingPerformanceSetsPerformances()
+    public function setPerformancesForObjectStorageContainingPerformanceSetsPerformances(): void
     {
         $performance = new Performance();
         $objectStorageHoldingExactlyOnePerformances = new ObjectStorage();
@@ -529,7 +529,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function addPerformanceToObjectStorageHoldingPerformances()
+    public function addPerformanceToObjectStorageHoldingPerformances(): void
     {
         $performance = new Performance();
         $objectStorageHoldingExactlyOnePerformance = new ObjectStorage();
@@ -545,7 +545,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function removePerformanceFromObjectStorageHoldingPerformances()
+    public function removePerformanceFromObjectStorageHoldingPerformances(): void
     {
         $performance = new Performance();
         $localObjectStorage = new ObjectStorage();
@@ -563,7 +563,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getOrganizerReturnsInitialValueForOrganizer()
+    public function getOrganizerReturnsInitialValueForOrganizer(): void
     {
         $this->assertEquals(
             null,
@@ -574,7 +574,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function setOrganizerForOrganizerSetsOrganizer()
+    public function setOrganizerForOrganizerSetsOrganizer(): void
     {
         $dummyObject = new Organizer();
         $this->subject->setOrganizer($dummyObject);
@@ -588,7 +588,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getEarliestDateReturnsInitiallyNull()
+    public function getEarliestDateReturnsInitiallyNull(): void
     {
         $this->assertNull($this->subject->getEarliestDate());
     }
@@ -618,7 +618,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getEarliestDateReturnsEarliestDate()
+    public function getEarliestDateReturnsEarliestDate(): void
     {
         $earliestDate = new \DateTime('@1');
         $laterDate = new \DateTime('@5');
@@ -640,7 +640,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getHiddenReturnsInitialyNull()
+    public function getHiddenReturnsInitialyNull(): void
     {
         $this->assertNull(
             $this->subject->getHidden()
@@ -650,7 +650,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function setHiddenForIntegerSetsHidden()
+    public function setHiddenForIntegerSetsHidden(): void
     {
         $this->subject->setHidden(3);
         $this->assertSame(
@@ -662,7 +662,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getAudienceReturnsInitialValueForObjectStorageContainingAudience()
+    public function getAudienceReturnsInitialValueForObjectStorageContainingAudience(): void
     {
         $newObjectStorage = new ObjectStorage();
         $this->assertEquals(
@@ -674,7 +674,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function setAudienceForObjectStorageContainingAudienceSetsAudience()
+    public function setAudienceForObjectStorageContainingAudienceSetsAudience(): void
     {
         $audience = new Audience();
         $objectStorageHoldingExactlyOneAudience = new ObjectStorage();
@@ -690,7 +690,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function addAudienceToObjectStorageHoldingAudience()
+    public function addAudienceToObjectStorageHoldingAudience(): void
     {
         $audience = new Audience();
         $objectStorageHoldingExactlyOneAudience = new ObjectStorage();
@@ -706,7 +706,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function removeAudienceFromObjectStorageHoldingAudience()
+    public function removeAudienceFromObjectStorageHoldingAudience(): void
     {
         $audience = new Audience();
         $localObjectStorage = new ObjectStorage();
@@ -724,7 +724,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getNewUntilInitiallyReturnsNull()
+    public function getNewUntilInitiallyReturnsNull(): void
     {
         $this->assertNull(
             $this->subject->getNewUntil()
@@ -734,7 +734,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function newUntilCanBeSet()
+    public function newUntilCanBeSet(): void
     {
         $date = new \DateTime();
 
@@ -748,7 +748,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getArchiveDateInitiallyReturnsNull()
+    public function getArchiveDateInitiallyReturnsNull(): void
     {
         $this->assertNull(
             $this->subject->getArchiveDate()
@@ -758,7 +758,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function archiveDateCanBeSet()
+    public function archiveDateCanBeSet(): void
     {
         $date = new \DateTime();
 
@@ -772,7 +772,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getContentElementsReturnsInitialValueForObjectStorageContainingContentElements()
+    public function getContentElementsReturnsInitialValueForObjectStorageContainingContentElements(): void
     {
         $newObjectStorage = new ObjectStorage();
         $this->assertEquals(
@@ -784,7 +784,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function setContentElementsForObjectStorageContainingContentElementSetsContentElements()
+    public function setContentElementsForObjectStorageContainingContentElementSetsContentElements(): void
     {
         $contentElements = new Content();
         $objectStorageHoldingExactlyOneContentElements = new ObjectStorage();
@@ -800,7 +800,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function addContentElementToObjectStorageHoldingContentElements()
+    public function addContentElementToObjectStorageHoldingContentElements(): void
     {
         $contentElements = new Content();
         $objectStorageHoldingExactlyOneContentElement = new ObjectStorage();
@@ -816,7 +816,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function removeContentElementFromObjectStorageHoldingContentElements()
+    public function removeContentElementFromObjectStorageHoldingContentElements(): void
     {
         $contentElements = new Content();
         $localObjectStorage = new ObjectStorage();
@@ -834,7 +834,7 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getRelatedSchedulesInitiallyReturnsEmptyObjectStorage()
+    public function getRelatedSchedulesInitiallyReturnsEmptyObjectStorage(): void
     {
         $emptyObjectStorage = new ObjectStorage();
 

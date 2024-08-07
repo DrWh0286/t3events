@@ -89,7 +89,7 @@ class AbstractDemand extends AbstractEntity implements DemandInterface
      * @param int $limit A limit for the demand. Only values > 0 are allowed. Default 100
      * @return void
      */
-    public function setLimit($limit = 100)
+    public function setLimit($limit = 100): void
     {
         $validatedLimit = (int)$limit;
 
@@ -114,7 +114,7 @@ class AbstractDemand extends AbstractEntity implements DemandInterface
      * @param int $offset An offset for the demand
      * @return void
      */
-    public function setOffset($offset = 0)
+    public function setOffset($offset = 0): void
     {
         $this->offset = (int)$offset;
     }
@@ -136,7 +136,7 @@ class AbstractDemand extends AbstractEntity implements DemandInterface
      * @return void
      * @deprecated use setOrder instead
      */
-    public function setSortBy($sortBy)
+    public function setSortBy($sortBy): void
     {
         $this->sortBy = $sortBy;
     }
@@ -159,7 +159,7 @@ class AbstractDemand extends AbstractEntity implements DemandInterface
      * @return void
      * @deprecated use setOrder instead
      */
-    public function setSortDirection($sortDirection)
+    public function setSortDirection($sortDirection): void
     {
         $this->sortDirection = $sortDirection;
     }
@@ -181,7 +181,7 @@ class AbstractDemand extends AbstractEntity implements DemandInterface
      * @param string $storagePages A comma separated list of storage page ids
      * @return void
      */
-    public function setStoragePages($storagePages)
+    public function setStoragePages($storagePages): void
     {
         $this->storagePages = $storagePages;
     }
@@ -212,7 +212,7 @@ class AbstractDemand extends AbstractEntity implements DemandInterface
      * @param string $uidList A comma separated List of record uids
      * @return void
      */
-    public function setUidList($uidList)
+    public function setUidList($uidList): void
     {
         $this->uidList = $uidList;
     }
@@ -233,7 +233,7 @@ class AbstractDemand extends AbstractEntity implements DemandInterface
      * @param string $order A comma separated List of orderings
      * @return void
      */
-    public function setOrder($order)
+    public function setOrder($order): void
     {
         $this->order = $order;
     }
@@ -253,7 +253,7 @@ class AbstractDemand extends AbstractEntity implements DemandInterface
      *
      * @param string $conjunction
      */
-    public function setConstraintsConjunction($conjunction)
+    public function setConstraintsConjunction($conjunction): void
     {
         $this->constraintsConjunction = $conjunction;
     }
@@ -264,7 +264,7 @@ class AbstractDemand extends AbstractEntity implements DemandInterface
      * @param string $categoryConjunction
      * @return void
      */
-    public function setCategoryConjunction($categoryConjunction)
+    public function setCategoryConjunction($categoryConjunction): void
     {
         $this->categoryConjunction = $categoryConjunction;
     }

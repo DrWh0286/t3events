@@ -1,7 +1,7 @@
 <?php
 namespace DWenzel\T3events\Tests\Unit\Controller;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use DWenzel\T3events\Controller\EventTypeRepositoryTrait;
 use DWenzel\T3events\Domain\Repository\EventTypeRepository;
 
@@ -42,7 +42,7 @@ class EventTypeRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function eventTypeRepositoryCanBeInjected()
+    public function eventTypeRepositoryCanBeInjected(): void
     {
         /** @var EventTypeRepository|\PHPUnit_Framework_MockObject_MockObject $eventTypeRepository */
         $eventTypeRepository = $this->getMockBuilder(EventTypeRepository::class)

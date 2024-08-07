@@ -39,7 +39,7 @@ trait EventDemandFactoryTrait
      * @param \DWenzel\T3events\Domain\Factory\Dto\EventDemandFactory $eventDemandFactory
      * @return void
      */
-    public function injectEventDemandFactory(EventDemandFactory $eventDemandFactory)
+    public function injectEventDemandFactory(EventDemandFactory $eventDemandFactory): void
     {
         $this->eventDemandFactory = $eventDemandFactory;
     }

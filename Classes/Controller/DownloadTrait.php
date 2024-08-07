@@ -46,7 +46,7 @@ trait DownloadTrait
      *
      * @param \TYPO3\CMS\Core\Resource\Driver\LocalDriver $localDriver
      */
-    public function injectLocalDriver(LocalDriver $localDriver)
+    public function injectLocalDriver(LocalDriver $localDriver): void
     {
         $this->localDriver = $localDriver;
     }
@@ -114,7 +114,7 @@ trait DownloadTrait
      * @param string $fileName
      * @throws InvalidFileTypeException
      */
-    public function sendDownloadHeaders($ext, $fileName)
+    public function sendDownloadHeaders($ext, $fileName): void
     {
         switch ($ext) {
             case 'csv':
@@ -198,8 +198,8 @@ trait DownloadTrait
             'Content-Disposition' => 'attachment; filename="' . $fileName . '.' . $ext . '"',
             'Content-Transfer-Encoding' => 'binary',
         ];
-        if (!$this->response instanceof Response) {
-            $this->response = $this->objectManager->get(Response::class);
+        if (!$this->response instanceof \TYPO3\CMS\Extbase\Mvc\Response) {
+            $this->response = $this->objectManager->get(\TYPO3\CMS\Extbase\Mvc\Response::class);
         }
         foreach ($headers as $header => $data) {
             $this->response->setHeader($header, $data);

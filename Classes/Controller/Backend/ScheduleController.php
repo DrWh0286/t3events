@@ -44,7 +44,7 @@ class ScheduleController extends PerformanceController
      * @throws InvalidSlotException
      * @throws InvalidSlotReturnException
      */
-    public function listAction(array $overwriteDemand = null)
+    public function listAction(array $overwriteDemand = null): \Psr\Http\Message\ResponseInterface
     {
         $demand = $this->performanceDemandFactory->createFromSettings($this->settings);
         $filterSettings = $this->settings['filter'] ?? [];
@@ -69,5 +69,6 @@ class ScheduleController extends PerformanceController
 
         $this->emitSignal(__CLASS__, self::PERFORMANCE_LIST_ACTION, $templateVariables);
         $this->view->assignMultiple($templateVariables);
+        return $this->htmlResponse();
     }
 }

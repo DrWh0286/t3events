@@ -150,7 +150,7 @@ class PerformanceControllerTest extends TestCase
      * @test
      * @covers ::injectPerformanceRepository
      */
-    public function injectPerformanceRepositorySetsPerformanceRepository()
+    public function injectPerformanceRepositorySetsPerformanceRepository(): void
     {
         /** @var PerformanceRepository $repository */
         $repository = $this->getMockBuilder(PerformanceRepository::class)
@@ -168,7 +168,7 @@ class PerformanceControllerTest extends TestCase
      * @test
      * @covers ::injectGenreRepository
      */
-    public function injectGenreRepositorySetsGenreRepository()
+    public function injectGenreRepositorySetsGenreRepository(): void
     {
         /** @var GenreRepository $repository */
         $repository = $this->getMockBuilder(GenreRepository::class)
@@ -187,7 +187,7 @@ class PerformanceControllerTest extends TestCase
      * @test
      * @covers ::injectVenueRepository
      */
-    public function injectVenueRepositorySetsVenueRepository()
+    public function injectVenueRepositorySetsVenueRepository(): void
     {
         /** @var VenueRepository $repository */
         $repository = $this->getMockBuilder(VenueRepository::class)
@@ -206,7 +206,7 @@ class PerformanceControllerTest extends TestCase
      * @test
      * @covers ::injectEventTypeRepository
      */
-    public function injectEventTypeRepositorySetsEventTypeRepository()
+    public function injectEventTypeRepositorySetsEventTypeRepository(): void
     {
         /** @var EventTypeRepository $repository */
         $repository = $this->getMockBuilder(EventTypeRepository::class)
@@ -224,7 +224,7 @@ class PerformanceControllerTest extends TestCase
      * @test
      * @covers ::injectCategoryRepository
      */
-    public function injectCategoryRepositorySetsCategoryRepository()
+    public function injectCategoryRepositorySetsCategoryRepository(): void
     {
         /** @var CategoryRepository $repository */
         $repository = $this->getMockBuilder(CategoryRepository::class)
@@ -241,7 +241,7 @@ class PerformanceControllerTest extends TestCase
     /**
      * @test
      */
-    public function initializeActionsSetsContentObject()
+    public function initializeActionsSetsContentObject(): void
     {
         $this->subject->_set(SI::SETTINGS, []);
         $this->mockSettingsUtility();
@@ -276,7 +276,7 @@ class PerformanceControllerTest extends TestCase
     /**
      * @test
      */
-    public function initializeActionSetsOverwriteDemandInSession()
+    public function initializeActionSetsOverwriteDemandInSession(): void
     {
         $this->subject->_set(SI::SETTINGS, []);
         $this->mockSettingsUtility();
@@ -300,7 +300,7 @@ class PerformanceControllerTest extends TestCase
     /**
      * @test
      */
-    public function initializeQuickMenuActionResetsOverwriteDemandInSession()
+    public function initializeQuickMenuActionResetsOverwriteDemandInSession(): void
     {
         $mockSession = $this->subject->_get('session');
         $mockRequest = $this->subject->_get('request');
@@ -316,7 +316,7 @@ class PerformanceControllerTest extends TestCase
      * @test
      * @covers ::createDemandFromSettings
      */
-    public function createDemandFromSettingsReturnsDemandObject()
+    public function createDemandFromSettingsReturnsDemandObject(): void
     {
         $this->assertInstanceOf(
             PerformanceDemand::class,
@@ -328,7 +328,7 @@ class PerformanceControllerTest extends TestCase
      * @test
      * @covers ::overwriteDemandObject
      */
-    public function overwriteDemandObjectSetsGenres()
+    public function overwriteDemandObjectSetsGenres(): void
     {
         /** @var PerformanceDemand|\PHPUnit_Framework_MockObject_MockObject $demand */
         $demand = $this->getMockBuilder(PerformanceDemand::class)
@@ -347,7 +347,7 @@ class PerformanceControllerTest extends TestCase
      * @test
      * @covers ::overwriteDemandObject
      */
-    public function overwriteDemandObjectSetsVenues()
+    public function overwriteDemandObjectSetsVenues(): void
     {
         $demand = $this->getMockBuilder(PerformanceDemand::class)
             ->getMock();
@@ -363,7 +363,7 @@ class PerformanceControllerTest extends TestCase
      * @test
      * @covers ::overwriteDemandObject
      */
-    public function overwriteDemandObjectSetsEventType()
+    public function overwriteDemandObjectSetsEventType(): void
     {
         $demand = $this->getMockBuilder(PerformanceDemand::class)->getMock();
         $overwriteDemand = ['eventType' => '1,2,3'];
@@ -378,7 +378,7 @@ class PerformanceControllerTest extends TestCase
      * @test
      * @covers ::overwriteDemandObject
      */
-    public function overwriteDemandObjectSetsEventLocations()
+    public function overwriteDemandObjectSetsEventLocations(): void
     {
         /** @var PerformanceDemand|\PHPUnit_Framework_MockObject_MockObject $demand */
         $demand = $this->getMockBuilder(PerformanceDemand::class)->getMock();
@@ -394,7 +394,7 @@ class PerformanceControllerTest extends TestCase
      * @test
      * @covers ::overwriteDemandObject
      */
-    public function overwriteDemandObjectSetsCategoryConjunction()
+    public function overwriteDemandObjectSetsCategoryConjunction(): void
     {
         /** @var PerformanceDemand|\PHPUnit_Framework_MockObject_MockObject $demand */
         $demand = $this->getMockBuilder(PerformanceDemand::class)->getMock();
@@ -409,7 +409,7 @@ class PerformanceControllerTest extends TestCase
     /**
      * @test ::overwriteDemandObject
      */
-    public function overwriteDemandObjectSetsSearch()
+    public function overwriteDemandObjectSetsSearch(): void
     {
         $this->mockSettingsUtility();
         $fieldNames = 'foo,bar';
@@ -445,7 +445,7 @@ class PerformanceControllerTest extends TestCase
      * @test
      * @covers ::overwriteDemandObject
      */
-    public function overwriteDemandObjectSetsSortBy()
+    public function overwriteDemandObjectSetsSortBy(): void
     {
         /** @var PerformanceDemand|\PHPUnit_Framework_MockObject_MockObject $demand */
         $demand = $this->getMockBuilder(PerformanceDemand::class)->getMock();
@@ -463,7 +463,7 @@ class PerformanceControllerTest extends TestCase
      * @test
      * @covers ::overwriteDemandObject
      */
-    public function overwriteDemandObjectSetsSortOrder()
+    public function overwriteDemandObjectSetsSortOrder(): void
     {
         /** @var PerformanceDemand|\PHPUnit_Framework_MockObject_MockObject $demand */
         $demand = $this->getMockBuilder(PerformanceDemand::class)->getMock();
@@ -482,7 +482,7 @@ class PerformanceControllerTest extends TestCase
      * @test
      * @covers ::overwriteDemandObject
      */
-    public function overwriteDemandObjectSetsDefaultSortDirectionAscending()
+    public function overwriteDemandObjectSetsDefaultSortDirectionAscending(): void
     {
         /** @var PerformanceDemand|\PHPUnit_Framework_MockObject_MockObject $demand */
         $demand = $this->getMockBuilder(PerformanceDemand::class)->getMock();
@@ -500,7 +500,7 @@ class PerformanceControllerTest extends TestCase
      * @test
      * @covers ::overwriteDemandObject
      */
-    public function overwriteDemandObjectSetsSortDirectionDescending()
+    public function overwriteDemandObjectSetsSortDirectionDescending(): void
     {
         /** @var PerformanceDemand|\PHPUnit_Framework_MockObject_MockObject $demand */
         $demand = $this->getMockBuilder(PerformanceDemand::class)->getMock();
@@ -517,7 +517,7 @@ class PerformanceControllerTest extends TestCase
     /**
      * @test
      */
-    public function overwriteDemandObjectSetsStartDate()
+    public function overwriteDemandObjectSetsStartDate(): void
     {
         /** @var PerformanceDemand|\PHPUnit_Framework_MockObject_MockObject $demand */
         $demand = $this->getMockBuilder(PerformanceDemand::class)->getMock();
@@ -537,7 +537,7 @@ class PerformanceControllerTest extends TestCase
     /**
      * @test
      */
-    public function overwriteDemandObjectSetsEndDate()
+    public function overwriteDemandObjectSetsEndDate(): void
     {
         /** @var PerformanceDemand|\PHPUnit_Framework_MockObject_MockObject $demand */
         $demand = $this->getMockBuilder(PerformanceDemand::class)->getMock();
@@ -558,7 +558,7 @@ class PerformanceControllerTest extends TestCase
      * @test
      * @covers ::listAction
      */
-    public function listActionCallsOverwriteDemandObject()
+    public function listActionCallsOverwriteDemandObject(): void
     {
         $this->subject = $this->getMockBuilder(PerformanceController::class)
             ->disableOriginalConstructor()
@@ -601,7 +601,7 @@ class PerformanceControllerTest extends TestCase
      * @test
      * @covers ::listAction
      */
-    public function listActionCallsFindDemanded()
+    public function listActionCallsFindDemanded(): void
     {
         $this->subject = $this->getAccessibleMock(
             'DWenzel\\T3events\\Controller\\PerformanceController',
@@ -644,7 +644,7 @@ class PerformanceControllerTest extends TestCase
     /**
      * @test
      */
-    public function showActionAssignsVariables()
+    public function showActionAssignsVariables(): void
     {
         //$this->markTestSkipped('wrong arguments in assignMultiple');
         $fixture = $this->getAccessibleMock(
@@ -680,7 +680,7 @@ class PerformanceControllerTest extends TestCase
     /**
      * @test
      */
-    public function quickMenuActionGetsOverwriteDemandFromSession()
+    public function quickMenuActionGetsOverwriteDemandFromSession(): void
     {
         $this->injectMockRepositories(['findMultipleByUid', 'findAll']);
         $mockSession = $this->getMockBuilder(SessionInterface::class)
@@ -715,7 +715,7 @@ class PerformanceControllerTest extends TestCase
     /**
      * @test
      */
-    public function quickMenuActionGetsGenresFromSettings()
+    public function quickMenuActionGetsGenresFromSettings(): void
     {
         $settings = [SI::GENRES => '1,2,3'];
         $this->subject->_set(SI::SETTINGS, $settings);
@@ -735,7 +735,7 @@ class PerformanceControllerTest extends TestCase
     /**
      * @test
      */
-    public function quickMenuActionGetsVenuesFromSettings()
+    public function quickMenuActionGetsVenuesFromSettings(): void
     {
         $settings = [SI::VENUES => '1,2,3'];
         $this->subject->_set(SI::SETTINGS, $settings);
@@ -755,7 +755,7 @@ class PerformanceControllerTest extends TestCase
     /**
      * @test
      */
-    public function quickMenuActionGetsEventTypesFromSettings()
+    public function quickMenuActionGetsEventTypesFromSettings(): void
     {
         $settings = [SI::EVENT_TYPES => '1,2,3'];
         $this->subject->_set(SI::SETTINGS, $settings);
@@ -775,7 +775,7 @@ class PerformanceControllerTest extends TestCase
     /**
      * @test
      */
-    public function constructorSetsNameSpace()
+    public function constructorSetsNameSpace(): void
     {
         $this->subject->__construct();
         $this->assertAttributeSame(

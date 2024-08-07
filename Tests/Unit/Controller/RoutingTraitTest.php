@@ -17,7 +17,7 @@ use DWenzel\T3events\Controller\Routing\RouterInterface;
 use DWenzel\T3events\Controller\RoutingTrait;
 use DWenzel\T3events\Controller\SignalInterface;
 use DWenzel\T3events\Controller\SignalTrait;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Extbase\Mvc\Web\Request;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 
@@ -51,7 +51,7 @@ class RoutingTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function routerCanBeInjected()
+    public function routerCanBeInjected(): void
     {
         $router = $this->getMockRouter();
         $this->subject->injectRouter($router);
@@ -64,11 +64,11 @@ class RoutingTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function dispatchGetsIdentifierFromRequest()
+    public function dispatchGetsIdentifierFromRequest(): void
     {
         $identifier = 'foo';
 
-        $mockRequest = $this->getMockBuilder(Request::class)
+        $mockRequest = $this->getMockBuilder(\TYPO3\CMS\Extbase\Mvc\Request::class)
             ->setMethods(['getControllerActionName', 'getControllerObjectName'])->getMock();
         $this->inject($this->subject, 'request', $mockRequest);
         $mockRequest->expects($this->once())
@@ -89,7 +89,7 @@ class RoutingTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function dispatchGetsRouteForIdentifier()
+    public function dispatchGetsRouteForIdentifier(): void
     {
         $identifier = 'foo';
         $mockRoute = $this->getMockRoute([], [$identifier]);
@@ -108,7 +108,7 @@ class RoutingTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function dispatchCallsMethodFromRoute()
+    public function dispatchCallsMethodFromRoute(): void
     {
         $identifier = 'foo';
         $method = 'bam';
@@ -135,7 +135,7 @@ class RoutingTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function dispatchUsesArgumentsFromOrigin()
+    public function dispatchUsesArgumentsFromOrigin(): void
     {
         $arguments = ['foo' => 'bar'];
         $optionsFromRoute = [
@@ -197,7 +197,7 @@ class RoutingTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function dispatchUsesDefaultArguments()
+    public function dispatchUsesDefaultArguments(): void
     {
         $defaultArguments = [
             'baz' => 'boom',
@@ -267,7 +267,7 @@ class RoutingTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function dispatchEmitsSignalDispatchBegin()
+    public function dispatchEmitsSignalDispatchBegin(): void
     {
         $this->subject = $this->getMockBuilder(MockSignalController::class)
             ->setMethods(['emitSignal'])->getMock();

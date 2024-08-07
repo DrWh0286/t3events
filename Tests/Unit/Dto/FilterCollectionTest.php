@@ -6,7 +6,7 @@ use Countable;
 use DWenzel\T3events\Dto\FilterCollection;
 use DWenzel\T3events\Dto\FilterInterface;
 use Iterator;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /***************************************************************
@@ -41,17 +41,17 @@ class FilterCollectionTest extends UnitTestCase
         $this->subject = new FilterCollection();
     }
 
-    public function testFilterCollectionImplementsIterator()
+    public function testFilterCollectionImplementsIterator(): void
     {
         $this->assertInstanceOf(Iterator::class, $this->subject);
     }
 
-    public function testFilterCollectionImplementsCountable()
+    public function testFilterCollectionImplementsCountable(): void
     {
         $this->assertInstanceOf(Countable::class, $this->subject);
     }
 
-    public function testFilterCanBeAttached()
+    public function testFilterCanBeAttached(): void
     {
         /** @var FilterInterface|MockObject $filter */
         $filter = $this->getMockBuilder(FilterInterface::class)
@@ -62,7 +62,7 @@ class FilterCollectionTest extends UnitTestCase
         );
     }
 
-    public function testFilterCanBeRemoved()
+    public function testFilterCanBeRemoved(): void
     {
         /** @var FilterInterface|MockObject $filter */
         $filter = $this->getMockBuilder(FilterInterface::class)
@@ -74,7 +74,7 @@ class FilterCollectionTest extends UnitTestCase
         );
     }
 
-    public function testCountInitialyReturnsZero()
+    public function testCountInitialyReturnsZero(): void
     {
         $this->assertSame(
             0,
@@ -82,7 +82,7 @@ class FilterCollectionTest extends UnitTestCase
         );
     }
 
-    public function testFilterCanBeCount()
+    public function testFilterCanBeCount(): void
     {
         /** @var FilterInterface|MockObject $firstFilter */
         $firstFilter = $this->getMockBuilder(FilterInterface::class)

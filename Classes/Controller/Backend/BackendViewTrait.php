@@ -81,7 +81,7 @@ trait BackendViewTrait
     /**
      * @param ViewInterface $view
      */
-    public function initializeView(ViewInterface $view)
+    public function initializeView(ViewInterface $view): void
     {
         if (
             $view instanceof ConfigurableViewInterface &&

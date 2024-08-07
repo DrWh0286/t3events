@@ -17,7 +17,7 @@ namespace DWenzel\T3events\Tests\Unit\Controller;
 
 use DWenzel\T3events\Controller\NotificationServiceTrait;
 use DWenzel\T3events\Service\NotificationService;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 
 /**
@@ -41,7 +41,7 @@ class NotificationServiceTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function notificationServiceCanBeInjected()
+    public function notificationServiceCanBeInjected(): void
     {
         /** @var NotificationService|\PHPUnit_Framework_MockObject_MockObject $notificationService */
         $notificationService = $this->getMockBuilder(NotificationService::class)

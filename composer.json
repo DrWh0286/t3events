@@ -24,9 +24,9 @@
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",
-    "nimut/testing-framework": "^6.0",
-    "phpunit/phpunit": " ^7.0",
-    "codeclimate/php-test-reporter": "dev-master"
+    "phpunit/phpunit": "^9.5",
+    "typo3/testing-framework": "^7.0",
+    "ssch/typo3-rector": "^2.6"
   },
   "autoload": {
     "psr-4": {
@@ -45,6 +45,10 @@
       "typo3/cms": "source",
       "typo3/cms-core": "source",
       "*": "dist"
+    },
+    "allow-plugins": {
+      "typo3/class-alias-loader": true,
+      "typo3/cms-composer-installers": true
     }
   },
   "scripts": {

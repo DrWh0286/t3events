@@ -70,7 +70,7 @@ class BackendUtility
      * @param string $fieldName some strange field name
      * @return void
      */
-    public function getFlexFormDS_postProcessDS(&$dataStructure, $conf, $row, $table, $fieldName)
+    public function getFlexFormDS_postProcessDS(&$dataStructure, $conf, $row, $table, $fieldName): void
     {
         if ($table === 'tt_content' && $row['list_type'] === 't3events_events' && is_array($dataStructure)) {
             $this->updateFlexforms($dataStructure, $row);
@@ -102,7 +102,7 @@ class BackendUtility
             }
 
             // new plugin element
-        } elseif (GeneralUtility::isFirstPartOfStr($row['uid'], 'NEW')) {
+        } elseif (\str_starts_with($row['uid'], 'NEW')) {
             // use List as starting view
             $selectedView = 'Event->list';
         }

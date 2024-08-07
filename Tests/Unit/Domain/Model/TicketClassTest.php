@@ -22,7 +22,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model;
  ***************************************************************/
 
 use DWenzel\T3events\Domain\Model\TicketClass;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DWenzel\T3events\Domain\Model\TicketClass.
@@ -56,7 +56,7 @@ class TicketClassTest extends UnitTestCase
     /**
      * @test
      */
-    public function getTitleReturnsInitialValueForString()
+    public function getTitleReturnsInitialValueForString(): void
     {
         $this->assertNull(
             $this->fixture->getTitle()
@@ -66,7 +66,7 @@ class TicketClassTest extends UnitTestCase
     /**
      * @test
      */
-    public function setTitleForStringSetsTitle()
+    public function setTitleForStringSetsTitle(): void
     {
         $this->fixture->setTitle('Conceived at T3CON10');
 
@@ -79,7 +79,7 @@ class TicketClassTest extends UnitTestCase
     /**
      * @test
      */
-    public function getColorReturnsInitialValueForString()
+    public function getColorReturnsInitialValueForString(): void
     {
         $this->assertNull(
             $this->fixture->getColor()
@@ -89,7 +89,7 @@ class TicketClassTest extends UnitTestCase
     /**
      * @test
      */
-    public function setColorForStringSetsColor()
+    public function setColorForStringSetsColor(): void
     {
         $this->fixture->setColor('Conceived at T3CON10');
 
@@ -102,7 +102,7 @@ class TicketClassTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPriceReturnsInitialValueForFloat()
+    public function getPriceReturnsInitialValueForFloat(): void
     {
         $this->assertSame(
             0.0,
@@ -113,7 +113,7 @@ class TicketClassTest extends UnitTestCase
     /**
      * @test
      */
-    public function setPriceForFloatSetsPrice()
+    public function setPriceForFloatSetsPrice(): void
     {
         $this->fixture->setPrice(3.14159265);
 
@@ -126,7 +126,7 @@ class TicketClassTest extends UnitTestCase
     /**
      * @test
      */
-    public function getTypeReturnsInitialValueForInteger()
+    public function getTypeReturnsInitialValueForInteger(): void
     {
         $this->assertSame(
             0,
@@ -137,7 +137,7 @@ class TicketClassTest extends UnitTestCase
     /**
      * @test
      */
-    public function setTypeForIntegerSetsType()
+    public function setTypeForIntegerSetsType(): void
     {
         $this->fixture->setType(12);
 

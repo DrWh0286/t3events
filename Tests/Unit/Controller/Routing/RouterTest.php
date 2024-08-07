@@ -16,7 +16,7 @@ use DWenzel\T3events\Controller\Routing\Route;
 use DWenzel\T3events\Controller\Routing\Router;
 use DWenzel\T3events\Controller\Routing\RouterInterface;
 use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Core\SingletonInterface;
 
 /**
@@ -44,7 +44,7 @@ class RouterTest extends UnitTestCase
     /**
      * @test
      */
-    public function classImplementsSingletonInterface()
+    public function classImplementsSingletonInterface(): void
     {
         $this->assertInstanceOf(
             SingletonInterface::class,
@@ -55,7 +55,7 @@ class RouterTest extends UnitTestCase
     /**
      * @test
      */
-    public function getRoutesReturnsInitialValue()
+    public function getRoutesReturnsInitialValue(): void
     {
         $this->assertSame(
             [],
@@ -66,7 +66,7 @@ class RouterTest extends UnitTestCase
     /**
      * @test
      */
-    public function getRoutesReturnsAllRoutes()
+    public function getRoutesReturnsAllRoutes(): void
     {
         $routes = ['foo' => 'bar'];
         $this->subject->_set('routes', $routes);
@@ -80,7 +80,7 @@ class RouterTest extends UnitTestCase
     /**
      * @test
      */
-    public function addRouteAddsRouteByOrigin()
+    public function addRouteAddsRouteByOrigin(): void
     {
         $origin = 'fooOriginOfRoute';
         $mockRoute = $this->getMockRoute(['getOrigin'], [$origin]);
@@ -100,7 +100,7 @@ class RouterTest extends UnitTestCase
     /**
      * @test
      */
-    public function addRouteAddsRouteByIdentifier()
+    public function addRouteAddsRouteByIdentifier(): void
     {
         $origin = 'fooOriginOfRoute';
 
@@ -121,7 +121,7 @@ class RouterTest extends UnitTestCase
      * @expectedException \DWenzel\T3events\ResourceNotFoundException
      * @expectedExceptionCode 1478437880
      */
-    public function getRouteThrowsExceptionForMissingRoute()
+    public function getRouteThrowsExceptionForMissingRoute(): void
     {
         $this->subject->getRoute('invalidRouteIdentifier');
     }

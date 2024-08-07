@@ -40,7 +40,7 @@ trait AudienceRepositoryTrait
      * @param \DWenzel\T3events\Domain\Repository\AudienceRepository $audienceRepository
      * @return void
      */
-    public function injectAudienceRepository(AudienceRepository $audienceRepository)
+    public function injectAudienceRepository(AudienceRepository $audienceRepository): void
     {
         $this->audienceRepository = $audienceRepository;
     }

@@ -14,7 +14,7 @@ namespace CPSIT\T3events\Tests\Unit\View;
  * The TYPO3 project - inspiring people to share!
  */
 use DWenzel\T3events\View\IcalTrait;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Class IcalTraitTest
@@ -39,7 +39,7 @@ class IcalTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function renderCallsParentsRenderMethod()
+    public function renderCallsParentsRenderMethod(): void
     {
         $parentContent = "foo";
         $expected = $parentContent;
@@ -56,7 +56,7 @@ class IcalTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function renderReplacesLineEndingsCorrectly()
+    public function renderReplacesLineEndingsCorrectly(): void
     {
         $parentContent = "\n";
         $expected = "\r\n";
@@ -73,7 +73,7 @@ class IcalTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function renderTrimsContentCorrectly()
+    public function renderTrimsContentCorrectly(): void
     {
         $parentContent = "\t\tfoo\tbar\0baz\x0B\0";
         $expected = "foo\tbar\0baz";

@@ -39,7 +39,7 @@ trait CategoryRepositoryTrait
      * @param \DWenzel\T3events\Domain\Repository\CategoryRepository $categoryRepository
      * @return void
      */
-    public function injectCategoryRepository(CategoryRepository $categoryRepository)
+    public function injectCategoryRepository(CategoryRepository $categoryRepository): void
     {
         $this->categoryRepository = $categoryRepository;
     }

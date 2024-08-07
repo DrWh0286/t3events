@@ -44,7 +44,7 @@ class HeaderDataViewHelper extends AbstractViewHelper
      *
      * @return void
      */
-    public function render()
+    public function render(): void
     {
         $GLOBALS['TSFE']->getPageRenderer()->addHeaderData($this->renderChildren());
     }

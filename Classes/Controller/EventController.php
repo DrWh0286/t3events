@@ -43,7 +43,7 @@ class EventController extends ActionController
      * initializes all actions
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
      */
-    public function initializeAction()
+    public function initializeAction(): void
     {
         $this->settings = $this->mergeSettings();
         if ($this->request->hasArgument(SI::OVERWRITE_DEMAND)) {
@@ -66,7 +66,7 @@ class EventController extends ActionController
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      */
-    public function listAction($overwriteDemand = null)
+    public function listAction($overwriteDemand = null): \Psr\Http\Message\ResponseInterface
     {
         if (!$overwriteDemand){
             $overwriteDemand = unserialize($this->session->get('tx_t3events_overwriteDemand'), ['allowed_classes' => false]);
@@ -98,6 +98,7 @@ class EventController extends ActionController
 
         $this->emitSignal(__CLASS__, self::EVENT_LIST_ACTION, $templateVariables);
         $this->view->assignMultiple($templateVariables);
+        return $this->htmlResponse();
     }
 
     /**
@@ -108,7 +109,7 @@ class EventController extends ActionController
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      */
-    public function showAction(Event $event)
+    public function showAction(Event $event): \Psr\Http\Message\ResponseInterface
     {
         $templateVariables = [
             SI::SETTINGS => $this->settings,
@@ -116,6 +117,7 @@ class EventController extends ActionController
         ];
         $this->emitSignal(__CLASS__, self::EVENT_SHOW_ACTION, $templateVariables);
         $this->view->assignMultiple($templateVariables);
+        return $this->htmlResponse();
     }
 
     /**
@@ -125,7 +127,7 @@ class EventController extends ActionController
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      */
-    public function quickMenuAction()
+    public function quickMenuAction(): \Psr\Http\Message\ResponseInterface
     {
         // get session data
         $overwriteDemand = unserialize($this->session->get('tx_t3events_overwriteDemand'), ['allowed_classes' => false]);
@@ -147,5 +149,6 @@ class EventController extends ActionController
         $this->view->assignMultiple(
             $templateVariables
         );
+        return $this->htmlResponse();
     }
 }

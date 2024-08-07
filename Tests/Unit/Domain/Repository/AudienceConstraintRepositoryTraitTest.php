@@ -4,7 +4,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
 
 use DWenzel\T3events\Domain\Model\Dto\AudienceAwareDemandInterface;
 use DWenzel\T3events\Domain\Repository\AudienceConstraintRepositoryTrait;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Persistence\Generic\Query;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -55,7 +55,7 @@ class AudienceConstraintRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function createAudienceConstraintsInitiallyReturnsEmptyArray()
+    public function createAudienceConstraintsInitiallyReturnsEmptyArray(): void
     {
         /** @var AudienceAwareDemandInterface|MockObject $demand */
         $demand = $this->getMockBuilder(AudienceAwareDemandInterface::class)
@@ -73,7 +73,7 @@ class AudienceConstraintRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function createAudienceConstraintsCreatesAudienceConstraints()
+    public function createAudienceConstraintsCreatesAudienceConstraints(): void
     {
         $audienceList = '1,2';
         /** @var QueryInterface|MockObject $query */

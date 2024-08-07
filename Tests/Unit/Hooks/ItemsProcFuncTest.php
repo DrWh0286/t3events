@@ -17,7 +17,7 @@ namespace DWenzel\T3events\Tests\Unit\Hooks;
 
 use DWenzel\T3events\Hooks\ItemsProcFunc;
 use DWenzel\T3events\Utility\TemplateLayoutUtility;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Lang\LanguageService;
 
 /**
@@ -58,7 +58,7 @@ class ItemsProcFuncTest extends UnitTestCase
     /**
      * @test
      */
-    public function constructorSetsTemplateLayoutUtility()
+    public function constructorSetsTemplateLayoutUtility(): void
     {
         unset($this->templateLayoutUtility);
         /** @noinspection ImplicitMagicMethodCallInspection */
@@ -74,7 +74,7 @@ class ItemsProcFuncTest extends UnitTestCase
     /**
      * @test
      */
-    public function user_templateLayoutGetsTemplateLayoutsFromUtility()
+    public function user_templateLayoutGetsTemplateLayoutsFromUtility(): void
     {
         $extensionKey = ItemsProcFunc::EXTENSION_KEY;
 
@@ -89,7 +89,7 @@ class ItemsProcFuncTest extends UnitTestCase
     /**
      * @test
      */
-    public function user_templateLayoutGetsPidFromConfigRow()
+    public function user_templateLayoutGetsPidFromConfigRow(): void
     {
         $extensionKey = ItemsProcFunc::EXTENSION_KEY;
         $pageId = 1;
@@ -109,7 +109,7 @@ class ItemsProcFuncTest extends UnitTestCase
     /**
      * @test
      */
-    public function user_templateLayoutGetsPidFromConfigFlexParentDatabaseRow()
+    public function user_templateLayoutGetsPidFromConfigFlexParentDatabaseRow(): void
     {
         $extensionKey = ItemsProcFunc::EXTENSION_KEY;
         $pageId = 1;
@@ -129,7 +129,7 @@ class ItemsProcFuncTest extends UnitTestCase
     /**
      * @test
      */
-    public function user_templateLayoutAddsItemsToConfig()
+    public function user_templateLayoutAddsItemsToConfig(): void
     {
         $mockLanguageService = $this->getMockBuilder(LanguageService::class)
             ->disableOriginalConstructor()

@@ -51,7 +51,7 @@ class Search extends AbstractEntity implements LocationAwareInterface
      * @param string $subject
      * @return void
      */
-    public function setSubject($subject)
+    public function setSubject($subject): void
     {
         $this->subject = $subject;
     }
@@ -72,7 +72,7 @@ class Search extends AbstractEntity implements LocationAwareInterface
      * @param string $fields A comma separated list of search fields
      * @return void
      */
-    public function setFields($fields)
+    public function setFields($fields): void
     {
         $this->fields = $fields;
     }

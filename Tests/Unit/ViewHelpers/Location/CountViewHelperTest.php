@@ -19,8 +19,7 @@ use DWenzel\T3events\Domain\Model\Event;
 use DWenzel\T3events\Domain\Model\EventLocation;
 use DWenzel\T3events\Domain\Model\Performance;
 use DWenzel\T3events\ViewHelpers\Location\CountViewHelper;
-use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub\ConsecutiveCalls;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -31,9 +30,6 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class CountViewHelperTest extends UnitTestCase
 {
-    /**
-     * @var CountViewHelper|MockObject|AccessibleMockObjectInterface
-     */
     protected $subject;
 
     /**
@@ -42,7 +38,7 @@ class CountViewHelperTest extends UnitTestCase
     protected function setUp(): void
     {
         $this->subject = $this->getAccessibleMock(
-            CountViewHelper::class, ['dummy', 'registerArgument']
+            CountViewHelper::class, ['registerArgument']
         );
     }
 
@@ -107,7 +103,7 @@ class CountViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function initializeArgumentsRegistersArgumentEvent()
+    public function initializeArgumentsRegistersArgumentEvent(): void
     {
         $this->subject->expects($this->once())
             ->method('registerArgument')
@@ -118,7 +114,7 @@ class CountViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function renderInitiallyReturnsZero()
+    public function renderInitiallyReturnsZero(): void
     {
         $this->assertSame(
             0,
@@ -130,7 +126,7 @@ class CountViewHelperTest extends UnitTestCase
      * @test
      * @dataProvider eventDataProvider
      */
-    public function renderReturnsCorrectLocationCount($event, $expectedResult)
+    public function renderReturnsCorrectLocationCount($event, $expectedResult): void
     {
         $this->subject->setArguments(['event' => $event]);
         $this->assertSame(

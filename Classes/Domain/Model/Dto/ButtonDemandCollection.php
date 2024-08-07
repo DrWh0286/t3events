@@ -92,7 +92,7 @@ class ButtonDemandCollection
      * @param \DWenzel\T3events\Domain\Model\Dto\ButtonDemand $demand
      * @return void
      */
-    public function addDemand(ButtonDemand $demand)
+    public function addDemand(ButtonDemand $demand): void
     {
         $this->demands->attach($demand);
     }
@@ -108,7 +108,7 @@ class ButtonDemandCollection
     /**
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<DWenzel\T3events\Domain\Model\Dto\ButtonDemand>
      */
-    public function setDemands(ObjectStorage $demands)
+    public function setDemands(ObjectStorage $demands): void
     {
         $this->demands = $demands;
     }
@@ -119,7 +119,7 @@ class ButtonDemandCollection
      * @param \DWenzel\T3events\Domain\Model\Dto\ButtonDemand $demandToRemove The Demand to be removed
      * @return void
      */
-    public function removeDemand(ButtonDemand $demandToRemove)
+    public function removeDemand(ButtonDemand $demandToRemove): void
     {
         $this->demands->detach($demandToRemove);
     }

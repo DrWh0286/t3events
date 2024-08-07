@@ -56,7 +56,7 @@ class EmConfiguration
     /**
      * @param boolean $respectPerformanceStoragePage
      */
-    public function setRespectPerformanceStoragePage($respectPerformanceStoragePage)
+    public function setRespectPerformanceStoragePage($respectPerformanceStoragePage): void
     {
         $this->respectPerformanceStoragePage = $respectPerformanceStoragePage;
     }

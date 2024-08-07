@@ -85,7 +85,7 @@ trait AddressTrait
      * @param string $address
      * @return void
      */
-    public function setAddress($address)
+    public function setAddress($address): void
     {
         $this->address = $address;
     }
@@ -96,7 +96,7 @@ trait AddressTrait
      * @param string $city
      * @return void
      */
-    public function setCity($city)
+    public function setCity($city): void
     {
         $this->city = $city;
     }
@@ -107,7 +107,7 @@ trait AddressTrait
      * @param string $zip
      * @return void
      */
-    public function setZip($zip)
+    public function setZip($zip): void
     {
         $this->zip = $zip;
     }
@@ -123,7 +123,7 @@ trait AddressTrait
     /**
      * @param string $country
      */
-    public function setCountry($country)
+    public function setCountry($country): void
     {
         $this->country = $country;
     }

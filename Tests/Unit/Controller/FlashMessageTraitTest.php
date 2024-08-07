@@ -3,7 +3,7 @@
 namespace DWenzel\T3events\Tests\Unit\Controller;
 
 use DWenzel\T3events\Controller\FlashMessageTrait;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageQueue;
@@ -81,11 +81,11 @@ class FlashMessageTraitTest extends UnitTestCase
     }
 
     /**
-     * @return Request|\PHPUnit_Framework_MockObject_MockObject
+     * @return \TYPO3\CMS\Extbase\Mvc\Request|\PHPUnit_Framework_MockObject_MockObject
      */
     protected function mockRequest()
     {
-        $mockRequest = $this->getMockBuilder(Request::class)
+        $mockRequest = $this->getMockBuilder(\TYPO3\CMS\Extbase\Mvc\Request::class)
             ->setMethods(['getControllerExtensionName', 'getPluginName'])->getMock();
         $this->inject(
             $this->subject,
@@ -115,7 +115,7 @@ class FlashMessageTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFlashMessageQueueInstantiatesQueue()
+    public function getFlashMessageQueueInstantiatesQueue(): void
     {
         $namespace = 'fooNamespace';
         $extensionName = 'barExtension';
@@ -156,7 +156,7 @@ class FlashMessageTraitTest extends UnitTestCase
      * @expectedException \InvalidArgumentException
      * @expectedExceptionCode 1243258395
      */
-    public function addFlashMessageThrowsExceptionForMissingMessageBody()
+    public function addFlashMessageThrowsExceptionForMissingMessageBody(): void
     {
         $this->subject->addFlashMessage(5);
     }
@@ -164,7 +164,7 @@ class FlashMessageTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function addFlashMessageEnqueuesMessage()
+    public function addFlashMessageEnqueuesMessage(): void
     {
         $messageBody = 'foo';
         $messageTitle = 'bar';

@@ -14,7 +14,7 @@ namespace DWenzel\T3events\Tests\Unit\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use DWenzel\T3events\Controller\PersistenceManagerTrait;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 
@@ -43,7 +43,7 @@ class PersistenceManagerTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function persistenceManagerCanBeInjected()
+    public function persistenceManagerCanBeInjected(): void
     {
         $persistenceManager = $this->getMockForAbstractClass(
             PersistenceManagerInterface::class

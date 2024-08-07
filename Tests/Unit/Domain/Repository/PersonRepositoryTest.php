@@ -22,7 +22,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Repository;
 
 use DWenzel\T3events\Domain\Repository\PersonRepository;
 use DWenzel\T3events\Tests\Unit\Domain\Model\Dto\MockDemandTrait;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
@@ -49,7 +49,7 @@ class PersonRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function createConstraintsFromDemandInitiallyReturnsEmptyArray()
+    public function createConstraintsFromDemandInitiallyReturnsEmptyArray(): void
     {
         $demand = $this->getMockDemand();
         $query = $this->getMockQuery();

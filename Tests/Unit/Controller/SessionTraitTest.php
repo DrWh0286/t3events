@@ -14,7 +14,7 @@ namespace DWenzel\T3events\Tests\Unit\Controller;
 
 use DWenzel\T3events\Controller\SessionTrait;
 use DWenzel\T3events\Session\SessionInterface;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class DummyClassWithNamespace
@@ -47,7 +47,7 @@ class SessionTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function sessionCanBeInjected()
+    public function sessionCanBeInjected(): void
     {
 
         $mockSession = $this->getMockSession();
@@ -63,7 +63,7 @@ class SessionTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function injectSessionSetsNamespace()
+    public function injectSessionSetsNamespace(): void
     {
         $namespace = 'foo';
         $this->subject = $this->getAccessibleMock(

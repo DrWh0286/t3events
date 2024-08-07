@@ -202,7 +202,7 @@ class Performance extends AbstractEntity
      *
      * @param \DWenzel\T3events\Domain\Model\Event $event
      */
-    public function setEvent(Event $event)
+    public function setEvent(Event $event): void
     {
         $this->event = $event;
     }
@@ -226,7 +226,7 @@ class Performance extends AbstractEntity
      * @param \DWenzel\T3events\Domain\Model\EventLocation $eventLocation
      * @return \DWenzel\T3events\Domain\Model\EventLocation eventLocation
      */
-    public function setEventLocation(\DWenzel\T3events\Domain\Model\EventLocation $eventLocation)
+    public function setEventLocation(\DWenzel\T3events\Domain\Model\EventLocation $eventLocation): void
     {
         $this->eventLocation = $eventLocation;
     }
@@ -247,7 +247,7 @@ class Performance extends AbstractEntity
      * @param \DateTime $date
      * @return void
      */
-    public function setDate($date)
+    public function setDate($date): void
     {
         $this->date = $date;
     }
@@ -272,7 +272,7 @@ class Performance extends AbstractEntity
      *
      * @param \DateTime $date
      */
-    public function setEndDate($date)
+    public function setEndDate($date): void
     {
         $this->endDate = $date;
     }
@@ -293,7 +293,7 @@ class Performance extends AbstractEntity
      * @param int $admission
      * @return void
      */
-    public function setAdmission($admission)
+    public function setAdmission($admission): void
     {
         $this->admission = $admission;
     }
@@ -314,7 +314,7 @@ class Performance extends AbstractEntity
      * @param int $begin
      * @return void
      */
-    public function setBegin($begin)
+    public function setBegin($begin): void
     {
         $this->begin = $begin;
     }
@@ -335,7 +335,7 @@ class Performance extends AbstractEntity
      * @param int $end
      * @return void
      */
-    public function setEnd($end)
+    public function setEnd($end): void
     {
         $this->end = $end;
     }
@@ -356,7 +356,7 @@ class Performance extends AbstractEntity
      * @param string $statusInfo
      * @return void
      */
-    public function setStatusInfo($statusInfo)
+    public function setStatusInfo($statusInfo): void
     {
         $this->statusInfo = $statusInfo;
     }
@@ -377,7 +377,7 @@ class Performance extends AbstractEntity
      * @param string $image
      * @return void
      */
-    public function setImage($image)
+    public function setImage($image): void
     {
         $this->image = $image;
     }
@@ -388,7 +388,7 @@ class Performance extends AbstractEntity
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image Image
      * @return void
      */
-    public function addImages(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image)
+    public function addImages(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image): void
     {
         $this->images->attach($image);
     }
@@ -399,7 +399,7 @@ class Performance extends AbstractEntity
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove Image
      * @return void
      */
-    public function removeImages(\TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove)
+    public function removeImages(\TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove): void
     {
         $this->images->detach($imageToRemove);
     }
@@ -420,7 +420,7 @@ class Performance extends AbstractEntity
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $images Images
      * @return void
      */
-    public function setImages(ObjectStorage $images)
+    public function setImages(ObjectStorage $images): void
     {
         $this->images = $images;
     }
@@ -431,7 +431,7 @@ class Performance extends AbstractEntity
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $plan Plan
      * @return void
      */
-    public function addPlan(\TYPO3\CMS\Extbase\Domain\Model\FileReference $plan)
+    public function addPlan(\TYPO3\CMS\Extbase\Domain\Model\FileReference $plan): void
     {
         $this->plan->attach($plan);
     }
@@ -442,7 +442,7 @@ class Performance extends AbstractEntity
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $planToRemove $planToRemove
      * @return void
      */
-    public function removePlan(\TYPO3\CMS\Extbase\Domain\Model\FileReference $planToRemove)
+    public function removePlan(\TYPO3\CMS\Extbase\Domain\Model\FileReference $planToRemove): void
     {
         $this->plan->detach($planToRemove);
     }
@@ -463,7 +463,7 @@ class Performance extends AbstractEntity
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $plan Plan
      * @return void
      */
-    public function setPlan(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $plan)
+    public function setPlan(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $plan): void
     {
         $this->plan = $plan;
     }
@@ -484,7 +484,7 @@ class Performance extends AbstractEntity
      * @param boolean $noHandlingFee
      * @return void
      */
-    public function setNoHandlingFee($noHandlingFee)
+    public function setNoHandlingFee($noHandlingFee): void
     {
         $this->noHandlingFee = $noHandlingFee;
     }
@@ -518,7 +518,7 @@ class Performance extends AbstractEntity
      * @param \DWenzel\T3events\Domain\Model\PerformanceStatus $status
      * @return void
      */
-    public function setStatus(\DWenzel\T3events\Domain\Model\PerformanceStatus $status)
+    public function setStatus(\DWenzel\T3events\Domain\Model\PerformanceStatus $status): void
     {
         $this->status = $status;
     }
@@ -539,7 +539,7 @@ class Performance extends AbstractEntity
      * @param string $priceNotice
      * @return void
      */
-    public function setPriceNotice($priceNotice)
+    public function setPriceNotice($priceNotice): void
     {
         $this->priceNotice = $priceNotice;
     }
@@ -550,7 +550,7 @@ class Performance extends AbstractEntity
      * @param \DWenzel\T3events\Domain\Model\TicketClass $ticketClass
      * @return void
      */
-    public function addTicketClass(\DWenzel\T3events\Domain\Model\TicketClass $ticketClass)
+    public function addTicketClass(\DWenzel\T3events\Domain\Model\TicketClass $ticketClass): void
     {
         $this->ticketClass->attach($ticketClass);
     }
@@ -561,7 +561,7 @@ class Performance extends AbstractEntity
      * @param \DWenzel\T3events\Domain\Model\TicketClass $ticketClassToRemove The TicketClass to be removed
      * @return void
      */
-    public function removeTicketClass(\DWenzel\T3events\Domain\Model\TicketClass $ticketClassToRemove)
+    public function removeTicketClass(\DWenzel\T3events\Domain\Model\TicketClass $ticketClassToRemove): void
     {
         $this->ticketClass->detach($ticketClassToRemove);
     }
@@ -582,7 +582,7 @@ class Performance extends AbstractEntity
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\T3events\Domain\Model\TicketClass> $ticketClass
      * @return void
      */
-    public function setTicketClass(ObjectStorage $ticketClass)
+    public function setTicketClass(ObjectStorage $ticketClass): void
     {
         $this->ticketClass = $ticketClass;
     }
@@ -603,7 +603,7 @@ class Performance extends AbstractEntity
      * @param string $additionalLink
      * @return string additionalLink
      */
-    public function setAdditionalLink($additionalLink)
+    public function setAdditionalLink($additionalLink): void
     {
         $this->additionalLink = $additionalLink;
     }
@@ -624,7 +624,7 @@ class Performance extends AbstractEntity
      * @param string $externalProviderLink
      * @return string externalProviderLink
      */
-    public function setExternalProviderLink($externalProviderLink)
+    public function setExternalProviderLink($externalProviderLink): void
     {
         $this->externalProviderLink = $externalProviderLink;
     }
@@ -645,7 +645,7 @@ class Performance extends AbstractEntity
      * @param integer $providerType
      * @return void
      */
-    public function setProviderType($providerType)
+    public function setProviderType($providerType): void
     {
         $this->providerType = $providerType;
     }
@@ -665,7 +665,7 @@ class Performance extends AbstractEntity
      *
      * @var integer $hidden
      */
-    public function setHidden($hidden)
+    public function setHidden($hidden): void
     {
         $this->hidden = ($hidden);
     }

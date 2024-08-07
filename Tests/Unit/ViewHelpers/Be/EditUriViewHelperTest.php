@@ -4,7 +4,7 @@ namespace DWenzel\T3events\Tests\Unit\ViewHelpers\Be;
 
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 use DWenzel\T3events\ViewHelpers\Be\EditUriViewHelper;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 
@@ -51,7 +51,7 @@ class EditUriViewHelperTest extends UnitTestCase
         $this->subject->method('getUriBuilder')->willReturn($this->uriBuilder);
     }
 
-    public function testArgumentsAreRegistered()
+    public function testArgumentsAreRegistered(): void
     {
         $this->subject->expects($this->exactly(3))
             ->method('registerArgument')

@@ -22,7 +22,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model;
  ***************************************************************/
 
 use DWenzel\T3events\Domain\Model\EventLocation;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DWenzel\T3events\Domain\Model\EventLocation.
@@ -58,7 +58,7 @@ class EventLocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getNameReturnsInitialValueForString()
+    public function getNameReturnsInitialValueForString(): void
     {
         $this->assertNull($this->fixture->getName());
     }
@@ -66,7 +66,7 @@ class EventLocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setNameForStringSetsName()
+    public function setNameForStringSetsName(): void
     {
         $this->fixture->setName('Conceived at T3CON10');
 
@@ -79,7 +79,7 @@ class EventLocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getAddressReturnsInitialValueForString()
+    public function getAddressReturnsInitialValueForString(): void
     {
         $this->assertNull(
             $this->fixture->getAddress()
@@ -89,7 +89,7 @@ class EventLocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setAddressForStringSetsAddress()
+    public function setAddressForStringSetsAddress(): void
     {
         $this->fixture->setAddress('Conceived at T3CON10');
 
@@ -102,7 +102,7 @@ class EventLocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getImageReturnsInitialValueForString()
+    public function getImageReturnsInitialValueForString(): void
     {
         $this->assertNull(
             $this->fixture->getImage()
@@ -112,7 +112,7 @@ class EventLocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setImageForStringSetsImage()
+    public function setImageForStringSetsImage(): void
     {
         $this->fixture->setImage('Conceived at T3CON10');
 
@@ -125,7 +125,7 @@ class EventLocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getZipReturnsInitialValueForString()
+    public function getZipReturnsInitialValueForString(): void
     {
         $this->assertNull(
             $this->fixture->getZip()
@@ -135,7 +135,7 @@ class EventLocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setZipForStringSetsZip()
+    public function setZipForStringSetsZip(): void
     {
         $this->fixture->setZip('Conceived at T3CON10');
 
@@ -148,7 +148,7 @@ class EventLocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPlaceReturnsInitialValueForString()
+    public function getPlaceReturnsInitialValueForString(): void
     {
         $this->assertNull(
             $this->fixture->getPlace()
@@ -158,7 +158,7 @@ class EventLocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setPlaceForStringSetsPlace()
+    public function setPlaceForStringSetsPlace(): void
     {
         $this->fixture->setPlace('Conceived at T3CON10');
 
@@ -171,7 +171,7 @@ class EventLocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getDetailsReturnsInitialValueForString()
+    public function getDetailsReturnsInitialValueForString(): void
     {
         $this->assertNull(
             $this->fixture->getDetails()
@@ -181,7 +181,7 @@ class EventLocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setDetailsForStringSetsDetails()
+    public function setDetailsForStringSetsDetails(): void
     {
         $this->fixture->setDetails('Conceived at T3CON10');
 
@@ -194,7 +194,7 @@ class EventLocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getWwwReturnsInitialValueForString()
+    public function getWwwReturnsInitialValueForString(): void
     {
         $this->assertNull(
             $this->fixture->getWww()
@@ -204,7 +204,7 @@ class EventLocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setWwwForStringSetsWww()
+    public function setWwwForStringSetsWww(): void
     {
         $this->fixture->setWww('Conceived at T3CON10');
 
@@ -217,7 +217,7 @@ class EventLocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getCountryReturnsInitialValueForString()
+    public function getCountryReturnsInitialValueForString(): void
     {
         $this->assertEquals(
             null,
@@ -228,7 +228,7 @@ class EventLocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setCountryForCountrySetsCountry()
+    public function setCountryForCountrySetsCountry(): void
     {
         $this->fixture->setCountry('foo');
 
@@ -241,7 +241,7 @@ class EventLocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getLatitudeReturnsInitiallyNull()
+    public function getLatitudeReturnsInitiallyNull(): void
     {
         $this->assertNull(
             $this->fixture->getLatitude()
@@ -251,7 +251,7 @@ class EventLocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setLatitudeForFloatSetsLatitude()
+    public function setLatitudeForFloatSetsLatitude(): void
     {
         $this->fixture->setLatitude(1.23);
         $this->assertSame(
@@ -263,7 +263,7 @@ class EventLocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getLongitudeReturnsInitiallyNull()
+    public function getLongitudeReturnsInitiallyNull(): void
     {
         $this->assertNull(
             $this->fixture->getLongitude()
@@ -273,7 +273,7 @@ class EventLocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setLongitudeForFloatSetsLongitude()
+    public function setLongitudeForFloatSetsLongitude(): void
     {
         $this->fixture->setLongitude(1.23);
         $this->assertSame(

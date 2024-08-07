@@ -36,7 +36,7 @@ class ScheduleConfigurationService
      * @param array $parameters
      * @param $parentObject
      */
-    public function getLabel(&$parameters, $parentObject = null)
+    public function getLabel(&$parameters, $parentObject = null): void
     {
         $recordLabel = '';
         $record = $this->callStatic(

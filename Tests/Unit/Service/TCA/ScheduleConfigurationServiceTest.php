@@ -20,7 +20,7 @@ namespace DWenzel\T3events\Tests\Unit\Service\TCA;
  ***************************************************************/
 
 use DWenzel\T3events\Service\TCA\ScheduleConfigurationService;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -48,7 +48,7 @@ class ScheduleConfigurationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function getLabelGetsRecord()
+    public function getLabelGetsRecord(): void
     {
         $parameters = [
             'row' =>[
@@ -71,7 +71,7 @@ class ScheduleConfigurationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function getLabelGetsTranslatedDateFormat() {
+    public function getLabelGetsTranslatedDateFormat(): void {
         $parameters = [
             'row' => [
                 'uid' => 23
@@ -96,7 +96,7 @@ class ScheduleConfigurationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function getLabelsSetsTitleToDate()
+    public function getLabelsSetsTitleToDate(): void
     {
         $parameters = [
             'row' => [
@@ -133,7 +133,7 @@ class ScheduleConfigurationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function getLabelGetsRecordTitleFromEventRecord()
+    public function getLabelGetsRecordTitleFromEventRecord(): void
     {
         $parameters = [
             'row' => [

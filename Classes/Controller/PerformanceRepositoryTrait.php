@@ -40,7 +40,7 @@ trait PerformanceRepositoryTrait
      *
      * @param \DWenzel\T3events\Domain\Repository\PerformanceRepository $performanceRepository
      */
-    public function injectPerformanceRepository(PerformanceRepository $performanceRepository)
+    public function injectPerformanceRepository(PerformanceRepository $performanceRepository): void
     {
         $this->performanceRepository = $performanceRepository;
     }

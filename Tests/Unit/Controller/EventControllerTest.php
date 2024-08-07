@@ -24,7 +24,7 @@ use DWenzel\T3events\Session\SessionInterface;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 use DWenzel\T3events\Utility\SettingsUtility;
 use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Request;
@@ -138,7 +138,7 @@ class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function initializeActionSetsOverwriteDemandInSession()
+    public function initializeActionSetsOverwriteDemandInSession(): void
     {
         $this->subject->_set(SI::SETTINGS, []);
         $this->mockSettingsUtility();
@@ -176,7 +176,7 @@ class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function initializeQuickMenuActionResetsOverwriteDemandInSession()
+    public function initializeQuickMenuActionResetsOverwriteDemandInSession(): void
     {
         $mockSession = $this->subject->_get('session');
         $mockRequest = $this->subject->_get('request');
@@ -191,7 +191,7 @@ class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function showActionAssignsVariablesToView()
+    public function showActionAssignsVariablesToView(): void
     {
         $mockEvent = $this->getMockEvent();
 
@@ -211,7 +211,7 @@ class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function showActionEmitsSignal()
+    public function showActionEmitsSignal(): void
     {
         $mockEvent = $this->getMockEvent();
 
@@ -227,7 +227,7 @@ class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function listActionGetsEventDemandFromFactory()
+    public function listActionGetsEventDemandFromFactory(): void
     {
         $mockDemand = $this->getMockEventDemand();
         $this->eventDemandFactory->expects($this->once())
@@ -241,7 +241,7 @@ class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function listActionOverwritesDemandObject()
+    public function listActionOverwritesDemandObject(): void
     {
         $mockDemand = $this->getMockEventDemand();
         $this->eventDemandFactory->method('createFromSettings')
@@ -256,7 +256,7 @@ class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function listActionGetsEventsFromRepository()
+    public function listActionGetsEventsFromRepository(): void
     {
         $this->eventRepository->expects($this->once())
             ->method('findDemanded')
@@ -268,7 +268,7 @@ class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function listActionAddsFlashMessageForEmptyResult()
+    public function listActionAddsFlashMessageForEmptyResult(): void
     {
         $title = 'foo';
         $message = 'bar';
@@ -289,7 +289,7 @@ class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function listActionEmitsSignal()
+    public function listActionEmitsSignal(): void
     {
         $this->subject->expects($this->once())
             ->method('emitSignal')
@@ -300,7 +300,7 @@ class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function listActionAssignsVariablesToView()
+    public function listActionAssignsVariablesToView(): void
     {
         $this->view->expects($this->once())
             ->method('assignMultiple');

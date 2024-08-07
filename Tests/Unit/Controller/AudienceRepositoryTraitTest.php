@@ -4,7 +4,7 @@ namespace DWenzel\T3events\Tests\Unit\Controller;
 
 use DWenzel\T3events\Controller\AudienceRepositoryTrait;
 use DWenzel\T3events\Domain\Repository\AudienceRepository;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /***************************************************************
@@ -50,7 +50,7 @@ class AudienceRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function audienceRepositoryCanBeInjected()
+    public function audienceRepositoryCanBeInjected(): void
     {
         /** @var AudienceRepository|MockObject $audienceRepository */
         $audienceRepository = $this->getMockBuilder(AudienceRepository::class)

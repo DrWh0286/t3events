@@ -39,7 +39,7 @@ class TitleTagViewHelper extends AbstractViewHelper
      *
      * @return void
      */
-    public function render()
+    public function render(): void
     {
         $content = $this->renderChildren();
         if (!empty($content)) {

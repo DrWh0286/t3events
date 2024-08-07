@@ -4,7 +4,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model;
 
 use DWenzel\T3events\Domain\Model\Performance;
 use DWenzel\T3events\Domain\Model\RelatedSchedulesTrait;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -44,7 +44,7 @@ class RelatedSchedulesTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function relatedSchedulesCanBeSet()
+    public function relatedSchedulesCanBeSet(): void
     {
         $performance = new Performance();
         $objectStorageHoldingExactlyOneAudience = new ObjectStorage();
@@ -60,7 +60,7 @@ class RelatedSchedulesTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function relatedScheduleCanBeAdded()
+    public function relatedScheduleCanBeAdded(): void
     {
         $performance = new Performance();
         $objectStorageHoldingExactlyOneAudience = new ObjectStorage();
@@ -78,7 +78,7 @@ class RelatedSchedulesTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function relatedScheduleCanBeRemoved()
+    public function relatedScheduleCanBeRemoved(): void
     {
         $performance = new Performance();
         $localObjectStorage = new ObjectStorage();

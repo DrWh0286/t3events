@@ -5,7 +5,7 @@ namespace DWenzel\T3events\Tests\Unit\Controller;
 use DWenzel\T3events\Controller\SettingsUtilityTrait;
 use DWenzel\T3events\Utility\SettingsUtility;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /***************************************************************
@@ -45,7 +45,7 @@ class SettingsUtilityTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function injectSettingsUtilitySetsObject()
+    public function injectSettingsUtilitySetsObject(): void
     {
         $object = $this->mockSettingsUtility();
         $this->fixture->injectSettingsUtility($object);
@@ -74,7 +74,7 @@ class SettingsUtilityTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function mergeSettingsMergesControllerSettings()
+    public function mergeSettingsMergesControllerSettings(): void
     {
         $controllerKey = 'foo';
         $typoScriptSettings = [
@@ -108,7 +108,7 @@ class SettingsUtilityTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function mergeSettingsMergesActionSettings()
+    public function mergeSettingsMergesActionSettings(): void
     {
         $controllerKey = 'foo';
         $actionKey = 'baz';
@@ -153,7 +153,7 @@ class SettingsUtilityTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function configurationFromSettingsOverRulesTypoScriptSettings()
+    public function configurationFromSettingsOverRulesTypoScriptSettings(): void
     {
         $controllerKey = 'foo';
         $actionKey = 'baz';

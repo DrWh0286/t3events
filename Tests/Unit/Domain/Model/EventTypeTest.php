@@ -31,7 +31,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model;
  * @author Dirk Wenzel <wenzel@webfox01.de>
  * @author Michael Kasten <kasten@webfox01.de>
  */
-class EventTypeTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
+class EventTypeTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
 {
 
     /**
@@ -52,7 +52,7 @@ class EventTypeTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
     /**
      * @test
      */
-    public function getTitleReturnsInitialValueForString()
+    public function getTitleReturnsInitialValueForString(): void
     {
         $this->assertNull($this->fixture->getTitle());
     }
@@ -60,7 +60,7 @@ class EventTypeTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
     /**
      * @test
      */
-    public function setTitleForStringSetsTitle()
+    public function setTitleForStringSetsTitle(): void
     {
         $this->fixture->setTitle('Conceived at T3CON10');
 
@@ -73,7 +73,7 @@ class EventTypeTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
     /**
      * @test
      */
-    public function getLinkReturnsInitiallyNull()
+    public function getLinkReturnsInitiallyNull(): void
     {
         $this->assertNull(
             $this->fixture->getLink()
@@ -83,7 +83,7 @@ class EventTypeTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
     /**
      * @test
      */
-    public function setLinkForStringSetsLink()
+    public function setLinkForStringSetsLink(): void
     {
         $link = 'foo';
         $this->fixture->setLink($link);

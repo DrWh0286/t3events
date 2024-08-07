@@ -4,7 +4,7 @@ namespace DWenzel\T3events\Tests\Unit\Dto;
 
 use DWenzel\T3events\Domain\Repository\VenueRepository;
 use DWenzel\T3events\Dto\VenueFilter;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /***************************************************************
@@ -48,7 +48,7 @@ class VenueFilterTest extends UnitTestCase
         $this->subject->injectVenueRepository($this->venueRepository);
     }
 
-    public function testGetOptionsRepositoryReturnsVenueRepository()
+    public function testGetOptionsRepositoryReturnsVenueRepository(): void
     {
         $this->assertSame(
             $this->venueRepository,

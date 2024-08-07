@@ -1,7 +1,7 @@
 <?php
 namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use DWenzel\T3events\Domain\Model\Dto\OrderAwareDemandTrait;
 
 /***************************************************************
@@ -38,7 +38,7 @@ class OrderAwareDemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function getOrderInitiallyReturnsNull()
+    public function getOrderInitiallyReturnsNull(): void
     {
         $this->assertNull(
             $this->subject->getOrder()
@@ -48,7 +48,7 @@ class OrderAwareDemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function orderCanBeSet()
+    public function orderCanBeSet(): void
     {
         $order = 'foo|bar';
         $this->subject->setOrder($order);

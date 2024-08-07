@@ -1,7 +1,7 @@
 <?php
 namespace DWenzel\T3events\Tests\Unit\Object;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /***************************************************************
@@ -42,7 +42,7 @@ class ObjectManagerTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function objectManagerCanBeInjected()
+    public function objectManagerCanBeInjected(): void
     {
         /** @var ObjectManager|\PHPUnit_Framework_MockObject_MockObject $objectManager */
         $objectManager = $this->getMockObjectManager();

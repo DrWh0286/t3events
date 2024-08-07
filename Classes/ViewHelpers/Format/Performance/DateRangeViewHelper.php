@@ -34,7 +34,7 @@ class DateRangeViewHelper extends AbstractDateRangeViewHelper
      */
     protected $performance;
 
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         $this->registerArgument('performance', Performance::class, static::ARGUMENT_PERFORMANCE_DESCRIPTION, true);
         $this->registerArgument('format', 'string', static::ARGUMENT_FORMAT_DESCRIPTION, false, static::DEFAULT_DATE_FORMAT);

@@ -21,7 +21,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use DWenzel\T3events\Domain\Model\Dto\PerformanceDemand;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DWenzel\T3events\Domain\Model\Dto\PerformanceDemand.
@@ -47,7 +47,7 @@ class PerformanceDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getDateReturnsInitialNull()
+    public function getDateReturnsInitialNull(): void
     {
         $this->assertNull($this->subject->getDate());
     }
@@ -55,7 +55,7 @@ class PerformanceDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function setDateForDateTimeSetsDate()
+    public function setDateForDateTimeSetsDate(): void
     {
         $now = new \DateTime();
         $this->subject->setDate($now);
@@ -66,7 +66,7 @@ class PerformanceDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getStartDateFieldForStringReturnsStartDateFieldConstant()
+    public function getStartDateFieldForStringReturnsStartDateFieldConstant(): void
     {
         $this->assertSame(
             PerformanceDemand::START_DATE_FIELD,
@@ -77,7 +77,7 @@ class PerformanceDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getEndDateFieldForStringReturnsEndDateFieldConstant()
+    public function getEndDateFieldForStringReturnsEndDateFieldConstant(): void
     {
         $this->assertSame(
             PerformanceDemand::END_DATE_FIELD,
@@ -88,7 +88,7 @@ class PerformanceDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getStatusFieldForStringReturnsStatusFieldConstant()
+    public function getStatusFieldForStringReturnsStatusFieldConstant(): void
     {
         $this->assertSame(
             PerformanceDemand::STATUS_FIELD,
@@ -99,7 +99,7 @@ class PerformanceDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getCategoryFieldForStringReturnsCategoryFieldConstant()
+    public function getCategoryFieldForStringReturnsCategoryFieldConstant(): void
     {
         $this->assertSame(
             PerformanceDemand::CATEGORY_FIELD,
@@ -110,7 +110,7 @@ class PerformanceDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function excludeSelectedStatusForBoolCanBeSet()
+    public function excludeSelectedStatusForBoolCanBeSet(): void
     {
         $this->subject->setExcludeSelectedStatuses(true);
         $this->assertTrue(
@@ -121,7 +121,7 @@ class PerformanceDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getEventLocationFieldReturnsClassConstant()
+    public function getEventLocationFieldReturnsClassConstant(): void
     {
         $this->assertSame(
             PerformanceDemand::EVENT_LOCATION_FIELD,
@@ -132,7 +132,7 @@ class PerformanceDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getAudienceFieldReturnsClassConstant()
+    public function getAudienceFieldReturnsClassConstant(): void
     {
         $this->assertSame(
             PerformanceDemand::AUDIENCE_FIELD,
@@ -143,7 +143,7 @@ class PerformanceDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getGenreFieldReturnsClassConstant()
+    public function getGenreFieldReturnsClassConstant(): void
     {
         $this->assertSame(
             PerformanceDemand::GENRE_FIELD,
@@ -154,7 +154,7 @@ class PerformanceDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getVenueFieldReturnsClassConstant()
+    public function getVenueFieldReturnsClassConstant(): void
     {
         $this->assertSame(
             PerformanceDemand::VENUE_FIELD,
@@ -165,7 +165,7 @@ class PerformanceDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getEventTypeFieldReturnsClassConstant()
+    public function getEventTypeFieldReturnsClassConstant(): void
     {
         $this->assertSame(
             PerformanceDemand::EVENT_TYPE_FIELD,

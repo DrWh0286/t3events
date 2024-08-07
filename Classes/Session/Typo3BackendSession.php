@@ -61,7 +61,7 @@ class Typo3BackendSession implements SessionInterface
      * @param mixed $value
      * @return void
      */
-    public function set($identifier, $value)
+    public function set($identifier, $value): void
     {
         $this->data[$identifier] = $value;
         //should write to backend user session
@@ -85,7 +85,7 @@ class Typo3BackendSession implements SessionInterface
         return null;
     }
 
-    public function clean()
+    public function clean(): void
     {
         //should clear backend user data for module
         $this->data = [];
@@ -96,7 +96,7 @@ class Typo3BackendSession implements SessionInterface
      *
      * @param string $namespace
      */
-    public function setNamespace($namespace)
+    public function setNamespace($namespace): void
     {
         $this->namespace = $namespace;
     }

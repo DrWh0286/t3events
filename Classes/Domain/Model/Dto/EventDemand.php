@@ -83,7 +83,7 @@ class EventDemand extends AbstractDemand implements
      * @param string $genre
      * @return void
      */
-    public function setGenre($genre)
+    public function setGenre($genre): void
     {
         $this->genre = $genre;
     }
@@ -104,7 +104,7 @@ class EventDemand extends AbstractDemand implements
      * @param string $venue
      * @return void
      */
-    public function setVenue($venue)
+    public function setVenue($venue): void
     {
         $this->venue = $venue;
     }
@@ -125,7 +125,7 @@ class EventDemand extends AbstractDemand implements
      * @param string $eventType
      * @return void
      */
-    public function setEventType($eventType)
+    public function setEventType($eventType): void
     {
         $this->eventType = $eventType;
     }
@@ -146,7 +146,7 @@ class EventDemand extends AbstractDemand implements
      * @param string $categoryConjunction
      * @return void
      */
-    public function setCategoryConjunction($categoryConjunction)
+    public function setCategoryConjunction($categoryConjunction): void
     {
         $this->categoryConjunction = $categoryConjunction;
     }
@@ -187,7 +187,7 @@ class EventDemand extends AbstractDemand implements
      * @param string $categories
      * @return void
      */
-    public function setCategories($categories)
+    public function setCategories($categories): void
     {
         $this->categories = $categories;
     }

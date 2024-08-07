@@ -45,12 +45,12 @@ trait FlashMessageTrait
      */
     protected $extensionService;
 
-    public function injectFlashMessageService(FlashMessageService $flashMessageService)
+    public function injectFlashMessageService(FlashMessageService $flashMessageService): void
     {
         $this->flashMessageService = $flashMessageService;
     }
 
-    public function injectExtensionService(ExtensionService $extensionService)
+    public function injectExtensionService(ExtensionService $extensionService): void
     {
         $this->extensionService = $extensionService;
     }
@@ -70,7 +70,7 @@ trait FlashMessageTrait
         $messageTitle = '',
         $severity = AbstractMessage::OK,
         $storeInSession = true
-    ) {
+    ): void {
         if (!is_string($messageBody)) {
             throw new \InvalidArgumentException('The message body must be of type string, "' . gettype($messageBody) . '" given.',
                 1243258395);

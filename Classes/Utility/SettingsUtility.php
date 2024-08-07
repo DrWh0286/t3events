@@ -60,24 +60,9 @@ class SettingsUtility implements SingletonInterface
      * @var ResourceFactory
      */
     protected $resourceFactory;
-
-    /**
-     * injects the ContentObjectRenderer
-     *
-     * @param ContentObjectRenderer $contentObjectRenderer
-     */
-    public function injectContentObjectRenderer(ContentObjectRenderer $contentObjectRenderer)
+    public function __construct(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObjectRenderer, \DWenzel\T3events\Resource\ResourceFactory $resourceFactory)
     {
         $this->contentObjectRenderer = $contentObjectRenderer;
-    }
-
-    /**
-     * injects the ResourceFactory
-     *
-     * @param \DWenzel\T3events\Resource\ResourceFactory $resourceFactory
-     */
-    public function injectResourceFactory(ResourceFactory $resourceFactory)
-    {
         $this->resourceFactory = $resourceFactory;
     }
 

@@ -72,12 +72,14 @@ class EventController extends AbstractBackendController implements FilterableCon
         ]
     ];
 
-    protected $defaultViewObjectName = BackendTemplateView::class;
+    public function __construct(private \TYPO3\CMS\Backend\Template\ModuleTemplateFactory $moduleTemplateFactory)
+    {
+    }
 
     /**
      * @return void
      */
-    public function initializeNewAction()
+    public function initializeNewAction(): void
     {
 
         $configuration = $this->configurationManager->getConfiguration(
@@ -99,8 +101,9 @@ class EventController extends AbstractBackendController implements FilterableCon
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      */
-    public function listAction($overwriteDemand = null)
+    public function listAction($overwriteDemand = null): \Psr\Http\Message\ResponseInterface
     {
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
         $demand = $this->eventDemandFactory->createFromSettings($this->settings);
 
         if ($overwriteDemand === null) {
@@ -138,14 +141,19 @@ class EventController extends AbstractBackendController implements FilterableCon
 
         $this->emitSignal(__CLASS__, self::LIST_ACTION, $templateVariables);
         $this->view->assignMultiple($templateVariables);
+        $moduleTemplate->setContent($this->view->render());
+        return $this->htmlResponse($moduleTemplate->renderContent());
     }
 
     /**
      * Redirect to new record form
      */
-    public function newAction()
+    public function newAction(): \Psr\Http\Message\ResponseInterface
     {
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
         $this->redirectToCreateNewRecord(SI::TABLE_EVENTS);
+        $moduleTemplate->setContent($this->view->render());
+        return $this->htmlResponse($moduleTemplate->renderContent());
     }
 
     /**

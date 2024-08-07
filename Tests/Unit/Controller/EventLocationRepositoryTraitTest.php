@@ -17,7 +17,7 @@ namespace DWenzel\T3events\Tests\Unit\Controller;
 
 use DWenzel\T3events\Controller\EventLocationRepositoryTrait;
 use DWenzel\T3events\Domain\Repository\EventLocationRepository;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Class EventLocationRepositoryTraitTest
@@ -42,7 +42,7 @@ class EventLocationRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function eventLocationRepositoryCanBeInjected()
+    public function eventLocationRepositoryCanBeInjected(): void
     {
         /** @var EventLocationRepository|\PHPUnit_Framework_MockObject_MockObject $eventLocationRepository */
         $eventLocationRepository = $this->getMockBuilder(EventLocationRepository::class)

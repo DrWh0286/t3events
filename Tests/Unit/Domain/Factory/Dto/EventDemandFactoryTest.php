@@ -5,7 +5,7 @@ use DWenzel\T3events\Domain\Factory\Dto\EventDemandFactory;
 use DWenzel\T3events\Domain\Model\Dto\EventDemand;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 use DWenzel\T3events\Tests\Unit\Object\MockObjectManagerTrait;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /***************************************************************
  *
@@ -56,7 +56,7 @@ class EventDemandFactoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function createFromSettingsReturnsEventDemand()
+    public function createFromSettingsReturnsEventDemand(): void
     {
         $mockDemand = $this->getMockEventDemand();
 
@@ -98,7 +98,7 @@ class EventDemandFactoryTest extends UnitTestCase
      * @param string|int $settingsValue
      * @param mixed $expectedValue
      */
-    public function createFromSettingsSetsSettableProperties($propertyName, $settingsValue, $expectedValue)
+    public function createFromSettingsSetsSettableProperties($propertyName, $settingsValue, $expectedValue): void
     {
         $settings = [
             $propertyName => $settingsValue
@@ -139,7 +139,7 @@ class EventDemandFactoryTest extends UnitTestCase
      * @param string|int $settingsValue
      * @param mixed $expectedValue
      */
-    public function createFromSettingsSetsMappedProperties($settingsKey, $propertyName, $settingsValue, $expectedValue)
+    public function createFromSettingsSetsMappedProperties($settingsKey, $propertyName, $settingsValue, $expectedValue): void
     {
         $settings = [
             $settingsKey => $settingsValue
@@ -178,7 +178,7 @@ class EventDemandFactoryTest extends UnitTestCase
      * @param $propertyName
      * @param $propertyValue
      */
-    public function createFromSettingsDoesNotSetSkippedValues($propertyName, $propertyValue)
+    public function createFromSettingsDoesNotSetSkippedValues($propertyName, $propertyValue): void
     {
         $settings = [
             $propertyName => $propertyValue
@@ -200,7 +200,7 @@ class EventDemandFactoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function createFromSettingsSetsPeriodTypeForSpecificPeriod()
+    public function createFromSettingsSetsPeriodTypeForSpecificPeriod(): void
     {
         $periodType = 'foo';
         $settings = [
@@ -223,7 +223,7 @@ class EventDemandFactoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function createFromSettingsSetsPeriodStartAndDurationIfPeriodTypeIsNotByDate()
+    public function createFromSettingsSetsPeriodStartAndDurationIfPeriodTypeIsNotByDate(): void
     {
         $periodType = 'fooPeriodType-notByDate';
         $periodStart = '30';
@@ -255,7 +255,7 @@ class EventDemandFactoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function createFromSettingsSetsStartDateForPeriodTypeByDate()
+    public function createFromSettingsSetsStartDateForPeriodTypeByDate(): void
     {
         $periodType = 'byDate';
         $startDate = '2012-10-10';
@@ -283,7 +283,7 @@ class EventDemandFactoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function createFromSettingsSetsEndDateForPeriodTypeByDate()
+    public function createFromSettingsSetsEndDateForPeriodTypeByDate(): void
     {
         $periodType = 'byDate';
         $endDate = '2012-10-10';

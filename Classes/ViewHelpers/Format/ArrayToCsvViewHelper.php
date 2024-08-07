@@ -32,7 +32,7 @@ class ArrayToCsvViewHelper extends AbstractViewHelper
     /**
      * Initializes the arguments for the ViewHelper
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         $this->registerArgument('source', 'array', static::ARGUMENT_SOURCE_DESCRIPTION, true, null);
         $this->registerArgument('delimiter', 'string', static::ARGUMENT_DELIMITER_DESCRIPTION, false, ',');

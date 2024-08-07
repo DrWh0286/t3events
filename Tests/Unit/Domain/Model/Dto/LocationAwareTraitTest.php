@@ -10,7 +10,7 @@ namespace DWenzel\T3events\Tests;
  * LICENSE.txt file that was distributed with this source code.
  * The TYPO3 project - inspiring people to share!
  */
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use DWenzel\T3events\Domain\Model\Dto\LocationAwareTrait;
 
 /**
@@ -34,7 +34,7 @@ class LocationAwareTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function getLocationReturnsInitialValueForString()
+    public function getLocationReturnsInitialValueForString(): void
     {
         $this->assertNull($this->fixture->getLocation());
     }
@@ -42,7 +42,7 @@ class LocationAwareTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function setLocationForStringSetsLocation()
+    public function setLocationForStringSetsLocation(): void
     {
         $this->fixture->setLocation('ping');
         $this->assertSame('ping', $this->fixture->getLocation());
@@ -51,7 +51,7 @@ class LocationAwareTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function getRadiusReturnsInitialValueForInteger()
+    public function getRadiusReturnsInitialValueForInteger(): void
     {
         $this->assertNull($this->fixture->getRadius());
     }
@@ -59,7 +59,7 @@ class LocationAwareTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function setRadiusForIntegerSetsRadius()
+    public function setRadiusForIntegerSetsRadius(): void
     {
         $this->fixture->setRadius(5000);
         $this->assertSame(5000, $this->fixture->getRadius());
@@ -68,7 +68,7 @@ class LocationAwareTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function getBoundsReturnsInitialValueForArray()
+    public function getBoundsReturnsInitialValueForArray(): void
     {
         $this->assertNull($this->fixture->getBounds());
     }
@@ -76,7 +76,7 @@ class LocationAwareTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function setBoundsForArraySetsBounds()
+    public function setBoundsForArraySetsBounds(): void
     {
         $bounds = array('test' => 'value');
         $this->fixture->setBounds($bounds);

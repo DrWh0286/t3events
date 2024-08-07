@@ -1,7 +1,7 @@
 <?php
 namespace DWenzel\T3events\Tests\Unit\Domain\Model;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Extbase\Domain\Model\Category;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use DWenzel\T3events\Domain\Model\CategorizableTrait;
@@ -48,7 +48,7 @@ class CategorizableTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function getCategoriesReturnsInitialNull()
+    public function getCategoriesReturnsInitialNull(): void
     {
         $this->assertNull(
             $this->subject->getCategories()
@@ -58,7 +58,7 @@ class CategorizableTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function setCategoryForObjectStorageContainingCategorySetsCategories()
+    public function setCategoryForObjectStorageContainingCategorySetsCategories(): void
     {
         $category = new Category();
         $objectStorageHoldingExactlyOneCategory = new ObjectStorage();
@@ -74,7 +74,7 @@ class CategorizableTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function addCategoryToObjectStorageHoldingCategory()
+    public function addCategoryToObjectStorageHoldingCategory(): void
     {
         $category = new Category();
         $newObjectStorage = new ObjectStorage();
@@ -92,7 +92,7 @@ class CategorizableTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function removeCategoryFromObjectStorageHoldingCategory()
+    public function removeCategoryFromObjectStorageHoldingCategory(): void
     {
         $category = new Category();
         $newObjectStorage = new ObjectStorage();

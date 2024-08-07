@@ -19,7 +19,7 @@ use DWenzel\T3events\Domain\Factory\Dto\PersonDemandFactory;
 use DWenzel\T3events\Domain\Model\Dto\PersonDemand;
 use DWenzel\T3events\Tests\Unit\Object\MockObjectManagerTrait;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class PersonDemandFactoryTest extends UnitTestCase
@@ -46,7 +46,7 @@ class PersonDemandFactoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function createFromSettingsReturnsPersonDemand()
+    public function createFromSettingsReturnsPersonDemand(): void
     {
         $mockDemand = $this->getMockPersonDemand();
         $this->objectManager->expects($this->once())
@@ -96,7 +96,7 @@ class PersonDemandFactoryTest extends UnitTestCase
      * @param string|int $settingsValue
      * @param mixed $expectedValue
      */
-    public function createFromSettingsSetsSettableProperties($propertyName, $settingsValue, $expectedValue)
+    public function createFromSettingsSetsSettableProperties($propertyName, $settingsValue, $expectedValue): void
     {
         $settings = [
             $propertyName => $settingsValue
@@ -132,7 +132,7 @@ class PersonDemandFactoryTest extends UnitTestCase
      * @param string|int $settingsValue
      * @param mixed $expectedValue
      */
-    public function createFromSettingsSetsMappedProperties($settingsKey, $propertyName, $settingsValue, $expectedValue)
+    public function createFromSettingsSetsMappedProperties($settingsKey, $propertyName, $settingsValue, $expectedValue): void
     {
         $settings = [
             $settingsKey => $settingsValue
@@ -166,7 +166,7 @@ class PersonDemandFactoryTest extends UnitTestCase
      * @param $propertyName
      * @param $propertyValue
      */
-    public function createFromSettingsDoesNotSetSkippedValues($propertyName, $propertyValue)
+    public function createFromSettingsDoesNotSetSkippedValues($propertyName, $propertyValue): void
     {
         $settings = [
             $propertyName => $propertyValue
@@ -186,7 +186,7 @@ class PersonDemandFactoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function createFromSettingsSetsOrderFromLegacySettings()
+    public function createFromSettingsSetsOrderFromLegacySettings(): void
     {
         $settings = [
             'sortBy' => 'foo',

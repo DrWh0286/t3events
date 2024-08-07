@@ -22,7 +22,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model;
  ***************************************************************/
 use DWenzel\T3events\Domain\Model\Person;
 use DWenzel\T3events\Domain\Model\PersonType;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -44,7 +44,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function getGenderReturnsInitialValueForInteger()
+    public function getGenderReturnsInitialValueForInteger(): void
     {
         $this->assertNull(
             $this->subject->getGender()
@@ -54,7 +54,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function setGenderForIntegerSetsGender()
+    public function setGenderForIntegerSetsGender(): void
     {
         $this->subject->setGender(12);
 
@@ -68,7 +68,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFirstNameReturnsInitialValueForString()
+    public function getFirstNameReturnsInitialValueForString(): void
     {
         $this->assertNull(
             $this->subject->getFirstName()
@@ -78,7 +78,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function setFirstNameForStringSetsFirstName()
+    public function setFirstNameForStringSetsFirstName(): void
     {
         $this->subject->setFirstName('Conceived at T3CON10');
 
@@ -92,7 +92,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function getLastNameReturnsInitialValueForString()
+    public function getLastNameReturnsInitialValueForString(): void
     {
         $this->assertNull(
             $this->subject->getLastName()
@@ -102,7 +102,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function setLastNameForStringSetsLastName()
+    public function setLastNameForStringSetsLastName(): void
     {
         $this->subject->setLastName('Conceived at T3CON10');
 
@@ -116,7 +116,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function getNameReturnsInitialValueForString()
+    public function getNameReturnsInitialValueForString(): void
     {
         $this->assertNull(
             $this->subject->getName()
@@ -126,7 +126,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function setNameForStringSetsName()
+    public function setNameForStringSetsName(): void
     {
         $this->subject->setName('Conceived at T3CON10');
 
@@ -140,7 +140,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function getAddressReturnsInitialValueForString()
+    public function getAddressReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -151,7 +151,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function setAddressForStringSetsAddress()
+    public function setAddressForStringSetsAddress(): void
     {
         $this->subject->setAddress('Conceived at T3CON10');
 
@@ -165,7 +165,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function getZipReturnsInitialValueForString()
+    public function getZipReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -176,7 +176,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function setZipForStringSetsZip()
+    public function setZipForStringSetsZip(): void
     {
         $this->subject->setZip('Conceived at T3CON10');
 
@@ -190,7 +190,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function getCityReturnsInitialValueForString()
+    public function getCityReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -201,7 +201,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function setCityForStringSetsCity()
+    public function setCityForStringSetsCity(): void
     {
         $this->subject->setCity('Conceived at T3CON10');
 
@@ -215,7 +215,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPhoneReturnsInitialValueForString()
+    public function getPhoneReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -226,7 +226,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function setPhoneForStringSetsPhone()
+    public function setPhoneForStringSetsPhone(): void
     {
         $this->subject->setPhone('Conceived at T3CON10');
 
@@ -240,7 +240,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function getEmailReturnsInitialValueForString()
+    public function getEmailReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -251,7 +251,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function setEmailForStringSetsEmail()
+    public function setEmailForStringSetsEmail(): void
     {
         $this->subject->setEmail('Conceived at T3CON10');
 
@@ -265,7 +265,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPersonTypeInitiallyReturnsNull()
+    public function getPersonTypeInitiallyReturnsNull(): void
     {
         $this->assertNull(
             $this->subject->getPersonType()
@@ -275,7 +275,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function setPersonTypeForObjectSetsPersonType()
+    public function setPersonTypeForObjectSetsPersonType(): void
     {
         $personType = new PersonType();
         $this->subject->setPersonType($personType);
@@ -289,7 +289,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function getBirthdayForDateTimeReturnsInitiallyNull()
+    public function getBirthdayForDateTimeReturnsInitiallyNull(): void
     {
         $this->assertNull(
             $this->subject->getBirthday()
@@ -299,7 +299,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function birthdayCanBeSet()
+    public function birthdayCanBeSet(): void
     {
         $date = new \DateTime();
         $this->subject->setBirthday($date);
@@ -312,7 +312,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function getTypeReturnsInitialValueForString()
+    public function getTypeReturnsInitialValueForString(): void
     {
         $this->assertSame(
             Person::PERSON_TYPE_UNKNOWN,
@@ -323,7 +323,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function typeCanBeSet()
+    public function typeCanBeSet(): void
     {
         $type = 'foo';
         $this->subject->setType($type);
@@ -337,7 +337,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function getWwwInitiallyReturnsNull()
+    public function getWwwInitiallyReturnsNull(): void
     {
         $this->assertNull(
             $this->subject->getWww()
@@ -347,7 +347,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function wwwCanBeSet()
+    public function wwwCanBeSet(): void
     {
         $www = 'foo';
         $this->subject->setWww($www);
@@ -361,7 +361,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function getTitleInitiallyReturnsNull()
+    public function getTitleInitiallyReturnsNull(): void
     {
         $this->assertNull(
             $this->subject->getTitle()
@@ -371,7 +371,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function titleCanBeSet()
+    public function titleCanBeSet(): void
     {
         $title = 'foo';
         $this->subject->setTitle($title);
@@ -385,7 +385,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function getImagesInitiallyReturnsEmptyObjectStorage()
+    public function getImagesInitiallyReturnsEmptyObjectStorage(): void
     {
         $emptyObjectStorage = new ObjectStorage();
         $this->subject->initializeObject();
@@ -399,7 +399,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function imagesCanBeSet()
+    public function imagesCanBeSet(): void
     {
         $emptyObjectStorage = new ObjectStorage();
         $this->subject->setImages($emptyObjectStorage);
@@ -413,7 +413,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function imageCanBeAdded()
+    public function imageCanBeAdded(): void
     {
         $this->subject->initializeObject();
         $mockFileReference = $this->getMockFileReference();
@@ -427,7 +427,7 @@ class PersonTest extends UnitTestCase
     /**
      * @test
      */
-    public function imageCanBeRemoved()
+    public function imageCanBeRemoved(): void
     {
         $this->subject->initializeObject();
         $mockFileReference = $this->getMockFileReference();

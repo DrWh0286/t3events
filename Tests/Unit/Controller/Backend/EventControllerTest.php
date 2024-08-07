@@ -23,7 +23,7 @@ use DWenzel\T3events\Domain\Model\Dto\ModuleData;
 use DWenzel\T3events\Domain\Repository\EventRepository;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\FormProtection\FormProtectionFactory;
@@ -134,7 +134,7 @@ class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function listActionCreatesDemandFromSettings()
+    public function listActionCreatesDemandFromSettings(): void
     {
         $settings = [
             'filter' => []
@@ -162,7 +162,7 @@ class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function listActionGetsOverwriteDemandFromModuleData()
+    public function listActionGetsOverwriteDemandFromModuleData(): void
     {
         $this->mockCreateDemandFromSettings();
         $this->moduleData->expects($this->once())
@@ -191,7 +191,7 @@ class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function listActionSetsOverwriteDemandOnModuleData()
+    public function listActionSetsOverwriteDemandOnModuleData(): void
     {
         $overwriteDemand = ['foo'];
         $this->mockCreateDemandFromSettings();
@@ -205,7 +205,7 @@ class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function listActionOverwritesDemandObject()
+    public function listActionOverwritesDemandObject(): void
     {
         $mockDemandObject = $this->mockCreateDemandFromSettings();
         $overwriteDemand = ['foo'];
@@ -219,7 +219,7 @@ class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function listActionEmitsSignal()
+    public function listActionEmitsSignal(): void
     {
         $this->mockCreateDemandFromSettings();
 
@@ -233,7 +233,7 @@ class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function listActionAssignsVariablesToView()
+    public function listActionAssignsVariablesToView(): void
     {
         $this->eventDemandFactory->expects($this->once())
             ->method('createFromSettings')
@@ -247,7 +247,7 @@ class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function newActionRedirectsToModuleEditRecord()
+    public function newActionRedirectsToModuleEditRecord(): void
     {
         $tableName = 'tx_t3events_domain_model_event';
         $pageId = '14';
@@ -298,7 +298,7 @@ class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function initializeNewActionSetsPageUidFromFrameworkConfiguration()
+    public function initializeNewActionSetsPageUidFromFrameworkConfiguration(): void
     {
         $pageIdFromFrameWorkConfiguration = 678;
 
@@ -323,7 +323,7 @@ class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function initializeNewActionSetPageUidFromModuleSettings()
+    public function initializeNewActionSetPageUidFromModuleSettings(): void
     {
         $pageIdFromFrameWorkConfiguration = 678;
         $pageIdFromModuleSettings = 888;
@@ -355,7 +355,7 @@ class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function getConfigurationManagerReturnsConfigurationManager()
+    public function getConfigurationManagerReturnsConfigurationManager(): void
     {
         $this->assertEquals(
             $this->configurationManager,

@@ -3,7 +3,7 @@
 namespace DWenzel\T3events\Tests\Unit\Controller\Backend;
 
 use DWenzel\T3events\Controller\Backend\FormTrait;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -53,7 +53,7 @@ class FormTraitTest extends UnitTestCase
      * @dataProvider getModuleKeyReturnsGetParameterDataProvider
      * @param string $expectedValue
      */
-    public function getModuleKeyReturnsGetParameter(string $expectedValue) {
+    public function getModuleKeyReturnsGetParameter(string $expectedValue): void {
         if(!defined('TYPO3_version')) {
             self::markTestSkipped('required constant `TYPO3_version` is not defined');
         }

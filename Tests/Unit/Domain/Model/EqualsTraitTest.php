@@ -2,7 +2,7 @@
 
 namespace DWenzel\T3events\Tests\Unit\Domain\Model;
 use DWenzel\T3events\Domain\Model\EqualsTrait;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
 
@@ -37,7 +37,7 @@ class EqualsTraitTest extends UnitTestCase
             ->getMockForTrait();
     }
 
-    public function testEqualsReturnsFalseForDifferentObject()
+    public function testEqualsReturnsFalseForDifferentObject(): void
     {
         /** @var AbstractDomainObject|MockObject $objectToCompare */
         $objectToCompare = $this->getMockBuilder(AbstractDomainObject::class)
@@ -56,7 +56,7 @@ class EqualsTraitTest extends UnitTestCase
         );
     }
 
-    public function testEqualsReturnsTrueForSameObject()
+    public function testEqualsReturnsTrueForSameObject(): void
     {
         $toString = 'foo';
 

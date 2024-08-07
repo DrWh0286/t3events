@@ -3,7 +3,7 @@
 namespace DWenzel\T3events\Tests\Unit\Domain\Repository;
 
 use DWenzel\T3events\Domain\Repository\TaskRepository;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
@@ -53,7 +53,7 @@ class TaskRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function initializeObjectsSetsDefaultQuerySettings()
+    public function initializeObjectsSetsDefaultQuerySettings(): void
     {
         $mockQuerySettings = $this->getMockBuilder(Typo3QuerySettings::class)
             ->setMethods(['setRespectStoragePage'])->getMock();

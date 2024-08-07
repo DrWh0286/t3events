@@ -169,7 +169,7 @@ trait DemandedRepositoryTrait
      * @param array<\TYPO3\CMS\Extbase\Persistence\Generic\Qom\Constraint> $additionalConstraints
      * @param string $conjunction
      */
-    public function combineConstraints(QueryInterface $query, &$constraints, $additionalConstraints, $conjunction = null)
+    public function combineConstraints(QueryInterface $query, &$constraints, $additionalConstraints, $conjunction = null): void
     {
         if (count($additionalConstraints)) {
             switch (strtolower($conjunction)) {

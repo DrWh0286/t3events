@@ -1,7 +1,7 @@
 <?php
 namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use DWenzel\T3events\Domain\Model\Dto\CategoryAwareDemandTrait;
 
 /**
@@ -30,7 +30,7 @@ class CategoryAwareDemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function getCategoriesReturnsInitialValueForString()
+    public function getCategoriesReturnsInitialValueForString(): void
     {
         $this->assertNull($this->subject->getCategories());
     }
@@ -38,7 +38,7 @@ class CategoryAwareDemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function setCategoriesForStringSetsCategory()
+    public function setCategoriesForStringSetsCategory(): void
     {
         $this->subject->setCategories('foo');
         $this->assertSame(

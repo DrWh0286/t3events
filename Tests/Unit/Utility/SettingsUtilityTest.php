@@ -5,7 +5,7 @@ namespace DWenzel\T3events\Utility;
 use DWenzel\T3events\Resource\ResourceFactory;
 use DWenzel\T3events\Tests\Unit\Object\MockObjectManagerTrait;
 use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
@@ -70,7 +70,7 @@ class SettingsUtilityTest extends UnitTestCase
     /**
      * @test
      */
-    public function getValueByKeyInitiallyReturnsNull()
+    public function getValueByKeyInitiallyReturnsNull(): void
     {
         $config = [];
         self::assertNull(
@@ -81,7 +81,7 @@ class SettingsUtilityTest extends UnitTestCase
     /**
      * @test
      */
-    public function getValueByKeyReturnsStringValueIfFieldIsNotSet()
+    public function getValueByKeyReturnsStringValueIfFieldIsNotSet(): void
     {
         $key = 'foo';
         $config = [
@@ -98,7 +98,7 @@ class SettingsUtilityTest extends UnitTestCase
     /**
      * @test
      */
-    public function getValueByKeyReturnsValueFromObjectByPath()
+    public function getValueByKeyReturnsValueFromObjectByPath(): void
     {
         $mockParentObject = $this->getAccessibleMock(
             AbstractDomainObject::class, ['getFoo']
@@ -132,7 +132,7 @@ class SettingsUtilityTest extends UnitTestCase
     /**
      * @test
      */
-    public function getValueByKeyReturnsDefaultValueIfObjectByPathReturnsNull()
+    public function getValueByKeyReturnsDefaultValueIfObjectByPathReturnsNull(): void
     {
         $mockParentObject = $this->getAccessibleMock(
             AbstractDomainObject::class, ['getFoo']
@@ -158,7 +158,7 @@ class SettingsUtilityTest extends UnitTestCase
     /**
      * @test
      */
-    public function getValueByKeyWrapsFieldValue()
+    public function getValueByKeyWrapsFieldValue(): void
     {
         $cObj = new ContentObjectRenderer();
         $this->subject->injectContentObjectRenderer($cObj);
@@ -190,7 +190,7 @@ class SettingsUtilityTest extends UnitTestCase
     /**
      * @test
      */
-    public function injectContentObjectRendererSetsObject()
+    public function injectContentObjectRendererSetsObject(): void
     {
         /** @var ContentObjectRenderer|MockObject $mockContentObjectRenderer */
         $mockContentObjectRenderer = $this->getMockBuilder(ContentObjectRenderer::class)
@@ -207,7 +207,7 @@ class SettingsUtilityTest extends UnitTestCase
     /**
      * @test
      */
-    public function getControllerKeyReturnsKeyIfSet()
+    public function getControllerKeyReturnsKeyIfSet(): void
     {
         $key = 'dummy';
         $controllerKeys = [
@@ -224,7 +224,7 @@ class SettingsUtilityTest extends UnitTestCase
     /**
      * @test
      */
-    public function getControllerKeyReturnsKeyByClassName()
+    public function getControllerKeyReturnsKeyByClassName(): void
     {
         $key = 'dummy';
 
@@ -237,7 +237,7 @@ class SettingsUtilityTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFileStorageInitiallyReturnsEmptyObjectStorage()
+    public function getFileStorageInitiallyReturnsEmptyObjectStorage(): void
     {
         $config = [];
         /** @var DomainObjectInterface|MockObject $mockObject */
@@ -260,7 +260,7 @@ class SettingsUtilityTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFileStorageReturnsNonEmptyFileReferenceStorageFromObject()
+    public function getFileStorageReturnsNonEmptyFileReferenceStorageFromObject(): void
     {
         $this->subject = $this->getAccessibleMock(
             SettingsUtility::class, ['getValue']
@@ -304,7 +304,7 @@ class SettingsUtilityTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFileStorageReturnsStorageWithFileReferenceFromObject()
+    public function getFileStorageReturnsStorageWithFileReferenceFromObject(): void
     {
         $this->subject = $this->getAccessibleMock(
             SettingsUtility::class, ['getValue']
@@ -340,7 +340,7 @@ class SettingsUtilityTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFileStorageAddsDefaultValueIfStorageFromObjectIsEmpty()
+    public function getFileStorageAddsDefaultValueIfStorageFromObjectIsEmpty(): void
     {
         $defaultValue = 'bar';
         $config = [
@@ -381,7 +381,7 @@ class SettingsUtilityTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFileStorageAddsAlwaysValue()
+    public function getFileStorageAddsAlwaysValue(): void
     {
         $defaultValue = 'bar';
         $alwaysValue = 'baz';

@@ -39,7 +39,7 @@ use DWenzel\T3events\Domain\Model\Event;
  * @author Michael Kasten <kasten@webfox01.de>
  * @coversDefaultClass \DWenzel\T3events\Domain\Model\Performance
  */
-class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
+class PerformanceTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
 {
     /**
      * @var \DWenzel\T3events\Domain\Model\Performance
@@ -60,7 +60,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getDate
      */
-    public function getDateReturnsInitialValueForDateTime()
+    public function getDateReturnsInitialValueForDateTime(): void
     {
         $this->assertNull($this->fixture->getDate());
     }
@@ -69,7 +69,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setDate
      */
-    public function setDateForDateTimeSetsDate()
+    public function setDateForDateTimeSetsDate(): void
     {
         $date = new \DateTime();
         $this->fixture->setDate($date);
@@ -83,7 +83,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getEndDate
      */
-    public function getEndDateReturnsInitialValueForDateTime()
+    public function getEndDateReturnsInitialValueForDateTime(): void
     {
         $this->assertNull($this->fixture->getEndDate());
     }
@@ -92,7 +92,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setEndDate
      */
-    public function setEndDateForDateTimeSetsEndDate()
+    public function setEndDateForDateTimeSetsEndDate(): void
     {
         $endDate = new \DateTime();
         $this->fixture->setEndDate($endDate);
@@ -106,7 +106,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getAdmission
      */
-    public function getAdmissionReturnsInitialValueForInt()
+    public function getAdmissionReturnsInitialValueForInt(): void
     {
         $this->assertNull($this->fixture->getAdmission());
     }
@@ -115,7 +115,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setAdmission
      */
-    public function setAdmissionForIntSetsAdmission()
+    public function setAdmissionForIntSetsAdmission(): void
     {
         $this->fixture->setAdmission(99);
         $this->assertSame(
@@ -128,7 +128,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getBegin
      */
-    public function getBeginReturnsInitialValueForInt()
+    public function getBeginReturnsInitialValueForInt(): void
     {
         $this->assertNull($this->fixture->getBegin());
     }
@@ -137,7 +137,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setBegin
      */
-    public function setBeginForIntSetsBegin()
+    public function setBeginForIntSetsBegin(): void
     {
         $this->fixture->setBegin(9999);
         $this->assertSame(
@@ -150,7 +150,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getEnd
      */
-    public function getEndReturnsInitialValueForInt()
+    public function getEndReturnsInitialValueForInt(): void
     {
         $this->assertNull($this->fixture->getEnd());
     }
@@ -159,7 +159,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setEnd
      */
-    public function setEndForIntSetsEnd()
+    public function setEndForIntSetsEnd(): void
     {
         $this->fixture->setEnd(123);
         $this->assertSame(
@@ -172,7 +172,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getStatusInfo
      */
-    public function getStatusInfoReturnsInitialValueForString()
+    public function getStatusInfoReturnsInitialValueForString(): void
     {
         $this->assertNull($this->fixture->getStatusInfo());
     }
@@ -181,7 +181,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setStatusInfo
      */
-    public function setStatusInfoForStringSetsStatusInfo()
+    public function setStatusInfoForStringSetsStatusInfo(): void
     {
         $this->fixture->setStatusInfo('Conceived at T3CON10');
 
@@ -195,7 +195,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getExternalProviderLink
      */
-    public function getExternalProviderLinkReturnsInitialValueForString()
+    public function getExternalProviderLinkReturnsInitialValueForString(): void
     {
         $this->assertNull($this->fixture->getExternalProviderLink());
     }
@@ -204,7 +204,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setExternalProviderLink
      */
-    public function setExternalProviderLinkForStringSetsExternalProviderLink()
+    public function setExternalProviderLinkForStringSetsExternalProviderLink(): void
     {
         $this->fixture->setExternalProviderLink('Conceived at T3CON10');
 
@@ -218,7 +218,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getAdditionalLink
      */
-    public function getAdditionalLinkReturnsInitialValueForString()
+    public function getAdditionalLinkReturnsInitialValueForString(): void
     {
         $this->assertNull($this->fixture->getAdditionalLink());
     }
@@ -227,7 +227,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setAdditionalLink
      */
-    public function setAdditionalLinkForStringSetsAdditionalLink()
+    public function setAdditionalLinkForStringSetsAdditionalLink(): void
     {
         $this->fixture->setAdditionalLink('Conceived at T3CON10');
 
@@ -241,7 +241,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getProviderType
      */
-    public function getProviderTypeReturnsInitialValueForInteger()
+    public function getProviderTypeReturnsInitialValueForInteger(): void
     {
         $this->assertSame(
             0,
@@ -253,7 +253,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setProviderType
      */
-    public function setProviderTypeForIntegerSetsProviderType()
+    public function setProviderTypeForIntegerSetsProviderType(): void
     {
         $this->fixture->setProviderType(12);
 
@@ -267,7 +267,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getImage
      */
-    public function getImageReturnsInitialValueForString()
+    public function getImageReturnsInitialValueForString(): void
     {
         $this->assertNull($this->fixture->getImage());
     }
@@ -276,7 +276,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setImage
      */
-    public function setImageForStringSetsImage()
+    public function setImageForStringSetsImage(): void
     {
         $this->fixture->setImage('Conceived at T3CON10');
 
@@ -290,7 +290,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getImages
      */
-    public function getImagesReturnsInitialValueForObjectStorageContainingImages()
+    public function getImagesReturnsInitialValueForObjectStorageContainingImages(): void
     {
         $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->assertEquals(
@@ -303,7 +303,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setImages
      */
-    public function setImagesForObjectStorageContainingImagesSetsImages()
+    public function setImagesForObjectStorageContainingImagesSetsImages(): void
     {
         $images = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
         $objectStorageHoldingExactlyOneImage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
@@ -320,7 +320,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::addImages
      */
-    public function addImagesToObjectStorageHoldingImages()
+    public function addImagesToObjectStorageHoldingImages(): void
     {
         $images = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
         $objectStorageHoldingExactlyOneImage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
@@ -337,7 +337,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::removeImages
      */
-    public function removeImagesFromObjectStorageHoldingImages()
+    public function removeImagesFromObjectStorageHoldingImages(): void
     {
         $images = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
         $localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
@@ -356,7 +356,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getPlan
      */
-    public function getPlanReturnsInitialValueForString()
+    public function getPlanReturnsInitialValueForString(): void
     {
         $this->assertNull($this->fixture->getPlan());
     }
@@ -365,7 +365,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setPlan
      */
-    public function setPlanForStringSetsPlan()
+    public function setPlanForStringSetsPlan(): void
     {
         $this->fixture->setPlan('Conceived at T3CON10');
 
@@ -379,7 +379,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getNoHandlingFee
      */
-    public function getNoHandlingFeeReturnsInitialValueForBoolean()
+    public function getNoHandlingFeeReturnsInitialValueForBoolean(): void
     {
         $this->assertSame(
             false,
@@ -391,7 +391,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::isNoHandlingFee
      */
-    public function isNoHandlingFeeReturnsInitialValueForBoolean()
+    public function isNoHandlingFeeReturnsInitialValueForBoolean(): void
     {
         $this->assertSame(
             false,
@@ -403,7 +403,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::isNoHandlingFee
      */
-    public function isNoHandlingFeeForBooleanReturnsCorrectValueForBoolean()
+    public function isNoHandlingFeeForBooleanReturnsCorrectValueForBoolean(): void
     {
         $this->fixture->setNoHandlingFee(true);
 
@@ -417,7 +417,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setNoHandlingFee
      */
-    public function setNoHandlingFeeForBooleanSetsNoHandlingFee()
+    public function setNoHandlingFeeForBooleanSetsNoHandlingFee(): void
     {
         $this->fixture->setNoHandlingFee(true);
 
@@ -431,7 +431,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getPriceNotice
      */
-    public function getPriceNoticeReturnsInitialValueForString()
+    public function getPriceNoticeReturnsInitialValueForString(): void
     {
         $this->assertNull($this->fixture->getPriceNotice());
     }
@@ -440,7 +440,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setPriceNotice
      */
-    public function setPriceNoticeForStringSetsPriceNotice()
+    public function setPriceNoticeForStringSetsPriceNotice(): void
     {
         $this->fixture->setPriceNotice('Conceived at T3CON10');
 
@@ -454,7 +454,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getEventLocation
      */
-    public function getEventLocationReturnsInitialValueForEventLocation()
+    public function getEventLocationReturnsInitialValueForEventLocation(): void
     {
         $this->assertEquals(
             null,
@@ -466,7 +466,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setEventLocation
      */
-    public function setEventLocationForEventLocationSetsEventLocation()
+    public function setEventLocationForEventLocationSetsEventLocation(): void
     {
         $dummyObject = new \DWenzel\T3events\Domain\Model\EventLocation();
         $this->fixture->setEventLocation($dummyObject);
@@ -481,7 +481,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getTicketClass
      */
-    public function getTicketClassReturnsInitialValueForObjectStorageContainingTicketClass()
+    public function getTicketClassReturnsInitialValueForObjectStorageContainingTicketClass(): void
     {
         $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->assertEquals(
@@ -494,7 +494,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setTicketClass
      */
-    public function setTicketClassForObjectStorageContainingTicketClassSetsTicketClass()
+    public function setTicketClassForObjectStorageContainingTicketClassSetsTicketClass(): void
     {
         $ticketClas = new \DWenzel\T3events\Domain\Model\TicketClass();
         $objectStorageHoldingExactlyOneTicketClass = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
@@ -511,7 +511,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::addTicketClass
      */
-    public function addTicketClassToObjectStorageHoldingTicketClass()
+    public function addTicketClassToObjectStorageHoldingTicketClass(): void
     {
         $ticketClass = new \DWenzel\T3events\Domain\Model\TicketClass();
         $objectStorageHoldingExactlyOneTicketClass = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
@@ -528,7 +528,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::removeTicketClass
      */
-    public function removeTicketClassFromObjectStorageHoldingTicketClass()
+    public function removeTicketClassFromObjectStorageHoldingTicketClass(): void
     {
         $ticketClass = new \DWenzel\T3events\Domain\Model\TicketClass();
         $localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
@@ -547,7 +547,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getStatus
      */
-    public function getStatusReturnsInitialValueForPerformanceStatus()
+    public function getStatusReturnsInitialValueForPerformanceStatus(): void
     {
         $this->assertEquals(
             null,
@@ -559,7 +559,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setStatus
      */
-    public function setStatusForPerformanceStatusSetsStatus()
+    public function setStatusForPerformanceStatusSetsStatus(): void
     {
         $dummyObject = new \DWenzel\T3events\Domain\Model\PerformanceStatus();
         $this->fixture->setStatus($dummyObject);
@@ -574,7 +574,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getHidden
      */
-    public function getHiddenForIntegerReturnsInitialNull()
+    public function getHiddenForIntegerReturnsInitialNull(): void
     {
         $this->assertSame(
             null,
@@ -586,7 +586,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setHidden
      */
-    public function setHiddenForIntegerSetsHidden()
+    public function setHiddenForIntegerSetsHidden(): void
     {
         $this->fixture->setHidden(1);
         $this->assertSame(1, $this->fixture->getHidden());
@@ -596,7 +596,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::getEvent
      */
-    public function getEventForObjectInitiallyReturnsNull()
+    public function getEventForObjectInitiallyReturnsNull(): void
     {
         $this->assertNull(
             $this->fixture->getEvent()
@@ -607,7 +607,7 @@ class PerformanceTest extends \Nimut\TestingFramework\TestCase\UnitTestCase
      * @test
      * @covers ::setEvent
      */
-    public function setEventForObjectSetsEvent()
+    public function setEventForObjectSetsEvent(): void
     {
         $event = new Event();
         $this->fixture->setEvent($event);

@@ -10,7 +10,7 @@ use DWenzel\T3events\Domain\Model\Dto\PerformanceDemand;
 use DWenzel\T3events\Domain\Repository\PerformanceRepository;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 
 /**
@@ -99,7 +99,7 @@ class ScheduleControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function listActionCreatesDemandFromSettings()
+    public function listActionCreatesDemandFromSettings(): void
     {
         $settings = [
             'filter' => []
@@ -121,7 +121,7 @@ class ScheduleControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function listActionGetsOverwriteDemandFromModuleData()
+    public function listActionGetsOverwriteDemandFromModuleData(): void
     {
         $this->mockCreateDemandFromSettings();
         $this->moduleData->expects($this->once())
@@ -146,7 +146,7 @@ class ScheduleControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function listActionSetsOverwriteDemandOnModuleData()
+    public function listActionSetsOverwriteDemandOnModuleData(): void
     {
         $overwriteDemand = ['foo'];
         $this->mockCreateDemandFromSettings();
@@ -160,7 +160,7 @@ class ScheduleControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function listActionOverwritesDemandObject()
+    public function listActionOverwritesDemandObject(): void
     {
         $mockDemandObject = $this->mockCreateDemandFromSettings();
         $overwriteDemand = ['foo'];
@@ -174,7 +174,7 @@ class ScheduleControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function listActionEmitsSignal()
+    public function listActionEmitsSignal(): void
     {
         $this->mockCreateDemandFromSettings();
 
@@ -188,7 +188,7 @@ class ScheduleControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function listActionAssignsVariablesToView()
+    public function listActionAssignsVariablesToView(): void
     {
         // can not match expectedTemplateVariables as soon as method 'emitSignal' is called.
         $this->view->expects($this->once())

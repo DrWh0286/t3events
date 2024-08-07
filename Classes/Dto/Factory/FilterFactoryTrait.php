@@ -32,7 +32,7 @@ trait FilterFactoryTrait
     /**
      * @param FilterFactory $filterFactory
      */
-    public function injectFilterFactory(FilterFactory $filterFactory)
+    public function injectFilterFactory(FilterFactory $filterFactory): void
     {
         $this->filterFactory = $filterFactory;
     }

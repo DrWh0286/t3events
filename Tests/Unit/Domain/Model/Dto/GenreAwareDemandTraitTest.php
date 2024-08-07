@@ -1,7 +1,7 @@
 <?php
 namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use DWenzel\T3events\Domain\Model\Dto\GenreAwareDemandTrait;
 
 /**
@@ -30,7 +30,7 @@ class GenreAwareDemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function getGenresReturnsInitialValueForString()
+    public function getGenresReturnsInitialValueForString(): void
     {
         $this->assertNull($this->subject->getGenres());
     }
@@ -38,7 +38,7 @@ class GenreAwareDemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function setGenresForStringSetsGenre()
+    public function setGenresForStringSetsGenre(): void
     {
         $this->subject->setGenres('foo');
         $this->assertSame(

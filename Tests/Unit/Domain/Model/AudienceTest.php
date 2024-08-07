@@ -20,7 +20,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model;
      *  This copyright notice MUST APPEAR in all copies of the script!
      ***************************************************************/
 use DWenzel\T3events\Domain\Model\Audience;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DWenzel\T3events\Domain\Model\Audience.
@@ -51,7 +51,7 @@ class AudienceTest extends UnitTestCase
     /**
      * @test
      */
-    public function getTitleReturnsInitialValueForString()
+    public function getTitleReturnsInitialValueForString(): void
     {
         $this->assertNull(
             $this->fixture->getTitle()
@@ -61,7 +61,7 @@ class AudienceTest extends UnitTestCase
     /**
      * @test
      */
-    public function setTitleForStringSetsTitle()
+    public function setTitleForStringSetsTitle(): void
     {
         $this->fixture->setTitle('Conceived at T3CON10');
 
@@ -74,7 +74,7 @@ class AudienceTest extends UnitTestCase
     /**
      * @test
      */
-    public function getDescriptionReturnsInitialValueForString()
+    public function getDescriptionReturnsInitialValueForString(): void
     {
         $this->assertNull(
             $this->fixture->getDescription()
@@ -84,7 +84,7 @@ class AudienceTest extends UnitTestCase
     /**
      * @test
      */
-    public function setDescriptionForStringSetsDescription()
+    public function setDescriptionForStringSetsDescription(): void
     {
         $this->fixture->setDescription('Conceived at T3CON10');
 
@@ -97,7 +97,7 @@ class AudienceTest extends UnitTestCase
     /**
      * @test
      */
-    public function getLinkReturnsInitiallyNull()
+    public function getLinkReturnsInitiallyNull(): void
     {
         $this->assertNull(
             $this->fixture->getLink()
@@ -107,7 +107,7 @@ class AudienceTest extends UnitTestCase
     /**
      * @test
      */
-    public function setLinkForStringSetsLink()
+    public function setLinkForStringSetsLink(): void
     {
         $link = 'foo';
         $this->fixture->setLink($link);

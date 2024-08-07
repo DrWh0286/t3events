@@ -4,7 +4,7 @@ namespace DWenzel\T3events\Tests\Unit\Controller;
 
 use DWenzel\T3events\Controller\CategoryRepositoryTrait;
 use DWenzel\T3events\Domain\Repository\CategoryRepository;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /***************************************************************
  *  Copyright notice
@@ -49,7 +49,7 @@ class CategoryRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function categoryRepositoryCanBeInjected()
+    public function categoryRepositoryCanBeInjected(): void
     {
         /** @var CategoryRepository|\PHPUnit_Framework_MockObject_MockObject $categoryRepository */
         $categoryRepository = $this->getMockBuilder(CategoryRepository::class)

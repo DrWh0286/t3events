@@ -4,7 +4,7 @@ namespace DWenzel\T3events\Tests\Unit\Resource;
 
 use DWenzel\T3events\Resource\ResourceFactory;
 use DWenzel\T3events\Tests\Unit\Object\MockObjectManagerTrait;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Resource\FileInterface;
@@ -61,7 +61,7 @@ class ResourceFactoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFileObjectByCombinedIdentifierInitiallyReturnsNull()
+    public function getFileObjectByCombinedIdentifierInitiallyReturnsNull(): void
     {
         self::assertNull(
             $this->subject->getFileObjectByCombinedIdentifier('foo')
@@ -71,7 +71,7 @@ class ResourceFactoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFileObjectByCombinedIdentifierReturnsNullForFolder()
+    public function getFileObjectByCombinedIdentifierReturnsNullForFolder(): void
     {
         $mockFolder = $this->getMockBuilder(Folder::class)
             ->disableOriginalConstructor()
@@ -88,7 +88,7 @@ class ResourceFactoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFileObjectByCombinedIdentifierReturnsFile()
+    public function getFileObjectByCombinedIdentifierReturnsFile(): void
     {
         $mockFile = $this->getMockBuilder(FileInterface::class)
             ->getMock();
@@ -104,7 +104,7 @@ class ResourceFactoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function createFileReferenceFromFileObjectCreatesObject()
+    public function createFileReferenceFromFileObjectCreatesObject(): void
     {
         $this->subject = $this->getMockBuilder(ResourceFactory::class)
             ->disableOriginalConstructor()

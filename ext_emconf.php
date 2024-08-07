@@ -16,8 +16,6 @@ $EM_CONF[$_EXTKEY] = array(
     'category' => 'plugin',
     'version' => '1.1.0',
     'state' => 'stable',
-    'uploadfolder' => 0,
-    'createDirs' => '',
     'clearcacheonload' => 0,
     'author' => 'Dirk Wenzel, Michael Kasten',
     'author_email' => 't3events@gmx.de, kasten@webfox01.de',
@@ -26,7 +24,7 @@ $EM_CONF[$_EXTKEY] = array(
         array(
             'depends' =>
                 array(
-                    'typo3' => '9.5.17-10.9.99',
+                    'typo3' => '11.5.0-11.5.99',
                     't3extension_tools' => '1.0.0-1.99.99'
                 ),
             'conflicts' =>

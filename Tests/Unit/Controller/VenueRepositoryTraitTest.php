@@ -4,7 +4,7 @@ namespace DWenzel\T3events\Tests\Unit\Controller;
 
 use DWenzel\T3events\Controller\VenueRepositoryTrait;
 use DWenzel\T3events\Domain\Repository\VenueRepository;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /***************************************************************
@@ -44,7 +44,7 @@ class VenueRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function venueRepositoryCanBeInjected()
+    public function venueRepositoryCanBeInjected(): void
     {
         /** @var VenueRepository|MockObject $venueRepository */
         $venueRepository = $this->getMockBuilder(VenueRepository::class)

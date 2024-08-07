@@ -1,7 +1,7 @@
 <?php
 namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use DWenzel\T3events\Domain\Model\Dto\EventLocationAwareDemandTrait;
 
 /**
@@ -25,7 +25,7 @@ class EventLocationAwareDemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function getEventLocationsReturnsInitialNull()
+    public function getEventLocationsReturnsInitialNull(): void
     {
         $this->assertSame(null, $this->subject->getEventLocations());
     }
@@ -33,7 +33,7 @@ class EventLocationAwareDemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function setEventLocationForStringSetsEventLocation()
+    public function setEventLocationForStringSetsEventLocation(): void
     {
         $eventLocation = 'foo';
 

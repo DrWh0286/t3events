@@ -45,7 +45,7 @@ trait LocationAwareTrait
      * @param string $location A string describing a location
      * @return void
      */
-    public function setLocation($location)
+    public function setLocation($location): void
     {
         $this->location = $location;
     }
@@ -66,7 +66,7 @@ trait LocationAwareTrait
      * @param integer $radius The search radius in meter
      * @return void
      */
-    public function setRadius($radius)
+    public function setRadius($radius): void
     {
         $this->radius = $radius;
     }
@@ -87,7 +87,7 @@ trait LocationAwareTrait
      * @param array $bounds
      * @return void
      */
-    public function setBounds($bounds)
+    public function setBounds($bounds): void
     {
         $this->bounds = $bounds;
     }

@@ -19,7 +19,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
      *  GNU General Public License for more details.
      *  This copyright notice MUST APPEAR in all copies of the script!
      ***************************************************************/
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use DWenzel\T3events\Domain\Model\Dto\PeriodAwareDemandTrait;
 
 /**
@@ -58,7 +58,7 @@ class PeriodAwareDemandTraitTest extends UnitTestCase
      * @test
      * @covers ::getPeriod
      */
-    public function getPeriodReturnsInitialValueForString()
+    public function getPeriodReturnsInitialValueForString(): void
     {
         $this->assertNull($this->fixture->getPeriod());
     }
@@ -67,7 +67,7 @@ class PeriodAwareDemandTraitTest extends UnitTestCase
      * @test
      * @covers ::setPeriod
      */
-    public function setPeriodForStringSetsDefaultEmptyString()
+    public function setPeriodForStringSetsDefaultEmptyString(): void
     {
         $this->fixture->setPeriod();
         $this->assertSame(
@@ -80,7 +80,7 @@ class PeriodAwareDemandTraitTest extends UnitTestCase
      * @test
      * @covers ::setPeriod
      */
-    public function setPeriodForStringSetsPeriod()
+    public function setPeriodForStringSetsPeriod(): void
     {
         $this->fixture->setPeriod('foo');
         $this->assertSame(
@@ -93,7 +93,7 @@ class PeriodAwareDemandTraitTest extends UnitTestCase
      * @test
      * @covers ::getPeriodType
      */
-    public function getPeriodTypeReturnsInitialNull()
+    public function getPeriodTypeReturnsInitialNull(): void
     {
         $this->assertNull($this->fixture->getPeriodType());
     }
@@ -102,7 +102,7 @@ class PeriodAwareDemandTraitTest extends UnitTestCase
      * @test
      * @covers ::setPeriodType
      */
-    public function setPeriodTypeForStringSetsPeriodType()
+    public function setPeriodTypeForStringSetsPeriodType(): void
     {
         $type = 'aType';
         $this->fixture->setPeriodType($type);
@@ -113,7 +113,7 @@ class PeriodAwareDemandTraitTest extends UnitTestCase
      * @test
      * @covers ::getPeriodStart
      */
-    public function getPeriodStartReturnsInitialNull()
+    public function getPeriodStartReturnsInitialNull(): void
     {
         $this->assertNull($this->fixture->getPeriodStart());
     }
@@ -122,7 +122,7 @@ class PeriodAwareDemandTraitTest extends UnitTestCase
      * @test
      * @covers ::setPeriodStart
      */
-    public function setPeriodStartForIntegerSetsPeriodStart()
+    public function setPeriodStartForIntegerSetsPeriodStart(): void
     {
         $this->fixture->setPeriodStart(-5);
         $this->assertSame(-5, $this->fixture->getPeriodStart());
@@ -132,7 +132,7 @@ class PeriodAwareDemandTraitTest extends UnitTestCase
      * @test
      * @covers ::setPeriodDuration
      */
-    public function setPeriodDurationForIntegerSetsPeriodDuration()
+    public function setPeriodDurationForIntegerSetsPeriodDuration(): void
     {
         $this->fixture->setPeriodDuration(-5);
         $this->assertSame(-5, $this->fixture->getPeriodDuration());
@@ -142,7 +142,7 @@ class PeriodAwareDemandTraitTest extends UnitTestCase
      * @test
      * @covers ::getPeriodDuration
      */
-    public function getPeriodDurationReturnsInitialNull()
+    public function getPeriodDurationReturnsInitialNull(): void
     {
         $this->assertNull($this->fixture->getPeriodDuration());
     }
@@ -151,7 +151,7 @@ class PeriodAwareDemandTraitTest extends UnitTestCase
      * @test
      * @covers ::getStartDate
      */
-    public function getStartDateReturnsInitialNull()
+    public function getStartDateReturnsInitialNull(): void
     {
         $this->assertNull($this->fixture->getStartDate());
     }
@@ -160,7 +160,7 @@ class PeriodAwareDemandTraitTest extends UnitTestCase
      * @test
      * @covers ::setStartDate
      */
-    public function setStartDateForDateTimeSetsStartDate()
+    public function setStartDateForDateTimeSetsStartDate(): void
     {
         $date = new \DateTime();
         $this->fixture->setStartDate($date);
@@ -171,7 +171,7 @@ class PeriodAwareDemandTraitTest extends UnitTestCase
      * @test
      * @covers ::getEndDate
      */
-    public function getEndDateReturnsInitialNull()
+    public function getEndDateReturnsInitialNull(): void
     {
         $this->assertNull($this->fixture->getEndDate());
     }
@@ -180,7 +180,7 @@ class PeriodAwareDemandTraitTest extends UnitTestCase
      * @test
      * @covers ::setEndDate
      */
-    public function setEndDateForDateTimeSetsEndDate()
+    public function setEndDateForDateTimeSetsEndDate(): void
     {
         $date = new \DateTime();
         $this->fixture->setEndDate($date);
@@ -190,7 +190,7 @@ class PeriodAwareDemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function isRespectEndDateInitiallyReturnsFalse()
+    public function isRespectEndDateInitiallyReturnsFalse(): void
     {
         $this->assertFalse(
             $this->fixture->isRespectEndDate()
@@ -200,7 +200,7 @@ class PeriodAwareDemandTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function isRespectEndDateForBooleanCanBeSet()
+    public function isRespectEndDateForBooleanCanBeSet(): void
     {
         $this->fixture->setRespectEndDate(true);
         $this->assertTrue(

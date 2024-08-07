@@ -16,7 +16,7 @@ namespace DWenzel\T3events\Tests\Unit\ViewHelpers\Location;
  */
 
 use DWenzel\T3events\ViewHelpers\Format\ArrayToCsvViewHelper;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Class ArrayToCsvTest
@@ -71,7 +71,7 @@ class ArrayToCsvViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function initializeArgumentsRegistersArguments()
+    public function initializeArgumentsRegistersArguments(): void
     {
         $this->subject->expects($this->exactly(3))
             ->method('registerArgument')
@@ -89,7 +89,7 @@ class ArrayToCsvViewHelperTest extends UnitTestCase
      * @param array $arguments
      * @param $expected
      */
-    public function renderInitiallyReturnsExpectedString($arguments, $expected)
+    public function renderInitiallyReturnsExpectedString($arguments, $expected): void
     {
         $this->subject->setArguments($arguments);
 

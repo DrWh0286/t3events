@@ -24,7 +24,7 @@ use DWenzel\T3events\Domain\Model\Dto\AbstractDemand;
 use DWenzel\T3events\Domain\Repository\AbstractDemandedRepository;
 use DWenzel\T3events\Tests\Unit\Domain\Model\Dto\MockDemandTrait;
 use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
@@ -58,7 +58,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function createOrderingsFromDemandReturnsInitiallyEmptyArray()
+    public function createOrderingsFromDemandReturnsInitiallyEmptyArray(): void
     {
         $expectedResult = array();
         $demand = $this->getMockDemand();
@@ -71,7 +71,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function createOrderingsFromDemandReturnsEmptyArrayForEmptyOrderList()
+    public function createOrderingsFromDemandReturnsEmptyArrayForEmptyOrderList(): void
     {
         $expectedResult = array();
         $mockDemand = $this->getMockDemand(['getOrder']);
@@ -89,7 +89,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function createOrderingsFromDemandReturnsOrderingsForFieldWithoutOrder()
+    public function createOrderingsFromDemandReturnsOrderingsForFieldWithoutOrder(): void
     {
         $fieldName = 'foo';
         $expectedResult = array(
@@ -110,7 +110,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function createOrderingsFromDemandReturnsOrderingsForFieldWithDescendingOrder()
+    public function createOrderingsFromDemandReturnsOrderingsForFieldWithDescendingOrder(): void
     {
         $fieldWithDescendingOrder = 'foo|desc';
         $expectedResult = array(
@@ -131,7 +131,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function createOrderingsFromDemandReturnsOrderingsForMultipleFieldsWithDifferentOrder()
+    public function createOrderingsFromDemandReturnsOrderingsForMultipleFieldsWithDifferentOrder(): void
     {
         $fieldsWithDifferentOrder = 'foo|desc,bar|asc';
         $expectedResult = array(
@@ -153,7 +153,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function findDemandedGeneratesAndExecutesQuery()
+    public function findDemandedGeneratesAndExecutesQuery(): void
     {
         /** @var AbstractDemandedRepository|MockObject $fixture */
         $fixture = $this->getMockBuilder(AbstractDemandedRepository::class)
@@ -182,7 +182,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function generateQueryCreatesQueryAndConstraints()
+    public function generateQueryCreatesQueryAndConstraints(): void
     {
         /** @var AbstractDemandedRepository|MockObject $fixture */
         $fixture = $this->getAccessibleMock(
@@ -211,7 +211,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function generateQueryReturnsQueryMatchingConstraints()
+    public function generateQueryReturnsQueryMatchingConstraints(): void
     {
         /** @var AbstractDemandedRepository|MockObject $fixture */
         $fixture = $this->getAccessibleMock(
@@ -243,7 +243,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function generateQuerySetsOrderings()
+    public function generateQuerySetsOrderings(): void
     {
         /** @var AbstractDemandedRepository|MockObject|AccessibleMockObjectInterface $fixture */
         $fixture = $this->getAccessibleMock(
@@ -270,7 +270,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function generateQuerySetsIgnoreEnableFields()
+    public function generateQuerySetsIgnoreEnableFields(): void
     {
         /** @var AbstractDemandedRepository|AccessibleMockObjectInterface|MockObject $fixture */
         $fixture = $this->getAccessibleMock(
@@ -301,7 +301,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function generateQuerySetsOffsetFromDemand()
+    public function generateQuerySetsOffsetFromDemand(): void
     {
         /** @var AbstractDemandedRepository|AccessibleMockObjectInterface|MockObject $fixture */
         $fixture = $this->getAccessibleMock(
@@ -328,7 +328,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function combineConstraintsInitiallyCombinesLogicalAnd()
+    public function combineConstraintsInitiallyCombinesLogicalAnd(): void
     {
         $fixture = $this->getAccessibleMock(
             AbstractDemandedRepository::class,
@@ -351,7 +351,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function combineConstraintsCombinesLogicalOr()
+    public function combineConstraintsCombinesLogicalOr(): void
     {
         $fixture = $this->getAccessibleMock(
             AbstractDemandedRepository::class,
@@ -376,7 +376,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function combineConstraintsCombinesLogicalNotAnd()
+    public function combineConstraintsCombinesLogicalNotAnd(): void
     {
         $fixture = $this->getAccessibleMock(
             AbstractDemandedRepository::class,
@@ -406,7 +406,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function combineConstraintsCombinesLogicalNotOr()
+    public function combineConstraintsCombinesLogicalNotOr(): void
     {
         $fixture = $this->getAccessibleMock(
             AbstractDemandedRepository::class,
@@ -436,7 +436,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function findMultipleByUidReturnsQuery()
+    public function findMultipleByUidReturnsQuery(): void
     {
         $mockQuery = $this->getMockQuery();
 
@@ -460,7 +460,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function findMultipleByUidMatchesUidList()
+    public function findMultipleByUidMatchesUidList(): void
     {
         $uidList = '1,2';
         /** @var QueryInterface $mockQuery */
@@ -483,7 +483,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function findMultipleByUidSetsDefaultOrderings()
+    public function findMultipleByUidSetsDefaultOrderings(): void
     {
         $uidList = '';
         /** @var QueryInterface $mockQuery */
@@ -502,7 +502,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function findMultipleByUidSetsOrderings()
+    public function findMultipleByUidSetsOrderings(): void
     {
         $sortField = 'foo';
         $order = QueryInterface::ORDER_DESCENDING;

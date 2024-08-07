@@ -23,7 +23,7 @@ trait SignalTrait
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      */
-    public function emitSignal($class, $name, array &$arguments)
+    public function emitSignal($class, $name, array &$arguments): void
     {
         /**
          * Wrap arguments into array in order to allow changing the arguments

@@ -5,7 +5,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
 use DWenzel\T3events\Domain\Model\Dto\EventTypeAwareDemandInterface;
 use DWenzel\T3events\Domain\Repository\EventTypeConstraintRepositoryTrait;
 use DWenzel\T3events\Tests\Unit\Domain\Repository\MockQueryTrait;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
@@ -54,7 +54,7 @@ class EventTypeConstraintRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function createEventTypeConstraintsInitiallyReturnsEmptyArray()
+    public function createEventTypeConstraintsInitiallyReturnsEmptyArray(): void
     {
         $demand = $this->getMockEventTypeAwareDemand();
         $this->assertSame(
@@ -70,7 +70,7 @@ class EventTypeConstraintRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function createEventTypeConstraintsCreatesEventTypeConstraints()
+    public function createEventTypeConstraintsCreatesEventTypeConstraints(): void
     {
         $eventTypeList = '1,2';
         $query = $this->getMockQuery(['in']);

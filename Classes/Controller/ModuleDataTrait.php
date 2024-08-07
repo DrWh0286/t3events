@@ -58,7 +58,7 @@ trait ModuleDataTrait
      *
      * @param ModuleDataStorageService $service
      */
-    public function injectModuleDataStorageService(ModuleDataStorageService $service)
+    public function injectModuleDataStorageService(ModuleDataStorageService $service): void
     {
         $this->moduleDataStorageService = $service;
     }
@@ -66,7 +66,7 @@ trait ModuleDataTrait
     /**
      * initializes all action methods
      */
-    public function initializeAction()
+    public function initializeAction(): void
     {
         $this->pageUid = (int)GeneralUtility::_GET('id');
         $this->settings = $this->mergeSettings();
@@ -76,7 +76,7 @@ trait ModuleDataTrait
      * Reset action
      * Resets all module data and forwards the request to the list action
      */
-    public function resetAction()
+    public function resetAction(): void
     {
         $this->moduleData = GeneralUtility::makeInstance(ModuleData::class);
         $this->moduleDataStorageService->persistModuleData($this->moduleData, $this->getModuleKey());
@@ -94,7 +94,7 @@ trait ModuleDataTrait
     /**
      * @param ModuleData $moduleData
      */
-    public function setModuleData(ModuleData $moduleData)
+    public function setModuleData(ModuleData $moduleData): void
     {
         $this->moduleData = $moduleData;
     }

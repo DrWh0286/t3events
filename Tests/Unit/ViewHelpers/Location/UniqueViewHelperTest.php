@@ -20,8 +20,7 @@ use DWenzel\T3events\Domain\Model\EventLocation;
 use DWenzel\T3events\Domain\Model\Performance;
 use DWenzel\T3events\ViewHelpers\Location\CountViewHelper;
 use DWenzel\T3events\ViewHelpers\Location\UniqueViewHelper;
-use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -30,9 +29,6 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class UniqueViewHelperTest extends UnitTestCase
 {
-    /**
-     * @var CountViewHelper|MockObject|AccessibleMockObjectInterface
-     */
     protected $subject;
 
     /**
@@ -41,7 +37,7 @@ class UniqueViewHelperTest extends UnitTestCase
     protected function setUp(): void
     {
         $this->subject = $this->getAccessibleMock(
-            UniqueViewHelper::class, ['dummy', 'registerArgument']
+            UniqueViewHelper::class, ['registerArgument']
         );
     }
 
@@ -95,7 +91,7 @@ class UniqueViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function initializeArgumentsRegistersArgumentEvent()
+    public function initializeArgumentsRegistersArgumentEvent(): void
     {
         $this->subject->expects($this->once())
             ->method('registerArgument')
@@ -106,7 +102,7 @@ class UniqueViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function renderInitiallyReturnsNull()
+    public function renderInitiallyReturnsNull(): void
     {
         $this->assertSame(
             null,
@@ -118,7 +114,7 @@ class UniqueViewHelperTest extends UnitTestCase
      * @test
      * @dataProvider eventDataProvider
      */
-    public function renderReturnsCorrectLocationCount($event, $expectedResult)
+    public function renderReturnsCorrectLocationCount($event, $expectedResult): void
     {
         $this->subject->setArguments(['event' => $event]);
         if ($expectedResult > 0) {

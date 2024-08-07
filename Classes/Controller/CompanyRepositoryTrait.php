@@ -40,7 +40,7 @@ trait CompanyRepositoryTrait
      * @param \DWenzel\T3events\Domain\Repository\CompanyRepository $companyRepository
      * @return void
      */
-    public function injectCompanyRepository(CompanyRepository $companyRepository)
+    public function injectCompanyRepository(CompanyRepository $companyRepository): void
     {
         $this->companyRepository = $companyRepository;
     }

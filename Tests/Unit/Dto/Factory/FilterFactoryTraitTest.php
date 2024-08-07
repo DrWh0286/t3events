@@ -4,7 +4,7 @@ namespace DWenzel\T3events\Tests\Unit\Dto\Factory;
 
 use DWenzel\T3events\Dto\Factory\FilterFactory;
 use DWenzel\T3events\Dto\Factory\FilterFactoryTrait;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /***************************************************************
@@ -48,7 +48,7 @@ class FilterFactoryTraitTest extends UnitTestCase
             ->getMockForAbstractClass();
     }
 
-    public function testFilterFactoryCanBeInjected()
+    public function testFilterFactoryCanBeInjected(): void
     {
         $this->subject->injectFilterFactory($this->filterFactory);
         $this->assertAttributeEquals(

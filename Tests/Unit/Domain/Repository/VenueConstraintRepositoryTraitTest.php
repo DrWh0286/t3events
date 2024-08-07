@@ -5,7 +5,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
 use DWenzel\T3events\Domain\Model\Dto\VenueAwareDemandInterface;
 use DWenzel\T3events\Domain\Repository\VenueConstraintRepositoryTrait;
 use DWenzel\T3events\Tests\Unit\Domain\Repository\MockQueryTrait;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
@@ -55,7 +55,7 @@ class VenueConstraintRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function createVenueConstraintsInitiallyReturnsEmptyArray()
+    public function createVenueConstraintsInitiallyReturnsEmptyArray(): void
     {
         $demand = $this->getMockVenueAwareDemand();
         $this->assertSame(
@@ -71,7 +71,7 @@ class VenueConstraintRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function createVenueConstraintsCreatesVenueConstraints()
+    public function createVenueConstraintsCreatesVenueConstraints(): void
     {
         $venueList = '1,2';
         $query = $this->getMockQuery(['contains']);

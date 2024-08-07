@@ -17,7 +17,7 @@ use DWenzel\T3events\Domain\Repository\AbstractDemandedRepository;
 use DWenzel\T3events\Domain\Repository\DemandedRepositoryTrait;
 use DWenzel\T3events\Tests\Unit\Domain\Model\Dto\MockDemandTrait;
 use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Query;
@@ -46,7 +46,7 @@ class DemandedRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function magicCallMethodAcceptsCountContainingSomethingCallsAndExecutesAQueryWithThatCriteria()
+    public function magicCallMethodAcceptsCountContainingSomethingCallsAndExecutesAQueryWithThatCriteria(): void
     {
         $countResult = 5;
         $mockQueryResult = $this->getMockBuilder(QueryResultInterface::class)->getMock();
@@ -77,7 +77,7 @@ class DemandedRepositoryTraitTest extends UnitTestCase
      * @expectedException \DWenzel\T3events\UnsupportedMethodException
      * @expectedExceptionCode 1479289568
      */
-    public function magicCallMethodThrowsUnsupportedMethodException()
+    public function magicCallMethodThrowsUnsupportedMethodException(): void
     {
         /** @noinspection PhpUndefinedMethodInspection */
         $this->subject->unsupportedMethod();
@@ -86,7 +86,7 @@ class DemandedRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function generateQuerySetsLimitFromDemand()
+    public function generateQuerySetsLimitFromDemand(): void
     {
         /** @var AbstractDemandedRepository|AccessibleMockObjectInterface|MockObject $fixture */
         $fixture = $this->getAccessibleMock(
@@ -115,7 +115,7 @@ class DemandedRepositoryTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function generateQuerySetsStoragePageIdsFromDemand()
+    public function generateQuerySetsStoragePageIdsFromDemand(): void
     {
         /** @var AbstractDemandedRepository|MockObject|AccessibleMockObjectInterface $fixture */
         $fixture = $this->getAccessibleMock(
