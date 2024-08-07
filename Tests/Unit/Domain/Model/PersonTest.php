@@ -58,10 +58,9 @@ class PersonTest extends UnitTestCase
     {
         $this->subject->setGender(12);
 
-        $this->assertAttributeEquals(
+        $this->assertSame(
             12,
-            'gender',
-            $this->subject
+            $this->subject->getGender()
         );
     }
 
@@ -82,10 +81,9 @@ class PersonTest extends UnitTestCase
     {
         $this->subject->setFirstName('Conceived at T3CON10');
 
-        $this->assertAttributeEquals(
+        $this->assertSame(
             'Conceived at T3CON10',
-            'firstName',
-            $this->subject
+            $this->subject->getFirstName()
         );
     }
 
@@ -106,10 +104,9 @@ class PersonTest extends UnitTestCase
     {
         $this->subject->setLastName('Conceived at T3CON10');
 
-        $this->assertAttributeEquals(
+        $this->assertSame(
             'Conceived at T3CON10',
-            'lastName',
-            $this->subject
+            $this->subject->getLastName()
         );
     }
 
@@ -130,10 +127,9 @@ class PersonTest extends UnitTestCase
     {
         $this->subject->setName('Conceived at T3CON10');
 
-        $this->assertAttributeEquals(
+        $this->assertSame(
             'Conceived at T3CON10',
-            'name',
-            $this->subject
+            $this->subject->getName()
         );
     }
 
@@ -155,10 +151,9 @@ class PersonTest extends UnitTestCase
     {
         $this->subject->setAddress('Conceived at T3CON10');
 
-        $this->assertAttributeEquals(
+        $this->assertSame(
             'Conceived at T3CON10',
-            'address',
-            $this->subject
+            $this->subject->getAddress()
         );
     }
 
@@ -180,10 +175,9 @@ class PersonTest extends UnitTestCase
     {
         $this->subject->setZip('Conceived at T3CON10');
 
-        $this->assertAttributeEquals(
+        $this->assertSame(
             'Conceived at T3CON10',
-            'zip',
-            $this->subject
+            $this->subject->getZip()
         );
     }
 
@@ -205,10 +199,9 @@ class PersonTest extends UnitTestCase
     {
         $this->subject->setCity('Conceived at T3CON10');
 
-        $this->assertAttributeEquals(
+        $this->assertSame(
             'Conceived at T3CON10',
-            'city',
-            $this->subject
+            $this->subject->getCity()
         );
     }
 
@@ -230,10 +223,9 @@ class PersonTest extends UnitTestCase
     {
         $this->subject->setPhone('Conceived at T3CON10');
 
-        $this->assertAttributeEquals(
+        $this->assertSame(
             'Conceived at T3CON10',
-            'phone',
-            $this->subject
+            $this->subject->getPhone()
         );
     }
 
@@ -255,10 +247,9 @@ class PersonTest extends UnitTestCase
     {
         $this->subject->setEmail('Conceived at T3CON10');
 
-        $this->assertAttributeEquals(
+        $this->assertSame(
             'Conceived at T3CON10',
-            'email',
-            $this->subject
+            $this->subject->getEmail()
         );
     }
 

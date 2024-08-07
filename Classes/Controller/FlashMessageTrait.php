@@ -2,13 +2,13 @@
 namespace DWenzel\T3events\Controller;
 
 use DWenzel\T3events\Configuration\ConfigurationManagerTrait;
-use DWenzel\T3extensionTools\Service\ExtensionService;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageQueue;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
+use TYPO3\CMS\Extbase\Service\ExtensionService;
 
 /**
  * FlashMessageTrait
@@ -19,6 +19,7 @@ use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
  * enqueue messages outside of action methods too.
  *
  * @package DWenzel\T3events\Controller
+ * @deprecated Needs to be replaced with DI!
  */
 trait FlashMessageTrait
 {
@@ -40,7 +41,7 @@ trait FlashMessageTrait
     protected $flashMessageService;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Service\ExtensionService
+     * @var ExtensionService
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $extensionService;

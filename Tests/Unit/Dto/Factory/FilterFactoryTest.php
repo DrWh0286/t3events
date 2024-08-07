@@ -43,14 +43,17 @@ class FilterFactoryTest extends UnitTestCase
      * @var ObjectManagerInterface|MockObject
      */
     protected $objectManager;
+    /**
+     * @var FilterResolverInterface|(FilterResolverInterface&object&MockObject)|(FilterResolverInterface&MockObject)|(object&MockObject)|MockObject
+     */
+    private FilterResolverInterface|MockObject $filterResolver;
 
 
     /** @noinspection ReturnTypeCanBeDeclaredInspection */
     protected function setUp(): void
     {
-        $this->subject = new FilterFactory();
-        $this->objectManager = $this->getMockObjectManager();
-        $this->subject->injectObjectManager($this->objectManager);
+        $this->filterResolver = $this->getMockForAbstractClass(FilterResolverInterface::class);
+        $this->subject = new FilterFactory($this->filterResolver);
     }
 
     public function testGetReturnsNullFilterForInvalidKey(): void
@@ -59,12 +62,9 @@ class FilterFactoryTest extends UnitTestCase
 
         $invalidKey = 'fo0Bar4BAz';
 
-        $this->objectManager->expects(self::once())
-            ->method('get')
-            ->with(NullFilter::class)
-            ->willReturn($expectedFilter);
+        $this->filterResolver->expects($this->once())->method('resolve')->willReturn(get_class($expectedFilter));
 
-        $this->assertSame(
+        $this->assertEquals(
             $expectedFilter,
             $this->subject->get($invalidKey)
         );
@@ -72,12 +72,8 @@ class FilterFactoryTest extends UnitTestCase
 
     public function testFilterResolverCanBeInjected(): void
     {
-        $resolver = $this->getMockBuilder(FilterResolverInterface::class)
-            ->getMockForAbstractClass();
-        $this->subject->injectFilterResolver($resolver);
-
         $this->assertSame(
-            $resolver,
+            $this->filterResolver,
             $this->subject->getFilterResolver()
         );
     }

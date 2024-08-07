@@ -20,25 +20,27 @@ namespace CPSIT\T3events\Tests\Unit\Domain\Model;
      *  GNU General Public License for more details.
      *  This copyright notice MUST APPEAR in all copies of the script!
      ***************************************************************/
+
+use DWenzel\T3events\Domain\Model\Company;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Class CompanyTest
  *
  * @package CPSIT\T3events\Tests\Unit\Domain\Model
- * @coversDefaultClass \DWenzel\T3events\Domain\Model\Company
+ * @coversDefaultClass Company
  */
 class CompanyTest extends UnitTestCase
 {
 
     /**
-     * @var \DWenzel\T3events\Domain\Model\Company
+     * @var Company
      */
     protected $subject = null;
 
     protected function setUp(): void
     {
-        $this->subject = new \DWenzel\T3events\Domain\Model\Company();
+        $this->subject = new Company();
     }
 
     protected function tearDown(): void
@@ -64,10 +66,9 @@ class CompanyTest extends UnitTestCase
     {
         $this->subject->setName('Conceived at T3CON10');
 
-        $this->assertAttributeEquals(
+        $this->assertSame(
             'Conceived at T3CON10',
-            'name',
-            $this->subject
+            $this->subject->getName()
         );
     }
 
@@ -89,10 +90,9 @@ class CompanyTest extends UnitTestCase
     {
         $this->subject->setAddress('Conceived at T3CON10');
 
-        $this->assertAttributeEquals(
+        $this->assertSame(
             'Conceived at T3CON10',
-            'address',
-            $this->subject
+            $this->subject->getAddress()
         );
     }
 
@@ -114,10 +114,9 @@ class CompanyTest extends UnitTestCase
     {
         $this->subject->setZip('Conceived at T3CON10');
 
-        $this->assertAttributeEquals(
+        $this->assertSame(
             'Conceived at T3CON10',
-            'zip',
-            $this->subject
+            $this->subject->getZip()
         );
     }
 
@@ -139,10 +138,9 @@ class CompanyTest extends UnitTestCase
     {
         $this->subject->setCity('Conceived at T3CON10');
 
-        $this->assertAttributeEquals(
+        $this->assertSame(
             'Conceived at T3CON10',
-            'city',
-            $this->subject
+            $this->subject->getCity()
         );
     }
 
@@ -164,10 +162,9 @@ class CompanyTest extends UnitTestCase
     {
         $this->subject->setCountry('Conceived at T3CON10');
 
-        $this->assertAttributeEquals(
+        $this->assertSame(
             'Conceived at T3CON10',
-            'country',
-            $this->subject
+            $this->subject->getCountry()
         );
     }
 }

@@ -17,8 +17,8 @@ namespace DWenzel\T3events\Tests\Unit\Hooks;
 
 use DWenzel\T3events\Hooks\ItemsProcFunc;
 use DWenzel\T3events\Utility\TemplateLayoutUtility;
+use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
-use TYPO3\CMS\Lang\LanguageService;
 
 /**
  * Class ItemsProcFuncTest
@@ -42,33 +42,13 @@ class ItemsProcFuncTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getAccessibleMock(
-            ItemsProcFunc::class, ['dummy', 'getLanguageService'], [], '', false
-        );
+        $this->templateLayoutUtility = $this->getMockBuilder(TemplateLayoutUtility::class)->getMock();
 
-        $this->templateLayoutUtility = $this->getMockBuilder(TemplateLayoutUtility::class)
-            ->setMethods(['getLayouts'])->getMock();
-        $this->inject(
-            $this->subject,
-            'templateLayoutUtility',
-            $this->templateLayoutUtility
-        );
-    }
+//        $this->subject = $this->getAccessibleMock(
+//            ItemsProcFunc::class, ['getLanguageService'], [$this->templateLayoutUtility], '', false
+//        );
 
-    /**
-     * @test
-     */
-    public function constructorSetsTemplateLayoutUtility(): void
-    {
-        unset($this->templateLayoutUtility);
-        /** @noinspection ImplicitMagicMethodCallInspection */
-        $this->subject->__construct();
-
-        $this->assertAttributeInstanceOf(
-            TemplateLayoutUtility::class,
-            'templateLayoutUtility',
-            $this->subject
-        );
+        $this->subject = new ItemsProcFunc($this->templateLayoutUtility);
     }
 
     /**
@@ -132,8 +112,9 @@ class ItemsProcFuncTest extends UnitTestCase
     public function user_templateLayoutAddsItemsToConfig(): void
     {
         $mockLanguageService = $this->getMockBuilder(LanguageService::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['sL'])->getMock();
+            ->disableOriginalConstructor()->getMock();
+        $GLOBALS['LANG'] = $mockLanguageService;
+
         $extensionKey = ItemsProcFunc::EXTENSION_KEY;
         $title = 'foo';
         $templateName = 'bar';
@@ -147,9 +128,7 @@ class ItemsProcFuncTest extends UnitTestCase
             ->method('getLayouts')
             ->with($extensionKey)
             ->will($this->returnValue($additionalLayouts));
-        $this->subject->expects($this->once())
-            ->method('getLanguageService')
-            ->will($this->returnValue($mockLanguageService));
+
         $mockLanguageService->expects($this->once())
             ->method('sL')
             ->with($title)

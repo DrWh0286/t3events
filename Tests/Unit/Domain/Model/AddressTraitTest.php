@@ -67,10 +67,9 @@ class AddressTraitTest extends UnitTestCase
     {
         $this->subject->setAddress('Conceived at T3CON10');
 
-        $this->assertAttributeEquals(
+        $this->assertSame(
             'Conceived at T3CON10',
-            'address',
-            $this->subject
+            $this->subject->getAddress()
         );
     }
 
@@ -92,10 +91,9 @@ class AddressTraitTest extends UnitTestCase
     {
         $this->subject->setZip('Conceived at T3CON10');
 
-        $this->assertAttributeEquals(
+        $this->assertSame(
             'Conceived at T3CON10',
-            'zip',
-            $this->subject
+            $this->subject->getZip()
         );
     }
 
@@ -117,10 +115,9 @@ class AddressTraitTest extends UnitTestCase
     {
         $this->subject->setCity('Conceived at T3CON10');
 
-        $this->assertAttributeEquals(
+        $this->assertSame(
             'Conceived at T3CON10',
-            'city',
-            $this->subject
+            $this->subject->getCity()
         );
     }
 
@@ -142,10 +139,9 @@ class AddressTraitTest extends UnitTestCase
     {
         $this->subject->setCountry('Conceived at T3CON10');
 
-        $this->assertAttributeEquals(
+        $this->assertSame(
             'Conceived at T3CON10',
-            'country',
-            $this->subject
+            $this->subject->getCountry()
         );
     }
 }

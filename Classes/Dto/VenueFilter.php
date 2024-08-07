@@ -4,6 +4,7 @@ namespace DWenzel\T3events\Dto;
 
 use DWenzel\T3events\Controller\VenueRepositoryTrait;
 use DWenzel\T3events\Domain\Repository\DemandedRepositoryInterface;
+use DWenzel\T3events\Domain\Repository\VenueRepository;
 
 /***************************************************************
  *  Copyright notice
@@ -27,7 +28,11 @@ use DWenzel\T3events\Domain\Repository\DemandedRepositoryInterface;
  */
 class VenueFilter implements FilterInterface
 {
-    use VenueRepositoryTrait, OptionsTrait;
+    use OptionsTrait;
+
+    public function __construct(private readonly VenueRepository $venueRepository)
+    {
+    }
 
     public function getOptionRepository(): DemandedRepositoryInterface
     {

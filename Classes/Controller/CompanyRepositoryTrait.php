@@ -24,6 +24,8 @@ use DWenzel\T3events\Domain\Repository\CompanyRepository;
  * Class CompanyRepositoryTrait
  *
  * @package DWenzel\T3events\Controller
+ * @deprecated Replace by DI
+ * @todo Replace by DI!
  */
 trait CompanyRepositoryTrait
 {

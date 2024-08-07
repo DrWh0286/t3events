@@ -34,9 +34,18 @@ class EventLocationRepositoryTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getMockForTrait(
-            EventLocationRepositoryTrait::class
-        );
+        $this->subject = new class
+        {
+            use EventLocationRepositoryTrait;
+
+            /**
+             * @return EventLocationRepository
+             */
+            public function getEventLocationRepository(): EventLocationRepository
+            {
+                return $this->eventLocationRepository;
+            }
+        };
     }
 
     /**
@@ -50,10 +59,9 @@ class EventLocationRepositoryTraitTest extends UnitTestCase
 
         $this->subject->injectEventLocationRepository($eventLocationRepository);
 
-        $this->assertAttributeSame(
+        $this->assertSame(
             $eventLocationRepository,
-            'eventLocationRepository',
-            $this->subject
+            $this->subject->getEventLocationRepository()
         );
     }
 }

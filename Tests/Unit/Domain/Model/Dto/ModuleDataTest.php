@@ -40,9 +40,7 @@ class ModuleDataTest extends UnitTestCase
 
     protected function setUp(): void
     {
-        $this->subject = $this->getAccessibleMock(
-            ModuleData::class, ['dummy']
-        );
+        $this->subject = new ModuleData();
     }
 
     /**

@@ -33,8 +33,7 @@ class Typo3BackendSessionTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getAccessibleMock(
-            Typo3BackendSession::class, ['dummy'], [], '', false);
+        $this->subject = new Typo3BackendSession();
         $this->subject->setNamespace(self::SESSION_NAMESPACE);
     }
 
@@ -45,10 +44,9 @@ class Typo3BackendSessionTest extends UnitTestCase
     {
         $namespace = 'foo';
         $subject = new Typo3BackendSession($namespace);
-        $this->assertAttributeSame(
+        $this->assertSame(
             $namespace,
-            'namespace',
-            $subject
+            $subject->getNamespace()
         );
     }
 
@@ -59,10 +57,9 @@ class Typo3BackendSessionTest extends UnitTestCase
     {
         $namespace = 'foo';
         $this->subject->setNamespace($namespace);
-        $this->assertAttributeSame(
+        $this->assertSame(
             $namespace,
-            'namespace',
-            $this->subject
+            $this->subject->getNamespace(),
         );
     }
 

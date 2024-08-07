@@ -25,6 +25,7 @@ trait SessionTrait
 
     /**
      * @param \DWenzel\T3events\Session\SessionInterface $session
+     * @deprecated This needs to be solved via DI!
      */
     public function injectSession(SessionInterface $session): void
     {

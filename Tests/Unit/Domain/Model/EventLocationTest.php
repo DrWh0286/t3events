@@ -22,6 +22,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model;
  ***************************************************************/
 
 use DWenzel\T3events\Domain\Model\EventLocation;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -46,8 +47,7 @@ class EventLocationTest extends UnitTestCase
 
     protected function setUp(): void
     {
-        $this->fixture = $this->getMockBuilder(EventLocation::class)
-            ->setMethods(['dummy'])->getMock();
+        $this->fixture = new EventLocation();
     }
 
     protected function tearDown(): void
@@ -104,7 +104,8 @@ class EventLocationTest extends UnitTestCase
      */
     public function getImageReturnsInitialValueForString(): void
     {
-        $this->assertNull(
+        $this->assertEquals(
+            new ObjectStorage(),
             $this->fixture->getImage()
         );
     }
@@ -114,10 +115,10 @@ class EventLocationTest extends UnitTestCase
      */
     public function setImageForStringSetsImage(): void
     {
-        $this->fixture->setImage('Conceived at T3CON10');
+        $this->fixture->setImage($objStorage = new ObjectStorage());
 
         $this->assertSame(
-            'Conceived at T3CON10',
+            $objStorage,
             $this->fixture->getImage()
         );
     }

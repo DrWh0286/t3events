@@ -8,6 +8,8 @@ use TYPO3\CMS\Core\Utility\ArrayUtility;
  * Class SettingsUtilityTrait
  *
  * @package Controller
+ * @todo: This needs another solution. Property $settings is also the property of the Controller itself - never set
+ *        here,never forced to be set when the trait is use - trait is the wrong solution for this.
  */
 trait SettingsUtilityTrait
 {

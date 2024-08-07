@@ -42,9 +42,28 @@ class FlashMessageTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getMockForTrait(
-            FlashMessageTrait::class
-        );
+        $this->subject = new class
+        {
+            use FlashMessageTrait;
+
+            /**
+             * @return FlashMessageService
+             */
+            public function getFlashMessageService(): FlashMessageService
+            {
+                return $this->flashMessageService;
+            }
+
+            public function setFlashMessageQueue($flashMessageQueue)
+            {
+                $this->flashMessageQueue = $flashMessageQueue;
+            }
+
+            public function setRequest($request)
+            {
+                $this->request = $request;
+            }
+        };
     }
 
     /**
@@ -71,11 +90,7 @@ class FlashMessageTraitTest extends UnitTestCase
     {
         $mockFlashMessageService = $this->getMockBuilder(FlashMessageService::class)
             ->setMethods(['getMessageQueueByIdentifier'])->getMock();
-        $this->inject(
-            $this->subject,
-            'flashMessageService',
-            $mockFlashMessageService
-        );
+        $this->subject->injectFlashMessageService($mockFlashMessageService);
 
         return $mockFlashMessageService;
     }
@@ -86,12 +101,9 @@ class FlashMessageTraitTest extends UnitTestCase
     protected function mockRequest()
     {
         $mockRequest = $this->getMockBuilder(\TYPO3\CMS\Extbase\Mvc\Request::class)
-            ->setMethods(['getControllerExtensionName', 'getPluginName'])->getMock();
-        $this->inject(
-            $this->subject,
-            'request',
-            $mockRequest
-        );
+            ->getMock();
+
+        $this->subject->setRequest($mockRequest);
 
         return $mockRequest;
     }
@@ -103,11 +115,8 @@ class FlashMessageTraitTest extends UnitTestCase
     {
         $mockExtensionService = $this->getMockBuilder(ExtensionService::class)
             ->setMethods(['getPluginNamespace'])->getMock();
-        $this->inject(
-            $this->subject,
-            'extensionService',
-            $mockExtensionService
-        );
+
+        $this->subject->injectExtensionService($mockExtensionService);
 
         return $mockExtensionService;
     }
@@ -120,9 +129,6 @@ class FlashMessageTraitTest extends UnitTestCase
         $namespace = 'fooNamespace';
         $extensionName = 'barExtension';
         $pluginName = 'bazPlugin';
-        $this->subject = $this->getMockBuilder(FlashMessageTrait::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['useLegacyFlashMessageHandling'])->getMockForTrait();
 
         $mockExtensionService = $this->mockExtensionService();
         $mockRequest = $this->mockRequest();
@@ -153,11 +159,11 @@ class FlashMessageTraitTest extends UnitTestCase
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionCode 1243258395
      */
     public function addFlashMessageThrowsExceptionForMissingMessageBody(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionCode(1243258395);
         $this->subject->addFlashMessage(5);
     }
 
@@ -175,11 +181,7 @@ class FlashMessageTraitTest extends UnitTestCase
         );
 
         $mockMessageQueue = $this->getMockFlashMessageQueue(['enqueue']);
-        $this->inject(
-            $this->subject,
-            'flashMessageQueue',
-            $mockMessageQueue
-        );
+        $this->subject->setFlashMessageQueue($mockMessageQueue);
 
         $mockMessageQueue->expects($this->once())
             ->method('enqueue')

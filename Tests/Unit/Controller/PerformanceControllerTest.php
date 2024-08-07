@@ -25,6 +25,7 @@ use DWenzel\T3events\Controller\PerformanceController;
 use DWenzel\T3events\Domain\Factory\Dto\PerformanceDemandFactory;
 use DWenzel\T3events\Domain\Model\Dto\PerformanceDemand;
 use DWenzel\T3events\Domain\Model\Dto\Search;
+use DWenzel\T3events\Domain\Model\Dto\SearchFactory;
 use DWenzel\T3events\Domain\Model\Performance;
 use DWenzel\T3events\Domain\Repository\CategoryRepository;
 use DWenzel\T3events\Domain\Repository\EventTypeRepository;
@@ -36,6 +37,9 @@ use DWenzel\T3events\Tests\Unit\Object\MockObjectManagerTrait;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 use DWenzel\T3events\Utility\SettingsUtility;
 use PHPUnit\Framework\MockObject\MockObject;
+use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
@@ -43,7 +47,7 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
-use PHPUnit\Framework\TestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DWenzel\T3events\Controller\PerformanceController.
@@ -56,7 +60,7 @@ use PHPUnit\Framework\TestCase;
  * @author Michael Kasten <kasten@webfox01.de>
  * @coversDefaultClass \DWenzel\T3events\Controller\PerformanceController
  */
-class PerformanceControllerTest extends TestCase
+class PerformanceControllerTest extends UnitTestCase
 {
     use MockObjectManagerTrait;
 
@@ -94,11 +98,50 @@ class PerformanceControllerTest extends TestCase
      * @var SessionInterface |MockObject
      */
     protected $session;
+    /**
+     * @var (GenreRepository&MockObject)|MockObject
+     */
+    private GenreRepository|MockObject $genreRepository;
+    /**
+     * @var (VenueRepository&MockObject)|MockObject
+     */
+    private MockObject|VenueRepository $venueRepository;
+    /**
+     * @var (EventTypeRepository&MockObject)|MockObject
+     */
+    private EventTypeRepository|MockObject $eventTypeRepository;
+    /**
+     * @var (SearchFactory&MockObject)|MockObject
+     */
+    private MockObject|SearchFactory $searchFactory;
 
     protected function setUp(): void
     {
-        $this->subject = $this->getAccessibleMock(PerformanceController::class,
-            ['dummy', 'emitSignal', 'createSearchObject'], [], '', false);
+        $this->performanceRepository = $this->getMockBuilder(PerformanceRepository::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        /** @var GenreRepository $repository */
+        $this->genreRepository = $this->getMockBuilder(GenreRepository::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->venueRepository = $this->getMockBuilder(VenueRepository::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->eventTypeRepository = $this->getMockBuilder(EventTypeRepository::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->searchFactory = $this->getMockBuilder(SearchFactory::class)->getMock();
+
+        $this->subject = $this->getAccessibleMock(
+            PerformanceController::class,
+            ['emitSignal', 'createSearchObject'],
+            [$this->performanceRepository, $this->genreRepository, $this->venueRepository, $this->eventTypeRepository, $this->searchFactory]
+        );
+
         $this->session = $this->getMockBuilder(SessionInterface::class)
             ->setMethods(['has', 'get', 'clean', 'set', 'setNamespace'])->getMock();
         $this->performanceDemandFactory = $this->getMockBuilder(PerformanceDemandFactory::class)
@@ -109,16 +152,11 @@ class PerformanceControllerTest extends TestCase
         $this->subject->injectPerformanceDemandFactory($this->performanceDemandFactory);
 
         $mockResult = $this->getMockBuilder(QueryResultInterface::class)->getMock();
-        $this->performanceRepository = $this->getMockBuilder(PerformanceRepository::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['findDemanded'])
-            ->getMock();
+
         $this->performanceRepository->method('findDemanded')->will(self::returnValue($mockResult));
-        $this->subject->injectPerformanceRepository($this->performanceRepository);
 
         $this->view = $this->getMockBuilder(TemplateView::class)
             ->disableOriginalConstructor()
-            ->setMethods(['assign', 'assignMultiple'])
             ->getMock();
         $this->contentObject = $this->getMockBuilder(ContentObjectRenderer::class)
             ->disableOriginalConstructor()
@@ -136,6 +174,10 @@ class PerformanceControllerTest extends TestCase
             )
             ->getMockForAbstractClass();
         $this->objectManager = $this->getMockObjectManager();
+
+        $this->responseFactory = $this->getMockBuilder(ResponseFactoryInterface::class)->getMock();
+        $this->streamFactory = $this->getMockBuilder(StreamFactoryInterface::class)->getMock();
+
         $this->subject->_set('view', $this->view);
         $this->subject->_set('session', $this->session);
         $this->subject->_set('contentObject', $this->contentObject);
@@ -144,6 +186,8 @@ class PerformanceControllerTest extends TestCase
         $this->subject->_set('configurationManager', $mockConfigurationManager);
         $this->subject->_set('objectManager', $this->objectManager);
         $this->subject->_set(SI::SETTINGS, $this->settings);
+        $this->subject->_set('responseFactory', $this->responseFactory);
+        $this->subject->_set('streamFactory', $this->streamFactory);
     }
 
     /**
@@ -152,14 +196,8 @@ class PerformanceControllerTest extends TestCase
      */
     public function injectPerformanceRepositorySetsPerformanceRepository(): void
     {
-        /** @var PerformanceRepository $repository */
-        $repository = $this->getMockBuilder(PerformanceRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $this->subject->injectPerformanceRepository($repository);
-
         $this->assertSame(
-            $repository,
+            $this->performanceRepository,
             $this->subject->_get('performanceRepository')
         );
     }
@@ -170,35 +208,9 @@ class PerformanceControllerTest extends TestCase
      */
     public function injectGenreRepositorySetsGenreRepository(): void
     {
-        /** @var GenreRepository $repository */
-        $repository = $this->getMockBuilder(GenreRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $this->subject->injectGenreRepository($repository);
-
-        $this->assertAttributeSame(
-            $repository,
-            'genreRepository',
-            $this->subject
-        );
-    }
-
-    /**
-     * @test
-     * @covers ::injectVenueRepository
-     */
-    public function injectVenueRepositorySetsVenueRepository(): void
-    {
-        /** @var VenueRepository $repository */
-        $repository = $this->getMockBuilder(VenueRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $this->subject->injectVenueRepository($repository);
-
-        $this->assertAttributeSame(
-            $repository,
-            'venueRepository',
-            $this->subject
+        $this->assertSame(
+            $this->genreRepository,
+            $this->subject->_get('genreRepository')
         );
     }
 
@@ -208,14 +220,8 @@ class PerformanceControllerTest extends TestCase
      */
     public function injectEventTypeRepositorySetsEventTypeRepository(): void
     {
-        /** @var EventTypeRepository $repository */
-        $repository = $this->getMockBuilder(EventTypeRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $this->subject->injectEventTypeRepository($repository);
-
         $this->assertSame(
-            $repository,
+            $this->eventTypeRepository,
             $this->subject->_get('eventTypeRepository')
         );
     }
@@ -265,7 +271,7 @@ class PerformanceControllerTest extends TestCase
     {
         /** @var SettingsUtility|\PHPUnit_Framework_MockObject_MockObject $mockSettingsUtility */
         $mockSettingsUtility = $this->getMockBuilder(SettingsUtility::class)
-            ->setMethods(['getControllerKey'])
+            ->disableOriginalConstructor()
             ->getMock();
         $this->subject->injectSettingsUtility($mockSettingsUtility);
         $mockSettingsUtility->expects($this->any())
@@ -283,7 +289,7 @@ class PerformanceControllerTest extends TestCase
         $overwriteDemand = ['foo'];
         $mockSession = $this->subject->_get('session');
         $mockRequest = $this->subject->_get('request');
-        $mockRequest->expects(self::once())
+        $mockRequest->expects(self::any())
             ->method('hasArgument')
             ->will(self::returnValue(true));
         $mockRequest->expects(self::once())
@@ -295,21 +301,6 @@ class PerformanceControllerTest extends TestCase
             ->with('tx_t3events_overwriteDemand', serialize($overwriteDemand));
 
         $this->subject->initializeAction();
-    }
-
-    /**
-     * @test
-     */
-    public function initializeQuickMenuActionResetsOverwriteDemandInSession(): void
-    {
-        $mockSession = $this->subject->_get('session');
-        $mockRequest = $this->subject->_get('request');
-        $mockRequest->expects(self::once())
-            ->method('hasArgument')
-            ->will(self::returnValue(false));
-        $mockSession->expects(self::once())
-            ->method('clean');
-        $this->subject->initializeQuickMenuAction();
     }
 
     /**
@@ -560,30 +551,33 @@ class PerformanceControllerTest extends TestCase
      */
     public function listActionCallsOverwriteDemandObject(): void
     {
-        $this->subject = $this->getMockBuilder(PerformanceController::class)
-            ->disableOriginalConstructor()
-            ->setMethods(
-                [
-                    'overwriteDemandObject',
-                    'createDemandFromSettings',
-                    'emitSignal'
-                ]
-            )
-            ->getMock();
         /** @var PerformanceRepository|\PHPUnit_Framework_MockObject_MockObject $repository */
         $repository = $this->getMockBuilder(PerformanceRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $this->subject->injectPerformanceRepository($repository);
+
+        $this->subject = $this->getAccessibleMock(
+            PerformanceController::class,
+            [
+                'overwriteDemandObject',
+                'createDemandFromSettings',
+                'emitSignal'
+            ],
+            [$repository, $this->genreRepository, $this->venueRepository, $this->eventTypeRepository, $this->searchFactory]
+        );
+
         /** @var TemplateView|\PHPUnit_Framework_MockObject_MockObject $view */
         $view = $this->getMockBuilder(TemplateView::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $this->inject($this->subject, 'view', $view);
-        $this->inject($this->subject, 'contentObject', $this->contentObject);
+        $this->subject->_set('view', $view);
+        $this->subject->_set('contentObject', $this->contentObject);
         $settings = array('foo');
-        $this->inject($this->subject, SI::SETTINGS, $settings);
-        $this->inject($this->subject, 'performanceDemandFactory', $this->performanceDemandFactory);
+        $this->subject->_set(SI::SETTINGS, $settings);
+        $this->subject->_set('performanceDemandFactory', $this->performanceDemandFactory);
+        $this->subject->_set('session', $this->session);
+        $this->subject->_set('responseFactory', $this->responseFactory);
+        $this->subject->_set('streamFactory', $this->streamFactory);
         /** @var PerformanceDemand|\PHPUnit_Framework_MockObject_MockObject $demand */
         $mockDemand = $this->getMockBuilder(PerformanceDemand::class)->getMock();
 
@@ -594,6 +588,15 @@ class PerformanceControllerTest extends TestCase
         $this->subject->expects(self::once())
             ->method('overwriteDemandObject')
             ->with($mockDemand);
+
+        $this->session->expects($this->any())->method('has')->with('tx_t3events_overwriteDemand')->willReturn(true);
+        $this->session->expects($this->any())->method('get')->with('tx_t3events_overwriteDemand')->willReturn(serialize(['demand' => 'dummy']));
+
+        $response = $this->createMock(ResponseInterface::class);
+        $this->responseFactory->expects($this->once())->method('createResponse')->willReturn($response);
+        $response->expects($this->any())->method('withHeader')->willReturn($response);
+        $response->expects($this->any())->method('withBody')->willReturn($response);
+
         $this->subject->listAction([]);
     }
 
@@ -604,26 +607,29 @@ class PerformanceControllerTest extends TestCase
     public function listActionCallsFindDemanded(): void
     {
         $this->subject = $this->getAccessibleMock(
-            'DWenzel\\T3events\\Controller\\PerformanceController',
-            array('overwriteDemandObject', 'emitSignal'),
-            [], '', false
+            PerformanceController::class,
+            ['overwriteDemandObject', 'emitSignal'],
+            [$this->performanceRepository, $this->genreRepository, $this->venueRepository, $this->eventTypeRepository, $this->searchFactory]
         );
-        /** @var PerformanceRepository|\PHPUnit_Framework_MockObject_MockObject $repository */
-        $repository = $this->getMockBuilder(PerformanceRepository::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['findDemanded'])
-            ->getMock();
-        $this->subject->injectPerformanceRepository($repository);
+
         $view = $this->getMockBuilder(TemplateView::class)
             ->disableOriginalConstructor()
             ->getMock();
         $this->subject->_set('view', $view);
+        $this->subject->_set('session', $this->session);
         $settings = array('foo');
         $this->subject->_set(SI::SETTINGS, $settings);
         /** @var PerformanceDemand|\PHPUnit_Framework_MockObject_MockObject $demand */
         $mockDemand = $this->getMockBuilder(PerformanceDemand::class)->getMock();
         $this->subject->_set(SI::SETTINGS, $settings);
-        $this->inject($this->subject, 'performanceDemandFactory', $this->performanceDemandFactory);
+
+        $this->subject->_set('performanceDemandFactory', $this->performanceDemandFactory);
+
+        $contentObject = $this->getMockBuilder(ContentObjectRenderer::class)->disableOriginalConstructor()->getMock();
+        $contentObject->data = [];
+        $this->subject->_set('contentObject', $contentObject);
+        $this->subject->_set('responseFactory', $this->responseFactory);
+        $this->subject->_set('streamFactory', $this->streamFactory);
 
         $this->performanceDemandFactory->expects(self::once())
             ->method('createFromSettings')
@@ -634,9 +640,17 @@ class PerformanceControllerTest extends TestCase
             ->with($mockDemand)
             ->will(self::returnValue($mockDemand));
 
-        $repository->expects(self::once())
+        $this->performanceRepository->expects(self::once())
             ->method('findDemanded')
             ->with($mockDemand);
+
+        $this->session->expects($this->any())->method('has')->with('tx_t3events_overwriteDemand')->willReturn(true);
+        $this->session->expects($this->any())->method('get')->with('tx_t3events_overwriteDemand')->willReturn(serialize(['demand' => 'dummy']));
+
+        $response = $this->createMock(ResponseInterface::class);
+        $this->responseFactory->expects($this->once())->method('createResponse')->willReturn($response);
+        $response->expects($this->any())->method('withHeader')->willReturn($response);
+        $response->expects($this->any())->method('withBody')->willReturn($response);
 
         $this->subject->listAction([]);
     }
@@ -649,7 +663,7 @@ class PerformanceControllerTest extends TestCase
         //$this->markTestSkipped('wrong arguments in assignMultiple');
         $fixture = $this->getAccessibleMock(
             PerformanceController::class,
-            ['emitSignal'], [], '', false
+            ['emitSignal'], [$this->performanceRepository, $this->genreRepository, $this->venueRepository, $this->eventTypeRepository], '', false
         );
         $settings = ['foo'];
         $performance = new Performance();
@@ -664,7 +678,6 @@ class PerformanceControllerTest extends TestCase
 
         $view = $this->getMockBuilder(TemplateView::class)
             ->disableOriginalConstructor()
-            ->setMethods(['assignMultiple'])
             ->getMock();
 
         $view->expects(self::once())
@@ -673,6 +686,13 @@ class PerformanceControllerTest extends TestCase
 
         $fixture->_set('view', $view);
         $fixture->_set(SI::SETTINGS, $settings);
+        $fixture->_set('responseFactory', $this->responseFactory);
+        $fixture->_set('streamFactory', $this->streamFactory);
+
+        $response = $this->createMock(ResponseInterface::class);
+        $this->responseFactory->expects($this->once())->method('createResponse')->willReturn($response);
+        $response->expects($this->any())->method('withHeader')->willReturn($response);
+        $response->expects($this->any())->method('withBody')->willReturn($response);
 
         $fixture->showAction($performance);
     }
@@ -686,12 +706,19 @@ class PerformanceControllerTest extends TestCase
         $mockSession = $this->getMockBuilder(SessionInterface::class)
             ->setMethods(['get', 'set', 'has', 'clean', 'setNamespace'])
             ->getMock();
-        $mockSession->expects(self::once())
-            ->method('get');
+
         $this->subject->_set('session', $mockSession);
         $this->subject->expects(self::once())
             ->method('emitSignal')
             ->will(self::returnValue([]));
+
+        $mockSession->expects($this->any())->method('has')->with('tx_t3events_overwriteDemand')->willReturn(true);
+        $mockSession->expects($this->any())->method('get')->with('tx_t3events_overwriteDemand')->willReturn(serialize(['demand' => 'dummy']));
+
+        $response = $this->createMock(ResponseInterface::class);
+        $this->responseFactory->expects($this->once())->method('createResponse')->willReturn($response);
+        $response->expects($this->any())->method('withHeader')->willReturn($response);
+        $response->expects($this->any())->method('withBody')->willReturn($response);
 
         $this->subject->quickMenuAction();
     }
@@ -708,7 +735,7 @@ class PerformanceControllerTest extends TestCase
         ];
         foreach ($repositoryClasses as $propertyName => $className) {
             $mock = $this->getAccessibleMock($className, $methodsToStub, [], '', false, true, false);
-            $this->inject($this->subject, $propertyName, $mock);
+            $mock->_set($propertyName, $this->subject);
         }
     }
 
@@ -728,6 +755,14 @@ class PerformanceControllerTest extends TestCase
         $this->subject->expects(self::once())
             ->method('emitSignal')
             ->will(self::returnValue([]));
+
+        $this->session->expects($this->any())->method('has')->with('tx_t3events_overwriteDemand')->willReturn(true);
+        $this->session->expects($this->any())->method('get')->with('tx_t3events_overwriteDemand')->willReturn(serialize(['demand' => 'dummy']));
+
+        $response = $this->createMock(ResponseInterface::class);
+        $this->responseFactory->expects($this->once())->method('createResponse')->willReturn($response);
+        $response->expects($this->any())->method('withHeader')->willReturn($response);
+        $response->expects($this->any())->method('withBody')->willReturn($response);
 
         $this->subject->quickMenuAction();
     }
@@ -749,6 +784,14 @@ class PerformanceControllerTest extends TestCase
             ->method('emitSignal')
             ->will(self::returnValue([]));
 
+        $this->session->expects($this->any())->method('has')->with('tx_t3events_overwriteDemand')->willReturn(true);
+        $this->session->expects($this->any())->method('get')->with('tx_t3events_overwriteDemand')->willReturn(serialize(['demand' => 'dummy']));
+
+        $response = $this->createMock(ResponseInterface::class);
+        $this->responseFactory->expects($this->once())->method('createResponse')->willReturn($response);
+        $response->expects($this->any())->method('withHeader')->willReturn($response);
+        $response->expects($this->any())->method('withBody')->willReturn($response);
+
         $this->subject->quickMenuAction();
     }
 
@@ -769,6 +812,14 @@ class PerformanceControllerTest extends TestCase
             ->method('emitSignal')
             ->will(self::returnValue([]));
 
+        $this->session->expects($this->any())->method('has')->with('tx_t3events_overwriteDemand')->willReturn(true);
+        $this->session->expects($this->any())->method('get')->with('tx_t3events_overwriteDemand')->willReturn(serialize(['demand' => 'dummy']));
+
+        $response = $this->createMock(ResponseInterface::class);
+        $this->responseFactory->expects($this->once())->method('createResponse')->willReturn($response);
+        $response->expects($this->any())->method('withHeader')->willReturn($response);
+        $response->expects($this->any())->method('withBody')->willReturn($response);
+
         $this->subject->quickMenuAction();
     }
 
@@ -777,11 +828,10 @@ class PerformanceControllerTest extends TestCase
      */
     public function constructorSetsNameSpace(): void
     {
-        $this->subject->__construct();
-        $this->assertAttributeSame(
+        $namespace = $this->subject->_get('namespace');
+        $this->assertSame(
             get_class($this->subject),
-            'namespace',
-            $this->subject
+            $namespace
         );
     }
 

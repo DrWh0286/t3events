@@ -32,8 +32,7 @@ class TaskTest extends UnitTestCase
 
     protected function setUp(): void
     {
-        $this->subject = $this->getMockBuilder(Task::class)
-            ->setMethods(['dummy'])->getMock();
+        $this->subject = new Task();
     }
 
     /**

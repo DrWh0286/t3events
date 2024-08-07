@@ -36,33 +36,7 @@ class AbstractPeriodDataProviderTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getAccessibleMockForAbstractClass(AbstractPeriodDataProvider::class);
-    }
-
-    /**
-     * @test
-     */
-    public function respectEndDateIsInitiallyFalse(): void
-    {
-        $this->assertAttributeSame(
-            false,
-            'respectEndDate',
-            $this->subject
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function constructorSetsRespectEndDate(): void
-    {
-        /** @noinspection ImplicitMagicMethodCallInspection */
-        $this->subject->__construct(true);
-        $this->assertAttributeSame(
-            true,
-            'respectEndDate',
-            $this->subject
-        );
+        $this->subject = $this->getMockForAbstractClass(AbstractPeriodDataProvider::class);
     }
 
     /**
@@ -94,23 +68,18 @@ class AbstractPeriodDataProviderTest extends UnitTestCase
      */
     public function getVisibleLayersReturnsLayersRespectingEndDate(): void
     {
-        $allLayers = ['foo', 'bar'];
-        $layersToHide = ['foo'];
-        $layersToShow = ['baz'];
         $expectedLayers = ['bar', 'baz'];
 
         /** @var AbstractPeriodDataProvider|MockObject subject */
-        $this->subject = $this->getMockBuilder(AbstractPeriodDataProvider::class)
-            ->setMethods(['getLayerIds'])->getMockForAbstractClass();
+        $subject = new class (true) extends AbstractPeriodDataProvider {
+            const VISIBLE_LAYERS = 'foo,bar';
+            const LAYERS_TO_HIDE = 'foo';
+            const LAYERS_TO_SHOW = 'baz';
+        };
 
-        /** @noinspection ImplicitMagicMethodCallInspection */
-        $this->subject->__construct(true);
-        $this->subject->expects($this->exactly(3))
-            ->method('getLayerIds')
-            ->will($this->onConsecutiveCalls($allLayers, $layersToHide, $layersToShow));
         $this->assertEquals(
             $expectedLayers,
-            $this->subject->getVisibleLayerIds()
+            $subject->getVisibleLayerIds()
         );
     }
 }

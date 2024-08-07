@@ -43,9 +43,7 @@ class NotificationTest extends UnitTestCase
 
     protected function setUp(): void
     {
-        $this->subject = $this->getAccessibleMock(
-            Notification::class, ['dummy']
-        );
+        $this->subject = new Notification();
     }
 
     /**
@@ -53,7 +51,7 @@ class NotificationTest extends UnitTestCase
      */
     public function getRecipientReturnsInitialValueForString(): void
     {
-        $this->assertNull(
+        $this->assertEmpty(
             $this->subject->getRecipient()
         );
     }
@@ -76,7 +74,7 @@ class NotificationTest extends UnitTestCase
      */
     public function getSenderReturnsInitialValueForString(): void
     {
-        $this->assertNull(
+        $this->assertEmpty(
             $this->subject->getSender()
         );
     }
@@ -99,7 +97,7 @@ class NotificationTest extends UnitTestCase
      */
     public function getSubjectReturnsInitialValueForString(): void
     {
-        $this->assertNull(
+        $this->assertEmpty(
             $this->subject->getSubject()
         );
     }
@@ -122,7 +120,7 @@ class NotificationTest extends UnitTestCase
      */
     public function getBodytextReturnsInitialValueForString(): void
     {
-        $this->assertNull(
+        $this->assertEmpty(
             $this->subject->getBodytext()
         );
     }
@@ -192,7 +190,7 @@ class NotificationTest extends UnitTestCase
      */
     public function getSenderEmailInitiallyReturnsNull(): void
     {
-        $this->assertNull(
+        $this->assertEmpty(
             $this->subject->getSenderEmail()
         );
     }
@@ -215,7 +213,7 @@ class NotificationTest extends UnitTestCase
      */
     public function getSenderNameInitiallyReturnsNull(): void
     {
-        $this->assertNull(
+        $this->assertEmpty(
             $this->subject->getSenderName()
         );
     }

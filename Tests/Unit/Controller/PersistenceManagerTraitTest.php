@@ -35,9 +35,15 @@ class PersistenceManagerTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getMockForTrait(
-            PersistenceManagerTrait::class
-        );
+        $this->subject = new class
+        {
+            use PersistenceManagerTrait;
+
+            public function getPersistenceManager()
+            {
+                return $this->persistenceManager;
+            }
+        };
     }
 
     /**
@@ -51,10 +57,9 @@ class PersistenceManagerTraitTest extends UnitTestCase
 
         $this->subject->injectPersistenceManager($persistenceManager);
 
-        $this->assertAttributeSame(
+        $this->assertSame(
             $persistenceManager,
-            'persistenceManager',
-            $this->subject
+            $this->subject->getPersistenceManager()
         );
     }
 }

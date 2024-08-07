@@ -31,14 +31,15 @@ use DWenzel\T3events\Controller\ModuleDataTrait;
 use DWenzel\T3events\Controller\NotificationRepositoryTrait;
 use DWenzel\T3events\Controller\NotificationServiceTrait;
 use DWenzel\T3events\Controller\PersistenceManagerTrait;
-use DWenzel\T3events\Controller\SearchTrait;
 use DWenzel\T3events\Controller\SettingsUtilityTrait;
 use DWenzel\T3events\Controller\SignalTrait;
 use DWenzel\T3events\Controller\TranslateTrait;
-use DWenzel\T3events\Controller\VenueRepositoryTrait;
 use DWenzel\T3events\Domain\Model\Dto\ButtonDemand;
+use DWenzel\T3events\Domain\Model\Dto\Search;
+use DWenzel\T3events\Domain\Model\Dto\SearchFactory;
+use DWenzel\T3events\Domain\Repository\VenueRepository;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
-use TYPO3\CMS\Backend\View\BackendTemplateView;
+use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -55,8 +56,8 @@ class EventController extends AbstractBackendController implements FilterableCon
         EventDemandFactoryTrait, EventRepositoryTrait, EventTypeRepositoryTrait,
         FilterableControllerTrait, FormTrait, GenreRepositoryTrait,
         ModuleDataTrait, NotificationRepositoryTrait, NotificationServiceTrait,
-        PersistenceManagerTrait, SearchTrait, SettingsUtilityTrait, SignalTrait,
-        TranslateTrait, VenueRepositoryTrait;
+        PersistenceManagerTrait, SettingsUtilityTrait, SignalTrait,
+        TranslateTrait;
 
     const LIST_ACTION = 'listAction';
     const EXTENSION_KEY = 't3events';
@@ -71,9 +72,12 @@ class EventController extends AbstractBackendController implements FilterableCon
             ButtonDemand::ICON_SIZE_KEY => Icon::SIZE_SMALL
         ]
     ];
+    private SearchFactory $searchFactory;
 
-    public function __construct(private \TYPO3\CMS\Backend\Template\ModuleTemplateFactory $moduleTemplateFactory)
+    public function __construct(private ModuleTemplateFactory $moduleTemplateFactory, private VenueRepository $venueRepository, SearchFactory $searchFactory)
     {
+        $this->searchFactory = $searchFactory;
+        $this->settings;
     }
 
     /**
@@ -133,8 +137,8 @@ class EventController extends AbstractBackendController implements FilterableCon
             SI::EVENTS => $events,
             SI::DEMAND => $demand,
             SI::OVERWRITE_DEMAND => $overwriteDemand,
-            'filterOptions' => $this->getFilterOptions($this->settings[SI::FILTER]),
-            SI::STORAGE_PID => $configuration[SI::PERSISTENCE][SI::STORAGE_PID],
+            'filterOptions' => $this->getFilterOptions($this->settings[SI::FILTER] ?? []),
+            SI::STORAGE_PID => $configuration[SI::PERSISTENCE][SI::STORAGE_PID] ?? null,
             SI::SETTINGS => $this->settings,
             SI::MODULE => SI::ROUTE_EVENT_MODULE
         ];
@@ -162,5 +166,10 @@ class EventController extends AbstractBackendController implements FilterableCon
     public function getConfigurationManager()
     {
         return $this->configurationManager;
+    }
+
+    public function createSearchObject($searchRequest, $settings): Search
+    {
+        return $this->searchFactory->get($searchRequest, $settings);
     }
 }

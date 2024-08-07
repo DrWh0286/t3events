@@ -23,6 +23,9 @@ use DWenzel\T3events\Controller\Backend\BackendViewTrait;
 use DWenzel\T3events\InvalidRequestException;
 use DWenzel\T3events\Utility\SettingsInterface;
 use DWenzel\T3events\View\ConfigurableViewInterface;
+use TYPO3\CMS\Backend\Template\Components\ButtonBar;
+use TYPO3\CMS\Core\Imaging\IconFactory;
+use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
@@ -68,16 +71,82 @@ class BackendViewTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getMockBuilder(BackendViewTrait::class)
-            ->addMethods(['getViewProperty'])
-            ->getMockForTrait();
-
         $this->configurationManager = $this->getMockBuilder(ConfigurationManager::class)
             ->disableOriginalConstructor()
             ->onlyMethods(['getConfiguration'])
             ->getMock();
-        $this->subject->method('getConfigurationManager')
-            ->willReturn($this->configurationManager);
+
+        $this->subject = new class ($this->configurationManager)
+        {
+            use BackendViewTrait;
+
+            private $getViewPropertyReturnValue = [];
+
+            public function __construct(private readonly ConfigurationManager $configurationManager)
+            {
+            }
+
+            public function getConfigurationManager()
+            {
+                return $this->configurationManager;
+            }
+
+            /**
+             * @return ButtonBar
+             */
+            protected function getButtonBar()
+            {
+
+            }
+
+            /**
+             * @return UriBuilder
+             */
+            protected function getUriBuilder()
+            {
+
+            }
+
+            /**
+             * @return IconFactory
+             */
+            protected function getIconFactory()
+            {
+
+            }
+
+            /**
+             * Translate a given key
+             *
+             * @param string $key
+             * @param string $extension
+             * @param array $arguments
+             * @return string
+             */
+            public function translate($key, $extension = 't3events', $arguments = null)
+            {
+
+            }
+
+            public function setGetViewPropertyReturnValue(array $configuration)
+            {
+                $this->getViewPropertyReturnValue = $configuration;
+            }
+
+            public function getViewProperty($extbaseFrameworkConfiguration, $setting)
+            {
+                return $this->getViewPropertyReturnValue;
+            }
+
+            /**
+             * @param array $settings
+             */
+            public function setSettings(array $settings): void
+            {
+                $this->settings = $settings;
+            }
+        };
+
         $this->pageRenderer = $this->getMockBuilder(PageRenderer::class)
             ->disableOriginalConstructor()
             ->onlyMethods(['addRequireJsConfiguration', 'loadRequireJsModule'])
@@ -107,9 +176,7 @@ class BackendViewTraitTest extends UnitTestCase
             ConfigurableViewInterface::SETTINGS_KEY => ['foo']
         ];
 
-        $this->inject(
-            $this->subject,
-            SI::SETTINGS,
+        $this->subject->setSettings(
             $settings
         );
         /** @var ConfigurableViewInterface|ViewInterface|\PHPUnit_Framework_MockObject_MockObject $mockView */
@@ -159,10 +226,8 @@ class BackendViewTraitTest extends UnitTestCase
             ->with(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK)
             ->will($this->returnValue($frameWorkConfiguration));
 
-        $this->subject->expects($this->once())
-            ->method('getViewProperty')
-            ->with($frameWorkConfiguration, SettingsInterface::PAGE_RENDERER)
-            ->will($this->returnValue($configuration));
+        $this->subject->setGetViewPropertyReturnValue($configuration);
+
         $this->pageRenderer->expects($this->never())
             ->method('addRequireJsConfiguration');
         $this->subject->initializeView($this->view);
@@ -236,15 +301,12 @@ class BackendViewTraitTest extends UnitTestCase
             ->with(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK)
             ->will($this->returnValue($frameWorkConfiguration));
 
-        $this->subject->expects($this->once())
-            ->method('getViewProperty')
-            ->with($frameWorkConfiguration, SettingsInterface::PAGE_RENDERER)
-            ->will($this->returnValue($configuration));
+        $this->subject->setGetViewPropertyReturnValue($configuration);
 
         $this->pageRenderer->expects($this->exactly($configurationCount))
             ->method('addRequireJsConfiguration');
-            $this->pageRenderer->expects($this->exactly($moduleCount))
-                ->method('loadRequireJsModule');
+        $this->pageRenderer->expects($this->exactly($moduleCount))
+            ->method('loadRequireJsModule');
 
         $this->subject->initializeView($this->view);
     }

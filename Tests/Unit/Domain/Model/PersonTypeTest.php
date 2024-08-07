@@ -62,10 +62,9 @@ class PersonTypeTest extends UnitTestCase
     {
         $this->subject->setTitle('Conceived at T3CON10');
 
-        $this->assertAttributeEquals(
+        $this->assertSame(
             'Conceived at T3CON10',
-            'title',
-            $this->subject
+            $this->subject->getTitle()
         );
     }
 }

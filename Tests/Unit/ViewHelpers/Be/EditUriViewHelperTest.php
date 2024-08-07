@@ -47,6 +47,7 @@ class EditUriViewHelperTest extends UnitTestCase
             ->getMock();
         $this->uriBuilder = $this->getMockBuilder(UriBuilder::class)
             ->setMethods(['buildUriFromRoute'])
+            ->disableOriginalConstructor()
             ->getMock();
         $this->subject->method('getUriBuilder')->willReturn($this->uriBuilder);
     }

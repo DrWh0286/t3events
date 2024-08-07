@@ -22,7 +22,8 @@ class EmConfigurationUtility
     public static function getSettings(): EmConfiguration
     {
         $configuration = self::parseSettings();
-        require_once ExtensionManagementUtility::extPath('t3events') . 'Classes/Domain/Model/Dto/EmConfiguration.php';
+        // @ToDo: Check, why this is necessary - Maybe just reproducible in TYPO3 context. In Tests, this causes errors.
+//        require_once ExtensionManagementUtility::extPath('t3events') . 'Classes/Domain/Model/Dto/EmConfiguration.php';
         return new EmConfiguration($configuration);
     }
 

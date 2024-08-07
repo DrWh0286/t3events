@@ -34,9 +34,18 @@ class EventDemandFactoryTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getMockForTrait(
-            EventDemandFactoryTrait::class
-        );
+        $this->subject = new class
+        {
+            use EventDemandFactoryTrait;
+
+            /**
+             * @return EventDemandFactory
+             */
+            public function getEventDemandFactory(): EventDemandFactory
+            {
+                return $this->eventDemandFactory;
+            }
+        };
     }
 
     /**
@@ -50,10 +59,9 @@ class EventDemandFactoryTraitTest extends UnitTestCase
 
         $this->subject->injectEventDemandFactory($eventDemandFactory);
 
-        $this->assertAttributeSame(
+        $this->assertSame(
             $eventDemandFactory,
-            'eventDemandFactory',
-            $this->subject
+            $this->subject->getEventDemandFactory()
         );
     }
 }

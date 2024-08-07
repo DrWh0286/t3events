@@ -16,6 +16,7 @@ use DWenzel\T3events\Domain\Model\Dto\AbstractDemand;
 use DWenzel\T3events\Domain\Repository\AbstractDemandedRepository;
 use DWenzel\T3events\Domain\Repository\DemandedRepositoryTrait;
 use DWenzel\T3events\Tests\Unit\Domain\Model\Dto\MockDemandTrait;
+use DWenzel\T3events\UnsupportedMethodException;
 use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -79,6 +80,8 @@ class DemandedRepositoryTraitTest extends UnitTestCase
      */
     public function magicCallMethodThrowsUnsupportedMethodException(): void
     {
+        $this->expectException(UnsupportedMethodException::class);
+        $this->expectExceptionCode(1479289568);
         /** @noinspection PhpUndefinedMethodInspection */
         $this->subject->unsupportedMethod();
     }

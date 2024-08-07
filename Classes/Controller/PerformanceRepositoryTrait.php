@@ -25,6 +25,7 @@ use DWenzel\T3events\Domain\Repository\PerformanceRepository;
  * Provides a PerformanceRepository
  *
  * @package DWenzel\T3events\Controller
+ * @deprecated Needs to be replaced with DI!
  */
 trait PerformanceRepositoryTrait
 {

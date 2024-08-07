@@ -15,11 +15,16 @@ namespace DWenzel\T3events\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DWenzel\T3events\Domain\Model\Dto\Search;
+use DWenzel\T3events\Domain\Model\Dto\SearchFactory;
 use DWenzel\T3events\Domain\Model\Event;
+use DWenzel\T3events\Domain\Repository\VenueRepository;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
+use RuntimeException;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 
 /**
  * Class EventController
@@ -31,9 +36,16 @@ class EventController extends ActionController
     use DemandTrait, EventDemandFactoryTrait,
         EventRepositoryTrait, EntityNotFoundHandlerTrait,
         EventTypeRepositoryTrait, FilterableControllerTrait,
-        GenreRepositoryTrait, SearchTrait, SessionTrait,
-        SettingsUtilityTrait, VenueRepositoryTrait,
-        TranslateTrait;
+        GenreRepositoryTrait, SessionTrait,
+        SettingsUtilityTrait, TranslateTrait;
+
+    private SearchFactory $searchFactory;
+
+    public function __construct(private readonly VenueRepository $venueRepository, Dispatcher $dispatcher, SearchFactory $searchFactory)
+    {
+        $this->signalSlotDispatcher = $dispatcher;
+        $this->searchFactory = $searchFactory;
+    }
 
     const EVENT_QUICK_MENU_ACTION = 'quickMenuAction';
     const EVENT_LIST_ACTION = 'listAction';
@@ -68,7 +80,10 @@ class EventController extends ActionController
      */
     public function listAction($overwriteDemand = null): \Psr\Http\Message\ResponseInterface
     {
-        if (!$overwriteDemand){
+        if (!$overwriteDemand) {
+            if (!$this->session->has('tx_t3events_overwriteDemand') || !is_string($this->session->get('tx_t3events_overwriteDemand')) || empty($this->session->get('tx_t3events_overwriteDemand'))) {
+                throw new RuntimeException('tx_t3events_overwriteDemand is not set or is empty and also no overwriteDemand is set!');
+            }
             $overwriteDemand = unserialize($this->session->get('tx_t3events_overwriteDemand'), ['allowed_classes' => false]);
         }
 
@@ -126,6 +141,8 @@ class EventController extends ActionController
      * @return void
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
+     *
+     * @todo Check, if removed initializeQuickMenuAction() breaks something.
      */
     public function quickMenuAction(): \Psr\Http\Message\ResponseInterface
     {
@@ -150,5 +167,10 @@ class EventController extends ActionController
             $templateVariables
         );
         return $this->htmlResponse();
+    }
+
+    public function createSearchObject($searchRequest, $settings): Search
+    {
+        return $this->searchFactory->get($searchRequest, $settings);
     }
 }

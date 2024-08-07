@@ -20,6 +20,7 @@ use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
  * Provides a persistence manager
  *
  * @package DWenzel\T3events\Controller
+ * @deprecated Needs to be replaced with DI!
  */
 trait PersistenceManagerTrait
 {

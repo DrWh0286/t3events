@@ -35,7 +35,18 @@ class NotificationServiceTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getMockBuilder(NotificationServiceTrait::class)->getMockForTrait();
+        $this->subject = new class
+        {
+            use NotificationServiceTrait;
+
+            /**
+             * @return NotificationService
+             */
+            public function getNotificationService(): NotificationService
+            {
+                return $this->notificationService;
+            }
+        };
     }
 
     /**
@@ -45,14 +56,14 @@ class NotificationServiceTraitTest extends UnitTestCase
     {
         /** @var NotificationService|\PHPUnit_Framework_MockObject_MockObject $notificationService */
         $notificationService = $this->getMockBuilder(NotificationService::class)
+            ->disableOriginalConstructor()
             ->getMock();
 
         $this->subject->injectNotificationService($notificationService);
 
-        $this->assertAttributeSame(
+        $this->assertSame(
             $notificationService,
-            'notificationService',
-            $this->subject
+            $this->subject->getNotificationService()
         );
     }
 }

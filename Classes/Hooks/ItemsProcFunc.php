@@ -38,9 +38,9 @@ class ItemsProcFunc
      */
     protected $templateLayoutUtility;
 
-    public function __construct()
+    public function __construct(TemplateLayoutUtility $templateLayoutUtility)
     {
-        $this->templateLayoutUtility = GeneralUtility::makeInstance(TemplateLayoutUtility::class);
+        $this->templateLayoutUtility = $templateLayoutUtility;
     }
 
     /**

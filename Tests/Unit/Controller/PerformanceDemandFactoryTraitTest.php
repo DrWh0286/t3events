@@ -35,9 +35,18 @@ class PerformanceDemandFactoryTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getMockForTrait(
-            PerformanceDemandFactoryTrait::class
-        );
+        $this->subject = new class
+        {
+            use PerformanceDemandFactoryTrait;
+
+            /**
+             * @return PerformanceDemandFactory
+             */
+            public function getPerformanceDemandFactory(): PerformanceDemandFactory
+            {
+                return $this->performanceDemandFactory;
+            }
+        };
     }
 
     /**
@@ -51,10 +60,9 @@ class PerformanceDemandFactoryTraitTest extends UnitTestCase
 
         $this->subject->injectPerformanceDemandFactory($performanceDemandFactory);
 
-        $this->assertAttributeSame(
+        $this->assertSame(
             $performanceDemandFactory,
-            'performanceDemandFactory',
-            $this->subject
+            $this->subject->getPerformanceDemandFactory()
         );
     }
 }

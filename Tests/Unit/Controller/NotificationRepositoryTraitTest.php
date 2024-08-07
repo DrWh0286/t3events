@@ -35,9 +35,18 @@ class NotificationRepositoryTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getMockForTrait(
-            NotificationRepositoryTrait::class
-        );
+        $this->subject = new class
+        {
+            use NotificationRepositoryTrait;
+
+            /**
+             * @return NotificationRepository
+             */
+            public function getNotificationRepository(): NotificationRepository
+            {
+                return $this->notificationRepository;
+            }
+        };
     }
 
     /**
@@ -51,10 +60,9 @@ class NotificationRepositoryTraitTest extends UnitTestCase
 
         $this->subject->injectNotificationRepository($notificationRepository);
 
-        $this->assertAttributeSame(
+        $this->assertSame(
             $notificationRepository,
-            'notificationRepository',
-            $this->subject
+            $this->subject->getNotificationRepository()
         );
     }
 }

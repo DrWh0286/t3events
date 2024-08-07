@@ -31,9 +31,15 @@ class PersonDemandFactoryTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getMockForTrait(
-            PersonDemandFactoryTrait::class
-        );
+        $this->subject = new class
+        {
+            use PersonDemandFactoryTrait;
+
+            public function getPersonDemandFactory()
+            {
+                return $this->personDemandFactory;
+            }
+        };
     }
 
     /**
@@ -47,10 +53,9 @@ class PersonDemandFactoryTraitTest extends UnitTestCase
 
         $this->subject->injectPersonDemandFactory($personDemandFactory);
 
-        $this->assertAttributeSame(
+        $this->assertSame(
             $personDemandFactory,
-            'personDemandFactory',
-            $this->subject
+            $this->subject->getPersonDemandFactory()
         );
     }
 }

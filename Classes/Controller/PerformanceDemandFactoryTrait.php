@@ -25,6 +25,7 @@ use DWenzel\T3events\Domain\Factory\Dto\PerformanceDemandFactory;
  * Provides a PerformanceDemandFactory
  *
  * @package DWenzel\T3events\Controller
+ * @deprecated Needs to be replaced with DI!
  */
 trait PerformanceDemandFactoryTrait
 {

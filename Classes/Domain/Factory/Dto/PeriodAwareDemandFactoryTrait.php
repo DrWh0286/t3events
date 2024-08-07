@@ -37,8 +37,13 @@ trait PeriodAwareDemandFactoryTrait
             $demand->setPeriodType($settings['periodType']);
         }
         if (isset($settings['periodType']) && $settings['periodType'] !== 'byDate') {
-            $demand->setPeriodStart($settings['periodStart']);
-            $demand->setPeriodDuration($settings['periodDuration']);
+            if (isset($settings['periodStart'])) {
+                $demand->setPeriodStart($settings['periodStart']);
+            }
+
+            if (isset($settings['periodDuration'])) {
+                $demand->setPeriodDuration($settings['periodDuration']);
+            }
         }
         if (
             isset($settings['periodType']) &&

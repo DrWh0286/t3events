@@ -5,6 +5,7 @@ namespace DWenzel\T3events\Utility;
 use DWenzel\T3events\Resource\ResourceFactory;
 use DWenzel\T3events\Tests\Unit\Object\MockObjectManagerTrait;
 use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Resource\File;
@@ -57,14 +58,16 @@ class SettingsUtilityTest extends UnitTestCase
      * @var SettingsUtility|AccessibleMockObjectInterface|MockObject
      */
     protected $subject;
+    /**
+     * @var ResourceFactory|(ResourceFactory&object&MockObject)|(ResourceFactory&MockObject)|(object&MockObject)|MockObject
+     */
+    private $resourceFactory;
 
     protected function setUp(): void
     {
-        $this->subject = $this->getAccessibleMock(
-            SettingsUtility::class, ['dummy']
-        );
-        $this->objectManager = $this->getMockObjectManager();
-        $this->subject->injectObjectManager($this->objectManager);
+        $cObj = new ContentObjectRenderer();
+        $this->resourceFactory = $this->createMock(ResourceFactory::class);
+        $this->subject = new SettingsUtility($cObj, $this->resourceFactory);
     }
 
     /**
@@ -100,12 +103,14 @@ class SettingsUtilityTest extends UnitTestCase
      */
     public function getValueByKeyReturnsValueFromObjectByPath(): void
     {
-        $mockParentObject = $this->getAccessibleMock(
-            AbstractDomainObject::class, ['getFoo']
-        );
-        $mockChildObject = $this->getAccessibleMock(
-            AbstractDomainObject::class, ['getBar']
-        );
+        $mockParentObject = $this->getMockBuilder(
+            $this->buildAccessibleProxy(AbstractDomainObject::class)
+        )->setMockClassName('ParentAbstractDomainObject')->addMethods(['getFoo'])->getMock();
+
+        $mockChildObject = $this->getMockBuilder(
+            $this->buildAccessibleProxy(AbstractDomainObject::class)
+        )->setMockClassName('ChildAbstractDomainObject')->addMethods(['getBar'])->getMock();
+
         $expectedValue = 'baz';
         $mockChildObject->_set('bar', $expectedValue);
         $mockParentObject->_set('foo', $mockChildObject);
@@ -134,9 +139,10 @@ class SettingsUtilityTest extends UnitTestCase
      */
     public function getValueByKeyReturnsDefaultValueIfObjectByPathReturnsNull(): void
     {
-        $mockParentObject = $this->getAccessibleMock(
-            AbstractDomainObject::class, ['getFoo']
-        );
+        $mockParentObject = $this->getMockBuilder(
+            $this->buildAccessibleProxy(AbstractDomainObject::class)
+        )->setMockClassName('ParentAbstractDomainObject')->addMethods(['getFoo'])->getMock();
+
         $expectedFallbackValue = 'fallback';
 
         $key = 'fooValue';
@@ -160,12 +166,13 @@ class SettingsUtilityTest extends UnitTestCase
      */
     public function getValueByKeyWrapsFieldValue(): void
     {
-        $cObj = new ContentObjectRenderer();
-        $this->subject->injectContentObjectRenderer($cObj);
+//        $cObj = new ContentObjectRenderer();
+//        $this->subject->injectContentObjectRenderer($cObj);
 
-        $mockParentObject = $this->getAccessibleMock(
-            AbstractDomainObject::class, ['getFoo']
-        );
+        $mockParentObject = $this->getMockBuilder(
+            $this->buildAccessibleProxy(AbstractDomainObject::class)
+        )->setMockClassName('ParentAbstractDomainObject')->addMethods(['getFoo'])->getMock();
+
         $fieldValue = 'field value';
         $wrap = '|Wrap |';
         $expectedWrappedValue = 'Wrap field value';
@@ -190,30 +197,13 @@ class SettingsUtilityTest extends UnitTestCase
     /**
      * @test
      */
-    public function injectContentObjectRendererSetsObject(): void
-    {
-        /** @var ContentObjectRenderer|MockObject $mockContentObjectRenderer */
-        $mockContentObjectRenderer = $this->getMockBuilder(ContentObjectRenderer::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $this->subject->injectContentObjectRenderer($mockContentObjectRenderer);
-        self::assertAttributeEquals(
-            $mockContentObjectRenderer,
-            'contentObjectRenderer',
-            $this->subject
-        );
-    }
-
-    /**
-     * @test
-     */
     public function getControllerKeyReturnsKeyIfSet(): void
     {
         $key = 'dummy';
         $controllerKeys = [
             DummyController::class => $key
         ];
-        $this->subject->_set('controllerKeys', $controllerKeys);
+        $this->subject->controllerKey = $controllerKeys;
 
         self::assertSame(
             $key,
@@ -242,18 +232,14 @@ class SettingsUtilityTest extends UnitTestCase
         $config = [];
         /** @var DomainObjectInterface|MockObject $mockObject */
         $mockObject = $this->getMockBuilder(DomainObjectInterface::class)->getMock();
-        $mockObjectStorage = $this->getMockObjectStorage();
 
-        $this->objectManager->expects(self::once())
-            ->method('get')
-            ->with(ObjectStorage::class)
-            ->will(self::returnValue($mockObjectStorage));
+        $cObj = $this->createMock(ContentObjectRenderer::class);
+        $resourceFactory = $this->createMock(ResourceFactory::class);
+        $subject = new SettingsUtility($cObj, $resourceFactory);
 
-        self::assertSame(
-            $mockObjectStorage,
-            $this->subject->getFileStorage(
-                $mockObject, $config
-            )
+        self::assertEquals(
+            GeneralUtility::makeInstance(ObjectStorage::class),
+            $subject->getFileStorage($mockObject, $config)
         );
     }
 
@@ -262,36 +248,25 @@ class SettingsUtilityTest extends UnitTestCase
      */
     public function getFileStorageReturnsNonEmptyFileReferenceStorageFromObject(): void
     {
-        $this->subject = $this->getAccessibleMock(
-            SettingsUtility::class, ['getValue']
-        );
-        $this->subject->injectObjectManager($this->objectManager);
-
-        $config = [
-            'field' => 'foo'
-        ];
         /** @var AbstractDomainObject|MockObject $mockObject */
         $mockObject = $this->getAccessibleMock(
             AbstractDomainObject::class
         );
-        $mockObjectStorage = $this->getMockObjectStorage();
+
         $mockObjectStorageFromObject = $this->getMockObjectStorage(['count', 'current']);
         $mockFileReference = $this->getMockFileReference();
-        $this->subject->expects(self::once())
-            ->method('getValue')
-            ->with($mockObject, $config)
-            ->will(self::returnValue($mockObjectStorageFromObject));
+
+        $config = [
+            'field' => 'foo',
+            'default' => $mockObjectStorageFromObject
+        ];
+
         $mockObjectStorageFromObject->expects($this->any())
             ->method('count')
             ->will(self::returnValue(5));
         $mockObjectStorageFromObject->expects($this->any())
             ->method('current')
             ->will(self::returnValue($mockFileReference));
-
-        $this->objectManager->expects(self::once())
-            ->method('get')
-            ->with(ObjectStorage::class)
-            ->will(self::returnValue($mockObjectStorage));
 
         self::assertSame(
             $mockObjectStorageFromObject,
@@ -306,35 +281,17 @@ class SettingsUtilityTest extends UnitTestCase
      */
     public function getFileStorageReturnsStorageWithFileReferenceFromObject(): void
     {
-        $this->subject = $this->getAccessibleMock(
-            SettingsUtility::class, ['getValue']
-        );
-        $this->subject->injectObjectManager($this->objectManager);
-
-        $config = ['foo'];
         /** @var AbstractDomainObject|MockObject $mockObject */
         $mockObject = $this->getAccessibleMock(
             AbstractDomainObject::class
         );
-        $mockObjectStorage = $this->getMockObjectStorage(['count', 'attach']);
         $mockFileReference = $this->getMockFileReference();
-        $this->subject->expects(self::once())
-            ->method('getValue')
-            ->with($mockObject, $config)
-            ->will(self::returnValue($mockFileReference));
-        $mockObjectStorage->expects(self::once())
-            ->method('attach')
-            ->with($mockFileReference);
-        $mockObjectStorage->expects($this->any())
-            ->method('count')
-            ->will(self::returnValue(1));
+        $config = ['foo', 'default' => $mockFileReference];
 
-        $this->objectManager->expects(self::once())
-            ->method('get')
-            ->with(ObjectStorage::class)
-            ->will(self::returnValue($mockObjectStorage));
+        $fileStorage = $this->subject->getFileStorage($mockObject, $config);
 
-        $this->subject->getFileStorage($mockObject, $config);
+        $this->assertSame(1, $fileStorage->count());
+        $this->assertSame($mockFileReference, $fileStorage->current());
     }
 
     /**
@@ -351,31 +308,22 @@ class SettingsUtilityTest extends UnitTestCase
         $mockObject = $this->getAccessibleMock(
             AbstractDomainObject::class
         );
-        $mockObjectStorage = $this->getMockObjectStorage(['count', 'attach']);
+
         $mockFile = $this->getMockFile();
         $mockFileReference = $this->getMockFileReference();
-        $mockObjectStorage->expects(self::once())
-            ->method('attach')
-            ->with($mockFileReference);
-        $mockObjectStorage->expects($this->any())
-            ->method('count')
-            ->will(self::returnValue(0));
-        $mockResourceFactory = $this->mockResourceFactory();
 
-        $mockResourceFactory->expects(self::once())
+        $this->resourceFactory->expects(self::once())
             ->method('getFileObjectByCombinedIdentifier')
             ->with($defaultValue)
             ->will(self::returnValue($mockFile));
-        $mockResourceFactory->expects(self::once())
+        $this->resourceFactory->expects(self::once())
             ->method('createFileReferenceFromFileObject')
             ->with($mockFile)
             ->will(self::returnValue($mockFileReference));
-        $this->objectManager->expects(self::once())
-            ->method('get')
-            ->with(ObjectStorage::class)
-            ->will(self::returnValue($mockObjectStorage));
 
-        $this->subject->getFileStorage($mockObject, $config);
+        $fileStorage = $this->subject->getFileStorage($mockObject, $config);
+
+        $this->assertSame($mockFileReference, $fileStorage->current());
     }
 
     /**
@@ -394,33 +342,29 @@ class SettingsUtilityTest extends UnitTestCase
         $mockObject = $this->getAccessibleMock(
             AbstractDomainObject::class
         );
-        $mockObjectStorage = $this->getMockObjectStorage(['count', 'attach']);
-        $mockFile = $this->getMockFile();
-        $mockFileReference = $this->getMockFileReference();
-        $mockObjectStorage->expects($this->exactly(2))
-            ->method('attach')
-            ->with($mockFileReference);
-        $mockObjectStorage->expects($this->any())
-            ->method('count')
-            ->will(self::returnValue(0));
-        $mockResourceFactory = $this->mockResourceFactory();
 
-        $mockResourceFactory->expects($this->exactly(2))
+        $mockFile = $this->getMockFile();
+        $mockFileReferenceA = $this->getMockFileReference();
+        $mockFileReferenceB = $this->getMockFileReference();
+
+        $this->resourceFactory->expects($this->exactly(2))
             ->method('getFileObjectByCombinedIdentifier')
             ->withConsecutive(
                 [$defaultValue], [$alwaysValue]
             )
             ->will(self::returnValue($mockFile));
-        $mockResourceFactory->expects($this->exactly(2))
+        $this->resourceFactory->expects($this->exactly(2))
             ->method('createFileReferenceFromFileObject')
             ->with($mockFile)
-            ->will(self::returnValue($mockFileReference));
-        $this->objectManager->expects(self::once())
-            ->method('get')
-            ->with(ObjectStorage::class)
-            ->will(self::returnValue($mockObjectStorage));
+            ->willReturnOnConsecutiveCalls($mockFileReferenceA, $mockFileReferenceB);
 
-        $this->subject->getFileStorage($mockObject, $config);
+
+        $fileStorage = $this->subject->getFileStorage($mockObject, $config);
+
+        $this->assertSame(2, $fileStorage->count());
+        $this->assertSame($mockFileReferenceA, $fileStorage->current(), 'reference A');
+        $fileStorage->next();
+        $this->assertSame($mockFileReferenceB, $fileStorage->current(), 'reference B');
     }
 
     /**

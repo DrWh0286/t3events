@@ -29,10 +29,8 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
  ***************************************************************/
 class SearchFactoryTest extends UnitTestCase
 {
-    use MockObjectManagerTrait;
-
     /**
-     * @var SearchFactory|MockObject|AccessibleMockObjectInterface
+     * @var SearchFactory
      */
     protected $subject;
 
@@ -41,11 +39,7 @@ class SearchFactoryTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getAccessibleMock(
-            SearchFactory::class, ['dummy']
-        );
-        $this->objectManager = $this->getMockObjectManager();
-        $this->subject->injectObjectManager($this->objectManager);
+        $this->subject = new SearchFactory();
     }
 
     /**
@@ -62,17 +56,14 @@ class SearchFactoryTest extends UnitTestCase
         $settings = [
             'fields' => $searchFields
         ];
-        $mockSearch = $this->getMockSearch(['setFields']);
-        $this->objectManager->expects($this->once())
-            ->method('get')
-            ->with(Search::class)
-            ->will($this->returnValue($mockSearch));
 
-        $mockSearch->expects($this->once())
-            ->method('setFields')
-            ->with($searchFields);
+        $expectedSearchObject = new Search();
+        $expectedSearchObject->setSubject('foo');
+        $expectedSearchObject->setFields('bar,baz');
 
-        $this->subject->get($searchRequest, $settings);
+        $actualSearchObject = $this->subject->get($searchRequest, $settings);
+
+        $this->assertEquals($expectedSearchObject, $actualSearchObject);
     }
 
     /**
@@ -89,17 +80,14 @@ class SearchFactoryTest extends UnitTestCase
         $settings = [
             'fields' => $searchFields
         ];
-        $mockSearch = $this->getMockSearch(['setSubject']);
-        $this->objectManager->expects($this->once())
-            ->method('get')
-            ->with(Search::class)
-            ->will($this->returnValue($mockSearch));
 
-        $mockSearch->expects($this->once())
-            ->method('setSubject')
-            ->with($subject);
+        $expectedSearchObject = new Search();
+        $expectedSearchObject->setSubject('foo');
+        $expectedSearchObject->setFields('bar,baz');
 
-        $this->subject->get($searchRequest, $settings);
+        $actualSearchObject = $this->subject->get($searchRequest, $settings);
+
+        $this->assertEquals($expectedSearchObject, $actualSearchObject);
     }
 
     /**
@@ -118,30 +106,13 @@ class SearchFactoryTest extends UnitTestCase
         $settings = [
             'fields' => $searchFields
         ];
-        $mockSearch = $this->getMockSearch(['setLocation', 'setRadius']);
-        $this->objectManager->expects($this->once())
-            ->method('get')
-            ->with(Search::class)
-            ->will($this->returnValue($mockSearch));
 
-        $mockSearch->expects($this->once())
-            ->method('setLocation')
-            ->with($location);
-        $mockSearch->expects($this->once())
-            ->method('setRadius')
-            ->with($radius);
+        $expectedSearchObject = new Search();
+        $expectedSearchObject->setLocation('foo');
+        $expectedSearchObject->setRadius(10);
 
-        $this->subject->get($searchRequest, $settings);
-    }
+        $actualSearchObject = $this->subject->get($searchRequest, $settings);
 
-    /**
-     * @param array $methods Methods to mock
-     * @return Search|MockObject
-     */
-    protected function getMockSearch(array $methods = [])
-    {
-        return $this->getMockBuilder(Search::class)
-            ->setMethods($methods)
-            ->getMock();
+        $this->assertEquals($expectedSearchObject, $actualSearchObject);
     }
 }

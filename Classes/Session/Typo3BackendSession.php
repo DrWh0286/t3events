@@ -100,4 +100,9 @@ class Typo3BackendSession implements SessionInterface
     {
         $this->namespace = $namespace;
     }
+
+    public function getNamespace(): string
+    {
+        return $this->namespace;
+    }
 }

@@ -3,7 +3,14 @@ namespace DWenzel\T3events\Tests\Unit\Service;
 
 use DWenzel\T3events\Tests\Unit\Object\MockObjectManagerTrait;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Rule\InvokedCount as InvokedCountMatcher;
+use Psr\Container\ContainerInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mailer\SentMessage;
+use Symfony\Component\Mime\Address;
 use TYPO3\CMS\Core\Mail\MailMessage;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use DWenzel\T3events\Domain\Model\Notification;
@@ -26,6 +33,8 @@ use DWenzel\T3events\Service\NotificationService;
  *  GNU General Public License for more details.
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
+// @ToDo: Das ist Grütze!
 class NotificationServiceTest extends UnitTestCase
 {
     use MockObjectManagerTrait;
@@ -34,17 +43,24 @@ class NotificationServiceTest extends UnitTestCase
      * @var NotificationService
      */
     protected $subject;
+    /**
+     * @var MockObject|(MailerInterface&MockObject)
+     */
+    private MailerInterface|MockObject $mailer;
+    /**
+     * @var (object&MockObject)|MockObject|ConfigurationManagerInterface|(ConfigurationManagerInterface&object&MockObject)|(ConfigurationManagerInterface&MockObject)
+     */
+    private MockObject|ConfigurationManagerInterface $configurationManager;
 
     /**
      * set up subject
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getAccessibleMock(
-            NotificationService::class, ['dummy']
-        );
-        $this->objectManager = $this->getMockObjectManager();
-        $this->subject->injectObjectManager($this->objectManager);
+        $this->configurationManager = $this->createMock(ConfigurationManagerInterface::class);
+        $this->mailer = $this->getMockBuilder(MailerInterface::class)->onlyMethods(['send'])->addMethods(['getSentMessage'])->getMock();
+
+        $this->subject = new NotificationService($this->configurationManager, $this->mailer);
     }
 
     /**
@@ -56,7 +72,7 @@ class NotificationServiceTest extends UnitTestCase
     {
         return [
             [ 'foo@bar.baz', ['foo@bar.baz']],
-            ['foo,bar', ['foo', 'bar']]
+            ['foo@dummy.tld,bar@dummy.tld', ['foo@dummy.tld', 'bar@dummy.tld']]
         ];
     }
     /**
@@ -67,19 +83,20 @@ class NotificationServiceTest extends UnitTestCase
      */
     public function sendSetsRecipients($recipientArgument, $expectedRecipients): void
     {
-        $notification = new Notification();
-        $notification->setRecipient($recipientArgument);
+        $notification = new Notification(
+            $recipientArgument,
+            'dummy sender',
+            'dummy@sender.tld'
+        );
 
-        $mockMessage = $this->getMockMailMessage();
-        $this->objectManager->expects(self::once())
-            ->method('get')
-            ->willReturn($mockMessage);
+        $sentMessage = $this->getMockBuilder(SentMessage::class)->disableOriginalConstructor()->getMock();
 
-        $mockMessage->expects(self::once())
-            ->method('setTo')
-            ->with($expectedRecipients);
+        $this->mailer->expects($this->once())->method('send');
+        $this->mailer->expects($this->once())->method('getSentMessage')->willReturn($sentMessage);
 
         $this->subject->send($notification);
+
+        $this->assertEquals((new \DateTime())->format('Y-m-d H:i'), $notification->getSentAt()->format('Y-m-d H:i'));
     }
 
     /**
@@ -90,28 +107,46 @@ class NotificationServiceTest extends UnitTestCase
      */
     public function notifySetsRecipients($recipient, $expectedRecipients): void
     {
-        $this->subject = $this->getAccessibleMock(
-            NotificationService::class, ['dummy', 'buildTemplateView']
-        );
-        $this->subject->injectObjectManager($this->objectManager);
-
         $mockTemplateView = $this->getMockBuilder(StandaloneView::class)
             ->disableOriginalConstructor()
             ->getMock();
+        $mailMessage = new MailMessage();
 
-        $this->subject->expects(self::once())
-            ->method('buildTemplateView')
-            ->will(self::returnValue($mockTemplateView));
+        $classes = [
+            StandaloneView::class => $mockTemplateView,
+            MailMessage::class => $mailMessage
+        ];
 
-        $mockMessage = $this->getMockMailMessage();
-        $this->objectManager->expects(self::once())
-            ->method('get')
-            ->with(MailMessage::class)
-            ->willReturn($mockMessage);
+        GeneralUtility::setContainer(new class ($classes) implements ContainerInterface {
 
-        $mockMessage->expects(self::once())
-            ->method('setTo')
-            ->with($expectedRecipients);
+            public function __construct(private array $classes = [])
+            {
+            }
+
+            public function get(string $id)
+            {
+                return $this->classes[$id];
+            }
+
+            public function has(string $id)
+            {
+                return isset($this->classes[$id]);
+            }
+        });
+
+        $this->configurationManager
+            ->expects($this->any())
+            ->method('getConfiguration')
+            ->with(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK)
+            ->willReturn([
+                'view' => [
+                    'templateRootPath' => 'dummy/path/to/template',
+                    'templateRootPaths' => ['dummy/path/to/template'],
+                    'partialRootPaths' => ['dummy/path/to/partial'],
+                    'layoutRootPaths' => ['dummy/path/to/layout'],
+                ]
+            ]);
+
         $this->subject->notify(
             $recipient,
             'bar@baz.foo',
@@ -120,6 +155,12 @@ class NotificationServiceTest extends UnitTestCase
             'baz',
             [], null, null
         );
+
+        $expectedAddresses = [];
+        foreach ($expectedRecipients as $expectedRecipient) {
+            $expectedAddresses[] = new Address($expectedRecipient);
+        }
+        $this->assertEquals($expectedAddresses, $mailMessage->getTo());
     }
 
     /**

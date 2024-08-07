@@ -5,6 +5,7 @@ namespace DWenzel\T3events\Controller;
  * Class SignalTrait
  *
  * @package DWenzel\T3events\Tests\Unit\Controller
+ * @deprecated Needs to be replaced by PSR-14, maybe a wrapping service (basically not needed) and constructor DI!
  */
 trait SignalTrait
 {
@@ -22,6 +23,7 @@ trait SignalTrait
      * @codeCoverageIgnore
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
+     * @todo Change to PSR-14!
      */
     public function emitSignal($class, $name, array &$arguments): void
     {

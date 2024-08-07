@@ -41,9 +41,18 @@ class CategoryRepositoryTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getMockForTrait(
-            \DWenzel\T3events\Controller\CategoryRepositoryTrait::class
-        );
+        $this->subject = new class
+        {
+            use CategoryRepositoryTrait;
+
+            /**
+             * @return CategoryRepository
+             */
+            public function getCategoryRepository(): CategoryRepository
+            {
+                return $this->categoryRepository;
+            }
+        };
     }
 
     /**
@@ -57,10 +66,9 @@ class CategoryRepositoryTraitTest extends UnitTestCase
 
         $this->subject->injectCategoryRepository($categoryRepository);
 
-        $this->assertAttributeSame(
+        $this->assertSame(
             $categoryRepository,
-            'categoryRepository',
-            $this->subject
+            $this->subject->getCategoryRepository()
         );
     }
 }

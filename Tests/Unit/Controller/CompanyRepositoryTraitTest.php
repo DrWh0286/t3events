@@ -2,6 +2,7 @@
 
 namespace DWenzel\T3events\Tests\Unit\Controller;
 
+use DWenzel\T3events\Controller\CompanyRepositoryTrait;
 use DWenzel\T3events\Domain\Repository\CompanyRepository;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -34,9 +35,18 @@ class CompanyRepositoryTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getMockForTrait(
-            \DWenzel\T3events\Controller\CompanyRepositoryTrait::class
-        );
+        $this->subject = new class
+        {
+            use CompanyRepositoryTrait;
+
+            /**
+             * @return CompanyRepository
+             */
+            public function getCompanyRepository(): CompanyRepository
+            {
+                return $this->companyRepository;
+            }
+        };
     }
 
     /**
@@ -51,10 +61,9 @@ class CompanyRepositoryTraitTest extends UnitTestCase
 
         $this->subject->injectCompanyRepository($companyRepository);
 
-        $this->assertAttributeSame(
+        $this->assertSame(
             $companyRepository,
-            'companyRepository',
-            $this->subject
+            $this->subject->getCompanyRepository()
         );
     }
 }

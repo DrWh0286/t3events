@@ -35,9 +35,18 @@ class GenreRepositoryTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getMockForTrait(
-            GenreRepositoryTrait::class
-        );
+        $this->subject = new class
+        {
+            use GenreRepositoryTrait;
+
+            /**
+             * @return GenreRepository
+             */
+            public function getGenreRepository(): GenreRepository
+            {
+                return $this->genreRepository;
+            }
+        };
     }
 
     /**
@@ -51,10 +60,9 @@ class GenreRepositoryTraitTest extends UnitTestCase
 
         $this->subject->injectGenreRepository($genreRepository);
 
-        $this->assertAttributeSame(
+        $this->assertSame(
             $genreRepository,
-            'genreRepository',
-            $this->subject
+            $this->subject->getGenreRepository()
         );
     }
 }

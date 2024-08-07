@@ -5,6 +5,7 @@ namespace DWenzel\T3events\Dto\Factory;
 use DWenzel\T3events\Dto\FilterCollection;
 use DWenzel\T3events\Dto\NullFilter;
 use DWenzel\T3events\Object\ObjectManagerTrait;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /***************************************************************
  *  Copyright notice
@@ -28,7 +29,9 @@ use DWenzel\T3events\Object\ObjectManagerTrait;
  */
 class FilterCollectionFactory
 {
-    use FilterFactoryTrait,ObjectManagerTrait;
+    public function __construct(private readonly FilterFactory $filterFactory)
+    {
+    }
 
     /**
      * Builds a FilterCollection from configuration
@@ -39,7 +42,7 @@ class FilterCollectionFactory
     public function create(array $configuration): FilterCollection
     {
         /** @var FilterCollection $collection */
-        $collection = $this->objectManager->get(FilterCollection::class);
+        $collection = GeneralUtility::makeInstance(FilterCollection::class);
 
         if(empty($configuration)) {
             return $collection;

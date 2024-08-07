@@ -105,7 +105,8 @@ class SettingsUtility implements SingletonInterface
         if (isset($this->controllerKeys[$className])) {
             $controllerKey = $this->controllerKeys[$className];
         } else {
-            $controllerKey = lcfirst(str_replace('Controller', '', end(explode('\\', $className))));
+            $explode = explode('\\', $className);
+            $controllerKey = lcfirst(str_replace('Controller', '', end($explode)));
             $this->controllerKeys[$className] = $controllerKey;
         }
 
@@ -141,9 +142,7 @@ class SettingsUtility implements SingletonInterface
      */
     public function getFileStorage(DomainObjectInterface $object, $config)
     {
-        $fileStorage = $this->objectManager->get(
-            ObjectStorage::class
-        );
+        $fileStorage = GeneralUtility::makeInstance(ObjectStorage::class);
         $valueFromSettings = $this->getValue($object, $config);
         // got ObjectStorage from field
         if ($valueFromSettings instanceof ObjectStorage) {

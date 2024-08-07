@@ -6,7 +6,8 @@ use DWenzel\T3events\Domain\Model\Dto\ModuleData;
 use DWenzel\T3events\Service\ModuleDataStorageService;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 use PHPUnit\Framework\TestCase;
-use DWenzel\T3events\Tests\Unit\Object\MockObjectManagerTrait;
+use Psr\Container\ContainerInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /***************************************************************
  *
@@ -38,7 +39,7 @@ class ModuleDataTraitTest extends TestCase
     use \DWenzel\T3events\Tests\Unit\Object\MockObjectManagerTrait;
 
     /**
-     * @var ModuleDataTrait|\PHPUnit_Framework_MockObject_MockObject
+     * @var ModuleDataTrait
      */
     protected $subject;
 
@@ -47,12 +48,62 @@ class ModuleDataTraitTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getMockBuilder(ModuleDataTrait::class)
-            ->setMethods(['getModuleKey'])
-            ->getMockForTrait();
+        $this->subject = new class
+        {
+            use ModuleDataTrait;
 
-        $this->objectManager = $this->getMockObjectManager();
-        $this->inject($this->subject, 'objectManager', $this->objectManager);
+            /**
+             * @return array
+             */
+            public function mergeSettings()
+            {
+                return ['foo'];
+            }
+
+            /**
+             * @return string
+             */
+            public function getModuleKey()
+            {
+                return 'foo';
+            }
+
+            /**
+             * Forwards the request to another action and / or controller.
+             * Request is directly transfered to the other action / controller
+             * without the need for a new request.
+             *
+             * @param string $actionName Name of the action to forward to
+             * @param string $controllerName Unqualified object name of the controller to forward to. If not specified, the current controller is used.
+             * @param string $extensionName Name of the extension containing the controller to forward to. If not specified, the current extension is assumed.
+             * @param array $arguments Arguments to pass to the target action
+             * @return void
+             */
+            public function forward(
+                $actionName,
+                $controllerName = null,
+                $extensionName = null,
+                array $arguments = null
+            )
+            {
+                throw new class ('forward method called', 872634598237456) extends \Exception
+                {
+                };
+            }
+
+            /**
+             * @return ModuleDataStorageService
+             */
+            public function getModuleDataStorageService(): ModuleDataStorageService
+            {
+                return $this->moduleDataStorageService;
+            }
+
+            public function getSettings()
+            {
+                return $this->settings;
+            }
+        };
     }
 
     /**
@@ -64,8 +115,8 @@ class ModuleDataTraitTest extends TestCase
 
 
         $this->subject->injectModuleDataStorageService($mockService);
-        $this->assertAttributeSame(
-            $mockService, 'moduleDataStorageService', $this->subject
+        $this->assertSame(
+            $mockService, $this->subject->getModuleDataStorageService()
         );
     }
 
@@ -76,26 +127,46 @@ class ModuleDataTraitTest extends TestCase
     {
         $moduleKey = 'foo';
 
-        /** @var ModuleData|\PHPUnit_Framework_MockObject_MockObject $mockModuleData */
-        $mockModuleData = $this->getMockBuilder(ModuleData::class)->getMock();
-        $this->objectManager->expects($this->once())
-            ->method('get')
-            ->with(ModuleData::class)
-            ->will($this->returnValue($mockModuleData));
+        $classes = [
+            ModuleData::class => $mockModuleData = $this->getMockBuilder(ModuleData::class)->getMock()
+        ];
 
-        $mockService = $this->getMockModuleDataStorageService(['persistModuleData']);
-        $this->subject->injectModuleDataStorageService($mockService);
+        GeneralUtility::setContainer(new class ($classes) implements ContainerInterface
+        {
+            public function __construct(private array $classes)
+            {
+            }
 
-        $mockService->expects($this->once())
+            public function get(string $id)
+            {
+                if (isset($this->classes[$id])) {
+                    return $this->classes[$id];
+                }
+
+                return null;
+            }
+
+            public function has(string $id)
+            {
+                if (isset($this->classes[$id])) {
+                    return true;
+                }
+
+                return false;
+            }
+        });
+
+
+        $moduleDataStorageService = $this->getMockModuleDataStorageService(['persistModuleData']);
+        $this->subject->injectModuleDataStorageService($moduleDataStorageService);
+
+        $moduleDataStorageService->expects($this->once())
             ->method('persistModuleData')
             ->with($mockModuleData, $moduleKey);
 
-        $this->subject->expects($this->once())
-            ->method(SI::FORWARD)
-            ->with('list');
-        $this->subject->expects($this->once())
-            ->method('getModuleKey')
-            ->will($this->returnValue($moduleKey));
+        $this->expectException(\Exception::class);
+        $this->expectExceptionCode(872634598237456);
+        $this->expectExceptionMessage('forward method called');
 
         $this->subject->resetAction();
     }
@@ -106,20 +177,11 @@ class ModuleDataTraitTest extends TestCase
     public function initializeActionMergesSettings(): void
     {
         $expectedSettings = ['foo'];
-        $this->subject = $this->getMockForTrait(
-            ModuleDataTrait::class,
-            [], '', true, true, true, ['mergeSettings']
-        );
-
-        $this->subject->expects($this->once())
-            ->method('mergeSettings')
-            ->will($this->returnValue($expectedSettings));
 
         $this->subject->initializeAction();
-        $this->assertAttributeSame(
+        $this->assertSame(
             $expectedSettings,
-            SI::SETTINGS,
-            $this->subject
+            $this->subject->getSettings()
         );
     }
 

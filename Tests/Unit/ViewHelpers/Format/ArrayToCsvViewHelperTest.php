@@ -35,7 +35,7 @@ class ArrayToCsvViewHelperTest extends UnitTestCase
     protected function setUp(): void
     {
         $this->subject = $this->getAccessibleMock(
-            ArrayToCsvViewHelper::class, ['dummy', 'registerArgument']
+            ArrayToCsvViewHelper::class, ['registerArgument']
         );
     }
 

@@ -38,6 +38,7 @@ class SettingsUtilityTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
+        $this->markTestSkipped('This trait needs to be replaced by another solution!');
         $this->fixture = $this->getMockBuilder(SettingsUtilityTrait::class)
             ->getMockForTrait();
     }

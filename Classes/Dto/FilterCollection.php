@@ -64,7 +64,7 @@ class FilterCollection implements Iterator, Countable
      *
      * @return int
      */
-    public function key()
+    public function key(): mixed
     {
         return key($this->storage);
     }
@@ -73,7 +73,7 @@ class FilterCollection implements Iterator, Countable
      * Checks if the pointer of the storage points to a valid position
      * @return bool
      */
-    public function valid()
+    public function valid(): bool
     {
         return current($this->storage) !== false;
     }

@@ -39,9 +39,20 @@ class SessionTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getMockForTrait(
-            SessionTrait::class
-        );
+        $this->subject = new class
+        {
+            use SessionTrait;
+
+            public function __construct()
+            {
+                $this->namespace = 'DummyNamespace';
+            }
+
+            public function getSession()
+            {
+                return $this->session;
+            }
+        };
     }
 
     /**
@@ -49,14 +60,12 @@ class SessionTraitTest extends UnitTestCase
      */
     public function sessionCanBeInjected(): void
     {
-
         $mockSession = $this->getMockSession();
         $this->subject->injectSession($mockSession);
 
-        $this->assertAttributeSame(
+        $this->assertSame(
             $mockSession,
-            'session',
-            $this->subject
+            $this->subject->getSession()
         );
     }
 
@@ -65,19 +74,10 @@ class SessionTraitTest extends UnitTestCase
      */
     public function injectSessionSetsNamespace(): void
     {
-        $namespace = 'foo';
-        $this->subject = $this->getAccessibleMock(
-            DummyClassWithNamespace::class, ['dummy']
-        );
-        $this->subject->_set(
-            'namespace',
-            $namespace
-        );
         $mockSession = $this->getMockSession();
 
-        $mockSession->expects($this->once())
-            ->method('setNamespace')
-            ->with($namespace);
+        $mockSession->expects($this->once())->method('setNamespace')->with('DummyNamespace');
+
         $this->subject->injectSession($mockSession);
     }
 

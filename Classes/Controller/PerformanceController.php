@@ -16,11 +16,15 @@ namespace DWenzel\T3events\Controller;
  */
 
 use DWenzel\T3events\Domain\Model\Dto\PerformanceDemand;
+use DWenzel\T3events\Domain\Model\Dto\Search;
+use DWenzel\T3events\Domain\Model\Dto\SearchFactory;
 use DWenzel\T3events\Domain\Model\Performance;
 use DWenzel\T3events\Domain\Repository\EventTypeRepository;
 use DWenzel\T3events\Domain\Repository\GenreRepository;
 use DWenzel\T3events\Domain\Repository\PerformanceRepository;
 use DWenzel\T3events\Domain\Repository\VenueRepository;
+use Psr\Http\Message\ResponseInterface;
+use RuntimeException;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 
@@ -36,7 +40,7 @@ class PerformanceController
 {
     use CategoryRepositoryTrait,
         DemandTrait, EntityNotFoundHandlerTrait, FilterableControllerTrait,
-        PerformanceDemandFactoryTrait, SearchTrait, SessionTrait,
+        PerformanceDemandFactoryTrait, SessionTrait,
         SettingsUtilityTrait, TranslateTrait;
 
     const PERFORMANCE_LIST_ACTION = 'listAction';
@@ -47,28 +51,28 @@ class PerformanceController
     /**
      * performanceRepository
      *
-     * @var \DWenzel\T3events\Domain\Repository\PerformanceRepository
+     * @var PerformanceRepository
      */
     protected $performanceRepository;
 
     /**
      * genreRepository
      *
-     * @var \DWenzel\T3events\Domain\Repository\GenreRepository
+     * @var GenreRepository
      */
     protected $genreRepository;
 
     /**
      * venueRepository
      *
-     * @var \DWenzel\T3events\Domain\Repository\VenueRepository
+     * @var VenueRepository
      */
     protected $venueRepository;
 
     /**
      * eventTypeRepository
      *
-     * @var \DWenzel\T3events\Domain\Repository\EventTypeRepository
+     * @var EventTypeRepository
      */
     protected $eventTypeRepository;
 
@@ -80,17 +84,19 @@ class PerformanceController
     protected $contentObject;
 
     protected $buttonConfiguration = [];
+    private SearchFactory $searchFactory;
 
     /**
      * Constructor
      */
-    public function __construct(\DWenzel\T3events\Domain\Repository\PerformanceRepository $performanceRepository, \DWenzel\T3events\Domain\Repository\GenreRepository $genreRepository, \DWenzel\T3events\Domain\Repository\VenueRepository $venueRepository, \DWenzel\T3events\Domain\Repository\EventTypeRepository $eventTypeRepository)
+    public function __construct(PerformanceRepository $performanceRepository, GenreRepository $genreRepository, VenueRepository $venueRepository, EventTypeRepository $eventTypeRepository, SearchFactory $searchFactory)
     {
         $this->namespace = get_class($this);
         $this->performanceRepository = $performanceRepository;
         $this->genreRepository = $genreRepository;
         $this->venueRepository = $venueRepository;
         $this->eventTypeRepository = $eventTypeRepository;
+        $this->searchFactory = $searchFactory;
     }
 
     /**
@@ -143,6 +149,9 @@ class PerformanceController
     public function listAction(array $overwriteDemand = null): \Psr\Http\Message\ResponseInterface
     {
         if (!$overwriteDemand){
+            if (!$this->session->has('tx_t3events_overwriteDemand') || !is_string($this->session->get('tx_t3events_overwriteDemand')) || empty($this->session->get('tx_t3events_overwriteDemand'))) {
+                throw new RuntimeException('tx_t3events_overwriteDemand is not set or is empty and also no overwriteDemand is set!');
+            }
             $overwriteDemand = unserialize($this->session->get('tx_t3events_overwriteDemand'), ['allowed_classes' => false]);
         }
 
@@ -188,25 +197,30 @@ class PerformanceController
      * @return void
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
+     *
+     * @todo Check if removing initialize action has any impact or breaks things!
      */
     public function quickMenuAction(): \Psr\Http\Message\ResponseInterface
     {
+        if (!$this->session->has('tx_t3events_overwriteDemand') || !is_string($this->session->get('tx_t3events_overwriteDemand')) || empty($this->session->get('tx_t3events_overwriteDemand'))) {
+            throw new RuntimeException('tx_t3events_overwriteDemand is not set or is empty and also no overwriteDemand is set!');
+        }
         $overwriteDemand = unserialize($this->session->get('tx_t3events_overwriteDemand'), ['allowed_classes' => false]);
 
         // get filter options from plugin
         $filterConfiguration = [
-            SI::LEGACY_KEY_GENRE => $this->settings[SI::GENRES],
-            'venue' => $this->settings[SI::VENUES],
-            'eventType' => $this->settings[SI::EVENT_TYPES],
-            'category' => $this->settings['categories']
+            SI::LEGACY_KEY_GENRE => $this->settings[SI::GENRES] ?? null,
+            'venue' => $this->settings[SI::VENUES] ?? null,
+            'eventType' => $this->settings[SI::EVENT_TYPES] ?? null,
+            'category' => $this->settings['categories'] ?? null
         ];
         $filterOptions = $this->getFilterOptions($filterConfiguration);
 
         $templateVariables = [
             'filterOptions' => $filterOptions,
-            SI::GENRES => $filterOptions[SI::GENRES],
-            SI::VENUES => $filterOptions[SI::VENUES],
-            SI::EVENT_TYPES => $filterOptions[SI::EVENT_TYPES],
+            SI::GENRES => $filterOptions[SI::GENRES] ?? null,
+            SI::VENUES => $filterOptions[SI::VENUES] ?? null,
+            SI::EVENT_TYPES => $filterOptions[SI::EVENT_TYPES] ?? null,
             SI::SETTINGS => $this->settings,
             SI::OVERWRITE_DEMAND => $overwriteDemand
         ];
@@ -214,6 +228,7 @@ class PerformanceController
         $this->view->assignMultiple(
             $templateVariables
         );
+
         return $this->htmlResponse();
     }
 
@@ -229,5 +244,10 @@ class PerformanceController
     {
         /** @var PerformanceDemand $demand */
         return $this->performanceDemandFactory->createFromSettings($settings);
+    }
+
+    public function createSearchObject($searchRequest, $settings): Search
+    {
+        return $this->searchFactory->get($searchRequest, $settings);
     }
 }

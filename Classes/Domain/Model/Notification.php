@@ -22,6 +22,7 @@ namespace DWenzel\T3events\Domain\Model;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Notification
@@ -42,7 +43,7 @@ class Notification extends AbstractEntity
     /**
      * @var string
      */
-    protected $senderEmail;
+    protected $senderEmail = '';
 
     /**
      * @var string
@@ -76,10 +77,31 @@ class Notification extends AbstractEntity
     protected $sentAt;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @var ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
      * @Lazy
      */
     protected $attachments;
+
+    public function __construct(
+        string $recipient = '',
+        string $sender = '',
+        string $senderEmail = '',
+        string $senderName = '',
+        string $subject = '',
+        string $bodytext = '',
+        ?string $format = null,
+        ?ObjectStorage $attachments = null
+    ) {
+        $this->recipient = $recipient;
+        $this->sender = $sender;
+        $this->senderEmail = $senderEmail;
+        $this->senderName = $senderName;
+        $this->subject = $subject;
+        $this->bodytext = $bodytext;
+        $this->format = $format;
+        $this->attachments = $attachments;
+    }
+
 
     /**
      * Returns the recipient
@@ -205,7 +227,7 @@ class Notification extends AbstractEntity
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @return ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
      */
     public function getAttachments()
     {
@@ -213,7 +235,7 @@ class Notification extends AbstractEntity
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $attachments
+     * @param ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $attachments
      */
     public function setAttachments($attachments): void
     {

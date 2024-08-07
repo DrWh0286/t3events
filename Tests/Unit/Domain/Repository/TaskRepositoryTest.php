@@ -37,17 +37,10 @@ class TaskRepositoryTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getMockBuilder(TaskRepository::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['dummy', 'setDefaultQuerySettings'])
-            ->getMock();
         $this->objectManager = $this->getMockBuilder(ObjectManagerInterface::class)
             ->getMockForAbstractClass();
-        $this->inject(
-            $this->subject,
-            'objectManager',
-            $this->objectManager
-        );
+
+        $this->subject = new TaskRepository($this->objectManager);
     }
 
     /**
@@ -56,7 +49,7 @@ class TaskRepositoryTest extends UnitTestCase
     public function initializeObjectsSetsDefaultQuerySettings(): void
     {
         $mockQuerySettings = $this->getMockBuilder(Typo3QuerySettings::class)
-            ->setMethods(['setRespectStoragePage'])->getMock();
+            ->disableOriginalConstructor()->getMock();
         $this->objectManager->expects($this->once())
             ->method('get')
             ->with(Typo3QuerySettings::class)
@@ -64,10 +57,9 @@ class TaskRepositoryTest extends UnitTestCase
         $mockQuerySettings->expects($this->once())
             ->method('setRespectStoragePage')
             ->with(false);
-        $this->subject->expects($this->once())
-            ->method('setDefaultQuerySettings')
-            ->with($mockQuerySettings);
 
         $this->subject->initializeObject();
+
+        $this->assertSame($mockQuerySettings, $this->subject->getDefaultQuerySettings());
     }
 }

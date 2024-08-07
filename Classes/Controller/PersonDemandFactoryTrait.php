@@ -21,6 +21,7 @@ use DWenzel\T3events\Domain\Factory\Dto\PersonDemandFactory;
  * Provides a PersonDemandFactory
  *
  * @package DWenzel\T3events\Controller
+ * @deprecated Needs to be replaced with DI!
  */
 trait PersonDemandFactoryTrait
 {

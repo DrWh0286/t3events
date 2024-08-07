@@ -35,9 +35,18 @@ class EventRepositoryTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getMockForTrait(
-            EventRepositoryTrait::class
-        );
+        $this->subject = new class
+        {
+            use EventRepositoryTrait;
+
+            /**
+             * @return EventRepository
+             */
+            public function getEventRepository(): EventRepository
+            {
+                return $this->eventRepository;
+            }
+        };
     }
 
     /**
@@ -51,10 +60,9 @@ class EventRepositoryTraitTest extends UnitTestCase
 
         $this->subject->injectEventRepository($eventRepository);
 
-        $this->assertAttributeSame(
+        $this->assertSame(
             $eventRepository,
-            'eventRepository',
-            $this->subject
+            $this->subject->getEventRepository()
         );
     }
 }

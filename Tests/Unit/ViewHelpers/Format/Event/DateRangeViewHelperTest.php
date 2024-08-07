@@ -68,10 +68,10 @@ class DateRangeViewHelperTest extends UnitTestCase
         $eventWithThreePerformances->addPerformance($performanceToday);
 
         $customGlue = ' till ';
-        $customFormatRequiringStrftime = '%A %e %B %Y';
+
         return [
             // single performance, default date format and glue
-            [
+            'single performance, default date format and glue' => [
                 // arguments
                 [
                     'event' => $eventWithOnePerformance
@@ -80,7 +80,7 @@ class DateRangeViewHelperTest extends UnitTestCase
                 $yesterdaysDate->format(DateRangeViewHelper::DEFAULT_DATE_FORMAT)
             ],
             // two performances, default date format and custom glue
-            [
+            'two performances, default date format and custom glue' => [
                 // arguments
                 [
                     'event' => $eventWithTwoPerformances,
@@ -92,17 +92,16 @@ class DateRangeViewHelperTest extends UnitTestCase
                 . $todaysDate->format(DateRangeViewHelper::DEFAULT_DATE_FORMAT)
             ],
             // three performances, custom date format and custom glue
-            [
+            'three performances, custom date format and custom glue' => [
                 // arguments
                 [
                     'event' => $eventWithThreePerformances,
-                    'format' => $customFormatRequiringStrftime,
                     'glue' => $customGlue,
                 ],
                 // expected
-                strftime($customFormatRequiringStrftime, $yesterdaysDate->getTimestamp())
+                $yesterdaysDate->format(DateRangeViewHelper::DEFAULT_DATE_FORMAT)
                 . $customGlue
-                . strftime($customFormatRequiringStrftime, $todaysDate->getTimestamp())
+                . $todaysDate->format(DateRangeViewHelper::DEFAULT_DATE_FORMAT)
             ]
         ];
     }
@@ -142,5 +141,45 @@ class DateRangeViewHelperTest extends UnitTestCase
             $expected,
             $this->subject->render()
         );
+    }
+
+    /**
+     * @test
+     */
+    public function formatWithPercentageThrowsAnException(): void
+    {
+        $yesterdaysDate = new \DateTime('yesterday');
+        $todaysDate = new \DateTime('today');
+        $tomorrowsDate = new \DateTime('tomorrow');
+
+        $performanceYesterday = new Performance();
+        $performanceToday = new Performance();
+        $performanceTomorrow = new Performance();
+        $performanceYesterday->setDate($yesterdaysDate);
+        $performanceToday->setDate($todaysDate);
+        $performanceTomorrow->setDate($tomorrowsDate);
+
+        $eventWithOnePerformance = new Event();
+        $eventWithOnePerformance->addPerformance($performanceYesterday);
+
+        $eventWithTwoPerformances = new Event();
+        $eventWithTwoPerformances->addPerformance($performanceYesterday);
+        $eventWithTwoPerformances->addPerformance($performanceToday);
+
+        $eventWithThreePerformances = new Event();
+        $eventWithThreePerformances->addPerformance($performanceYesterday);
+        $eventWithThreePerformances->addPerformance($performanceToday);
+
+        $arguments = [
+            'event' => $eventWithThreePerformances,
+            'format' => '%A %e %B %Y',
+            'glue' => 'till',
+        ];
+
+        $this->subject->setArguments($arguments);
+        $this->subject->expects($this->once())->method('initialize');
+
+        $this->expectException(\RuntimeException::class);
+        $this->subject->render();
     }
 }

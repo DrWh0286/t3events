@@ -7,9 +7,19 @@ use DWenzel\T3events\Domain\Factory\Dto\PerformanceDemandFactory;
 use DWenzel\T3events\Domain\Model\Dto\DemandInterface;
 use DWenzel\T3events\Domain\Model\Dto\ModuleData;
 use DWenzel\T3events\Domain\Model\Dto\PerformanceDemand;
+use DWenzel\T3events\Domain\Model\Dto\SearchFactory;
+use DWenzel\T3events\Domain\Repository\EventTypeRepository;
+use DWenzel\T3events\Domain\Repository\GenreRepository;
 use DWenzel\T3events\Domain\Repository\PerformanceRepository;
+use DWenzel\T3events\Domain\Repository\VenueRepository;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
+use PHPUnit\Framework\MockObject\MockObject;
+use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamFactoryInterface;
+use TYPO3\CMS\Core\Http\ResponseFactory;
+use TYPO3\CMS\Core\Http\StreamFactory;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 
@@ -52,22 +62,69 @@ class ScheduleControllerTest extends UnitTestCase
      * @var array
      */
     protected $settings = [];
+    /**
+     * @var (PerformanceRepository&MockObject)|MockObject
+     */
+    private PerformanceRepository|MockObject $performanceRepository;
+    /**
+     * @var (GenreRepository&MockObject)|MockObject
+     */
+    private GenreRepository|MockObject $genreRepository;
+    /**
+     * @var (VenueRepository&MockObject)|MockObject
+     */
+    private MockObject|VenueRepository $venueRepository;
+    /**
+     * @var (EventTypeRepository&MockObject)|MockObject
+     */
+    private EventTypeRepository|MockObject $eventTypeRepository;
+    /**
+     * @var (SearchFactory&MockObject)|MockObject
+     */
+    private MockObject|SearchFactory $searchFactory;
+    /**
+     * @var MockObject|(ResponseFactoryInterface&MockObject)
+     */
+    private MockObject|ResponseFactoryInterface $responseFactory;
+    /**
+     * @var MockObject|(StreamFactoryInterface&MockObject)
+     */
+    private StreamFactoryInterface|MockObject $streamFactory;
 
     /**
      * set up
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getMockBuilder(ScheduleController::class)
-            ->setMethods(
-                [
-                    'createDemandFromSettings',
-                    'emitSignal',
-                    'getFilterOptions',
-                    'overwriteDemandObject'
-                ])
-            ->disableOriginalConstructor()
-            ->getMock();
+        $this->performanceRepository = $this->getMockBuilder(PerformanceRepository::class)->disableOriginalConstructor()->getMock();
+        $this->genreRepository = $this->getMockBuilder(GenreRepository::class)->disableOriginalConstructor()->getMock();
+        $this->venueRepository = $this->getMockBuilder(VenueRepository::class)->disableOriginalConstructor()->getMock();
+        $this->eventTypeRepository = $this->getMockBuilder(EventTypeRepository::class)->disableOriginalConstructor()->getMock();
+        $this->searchFactory = $this->getMockBuilder(SearchFactory::class)->disableOriginalConstructor()->getMock();
+        $this->responseFactory = $this->getMockBuilder(ResponseFactoryInterface::class)->getMock();
+        $this->streamFactory = $this->getMockBuilder(StreamFactoryInterface::class)->getMock();
+
+        $response = $this->createMock(ResponseInterface::class);
+        $this->responseFactory->expects($this->any())->method('createResponse')->willReturn($response);
+        $response->expects($this->any())->method('withHeader')->willReturn($response);
+        $response->expects($this->any())->method('withBody')->willReturn($response);
+
+        $this->subject = $this->getAccessibleMock(
+            ScheduleController::class,
+            [
+            'createDemandFromSettings',
+            'emitSignal',
+            'getFilterOptions',
+            'overwriteDemandObject'
+            ],
+            [
+                $this->performanceRepository,
+                $this->genreRepository,
+                $this->venueRepository,
+                $this->eventTypeRepository,
+                $this->searchFactory,
+            ]
+        );
         $this->view = $this->getMockForAbstractClass(
             ViewInterface::class
         );
@@ -75,17 +132,11 @@ class ScheduleControllerTest extends UnitTestCase
         /** @var PerformanceRepository|\PHPUnit_Framework_MockObject_MockObject $mockPerformanceRepository */
         $mockPerformanceRepository = $this->getMockBuilder(PerformanceRepository::class)
             ->disableOriginalConstructor()->getMock();
-        $this->inject(
-            $this->subject,
-            'view',
-            $this->view
-        );
-        $this->inject(
-            $this->subject,
-            'moduleData',
-            $this->moduleData
-        );
-        $this->subject->injectPerformanceRepository($mockPerformanceRepository);
+
+        $this->subject->_set('view', $this->view);
+        $this->subject->_set('moduleData', $this->moduleData);
+
+
         /** @var PerformanceDemandFactory|\PHPUnit_Framework_MockObject_MockObject performanceDemandFactory */
         $this->performanceDemandFactory = $this->getMockBuilder(PerformanceDemandFactory::class)
             ->setMethods(['createFromSettings'])->getMock();
@@ -93,7 +144,9 @@ class ScheduleControllerTest extends UnitTestCase
         $mockDemand = $this->getMockBuilder(PerformanceDemand::class)->getMock();
         $this->performanceDemandFactory->method('createFromSettings')->will($this->returnValue($mockDemand));
         $this->subject->injectPerformanceDemandFactory($this->performanceDemandFactory);
-        $this->inject($this->subject, SI::SETTINGS, $this->settings);
+        $this->subject->_set(SI::SETTINGS, $this->settings);
+        $this->subject->injectResponseFactory($this->responseFactory);
+        $this->subject->injectStreamFactory($this->streamFactory);
     }
 
     /**
@@ -105,8 +158,7 @@ class ScheduleControllerTest extends UnitTestCase
             'filter' => []
         ];
 
-        $this->inject(
-            $this->subject,
+        $this->subject->_set(
             SI::SETTINGS,
             $settings
         );

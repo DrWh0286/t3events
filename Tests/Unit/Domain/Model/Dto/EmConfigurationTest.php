@@ -40,9 +40,7 @@ class EmConfigurationTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getAccessibleMock(
-            EmConfiguration::class, ['dummy'], [], '', false
-        );
+        $this->subject = new EmConfiguration([]);
     }
 
     /**

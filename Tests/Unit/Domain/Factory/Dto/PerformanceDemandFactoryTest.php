@@ -4,6 +4,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Factory\Dto;
 
 use DWenzel\T3events\Domain\Factory\Dto\PerformanceDemandFactory;
 use DWenzel\T3events\Domain\Model\Dto\PerformanceDemand;
+use DWenzel\T3events\Domain\Model\Dto\Search;
 use DWenzel\T3events\Tests\Unit\Object\MockObjectManagerTrait;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -35,11 +36,7 @@ class PerformanceDemandFactoryTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getAccessibleMock(
-            PerformanceDemandFactory::class, ['dummy'], [], '', false
-        );
-        $this->objectManager = $this->getMockObjectManager();
-        $this->subject->injectObjectManager($this->objectManager);
+        $this->subject = new PerformanceDemandFactory();
     }
 
     /**
@@ -47,14 +44,8 @@ class PerformanceDemandFactoryTest extends UnitTestCase
      */
     public function createFromSettingsReturnsPerformanceDemand(): void
     {
-        $mockDemand = $this->getMockPerformanceDemand();
-        $this->objectManager->expects($this->once())
-            ->method('get')
-            ->with(PerformanceDemand::class)
-            ->will($this->returnValue($mockDemand));
-
-        $this->assertSame(
-            $mockDemand,
+        $this->assertEquals(
+            new PerformanceDemand(),
             $this->subject->createFromSettings([])
         );
     }
@@ -95,16 +86,11 @@ class PerformanceDemandFactoryTest extends UnitTestCase
         $settings = [
             $propertyName => $settingsValue
         ];
-        $mockDemand = $this->getMockPerformanceDemand(['dummy']);
 
-        $this->objectManager->expects($this->once())
-            ->method('get')
-            ->will($this->returnValue($mockDemand));
         $createdDemand = $this->subject->createFromSettings($settings);
-        $this->assertAttributeSame(
+        $this->assertSame(
             $expectedValue,
-            $propertyName,
-            $createdDemand
+            $createdDemand->_getProperty($propertyName)
         );
     }
 
@@ -132,15 +118,11 @@ class PerformanceDemandFactoryTest extends UnitTestCase
         $settings = [
             $settingsKey => $settingsValue
         ];
-        $mockDemand = $this->getMockPerformanceDemand(['dummy']);
-        $this->objectManager->expects($this->once())
-            ->method('get')
-            ->will($this->returnValue($mockDemand));
+
         $createdDemand = $this->subject->createFromSettings($settings);
-        $this->assertAttributeSame(
+        $this->assertSame(
             $expectedValue,
-            $propertyName,
-            $createdDemand
+            $createdDemand->_getProperty($propertyName)
         );
     }
 
@@ -152,9 +134,9 @@ class PerformanceDemandFactoryTest extends UnitTestCase
         return [
             ['foo', ''],
             ['periodType', 'bar'],
-            ['periodStart', 'bar'],
-            ['periodDuration', 'bar'],
-            ['search', 'bar']
+            ['periodStart', 12],
+            ['periodDuration', 23],
+            ['search', new Search()]
         ];
     }
 
@@ -169,15 +151,17 @@ class PerformanceDemandFactoryTest extends UnitTestCase
         $settings = [
             $propertyName => $propertyValue
         ];
-        $mockDemand = $this->getMockPerformanceDemand(['dummy']);
-        $this->objectManager->expects($this->once())
-            ->method('get')
-            ->will($this->returnValue($mockDemand));
+
+        $expected = new PerformanceDemand();
+        if ($propertyName !== 'search'){
+            $expected->_setProperty($propertyName, $propertyValue);
+        }
+
         $createdDemand = $this->subject->createFromSettings($settings);
 
         $this->assertEquals(
-            $createdDemand,
-            $mockDemand
+            $expected,
+            $createdDemand
         );
     }
 
@@ -191,16 +175,12 @@ class PerformanceDemandFactoryTest extends UnitTestCase
             'period' => SI::SPECIFIC,
             'periodType' => $periodType
         ];
-        $mockDemand = $this->getMockPerformanceDemand(['dummy']);
-        $this->objectManager->expects($this->once())
-            ->method('get')
-            ->will($this->returnValue($mockDemand));
+
         $createdDemand = $this->subject->createFromSettings($settings);
 
-        $this->assertAttributeSame(
+        $this->assertSame(
             $periodType,
-            'periodType',
-            $createdDemand
+            $createdDemand->getPeriodType()
         );
     }
 
@@ -217,22 +197,17 @@ class PerformanceDemandFactoryTest extends UnitTestCase
             'periodStart' => $periodStart,
             'periodDuration' => $periodDuration
         ];
-        $mockDemand = $this->getMockPerformanceDemand(['dummy']);
-        $this->objectManager->expects($this->once())
-            ->method('get')
-            ->will($this->returnValue($mockDemand));
+
         $createdDemand = $this->subject->createFromSettings($settings);
 
-        $this->assertAttributeSame(
+        $this->assertSame(
             (int)$periodStart,
-            'periodStart',
-            $createdDemand
+            $createdDemand->getPeriodStart()
         );
 
-        $this->assertAttributeSame(
+        $this->assertSame(
             (int)$periodDuration,
-            'periodDuration',
-            $createdDemand
+            $createdDemand->getPeriodDuration()
         );
     }
 
@@ -248,19 +223,14 @@ class PerformanceDemandFactoryTest extends UnitTestCase
             'periodStartDate' => $startDate
         ];
 
-        $mockDemand = $this->getMockPerformanceDemand(['dummy']);
-        $this->objectManager->expects($this->once())
-            ->method('get')
-            ->will($this->returnValue($mockDemand));
         $createdDemand = $this->subject->createFromSettings($settings);
 
         $timeZone = new \DateTimeZone(date_default_timezone_get());
         $expectedStartDate = new \DateTime($startDate, $timeZone);
 
-        $this->assertAttributeEquals(
+        $this->assertEquals(
             $expectedStartDate,
-            SI::START_DATE,
-            $createdDemand
+            $createdDemand->_getProperty(SI::START_DATE)
         );
     }
 
@@ -276,19 +246,14 @@ class PerformanceDemandFactoryTest extends UnitTestCase
             'periodEndDate' => $endDate
         ];
 
-        $mockDemand = $this->getMockPerformanceDemand(['dummy']);
-        $this->objectManager->expects($this->once())
-            ->method('get')
-            ->will($this->returnValue($mockDemand));
         $createdDemand = $this->subject->createFromSettings($settings);
 
         $timeZone = new \DateTimeZone(date_default_timezone_get());
         $expectedStartDate = new \DateTime($endDate, $timeZone);
 
-        $this->assertAttributeEquals(
+        $this->assertEquals(
             $expectedStartDate,
-            SI::END_DATE,
-            $createdDemand
+            $createdDemand->_getProperty(SI::END_DATE)
         );
     }
 
@@ -303,10 +268,6 @@ class PerformanceDemandFactoryTest extends UnitTestCase
         ];
         $expectedOrder = 'foo|bar';
 
-        $mockDemand = $this->getMockPerformanceDemand(['dummy']);
-        $this->objectManager->expects($this->once())
-            ->method('get')
-            ->will($this->returnValue($mockDemand));
         $createdDemand = $this->subject->createFromSettings($settings);
 
         $this->assertSame(
@@ -343,10 +304,6 @@ class PerformanceDemandFactoryTest extends UnitTestCase
         ];
         $expectedOrder = $expected;
 
-        $mockDemand = $this->getMockPerformanceDemand(['dummy']);
-        $this->objectManager->expects($this->once())
-            ->method('get')
-            ->will($this->returnValue($mockDemand));
         $createdDemand = $this->subject->createFromSettings($settings);
 
         $this->assertSame(

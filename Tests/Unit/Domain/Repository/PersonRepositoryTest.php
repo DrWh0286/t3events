@@ -22,6 +22,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Repository;
 
 use DWenzel\T3events\Domain\Repository\PersonRepository;
 use DWenzel\T3events\Tests\Unit\Domain\Model\Dto\MockDemandTrait;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -41,9 +42,8 @@ class PersonRepositoryTest extends UnitTestCase
 
     protected function setUp(): void
     {
-        $this->fixture = $this->getAccessibleMock(
-            PersonRepository::class,
-            ['dummy'], [], '', false);
+        $this->objectManager = $this->createMock(ObjectManagerInterface::class);
+        $this->fixture = new PersonRepository($this->objectManager);
     }
 
     /**

@@ -66,7 +66,8 @@ class DateRangeViewHelper extends AbstractDateRangeViewHelper
         foreach ($this->performances as $performance) {
             $timestamps[] = $performance->getDate()->getTimestamp();
         }
-        sort(array_unique($timestamps));
+        $array_unique = array_unique($timestamps);
+        sort($array_unique);
 
         return $timestamps;
     }

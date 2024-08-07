@@ -23,6 +23,8 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Repository;
 use DWenzel\T3events\Domain\Model\Dto\DemandInterface;
 use DWenzel\T3events\Domain\Repository\GenreRepository;
 use DWenzel\T3events\Tests\Unit\Domain\Model\Dto\MockDemandTrait;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -44,9 +46,8 @@ class GenreRepositoryTest extends UnitTestCase
 
     protected function setUp(): void
     {
-        $this->fixture = $this->getAccessibleMock(
-            GenreRepository::class,
-            ['dummy'], [], '', false);
+        $this->objectManager = $this->createMock(ObjectManagerInterface::class);
+        $this->fixture = new GenreRepository($this->objectManager);
     }
 
     /**

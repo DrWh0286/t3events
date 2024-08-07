@@ -332,16 +332,15 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     {
         $fixture = $this->getAccessibleMock(
             AbstractDemandedRepository::class,
-            array('dummy', 'createConstraintsFromDemand'), array(), '', false);
+            array('createConstraintsFromDemand'), array(), '', false);
         $constraints = array();
         $mockQuery = $this->getMockQuery(['logicalAnd']);
         $additionalConstraint = [$this->getMockConstraint()];
 
         $mockQuery->expects($this->once())
             ->method('logicalAnd')
-            ->with($additionalConstraint);
-        $fixture->_callRef(
-            'combineConstraints',
+            ->with(...$additionalConstraint);
+        $fixture->combineConstraints(
             $mockQuery,
             $constraints,
             $additionalConstraint
@@ -355,7 +354,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     {
         $fixture = $this->getAccessibleMock(
             AbstractDemandedRepository::class,
-            array('dummy', 'createConstraintsFromDemand'), array(), '', false);
+            array('createConstraintsFromDemand'), array(), '', false);
         $constraints = array();
         $conjunction = 'or';
         $mockQuery = $this->getMockQuery(['logicalOr']);
@@ -363,9 +362,8 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
 
         $mockQuery->expects($this->once())
             ->method('logicalOr')
-            ->with($additionalConstraint);
-        $fixture->_callRef(
-            'combineConstraints',
+            ->with(...$additionalConstraint);
+        $fixture->combineConstraints(
             $mockQuery,
             $constraints,
             $additionalConstraint,
@@ -380,7 +378,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     {
         $fixture = $this->getAccessibleMock(
             AbstractDemandedRepository::class,
-            array('dummy', 'createConstraintsFromDemand'), array(), '', false);
+            array('createConstraintsFromDemand'), array(), '', false);
         $constraints = array();
         $conjunction = 'NotAnd';
         $mockQuery = $this->getMockQuery(['logicalNot', 'logicalAnd']);
@@ -394,8 +392,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
         $mockQuery->expects($this->once())
             ->method('logicalNot')
             ->with($mockConstraint);
-        $fixture->_callRef(
-            'combineConstraints',
+        $fixture->combineConstraints(
             $mockQuery,
             $constraints,
             $additionalConstraint,
@@ -408,9 +405,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
      */
     public function combineConstraintsCombinesLogicalNotOr(): void
     {
-        $fixture = $this->getAccessibleMock(
-            AbstractDemandedRepository::class,
-            array('dummy', 'createConstraintsFromDemand'), array(), '', false);
+        $fixture = $this->getMockBuilder(AbstractDemandedRepository::class)->disableOriginalConstructor()->getMockForAbstractClass();
         $constraints = array();
         $conjunction = 'NotOr';
         $mockQuery = $this->getMockQuery(['logicalNot', 'logicalOr']);
@@ -424,8 +419,8 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
         $mockQuery->expects($this->once())
             ->method('logicalNot')
             ->with($mockConstraint);
-        $fixture->_callRef(
-            'combineConstraints',
+
+        $fixture->combineConstraints(
             $mockQuery,
             $constraints,
             $additionalConstraint,

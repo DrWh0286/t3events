@@ -3,17 +3,22 @@
 namespace DWenzel\T3events\Controller;
 
 use DWenzel\T3events\Utility\SettingsInterface as SI;
+use TYPO3\CMS\Core\Http\ImmediateResponseException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Property\Exception as PropertyException;
+use TYPO3\CMS\Frontend\Controller\ErrorController;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3\CMS\Frontend\Page\PageAccessFailureReasons;
 
 /**
  * Class EntityNotFoundHandlerTrait
  *
  * @package DWenzel\T3events\Controller
+ * @deprecated This needs to be replaced errorAction()!
+ * @todo: Replace this!
  */
 trait EntityNotFoundHandlerTrait
 {
@@ -102,6 +107,7 @@ trait EntityNotFoundHandlerTrait
      * @param string $configuration Configuration for handling
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
+     * @throws ImmediateResponseException
      */
     public function handleEntityNotFoundError(string $configuration): void
     {
@@ -132,7 +138,11 @@ trait EntityNotFoundHandlerTrait
                 }
                 break;
             case 'pageNotFoundHandler':
-                $this->getFrontendController()->pageNotFoundAndExit($this->entityNotFoundMessage);
+                //@todo: pageNotFoundAndExit() does not exist anymore!
+                /** @var ErrorController $errorController */
+                $errorController = GeneralUtility::makeInstance(ErrorController::class);
+                $response = $errorController->pageNotFoundAction($this->request, $this->entityNotFoundMessage, ['code' => PageAccessFailureReasons::PAGE_NOT_FOUND]);
+                throw new ImmediateResponseException($response);
                 break;
             default:
                 $params = [

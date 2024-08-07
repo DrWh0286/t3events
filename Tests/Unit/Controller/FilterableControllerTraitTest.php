@@ -37,6 +37,11 @@ class DummyControllerWithAudienceRepository
 
     protected $audienceRepository;
 
+    public function __construct(AudienceRepository $audienceRepository)
+    {
+        $this->audienceRepository = $audienceRepository;
+    }
+
     /**
      * Mock translate function
      *
@@ -55,7 +60,7 @@ class DummyControllerWithAudienceRepository
         $arguments = null
     ): string
     {
-        return 'foo';
+        return 'label.period';
     }
 }
 
@@ -74,9 +79,15 @@ class FilterableControllerTraitTest extends UnitTestCase
 
     protected function setUp(): void
     {
-        $this->subject = $this->getMockForTrait(
-            FilterableControllerTrait::class
-        );
+        $this->subject = new class
+        {
+            use FilterableControllerTrait;
+
+            public function translate($key, $extension = 't3events', $arguments = null)
+            {
+                // TODO: Implement translate() method.
+            }
+        };
     }
 
     /**
@@ -131,15 +142,14 @@ class FilterableControllerTraitTest extends UnitTestCase
      */
     public function getFilterOptionsAddsAllOptionsForExistingRepositoryProperty(): void
     {
-        $this->subject = $this->getMockBuilder(DummyControllerWithAudienceRepository::class)
-            ->setMethods(['translate'])->getMock();
+        $audienceRepository = $this->getMockAudienceRepository(['findAll']);
+        $this->subject = new DummyControllerWithAudienceRepository($audienceRepository);
 
         $settings = [
             'audience' => ''
         ];
-        $audienceRepository = $this->getMockAudienceRepository(['findAll']);
+
         $mockQueryResult = $this->getMockQueryResult();
-        $this->inject($this->subject, 'audienceRepository', $audienceRepository);
 
         $audienceRepository->expects($this->once())
             ->method('findAll')
@@ -166,11 +176,7 @@ class FilterableControllerTraitTest extends UnitTestCase
         ];
         $audienceRepository = $this->getMockAudienceRepository(['findMultipleByUid']);
         $mockQueryResult = $this->getMockQueryResult();
-        $this->subject = $this->getAccessibleMock(
-            DummyControllerWithAudienceRepository::class, ['dummy']
-        );
-
-        $this->inject($this->subject, 'audienceRepository', $audienceRepository);
+        $this->subject = new DummyControllerWithAudienceRepository($audienceRepository);
 
         $audienceRepository->expects($this->once())
             ->method('findMultipleByUid')
@@ -193,13 +199,12 @@ class FilterableControllerTraitTest extends UnitTestCase
      */
     public function getFilterOptionsAddsDefaultPeriodOptions(): void
     {
-        $this->subject = $this->getAccessibleMock(
-            DummyControllerWithAudienceRepository::class, ['translate']
-        );
+        $audienceRepository = $this->getMockAudienceRepository(['findAll']);
+        $this->subject = new DummyControllerWithAudienceRepository($audienceRepository);
 
-        $this->subject->expects($this->any())
-            ->method('translate')
-            ->will($this->returnValue('label.period'));
+//        $this->subject->expects($this->any())
+//            ->method('translate')
+//            ->will($this->returnValue('label.period'));
         $settings = [
             'periods' => ''
         ];

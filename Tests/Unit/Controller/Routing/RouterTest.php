@@ -15,6 +15,7 @@ namespace DWenzel\T3events\Tests\Unit\Controller\Routing;
 use DWenzel\T3events\Controller\Routing\Route;
 use DWenzel\T3events\Controller\Routing\Router;
 use DWenzel\T3events\Controller\Routing\RouterInterface;
+use DWenzel\T3events\ResourceNotFoundException;
 use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Core\SingletonInterface;
@@ -36,9 +37,7 @@ class RouterTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getAccessibleMock(
-            Router::class, ['dummy']
-        );
+        $this->subject = new Router();
     }
 
     /**
@@ -68,8 +67,12 @@ class RouterTest extends UnitTestCase
      */
     public function getRoutesReturnsAllRoutes(): void
     {
-        $routes = ['foo' => 'bar'];
-        $this->subject->_set('routes', $routes);
+        $routes = [
+            'foo' => $routeFoo = new Route('DummyOriginFoo'),
+            'bar' => $routeBar = new Route('DummyOriginBar')
+        ];
+        $this->subject->addRoute($routeFoo, 'foo');
+        $this->subject->addRoute($routeBar, 'bar');
 
         $this->assertSame(
             $routes,
@@ -118,11 +121,11 @@ class RouterTest extends UnitTestCase
 
     /**
      * @test
-     * @expectedException \DWenzel\T3events\ResourceNotFoundException
-     * @expectedExceptionCode 1478437880
      */
     public function getRouteThrowsExceptionForMissingRoute(): void
     {
+        $this->expectException(ResourceNotFoundException::class);
+        $this->expectExceptionCode(1478437880);
         $this->subject->getRoute('invalidRouteIdentifier');
     }
 

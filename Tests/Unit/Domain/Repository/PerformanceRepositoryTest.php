@@ -61,16 +61,8 @@ class PerformanceRepositoryTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getAccessibleMock(
-            PerformanceRepository::class,
-            ['dummy'], [], '', false
-        );
         $this->objectManager = $this->getMockObjectManager();
-        $this->inject(
-            $this->subject,
-            'objectManager',
-            $this->objectManager
-        );
+        $this->subject = new PerformanceRepository($this->objectManager);
     }
 
     /**
@@ -228,8 +220,11 @@ class PerformanceRepositoryTest extends UnitTestCase
      */
     public function initializeObjectInitiallySetsRespectStoragePageFalse(): void
     {
+        $emSettings = [
+            'respectPerformanceStoragePage' => false
+        ];
+        $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['t3events'] = $emSettings;
         $mockQuerySettings = $this->getMockQuerySettings(['setRespectStoragePage']);
-
         $this->objectManager->expects($this->once())
             ->method('get')
             ->with(Typo3QuerySettings::class)

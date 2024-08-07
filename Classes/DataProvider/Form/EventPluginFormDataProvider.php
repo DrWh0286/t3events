@@ -23,20 +23,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class EventPluginFormDataProvider implements FormDataProviderInterface
 {
     /**
-     * @var BackendUtility
-     */
-    protected $backendUtility;
-
-    /**
      * injects the backend utility
      * @param BackendUtility|null $backendUtility
      */
-    public function __construct($backendUtility = null)
+    public function __construct(private readonly BackendUtility $backendUtility)
     {
-        if (!$backendUtility instanceof BackendUtility) {
-            $backendUtility = GeneralUtility::makeInstance(BackendUtility::class);
-        }
-        $this->backendUtility = $backendUtility;
     }
 
     /**

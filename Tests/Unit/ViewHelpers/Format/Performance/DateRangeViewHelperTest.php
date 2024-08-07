@@ -15,6 +15,7 @@ namespace DWenzel\T3events\Tests\Unit\ViewHelpers\Format\Performance;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DWenzel\T3events\Domain\Model\Event;
 use DWenzel\T3events\Domain\Model\Performance;
 use DWenzel\T3events\ViewHelpers\Format\Performance\DateRangeViewHelper;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -61,7 +62,7 @@ class DateRangeViewHelperTest extends UnitTestCase
 
 
         $customGlue = ' till ';
-        $customFormatRequiringStrftime = '%A %e %B %Y';
+
         return [
             // performance with start date only, default date format and glue
             [
@@ -86,14 +87,12 @@ class DateRangeViewHelperTest extends UnitTestCase
                 // arguments
                 [
                     'performance' => $performanceWithDifferentStartAndEndDate,
-                    'startFormat' => $customFormatRequiringStrftime,
-                    'endFormat' => $customFormatRequiringStrftime,
                     'glue' => $customGlue
                 ],
                 // expected
-                strftime($customFormatRequiringStrftime, $yesterdaysDate->getTimestamp())
+                $yesterdaysDate->format(DateRangeViewHelper::DEFAULT_DATE_FORMAT)
                 . $customGlue
-                . strftime($customFormatRequiringStrftime, $todaysDate->getTimestamp())
+                . $todaysDate->format(DateRangeViewHelper::DEFAULT_DATE_FORMAT)
             ],// performance with same start and end date, default date format and glue
             [
                 // arguments
@@ -141,5 +140,52 @@ class DateRangeViewHelperTest extends UnitTestCase
             $expected,
             $this->subject->render()
         );
+    }
+
+    /**
+     * @test
+     */
+    public function formatWithPercentageThrowsAnException(): void
+    {
+        $yesterdaysDate = new \DateTime('yesterday');
+        $todaysDate = new \DateTime('today');
+        $tomorrowsDate = new \DateTime('tomorrow');
+
+        $performanceYesterday = new Performance();
+        $performanceToday = new Performance();
+        $performanceTomorrow = new Performance();
+        $performanceYesterday->setDate($yesterdaysDate);
+        $performanceToday->setDate($todaysDate);
+        $performanceTomorrow->setDate($tomorrowsDate);
+
+        $eventWithOnePerformance = new Event();
+        $eventWithOnePerformance->addPerformance($performanceYesterday);
+
+        $eventWithTwoPerformances = new Event();
+        $eventWithTwoPerformances->addPerformance($performanceYesterday);
+        $eventWithTwoPerformances->addPerformance($performanceToday);
+
+        $eventWithThreePerformances = new Event();
+        $eventWithThreePerformances->addPerformance($performanceYesterday);
+        $eventWithThreePerformances->addPerformance($performanceToday);
+
+        $customFormatRequiringStrftime = '%A %e %B %Y';
+
+        $performanceWithStartDateOnly = new Performance();
+        $performanceWithStartDateOnly->setDate($yesterdaysDate);
+
+        $arguments = [
+            'performance' => $performanceWithStartDateOnly,
+            'event' => $eventWithThreePerformances,
+            'startFormat' => $customFormatRequiringStrftime,
+            'endFormat' => $customFormatRequiringStrftime,
+            'glue' => 'till',
+        ];
+
+        $this->subject->setArguments($arguments);
+        $this->subject->expects($this->once())->method('initialize');
+
+        $this->expectException(\RuntimeException::class);
+        $this->subject->render();
     }
 }

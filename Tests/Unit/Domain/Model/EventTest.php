@@ -605,26 +605,15 @@ class EventTest extends UnitTestCase
     }
 
     /**
-     * @param array $methods Methods to mock
-     * @return Event|MockObject
-     */
-    protected function getMockEvent(array $methods = [])
-    {
-        return $this->getMockBuilder(Event::class)
-            ->setMethods($methods)
-            ->getMock();
-    }
-
-    /**
      * @test
      */
     public function getEarliestDateReturnsEarliestDate(): void
     {
-        $earliestDate = new \DateTime('@1');
-        $laterDate = new \DateTime('@5');
+        $earliestDate = new \DateTime('2024-01-01 08:00:00');
+        $laterDate = new \DateTime('2024-01-02 08:00:00');
         $mockPerformanceA = $this->getMockPerformance(['getDate']);
         $mockPerformanceB = $this->getMockPerformance(['getDate']);
-        $fixture = $this->getMockEvent(['dummy']);
+        $fixture = new Event();
         $fixture->addPerformance($mockPerformanceA);
         $fixture->addPerformance($mockPerformanceB);
         $mockPerformanceA->expects($this->once())->method('getDate')
@@ -632,7 +621,7 @@ class EventTest extends UnitTestCase
         $mockPerformanceB->expects($this->once())->method('getDate')
             ->will($this->returnValue($laterDate));
         $this->assertSame(
-            1,
+            $earliestDate->getTimestamp(),
             $fixture->getEarliestDate()
         );
     }

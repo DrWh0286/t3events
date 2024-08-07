@@ -20,9 +20,17 @@ use DWenzel\T3events\Domain\Factory\Dto\EventDemandFactory;
 use DWenzel\T3events\Domain\Model\Dto\DemandInterface;
 use DWenzel\T3events\Domain\Model\Dto\EventDemand;
 use DWenzel\T3events\Domain\Model\Dto\ModuleData;
+use DWenzel\T3events\Domain\Model\Dto\SearchFactory;
 use DWenzel\T3events\Domain\Repository\EventRepository;
+use DWenzel\T3events\Domain\Repository\VenueRepository;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\StreamFactoryInterface;
+use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
@@ -82,15 +90,38 @@ class EventControllerTest extends UnitTestCase
      * @var UriBuilder|MockObject
      */
     protected $uriBuilder;
+    /**
+     * @var (object&MockObject)|MockObject|ModuleTemplateFactory|(ModuleTemplateFactory&object&MockObject)|(ModuleTemplateFactory&MockObject)
+     */
+    private ModuleTemplateFactory|MockObject $moduleTemplateFactory;
+    /**
+     * @var VenueRepository|(VenueRepository&object&MockObject)|(VenueRepository&MockObject)|(object&MockObject)|MockObject
+     */
+    private MockObject|VenueRepository $venueRepository;
+    private RequestInterface|MockObject $request;
+    /**
+     * @var MockObject|(StreamFactoryInterface&MockObject)
+     */
+    private StreamFactoryInterface|MockObject $streamFactory;
+    /**
+     * @var MockObject|(ResponseFactoryInterface&MockObject)
+     */
+    private MockObject|ResponseFactoryInterface $responseFactory;
+    private MockObject|SearchFactory $searchFactory;
 
     /**
      * set up
      */
     protected function setUp(): void
     {
+        $this->moduleTemplateFactory = $this->createMock(ModuleTemplateFactory::class);
+        $this->venueRepository = $this->createMock(VenueRepository::class);
+        $this->searchFactory = $this->createMock(SearchFactory::class);
+
         $this->subject = $this->getAccessibleMock(
             EventController::class,
-            ['emitSignal', 'getFilterOptions', 'overwriteDemandObject', 'addFlashMessage', 'translate', 'callStatic']
+            ['emitSignal', 'getFilterOptions', 'overwriteDemandObject', 'addFlashMessage', 'translate', 'callStatic'],
+            [$this->moduleTemplateFactory, $this->venueRepository, $this->searchFactory]
         );
         $this->view = $this->getMockForAbstractClass(
             ViewInterface::class
@@ -108,13 +139,11 @@ class EventControllerTest extends UnitTestCase
             ->setMethods(['createFromSettings'])->getMock();
         $this->subject->injectEventDemandFactory($this->eventDemandFactory);
         $this->subject->injectConfigurationManager($this->configurationManager);
-        $this->inject(
-            $this->subject,
+        $this->subject->_set(
             'view',
             $this->view
         );
-        $this->inject(
-            $this->subject,
+        $this->subject->_set(
             SI::SETTINGS,
             []
         );
@@ -128,7 +157,16 @@ class EventControllerTest extends UnitTestCase
             ->disableOriginalConstructor()
             ->getMock();
         $this->uriBuilder = $this->getMockBuilder(UriBuilder::class)
-            ->setMethods(['buildUriFromRoute'])->getMock();
+            ->disableOriginalConstructor()->getMock();
+
+        $this->request = $this->getMockBuilder(ServerRequestInterface::class)->getMock();
+        $this->subject->_set('request', $this->request);
+
+        $this->responseFactory = $this->getMockBuilder(ResponseFactoryInterface::class)->getMock();
+        $this->subject->injectResponseFactory($this->responseFactory);
+
+        $this->streamFactory = $this->getMockBuilder(StreamFactoryInterface::class)->getMock();
+        $this->subject->injectStreamFactory($this->streamFactory);
     }
 
     /**
@@ -143,11 +181,7 @@ class EventControllerTest extends UnitTestCase
             DemandInterface::class
         );
 
-        $this->inject(
-            $this->subject,
-            SI::SETTINGS,
-            $settings
-        );
+        $this->subject->_set(SI::SETTINGS, $settings);
 
         /** @var EventDemandFactory| \PHPUnit_Framework_MockObject_MockObject $demandFactory */
         $demandFactory = $this->subject->_get('eventDemandFactory');
@@ -155,6 +189,11 @@ class EventControllerTest extends UnitTestCase
             ->method('createFromSettings')
             ->with($settings)
             ->will($this->returnValue($mockDemand));
+
+        $response = $this->createMock(ResponseInterface::class);
+        $this->responseFactory->expects($this->once())->method('createResponse')->willReturn($response);
+        $response->expects($this->any())->method('withHeader')->willReturn($response);
+        $response->expects($this->any())->method('withBody')->willReturn($response);
 
         $this->subject->listAction();
     }
@@ -167,6 +206,12 @@ class EventControllerTest extends UnitTestCase
         $this->mockCreateDemandFromSettings();
         $this->moduleData->expects($this->once())
             ->method('getOverwriteDemand');
+
+        $response = $this->createMock(ResponseInterface::class);
+        $this->responseFactory->expects($this->once())->method('createResponse')->willReturn($response);
+        $response->expects($this->any())->method('withHeader')->willReturn($response);
+        $response->expects($this->any())->method('withBody')->willReturn($response);
+
         $this->subject->listAction();
     }
 
@@ -199,6 +244,11 @@ class EventControllerTest extends UnitTestCase
             ->method('setOverwriteDemand')
             ->with($overwriteDemand);
 
+        $response = $this->createMock(ResponseInterface::class);
+        $this->responseFactory->expects($this->once())->method('createResponse')->willReturn($response);
+        $response->expects($this->any())->method('withHeader')->willReturn($response);
+        $response->expects($this->any())->method('withBody')->willReturn($response);
+
         $this->subject->listAction($overwriteDemand);
     }
 
@@ -212,6 +262,11 @@ class EventControllerTest extends UnitTestCase
         $this->subject->expects($this->once())
             ->method('overwriteDemandObject')
             ->with($mockDemandObject, $overwriteDemand);
+
+        $response = $this->createMock(ResponseInterface::class);
+        $this->responseFactory->expects($this->once())->method('createResponse')->willReturn($response);
+        $response->expects($this->any())->method('withHeader')->willReturn($response);
+        $response->expects($this->any())->method('withBody')->willReturn($response);
 
         $this->subject->listAction($overwriteDemand);
     }
@@ -227,6 +282,11 @@ class EventControllerTest extends UnitTestCase
         $this->subject->expects($this->once())
             ->method('emitSignal');
 
+        $response = $this->createMock(ResponseInterface::class);
+        $this->responseFactory->expects($this->once())->method('createResponse')->willReturn($response);
+        $response->expects($this->any())->method('withHeader')->willReturn($response);
+        $response->expects($this->any())->method('withBody')->willReturn($response);
+
         $this->subject->listAction();
     }
 
@@ -241,6 +301,12 @@ class EventControllerTest extends UnitTestCase
         // can not match expectedTemplateVariables as soon as method 'emitSignal' is called.
         $this->view->expects($this->once())
             ->method('assignMultiple');
+
+        $response = $this->createMock(ResponseInterface::class);
+        $this->responseFactory->expects($this->once())->method('createResponse')->willReturn($response);
+        $response->expects($this->any())->method('withHeader')->willReturn($response);
+        $response->expects($this->any())->method('withBody')->willReturn($response);
+
         $this->subject->listAction();
     }
 
@@ -252,11 +318,8 @@ class EventControllerTest extends UnitTestCase
         $tableName = 'tx_t3events_domain_model_event';
         $pageId = '14';
         $returnUrl = 'bazBar.html';
-        $this->inject(
-            $this->subject,
-            'pageUid',
-            $pageId
-        );
+
+        $this->subject->_set('pageUid', $pageId);
 
         $expectedUriBuilderParameters = [
             SI::ROUTE_EDIT_RECORD_MODULE,
@@ -292,6 +355,11 @@ class EventControllerTest extends UnitTestCase
                 $redirectUrl
             );
 
+        $response = $this->createMock(ResponseInterface::class);
+        $this->responseFactory->expects($this->once())->method('createResponse')->willReturn($response);
+        $response->expects($this->any())->method('withHeader')->willReturn($response);
+        $response->expects($this->any())->method('withBody')->willReturn($response);
+
         $this->subject->newAction();
     }
 
@@ -313,10 +381,12 @@ class EventControllerTest extends UnitTestCase
             ->with(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK)
             ->will($this->returnValue($configuration));
         $this->subject->initializeNewAction();
-        $this->assertAttributeEquals(
+
+        $pageUid = $this->subject->_get('pageUid');
+
+        $this->assertSame(
             $pageIdFromFrameWorkConfiguration,
-            'pageUid',
-            $this->subject
+            $pageUid
         );
     }
 
@@ -345,10 +415,13 @@ class EventControllerTest extends UnitTestCase
             ->with(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK)
             ->will($this->returnValue($configuration));
         $this->subject->initializeNewAction();
-        $this->assertAttributeEquals(
+
+        $pageUid = $this->subject->_get('pageUid');
+
+
+        $this->assertSame(
             $pageIdFromModuleSettings,
-            'pageUid',
-            $this->subject
+            $pageUid
         );
     }
 

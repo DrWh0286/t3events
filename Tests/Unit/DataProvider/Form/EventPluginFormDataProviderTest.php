@@ -40,11 +40,11 @@ class EventPluginFormDataProviderTest extends UnitTestCase
         if (!interface_exists(FormDataProviderInterface::class)) {
             $this->markTestSkipped();
         }
-        $this->subject = $this->getMockBuilder(EventPluginFormDataProvider::class)
-            ->setMethods(['dummy'])->getMock();
+
         $this->backendUtility = $this->getMockBuilder(BackendUtility::class)
             ->setMethods(['getFlexFormDS_postProcessDS'])->getMock();
-        $this->subject->__construct($this->backendUtility);
+
+        $this->subject = new EventPluginFormDataProvider($this->backendUtility);
     }
 
     /**
@@ -56,19 +56,6 @@ class EventPluginFormDataProviderTest extends UnitTestCase
         $this->assertSame(
             $originalResult,
             $this->subject->addData($originalResult)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function backendUtilityCanBeInjected(): void
-    {
-        $this->subject->__construct($this->backendUtility);
-        $this->assertAttributeSame(
-            $this->backendUtility,
-            'backendUtility',
-            $this->subject
         );
     }
 

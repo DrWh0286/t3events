@@ -23,6 +23,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  *  GNU General Public License for more details.
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
 class PerformanceRepositoryTraitTest extends UnitTestCase
 {
     /**
@@ -35,9 +36,18 @@ class PerformanceRepositoryTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getMockForTrait(
-            PerformanceRepositoryTrait::class
-        );
+        $this->subject = new class
+        {
+            use PerformanceRepositoryTrait;
+
+            /**
+             * @return PerformanceRepository
+             */
+            public function getPerformanceRepository(): PerformanceRepository
+            {
+                return $this->performanceRepository;
+            }
+        };
     }
 
     /**
@@ -51,10 +61,9 @@ class PerformanceRepositoryTraitTest extends UnitTestCase
 
         $this->subject->injectPerformanceRepository($performanceRepository);
 
-        $this->assertAttributeSame(
+        $this->assertSame(
             $performanceRepository,
-            'performanceRepository',
-            $this->subject
+            $this->subject->getPerformanceRepository()
         );
     }
 }

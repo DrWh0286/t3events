@@ -23,6 +23,7 @@ use DWenzel\T3events\Domain\Repository\GenreRepository;
 /**
  * Class GenreRepositoryTrait
  * Provides a GenreRepository
+ * @deprecated Needs to be replaced with DI!
  */
 trait GenreRepositoryTrait
 {

@@ -45,29 +45,14 @@ class ModuleDataStorageServiceTest extends UnitTestCase
 
     protected function setUp(): void
     {
-        $GLOBALS['BE_USER'] = $this->mockBackendUserAuthentication();
-        $this->subject = $this->getAccessibleMock(
-            ModuleDataStorageService::class, ['dummy']
-        );
+        $this->subject = new ModuleDataStorageService();
     }
 
     protected function mockBackendUserAuthentication()
     {
         return $this->getMockBuilder(BackendUserAuthentication::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getModuleData', 'pushModuleData'])
             ->getMock();
-    }
-
-    /**
-     * @test
-     */
-    public function getBackendUserAuthenticationReturnsAuthenticationFromGlobals(): void
-    {
-        self::assertSame(
-            $GLOBALS['BE_USER'],
-            $this->subject->getBackendUserAuthentication()
-        );
     }
 
     /**
@@ -75,15 +60,10 @@ class ModuleDataStorageServiceTest extends UnitTestCase
      */
     public function persistModuleDataCanBePersisted(): void
     {
-        $this->subject = $this->getAccessibleMock(
-            ModuleDataStorageService::class, ['getBackendUserAuthentication']
-        );
         $key = 'foo';
         $moduleData = new ModuleData();
         $mockBackendUserAuthentication = $this->mockBackendUserAuthentication();
-        $this->subject->expects(self::any())
-            ->method('getBackendUserAuthentication')
-            ->willReturn($mockBackendUserAuthentication);
+        $GLOBALS['BE_USER'] = $mockBackendUserAuthentication;
 
         $mockBackendUserAuthentication->expects(self::once())
             ->method('pushModuleData')
@@ -98,19 +78,15 @@ class ModuleDataStorageServiceTest extends UnitTestCase
     public function loadModuleDataInitiallyReturnsNewModuleDataObject(): void
     {
         $key = 'foo';
-        /** @var ObjectManager|MockObject $mockObjectManager */
-        $mockObjectManager = $this->getMockObjectManager();
-        $this->subject->injectObjectManager($mockObjectManager);
-        $mockModuleData = $this->getMockModuleData();
-        $mockObjectManager->expects(self::once())
-            ->method('get')
-            ->with(ModuleData::class)
-            ->will(self::returnValue($mockModuleData));
 
-        self::assertSame(
-            $mockModuleData,
-            $this->subject->loadModuleData($key)
-        );
+        $mockBackendUserAuthentication = $this->mockBackendUserAuthentication();
+        $GLOBALS['BE_USER'] = $mockBackendUserAuthentication;
+
+        $mockBackendUserAuthentication->expects(self::once())
+            ->method('getModuleData')
+            ->will(self::returnValue(null));
+
+        $this->assertInstanceOf(ModuleData::class, $this->subject->loadModuleData($key));
     }
 
     /**
@@ -118,33 +94,18 @@ class ModuleDataStorageServiceTest extends UnitTestCase
      */
     public function loadModuleDataReturnsModuleDataFromBackendUserAuthentication(): void
     {
-        $this->subject = $this->getAccessibleMock(
-            ModuleDataStorageService::class, ['getBackendUserAuthentication']
-        );
         $key = 'foo';
         $mockBackendUserAuthentication = $this->mockBackendUserAuthentication();
-        $this->subject->expects(self::any())
-            ->method('getBackendUserAuthentication')
-            ->will(self::returnValue($mockBackendUserAuthentication));
+        $GLOBALS['BE_USER'] = $mockBackendUserAuthentication;
 
-        $mockModuleData = $this->getMockModuleData();
+        $moduleData = new ModuleData();
         $mockBackendUserAuthentication->expects(self::once())
             ->method('getModuleData')
-            ->will(self::returnValue(serialize($mockModuleData)));
+            ->will(self::returnValue(serialize($moduleData)));
 
         self::assertEquals(
-            $mockModuleData,
+            $moduleData,
             $this->subject->loadModuleData($key)
         );
-    }
-
-    /**
-     * @return MockObject
-     */
-    protected function getMockModuleData(): MockObject
-    {
-        $mockModuleData = $this->getMockBuilder(ModuleData::class)
-            ->getMock();
-        return $mockModuleData;
     }
 }

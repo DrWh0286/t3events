@@ -17,8 +17,8 @@ use DWenzel\T3events\Controller\Routing\RouterInterface;
 use DWenzel\T3events\Controller\RoutingTrait;
 use DWenzel\T3events\Controller\SignalInterface;
 use DWenzel\T3events\Controller\SignalTrait;
+use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
-use TYPO3\CMS\Extbase\Mvc\Web\Request;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 
 class MockSignalController implements SignalInterface
@@ -43,9 +43,20 @@ class RoutingTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getMockForTrait(
-            RoutingTrait::class
-        );
+        $this->subject = new class
+        {
+            use RoutingTrait;
+
+            public function setRequest(Request $request)
+            {
+                $this->request = $request;
+            }
+
+            public function getRouter()
+            {
+                return $this->router;
+            }
+        };
     }
 
     /**
@@ -56,8 +67,8 @@ class RoutingTraitTest extends UnitTestCase
         $router = $this->getMockRouter();
         $this->subject->injectRouter($router);
 
-        $this->assertAttributeEquals(
-            $router, 'router', $this->subject
+        $this->assertEquals(
+            $router, $this->subject->getRouter()
         );
     }
 
@@ -68,9 +79,11 @@ class RoutingTraitTest extends UnitTestCase
     {
         $identifier = 'foo';
 
-        $mockRequest = $this->getMockBuilder(\TYPO3\CMS\Extbase\Mvc\Request::class)
+        $mockRequest = $this->getMockBuilder(Request::class)
             ->setMethods(['getControllerActionName', 'getControllerObjectName'])->getMock();
-        $this->inject($this->subject, 'request', $mockRequest);
+
+        $this->subject->setRequest($mockRequest);
+
         $mockRequest->expects($this->once())
             ->method('getControllerActionName');
         $mockRequest->expects($this->once())

@@ -24,9 +24,12 @@ use DWenzel\T3events\Domain\Model\Dto\EventDemand;
 use DWenzel\T3events\Domain\Model\Dto\Search;
 use DWenzel\T3events\Domain\Repository\EventRepository;
 use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
+use UnexpectedValueException;
 
 
 /**
@@ -50,8 +53,8 @@ class EventRepositoryTest extends UnitTestCase
 
     protected function setUp(): void
     {
-        $this->fixture = $this->getAccessibleMock(EventRepository::class,
-            array('dummy'), array(), '', false);
+        $this->objectManager = $this->createMock(ObjectManagerInterface::class);
+        $this->fixture = new EventRepository($this->objectManager);
     }
 
     /**
@@ -333,8 +336,6 @@ class EventRepositoryTest extends UnitTestCase
     /**
      * @test
      * @covers ::createSearchConstraints
-     * @expectedException \UnexpectedValueException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function createSearchConstraintsThrowsExceptionForMissingSearchFields(): void
     {
@@ -351,8 +352,10 @@ class EventRepositoryTest extends UnitTestCase
             ->will($this->returnValue('foo')
             );
 
+        $this->expectException(UnexpectedValueException::class);
+
         $this->assertEquals(
-            array(),
+            [],
             $this->fixture->createSearchConstraints($query, $demand)
         );
     }

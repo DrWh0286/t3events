@@ -36,11 +36,7 @@ class PersonDemandFactoryTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getAccessibleMock(
-            PersonDemandFactory::class, ['dummy'], [], '', false
-        );
-        $this->objectManager = $this->getMockObjectManager();
-        $this->subject->injectObjectManager($this->objectManager);
+        $this->subject = new PersonDemandFactory();
     }
 
     /**
@@ -48,14 +44,8 @@ class PersonDemandFactoryTest extends UnitTestCase
      */
     public function createFromSettingsReturnsPersonDemand(): void
     {
-        $mockDemand = $this->getMockPersonDemand();
-        $this->objectManager->expects($this->once())
-            ->method('get')
-            ->with(PersonDemand::class)
-            ->will($this->returnValue($mockDemand));
-
-        $this->assertSame(
-            $mockDemand,
+        $this->assertEquals(
+            new PersonDemand(),
             $this->subject->createFromSettings([])
         );
     }
@@ -101,15 +91,12 @@ class PersonDemandFactoryTest extends UnitTestCase
         $settings = [
             $propertyName => $settingsValue
         ];
-        $mockDemand = $this->getMockPersonDemand(['dummy']);
-        $this->objectManager->expects($this->once())
-            ->method('get')
-            ->will($this->returnValue($mockDemand));
+
         $createdDemand = $this->subject->createFromSettings($settings);
-        $this->assertAttributeSame(
+
+        $this->assertSame(
             $expectedValue,
-            $propertyName,
-            $createdDemand
+            $createdDemand->_getProperty($propertyName)
         );
     }
 
@@ -137,15 +124,12 @@ class PersonDemandFactoryTest extends UnitTestCase
         $settings = [
             $settingsKey => $settingsValue
         ];
-        $mockDemand = $this->getMockPersonDemand(['dummy']);
-        $this->objectManager->expects($this->once())
-            ->method('get')
-            ->will($this->returnValue($mockDemand));
+
         $createdDemand = $this->subject->createFromSettings($settings);
-        $this->assertAttributeSame(
+
+        $this->assertSame(
             $expectedValue,
-            $propertyName,
-            $createdDemand
+            $createdDemand->_getProperty($propertyName)
         );
     }
 
@@ -171,10 +155,7 @@ class PersonDemandFactoryTest extends UnitTestCase
         $settings = [
             $propertyName => $propertyValue
         ];
-        $mockDemand = $this->getMockPersonDemand(['dummy']);
-        $this->objectManager->expects($this->once())
-            ->method('get')
-            ->will($this->returnValue($mockDemand));
+        $mockDemand = new PersonDemand();
         $createdDemand = $this->subject->createFromSettings($settings);
 
         $this->assertEquals(
@@ -194,10 +175,6 @@ class PersonDemandFactoryTest extends UnitTestCase
         ];
         $expectedOrder = 'foo|bar';
 
-        $mockDemand = $this->getMockPersonDemand(['dummy']);
-        $this->objectManager->expects($this->once())
-            ->method('get')
-            ->will($this->returnValue($mockDemand));
         $createdDemand = $this->subject->createFromSettings($settings);
 
         $this->assertSame(

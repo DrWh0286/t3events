@@ -37,9 +37,7 @@ class RouteTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getAccessibleMock(
-            Route::class, ['dummy'], [self::DUMMY_ORIGIN]
-        );
+        $this->subject = new Route(self::DUMMY_ORIGIN);
     }
 
     /**
