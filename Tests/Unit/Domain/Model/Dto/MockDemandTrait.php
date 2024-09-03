@@ -1,6 +1,7 @@
 <?php
 
 namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
+
 use DWenzel\T3events\Domain\Model\Dto\DemandInterface;
 use PHPUnit\Framework\MockObject\MockBuilder;
 use PHPUnit\Framework\MockObject\MockObject;

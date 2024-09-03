@@ -7,6 +7,7 @@ use DWenzel\T3events\Domain\Repository\AudienceRepository;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
+
 /***************************************************************
  *
  *  Copyright notice
@@ -58,8 +59,7 @@ class DummyControllerWithAudienceRepository
         $extension = 't3events',
         /** @noinspection PhpUnusedParameterInspection */
         $arguments = null
-    ): string
-    {
+    ): string {
         return 'label.period';
     }
 }
@@ -71,7 +71,6 @@ class DummyControllerWithAudienceRepository
  */
 class FilterableControllerTraitTest extends UnitTestCase
 {
-
     /**
      * @var FilterableControllerTrait
      */
@@ -79,8 +78,7 @@ class FilterableControllerTraitTest extends UnitTestCase
 
     protected function setUp(): void
     {
-        $this->subject = new class
-        {
+        $this->subject = new class () {
             use FilterableControllerTrait;
 
             public function translate($key, $extension = 't3events', $arguments = null)
@@ -202,9 +200,9 @@ class FilterableControllerTraitTest extends UnitTestCase
         $audienceRepository = $this->getMockAudienceRepository(['findAll']);
         $this->subject = new DummyControllerWithAudienceRepository($audienceRepository);
 
-//        $this->subject->expects($this->any())
-//            ->method('translate')
-//            ->will($this->returnValue('label.period'));
+        //        $this->subject->expects($this->any())
+        //            ->method('translate')
+        //            ->will($this->returnValue('label.period'));
         $settings = [
             'periods' => ''
         ];

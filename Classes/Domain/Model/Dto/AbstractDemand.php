@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Domain\Model\Dto;
 
 /**
@@ -25,7 +26,6 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 class AbstractDemand extends AbstractEntity implements DemandInterface
 {
-
     /**
      * Category Conjunction
      *
@@ -93,7 +93,7 @@ class AbstractDemand extends AbstractEntity implements DemandInterface
     {
         $validatedLimit = (int)$limit;
 
-        if ( $validatedLimit > 0) {
+        if ($validatedLimit > 0) {
             $this->limit = $validatedLimit;
         }
     }

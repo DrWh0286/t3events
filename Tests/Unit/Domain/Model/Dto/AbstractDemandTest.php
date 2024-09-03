@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
 
 /***************************************************************
@@ -34,7 +35,6 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
  */
 class AbstractDemandTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
 {
-
     /**
      * @var \DWenzel\T3events\Domain\Model\Dto\AbstractDemand
      */
@@ -112,7 +112,8 @@ class AbstractDemandTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
         $this->fixture->setOffset();
         $this->assertSame(
             0,
-            $this->fixture->getOffset());
+            $this->fixture->getOffset()
+        );
     }
 
     /**
@@ -124,7 +125,8 @@ class AbstractDemandTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
         $this->fixture->setOffset(99);
         $this->assertSame(
             99,
-            $this->fixture->getOffset());
+            $this->fixture->getOffset()
+        );
     }
 
     /**

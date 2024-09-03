@@ -42,8 +42,7 @@ class FlashMessageTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = new class
-        {
+        $this->subject = new class () {
             use FlashMessageTrait;
 
             /**
@@ -177,7 +176,11 @@ class FlashMessageTraitTest extends UnitTestCase
         $severity = AbstractMessage::ERROR;
         $storeInSession = false;
         $expectedMessage = GeneralUtility::makeInstance(
-            FlashMessage::class, $messageBody, $messageTitle, $severity, $storeInSession
+            FlashMessage::class,
+            $messageBody,
+            $messageTitle,
+            $severity,
+            $storeInSession
         );
 
         $mockMessageQueue = $this->getMockFlashMessageQueue(['enqueue']);
@@ -187,7 +190,10 @@ class FlashMessageTraitTest extends UnitTestCase
             ->method('enqueue')
             ->with($this->equalTo($expectedMessage));
         $this->subject->addFlashMessage(
-            $messageBody, $messageTitle, $severity, $storeInSession
+            $messageBody,
+            $messageTitle,
+            $severity,
+            $storeInSession
         );
     }
 

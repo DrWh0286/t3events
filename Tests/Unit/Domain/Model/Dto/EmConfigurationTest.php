@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
 
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;

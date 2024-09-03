@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Tests\Unit\Controller;
 
 /**
@@ -35,8 +36,7 @@ class PersistenceManagerTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = new class
-        {
+        $this->subject = new class () {
             use PersistenceManagerTrait;
 
             public function getPersistenceManager()

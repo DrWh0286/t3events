@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Service;
 
 use DWenzel\T3events\Domain\Model\Notification;
@@ -218,7 +219,7 @@ class NotificationService
     protected function getPartialRootPaths()
     {
         $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-        return is_array($extbaseFrameworkConfiguration['view']['partialRootPaths'])? $extbaseFrameworkConfiguration['view']['partialRootPaths'] : [];
+        return is_array($extbaseFrameworkConfiguration['view']['partialRootPaths']) ? $extbaseFrameworkConfiguration['view']['partialRootPaths'] : [];
     }
 
     /**
@@ -236,7 +237,8 @@ class NotificationService
             ObjectAccess::setProperty(
                 $notification,
                 $property,
-                $oldNotification->_getProperty($property));
+                $oldNotification->_getProperty($property)
+            );
         }
 
         return $notification;

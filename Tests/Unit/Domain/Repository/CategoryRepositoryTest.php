@@ -35,7 +35,6 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
  */
 class CategoryRepositoryTest extends UnitTestCase
 {
-
     /**
      * @var \DWenzel\T3events\Domain\Repository\CategoryRepository
      */

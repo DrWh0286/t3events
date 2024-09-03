@@ -24,7 +24,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class TaskTest extends UnitTestCase
 {
-
     /**
      * @var \DWenzel\T3events\Domain\Model\Task
      */

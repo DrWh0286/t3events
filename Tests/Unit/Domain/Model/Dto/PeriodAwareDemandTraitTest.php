@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
 
 /***************************************************************
@@ -36,7 +37,6 @@ use DWenzel\T3events\Domain\Model\Dto\PeriodAwareDemandTrait;
  */
 class PeriodAwareDemandTraitTest extends UnitTestCase
 {
-
     /**
      * @var \DWenzel\T3events\Domain\Model\Dto\PeriodAwareDemandTrait
      */

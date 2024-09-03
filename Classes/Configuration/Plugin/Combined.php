@@ -6,7 +6,6 @@ use DWenzel\T3events\Controller\EventController;
 use DWenzel\T3events\Controller\PerformanceController;
 use DWenzel\T3extensionTools\Configuration\PluginConfigurationInterface;
 use DWenzel\T3extensionTools\Configuration\PluginConfigurationTrait;
-
 /***************************************************************
  *  Copyright notice
  *
@@ -35,20 +34,20 @@ abstract class Combined implements PluginConfigurationInterface
 {
     use PluginConfigurationTrait;
 
-    static protected string $pluginName = 'Events';
-    static protected string $pluginSignature = 't3events_events';
-    static protected string $pluginTitle = 'LLL:EXT:t3events/Resources/Private/Language/locallang_be.xlf:plugin.combined.title';
-    static protected string $flexForm = 'FILE:EXT:t3events/Configuration/FlexForms/flexform_events.xml';
-    static protected array $controllerActions = [
+    protected static string $pluginName = 'Events';
+    protected static string $pluginSignature = 't3events_events';
+    protected static string $pluginTitle = 'LLL:EXT:t3events/Resources/Private/Language/locallang_be.xlf:plugin.combined.title';
+    protected static string $flexForm = 'FILE:EXT:t3events/Configuration/FlexForms/flexform_events.xml';
+    protected static array $controllerActions = [
         EventController::class => 'list, show, quickMenu',
         PerformanceController::class => 'list, show, quickMenu',
     ];
 
-    static protected array $nonCacheableControllerActions = [
+    protected static array $nonCacheableControllerActions = [
         EventController::class => 'quickMenu',
         PerformanceController::class => 'quickMenu',
     ];
 
-    static protected string $extensionName = ExtensionConfiguration::EXTENSION_KEY;
-    static protected string $vendorExtensionName = ExtensionConfiguration::VENDOR . '.' . ExtensionConfiguration::EXTENSION_KEY;
+    protected static string $extensionName = ExtensionConfiguration::EXTENSION_KEY;
+    protected static string $vendorExtensionName = ExtensionConfiguration::VENDOR . '.' . ExtensionConfiguration::EXTENSION_KEY;
 }

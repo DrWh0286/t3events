@@ -27,7 +27,8 @@ use DWenzel\T3events\Domain\Repository\DemandedRepositoryInterface;
  */
 class AudienceFilter
 {
-    use AudienceRepositoryTrait, OptionsTrait;
+    use AudienceRepositoryTrait;
+    use OptionsTrait;
 
     public function getOptionRepository(): DemandedRepositoryInterface
     {

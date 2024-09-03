@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\ViewHelpers\Format;
 
 /*                                                                        *
@@ -65,7 +66,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class DateViewHelper extends AbstractViewHelper
 {
-
     /**
      * @var boolean
      */

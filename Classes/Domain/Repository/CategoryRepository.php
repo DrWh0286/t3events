@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Domain\Repository;
 
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;

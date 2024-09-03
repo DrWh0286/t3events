@@ -27,7 +27,6 @@ use PHPUnit\Framework\MockObject\MockObject;
  ***************************************************************/
 class SettingsUtilityTraitTest extends UnitTestCase
 {
-
     /**
      * @var SettingsUtilityTrait
      */

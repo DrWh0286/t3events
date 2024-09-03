@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
 
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -32,7 +33,6 @@ use PHPUnit\Framework\MockObject\MockObject;
  ***************************************************************/
 class ModuleDataTest extends UnitTestCase
 {
-
     /**
      * @var ModuleData
      */

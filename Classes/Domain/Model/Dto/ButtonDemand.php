@@ -1,6 +1,7 @@
 <?php
 
 namespace DWenzel\T3events\Domain\Model\Dto;
+
 use TYPO3\CMS\Core\Imaging\Icon;
 
 /***************************************************************
@@ -22,12 +23,12 @@ use TYPO3\CMS\Core\Imaging\Icon;
 
 class ButtonDemand
 {
-    const LABEL_KEY = 'label';
-    const ACTION_KEY = 'action';
-    const ICON_KEY = 'icon';
-    const ICON_SIZE_KEY = 'icon-size';
-    const TABLE_KEY = 'table';
-    const OVERLAY_KEY = 'overlay';
+    public const LABEL_KEY = 'label';
+    public const ACTION_KEY = 'action';
+    public const ICON_KEY = 'icon';
+    public const ICON_SIZE_KEY = 'icon-size';
+    public const TABLE_KEY = 'table';
+    public const OVERLAY_KEY = 'overlay';
 
     /**
      * @var string

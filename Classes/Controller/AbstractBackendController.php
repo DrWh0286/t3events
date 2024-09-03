@@ -19,7 +19,8 @@ abstract class AbstractBackendController extends ActionController
 {
     use ModuleDataTrait;
 
-    public function __construct(ModuleDataStorageService $moduleDataStorageService) {
+    public function __construct(ModuleDataStorageService $moduleDataStorageService)
+    {
         $this->moduleDataStorageService = $moduleDataStorageService;
     }
     /**

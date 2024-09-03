@@ -31,7 +31,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class PerformanceDemandTest extends UnitTestCase
 {
-
     /**
      * @var \DWenzel\T3events\Domain\Model\Dto\PerformanceDemand
      */

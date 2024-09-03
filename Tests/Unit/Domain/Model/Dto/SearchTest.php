@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Tests;
 
 /**
@@ -25,7 +26,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class SearchTest extends UnitTestCase
 {
-
     /**
      * @var \DWenzel\T3events\Domain\Model\Dto\Search
      */

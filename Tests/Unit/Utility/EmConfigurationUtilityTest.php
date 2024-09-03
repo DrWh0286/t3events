@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Utility;
 
 use DWenzel\T3events\Utility\EmConfigurationUtility;
@@ -31,7 +32,6 @@ use DWenzel\T3events\Domain\Model\Dto\EmConfiguration;
  ***************************************************************/
 class EmConfigurationUtilityTest extends UnitTestCase
 {
-
     /**
      * @test
      */

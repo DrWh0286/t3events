@@ -48,7 +48,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 class EventControllerTest extends UnitTestCase
 {
-
     /**
      * @var \DWenzel\T3events\Controller\EventController|\PHPUnit_Framework_MockObject_MockObject|AccessibleMockObjectInterface
      */
@@ -89,10 +88,10 @@ class EventControllerTest extends UnitTestCase
 
     protected function setUp(): void
     {
-//        $this->subject = $this->getAccessibleMock(
-//            EventController::class,
-//            ['overwriteDemandObject', 'emitSignal', 'addFlashMessage', 'translate'], [], '', false
-//        );
+        //        $this->subject = $this->getAccessibleMock(
+        //            EventController::class,
+        //            ['overwriteDemandObject', 'emitSignal', 'addFlashMessage', 'translate'], [], '', false
+        //        );
 
         $this->venueRepository = $this->getMockBuilder(VenueRepository::class)->disableOriginalConstructor()->getMock();
         $this->signalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();

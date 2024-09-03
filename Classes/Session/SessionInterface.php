@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Session;
 
 /**
@@ -8,7 +9,6 @@ namespace DWenzel\T3events\Session;
  */
 interface SessionInterface
 {
-
     /**
      * @param string $identifier
      * @param mixed $value

@@ -33,12 +33,13 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 class StatusConstraintRepositoryTraitTest extends UnitTestCase
 {
-    use MockDemandTrait, MockQueryTrait;
+    use MockDemandTrait;
+    use MockQueryTrait;
 
     /**
      * mock status field
      */
-    const STATUS_FIELD = 'foo';
+    public const STATUS_FIELD = 'foo';
 
     /**
      * @var \DWenzel\T3events\Domain\Repository\StatusConstraintRepositoryTrait
@@ -108,7 +109,8 @@ class StatusConstraintRepositoryTraitTest extends UnitTestCase
         $query->expects($this->once())
             ->method('in')
             ->with(
-                self::STATUS_FIELD, [1, 2]
+                self::STATUS_FIELD,
+                [1, 2]
             )
             ->will($this->returnValue($mockConstraint));
         $this->assertSame(

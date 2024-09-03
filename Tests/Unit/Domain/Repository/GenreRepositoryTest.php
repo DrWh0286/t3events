@@ -37,7 +37,8 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
  */
 class GenreRepositoryTest extends UnitTestCase
 {
-    use MockDemandTrait, MockQueryTrait;
+    use MockDemandTrait;
+    use MockQueryTrait;
 
     /**
      * @var \DWenzel\T3events\Domain\Repository\GenreRepository

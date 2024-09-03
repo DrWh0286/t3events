@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\ViewHelpers;
 
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
@@ -38,7 +39,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class HeaderDataViewHelper extends AbstractViewHelper
 {
-
     /**
      * Renders HeaderData
      *

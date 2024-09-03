@@ -24,7 +24,8 @@ use PHPUnit\Framework\MockObject\MockObject;
  *  GNU General Public License for more details.
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-class DummyWithAudienceRepository {
+class DummyWithAudienceRepository
+{
     use AudienceRepositoryTrait;
 
     public function getAudienceRepository(): AudienceRepository

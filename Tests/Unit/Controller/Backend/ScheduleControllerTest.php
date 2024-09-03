@@ -37,7 +37,6 @@ use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
  */
 class ScheduleControllerTest extends UnitTestCase
 {
-
     /**
      * @var ScheduleController|\PHPUnit_Framework_MockObject_MockObject|AccessibleMockObjectInterface
      */

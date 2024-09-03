@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Domain\Model\Dto;
 
 /***************************************************************
@@ -27,7 +28,6 @@ namespace DWenzel\T3events\Domain\Model\Dto;
  ***************************************************************/
 trait GenreAwareDemandTrait
 {
-
     /**
      * @var string
      */

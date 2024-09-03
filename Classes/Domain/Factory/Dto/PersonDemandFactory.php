@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Domain\Factory\Dto;
 
 /**
@@ -32,7 +33,7 @@ class PersonDemandFactory extends AbstractDemandFactory implements DemandFactory
     /**
      * Class name of the object created by this factory.
      */
-    const DEMAND_CLASS = PersonDemand::class;
+    public const DEMAND_CLASS = PersonDemand::class;
 
     /**
      * Properties which should be mapped when settings

@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Domain\Factory\Dto;
 
 /**

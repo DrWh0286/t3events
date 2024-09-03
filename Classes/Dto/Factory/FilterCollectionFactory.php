@@ -44,17 +44,16 @@ class FilterCollectionFactory
         /** @var FilterCollection $collection */
         $collection = GeneralUtility::makeInstance(FilterCollection::class);
 
-        if(empty($configuration)) {
+        if (empty($configuration)) {
             return $collection;
         }
 
-        foreach ($configuration as $key => $singleConfiguration){
+        foreach ($configuration as $key => $singleConfiguration) {
             if (!is_array($singleConfiguration)) {
                 $singleConfiguration = [$singleConfiguration];
             }
             $filter = $this->filterFactory->get($key, $singleConfiguration);
-            if ($filter instanceof NullFilter)
-            {
+            if ($filter instanceof NullFilter) {
                 continue;
             }
             $collection->attach($filter);

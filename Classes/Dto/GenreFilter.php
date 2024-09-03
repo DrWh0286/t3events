@@ -28,7 +28,8 @@ use DWenzel\T3events\Utility\SettingsInterface as SI;
  */
 class GenreFilter implements FilterInterface
 {
-    use GenreRepositoryTrait, OptionsTrait;
+    use GenreRepositoryTrait;
+    use OptionsTrait;
 
     public function getOptionRepository(): DemandedRepositoryInterface
     {

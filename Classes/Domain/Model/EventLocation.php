@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Domain\Model;
 
 use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;

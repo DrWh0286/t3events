@@ -17,7 +17,7 @@ class AudienceConstraintRepositoryTraitTest extends UnitTestCase
     /**
      * mock audience field
      */
-    const AUDIENCE_FIELD = 'foo';
+    public const AUDIENCE_FIELD = 'foo';
 
     /**
      * @var \DWenzel\T3events\Domain\Repository\AudienceConstraintRepositoryTrait

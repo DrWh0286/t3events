@@ -2,7 +2,6 @@
 
 namespace DWenzel\T3events\Domain\Model;
 
-
 /***************************************************************
  *  Copyright notice
  *

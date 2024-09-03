@@ -76,8 +76,7 @@ class BackendViewTraitTest extends UnitTestCase
             ->onlyMethods(['getConfiguration'])
             ->getMock();
 
-        $this->subject = new class ($this->configurationManager)
-        {
+        $this->subject = new class ($this->configurationManager) {
             use BackendViewTrait;
 
             private $getViewPropertyReturnValue = [];

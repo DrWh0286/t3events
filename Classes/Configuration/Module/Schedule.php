@@ -30,11 +30,11 @@ abstract class Schedule extends DefaultRegistration implements ModuleRegistratio
 {
     use ModuleRegistrationTrait;
 
-    static protected string $subModuleName = 'm2';
-    static protected array $controllerActions = [
+    protected static string $subModuleName = 'm2';
+    protected static array $controllerActions = [
         ScheduleController::class => 'list, show, edit, delete, reset',
     ];
-    static protected array $moduleConfiguration = [
+    protected static array $moduleConfiguration = [
         'access' => 'user,group',
         'icon' => 'EXT:t3events/Resources/Public/Icons/calendar-blue.svg',
         'labels' => 'LLL:EXT:t3events/Resources/Private/Language/locallang_m2.xlf',

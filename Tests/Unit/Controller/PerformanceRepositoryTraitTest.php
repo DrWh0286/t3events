@@ -36,8 +36,7 @@ class PerformanceRepositoryTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = new class
-        {
+        $this->subject = new class () {
             use PerformanceRepositoryTrait;
 
             /**

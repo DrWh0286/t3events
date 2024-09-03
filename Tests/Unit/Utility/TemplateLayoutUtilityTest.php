@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Tests\Unit\Utility;
 
 /**
@@ -21,7 +22,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class TemplateLayoutUtilityTest extends UnitTestCase
 {
-
     /**
      * @var TemplateLayoutUtility | \PHPUnit_Framework_MockObject_MockObject
      */
@@ -33,7 +33,8 @@ class TemplateLayoutUtilityTest extends UnitTestCase
     protected function setUp(): void
     {
         $this->subject = $this->getAccessibleMock(
-            TemplateLayoutUtility::class, ['getPageTSConfig']
+            TemplateLayoutUtility::class,
+            ['getPageTSConfig']
         );
     }
 

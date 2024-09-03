@@ -30,14 +30,14 @@ class PeriodFilter implements FilterInterface
 {
     use TranslateTrait;
 
-    const DEFAULT_OPTION_KEYS = [
+    public const DEFAULT_OPTION_KEYS = [
         SI::FUTURE_ONLY,
         SI::PAST_ONLY,
         SI::ALL,
         SI::SPECIFIC
     ];
 
-    const PREFIX_OPTION_LABEL_KEY = 'label.period.';
+    public const PREFIX_OPTION_LABEL_KEY = 'label.period.';
 
     protected $options = [];
 
@@ -60,7 +60,8 @@ class PeriodFilter implements FilterInterface
         }
         foreach ($keys as $key) {
             $label = $this->translate(
-                static::PREFIX_OPTION_LABEL_KEY . $key, SI::EXTENSION_KEY
+                static::PREFIX_OPTION_LABEL_KEY . $key,
+                SI::EXTENSION_KEY
             );
             $option = new Option();
             $option->setValue($key)

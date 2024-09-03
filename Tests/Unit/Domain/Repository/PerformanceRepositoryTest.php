@@ -49,7 +49,9 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
  */
 class PerformanceRepositoryTest extends UnitTestCase
 {
-    use MockQueryTrait, MockObjectManagerTrait, MockQuerySettingsTrait;
+    use MockQueryTrait;
+    use MockObjectManagerTrait;
+    use MockQuerySettingsTrait;
 
     /**
      * @var PerformanceRepository|AccessibleMockObjectInterface|\PHPUnit_Framework_MockObject_MockObject
@@ -78,7 +80,10 @@ class PerformanceRepositoryTest extends UnitTestCase
                 'createStatusConstraints',
                 'createCategoryConstraints',
                 'createSearchConstraints'
-            ], [], '', false
+            ],
+            [],
+            '',
+            false
         );
         /** @var QueryInterface|\PHPUnit_Framework_MockObject_MockObject $query */
         $query = $this->getMockBuilder(Query::class)
@@ -109,7 +114,11 @@ class PerformanceRepositoryTest extends UnitTestCase
                 'createStatusConstraints',
                 'createCategoryConstraints',
                 'createSearchConstraints'
-            ], [], '', false);
+            ],
+            [],
+            '',
+            false
+        );
         $demand = $this->getMockPerformanceDemand(['getEventLocations']);
         $query = $this->getMockQuery();
 
@@ -131,14 +140,19 @@ class PerformanceRepositoryTest extends UnitTestCase
                 'createStatusConstraints',
                 'createSearchConstraints',
                 'createCategoryConstraints'
-            ], [], '', false);
+            ],
+            [],
+            '',
+            false
+        );
         $demand = $this->getMockPerformanceDemand(['getEventLocations']);
         $query = $this->getMockQuery();
 
         $demand->expects($this->any())
             ->method('getEventLocations')
             ->with()
-            ->will($this->returnValue($locationIds)
+            ->will(
+                $this->returnValue($locationIds)
             );
         $expectedLocationParams = GeneralUtility::intExplode(',', $locationIds);
 
@@ -161,7 +175,11 @@ class PerformanceRepositoryTest extends UnitTestCase
                 'createSearchConstraints',
                 'createCategoryConstraints',
                 'combineConstraints'
-            ], [], '', false);
+            ],
+            [],
+            '',
+            false
+        );
         $demand = $this->getMockPerformanceDemand(['getEventLocations', 'isExcludeSelectedStatuses']);
         $query = $this->getMockQuery();
 
@@ -171,7 +189,8 @@ class PerformanceRepositoryTest extends UnitTestCase
         $this->subject->expects($this->once())
             ->method('createStatusConstraints')
             ->with($query, $demand)
-            ->will($this->returnValue($mockStatusConstraints)
+            ->will(
+                $this->returnValue($mockStatusConstraints)
             );
         $this->subject->expects($this->once())
             ->method('combineConstraints')
@@ -192,7 +211,11 @@ class PerformanceRepositoryTest extends UnitTestCase
                 'createSearchConstraints',
                 'createCategoryConstraints',
                 'combineConstraints'
-            ], [], '', false);
+            ],
+            [],
+            '',
+            false
+        );
         $demand = $this->getMockPerformanceDemand(['getEventLocations', 'isExcludeSelectedStatuses']);
         $query = $this->getMockQuery();
 
@@ -206,7 +229,8 @@ class PerformanceRepositoryTest extends UnitTestCase
         $this->subject->expects($this->once())
             ->method('createStatusConstraints')
             ->with($query, $demand)
-            ->will($this->returnValue($mockStatusConstraints)
+            ->will(
+                $this->returnValue($mockStatusConstraints)
             );
         $this->subject->expects($this->once())
             ->method('combineConstraints')
@@ -300,7 +324,11 @@ class PerformanceRepositoryTest extends UnitTestCase
             PerformanceRepository::class,
             [
                 'combineConstraints'
-            ], [], '', false);
+            ],
+            [],
+            '',
+            false
+        );
         $demand = $this->getMockPerformanceDemand(
             [
                 'getGenres',
@@ -371,13 +399,16 @@ class PerformanceRepositoryTest extends UnitTestCase
         $comparisonMethod,
         $propertyName,
         $operand
-    ): void
-    {
+    ): void {
         $this->subject = $this->getAccessibleMock(
             PerformanceRepository::class,
             [
                 'combineConstraints'
-            ], [], '', false);
+            ],
+            [],
+            '',
+            false
+        );
         $demand = $this->getMockPerformanceDemand(
             [
                 'getGenres',
@@ -422,7 +453,11 @@ class PerformanceRepositoryTest extends UnitTestCase
             PerformanceRepository::class,
             [
                 'combineConstraints'
-            ], [], '', false);
+            ],
+            [],
+            '',
+            false
+        );
         $demand = $this->getMockPerformanceDemand([
             'getGenres',
             'getVenues',
@@ -460,7 +495,11 @@ class PerformanceRepositoryTest extends UnitTestCase
                 'createSearchConstraints',
                 'createCategoryConstraints',
                 'combineConstraints'
-            ], [], '', false);
+            ],
+            [],
+            '',
+            false
+        );
         /** @var DemandInterface $demand */
         $demand = $this->getMockPerformanceDemand();
         $query = $this->getMockQuery();
@@ -485,7 +524,11 @@ class PerformanceRepositoryTest extends UnitTestCase
                 'createSearchConstraints',
                 'createCategoryConstraints',
                 'combineConstraints'
-            ], [], '', false);
+            ],
+            [],
+            '',
+            false
+        );
         /** @var DemandInterface $demand */
         $demand = $this->getMockPerformanceDemand();
         $query = $this->getMockQuery();
@@ -495,7 +538,8 @@ class PerformanceRepositoryTest extends UnitTestCase
 
         $this->subject->expects($this->once())
             ->method('createPeriodConstraints')
-            ->will($this->returnValue($mockPeriodConstraints)
+            ->will(
+                $this->returnValue($mockPeriodConstraints)
             );
         $this->subject->expects($this->once())
             ->method('combineConstraints')

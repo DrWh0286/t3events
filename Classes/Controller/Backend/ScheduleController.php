@@ -16,7 +16,9 @@ use TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException;
  */
 class ScheduleController extends PerformanceController
 {
-    use ModuleDataTrait, FormTrait, SettingsUtilityTrait;
+    use ModuleDataTrait;
+    use FormTrait;
+    use SettingsUtilityTrait;
 
     /**
      * Load and persist module data

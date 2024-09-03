@@ -27,7 +27,8 @@ use DWenzel\T3events\Domain\Repository\DemandedRepositoryInterface;
  */
 class EventTypeFilter implements FilterInterface
 {
-    use EventTypeRepositoryTrait, OptionsTrait;
+    use EventTypeRepositoryTrait;
+    use OptionsTrait;
 
     public function getOptionRepository(): DemandedRepositoryInterface
     {

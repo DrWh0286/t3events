@@ -18,7 +18,6 @@
 
 namespace DWenzel\T3events\Object;
 
-
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**

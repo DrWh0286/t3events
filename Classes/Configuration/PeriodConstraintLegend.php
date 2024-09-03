@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Configuration;
 
 use DWenzel\T3events\InvalidConfigurationException;
@@ -81,14 +82,15 @@ class PeriodConstraintLegend extends VectorImage
      */
     public function initialize($params): void
     {
-        if(!empty($params[self::PARAM_XML_FILE_PATH])) {
+        if (!empty($params[self::PARAM_XML_FILE_PATH])) {
             $this->xmlFilePath = $params[self::PARAM_XML_FILE_PATH];
         }
 
         $absoluteFilePath = GeneralUtility::getFileAbsFileName($this->xmlFilePath);
         if (!file_exists($absoluteFilePath)) {
             throw new MissingFileException(
-                'Missing XML file: ' . $absoluteFilePath, 1462887081
+                'Missing XML file: ' . $absoluteFilePath,
+                1462887081
             );
         }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Controller;
 
 use DWenzel\T3events\Session\SessionInterface;

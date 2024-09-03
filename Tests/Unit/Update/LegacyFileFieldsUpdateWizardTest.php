@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DWenzel\T3events\Tests\Unit\Update;

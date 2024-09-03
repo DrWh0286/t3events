@@ -39,9 +39,9 @@ use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
  */
 class EditUriViewHelper extends AbstractViewHelper
 {
-    const DESCRIPTION_ARGUMENT_TABLE = 'table of record to edit';
-    const DESCRIPTION_ARGUMENT_RECORD = 'id of record';
-    const DESCRIPTION_ARGUMENT_MODULE = 'module to return to';
+    public const DESCRIPTION_ARGUMENT_TABLE = 'table of record to edit';
+    public const DESCRIPTION_ARGUMENT_RECORD = 'id of record';
+    public const DESCRIPTION_ARGUMENT_MODULE = 'module to return to';
 
     /**
      * Initialize Arguments
@@ -81,8 +81,7 @@ class EditUriViewHelper extends AbstractViewHelper
         array $arguments,
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
-    )
-    {
+    ) {
         /** @var UriBuilder $uriBuilder */
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $returnUrl = (string)$uriBuilder->buildUriFromRoute($arguments[SI::MODULE]);

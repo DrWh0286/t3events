@@ -18,7 +18,7 @@ class EventTypeConstraintRepositoryTraitTest extends UnitTestCase
     /**
      * mock eventType field
      */
-    const EVENT_TYPE_FIELD = 'foo';
+    public const EVENT_TYPE_FIELD = 'foo';
 
     /**
      * @var EventTypeConstraintRepositoryTrait|MockObject

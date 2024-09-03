@@ -32,15 +32,16 @@ use DWenzel\T3events\Utility\SettingsInterface as SI;
  */
 class PeriodConstraintRepositoryTraitTest extends UnitTestCase
 {
-    use MockDemandTrait, MockQueryTrait;
+    use MockDemandTrait;
+    use MockQueryTrait;
     /**
      * mock start date field
      */
-    const START_DATE_FIELD = 'foo';
+    public const START_DATE_FIELD = 'foo';
     /**
      * mock end date field
      */
-    const END_DATE_FIELD = 'bar';
+    public const END_DATE_FIELD = 'bar';
 
     /**
      * @var PeriodConstraintRepositoryTrait|MockObject
@@ -335,7 +336,8 @@ class PeriodConstraintRepositoryTraitTest extends UnitTestCase
             ->method('lessThanOrEqual')
             ->withConsecutive(
                 [self::END_DATE_FIELD, $endDate->getTimestamp()],
-                [self::START_DATE_FIELD, $startDate->getTimestamp()]);
+                [self::START_DATE_FIELD, $startDate->getTimestamp()]
+            );
         $this->query->expects($this->once())
             ->method('logicalAnd')
             ->with();
@@ -379,13 +381,15 @@ class PeriodConstraintRepositoryTraitTest extends UnitTestCase
             ->method('greaterThanOrEqual')
             ->withConsecutive(
                 [self::END_DATE_FIELD, $startDate->getTimestamp()],
-                [self::START_DATE_FIELD, $startDate->getTimestamp()]);
+                [self::START_DATE_FIELD, $startDate->getTimestamp()]
+            );
         $this->query->expects($this->exactly(3))
             ->method('lessThanOrEqual')
             ->withConsecutive(
                 [self::END_DATE_FIELD, $endDate->getTimestamp()],
                 [self::START_DATE_FIELD, $startDate->getTimestamp()],
-                [self::END_DATE_FIELD, $endDate->getTimestamp()]);
+                [self::END_DATE_FIELD, $endDate->getTimestamp()]
+            );
         $this->query->expects($this->exactly(2))
             ->method('logicalAnd')
             ->with();

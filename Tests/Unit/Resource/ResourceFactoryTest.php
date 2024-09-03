@@ -116,7 +116,8 @@ class ResourceFactoryTest extends UnitTestCase
             ->disableOriginalConstructor()
             ->getMock();
         $mockExtbaseFileReference = $this->getMockBuilder(
-            ExtbaseFileReference::class)
+            ExtbaseFileReference::class
+        )
             ->setMethods(['setOriginalResource'])
             ->getMock();
         /** @var File|MockObject $mockFileObject */

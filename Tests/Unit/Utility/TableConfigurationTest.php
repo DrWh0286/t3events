@@ -131,8 +131,7 @@ class TableConfigurationTest extends UnitTestCase
      */
     public function getLanguageFilePathReturnsCorrectPaths($extensionName, $expectedPath): void
     {
-        if (is_null($extensionName))
-        {
+        if (is_null($extensionName)) {
             $path = TableConfiguration::getLanguageFilePath();
         } else {
             $path = TableConfiguration::getLanguageFilePath($extensionName);

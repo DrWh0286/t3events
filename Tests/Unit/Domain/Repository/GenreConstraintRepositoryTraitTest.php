@@ -19,7 +19,7 @@ class GenreConstraintRepositoryTraitTest extends UnitTestCase
     /**
      * mock genre field
      */
-    const GENRE_FIELD = 'foo';
+    public const GENRE_FIELD = 'foo';
 
     /**
      * @var GenreConstraintRepositoryTrait|MockObject

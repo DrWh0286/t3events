@@ -1,6 +1,7 @@
 <?php
 
 namespace DWenzel\T3events\Tests\Unit\Domain\Repository;
+
 use PHPUnit\Framework\MockObject\MockBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Persistence\Generic\Qom\ConstraintInterface;
@@ -24,7 +25,6 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Qom\ConstraintInterface;
 
 trait MockConstraintsTrait
 {
-
     /**
      * Returns a builder object to create mock objects using a fluent interface.
      *

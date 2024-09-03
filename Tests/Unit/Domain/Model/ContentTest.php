@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Tests\Unit\Domain\Model;
 
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -30,7 +31,6 @@ use DWenzel\T3events\Domain\Model\Content;
  ***************************************************************/
 class ContentTest extends UnitTestCase
 {
-
     /**
      * @var TtContent
      */

@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Tests\Unit\Domain\Model;
 
 /***************************************************************
@@ -33,7 +34,6 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Model;
  */
 class GenreTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
 {
-
     /**
      * @var \DWenzel\T3events\Domain\Model\Genre
      */

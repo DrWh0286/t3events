@@ -30,7 +30,9 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
  */
 class DemandedRepositoryTraitTest extends UnitTestCase
 {
-    use MockDemandTrait, MockQueryTrait, MockQuerySettingsTrait;
+    use MockDemandTrait;
+    use MockQueryTrait;
+    use MockQuerySettingsTrait;
 
     /**
      * @var DemandedRepositoryTrait|\PHPUnit_Framework_MockObject_MockObject
@@ -94,7 +96,11 @@ class DemandedRepositoryTraitTest extends UnitTestCase
         /** @var AbstractDemandedRepository|AccessibleMockObjectInterface|MockObject $fixture */
         $fixture = $this->getAccessibleMock(
             AbstractDemandedRepository::class,
-            array('createQuery', 'createConstraintsFromDemand'), array(), '', false);
+            array('createQuery', 'createConstraintsFromDemand'),
+            array(),
+            '',
+            false
+        );
         /** @var AbstractDemand|MockObject|AccessibleMockObjectInterface $mockDemand */
         $mockDemand = $this->getMockDemand(['getLimit']);
         $limit = 3;
@@ -123,7 +129,11 @@ class DemandedRepositoryTraitTest extends UnitTestCase
         /** @var AbstractDemandedRepository|MockObject|AccessibleMockObjectInterface $fixture */
         $fixture = $this->getAccessibleMock(
             AbstractDemandedRepository::class,
-            array('createQuery', 'createConstraintsFromDemand'), array(), '', false);
+            array('createQuery', 'createConstraintsFromDemand'),
+            array(),
+            '',
+            false
+        );
         /** @var AbstractDemand|MockObject $mockDemand */
         $mockDemand = $this->getAccessibleMockForAbstractClass(AbstractDemand::class);
         $storagePageIds = '3,5';

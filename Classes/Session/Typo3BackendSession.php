@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Session;
 
 /**
@@ -18,7 +19,6 @@ namespace DWenzel\T3events\Session;
  */
 class Typo3BackendSession implements SessionInterface
 {
-
     /**
      * @var string
      */

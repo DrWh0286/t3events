@@ -27,7 +27,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class DemandTraitTest extends UnitTestCase
 {
-    const DUMMY_CONTROLLER_KEY = 'dummy';
+    public const DUMMY_CONTROLLER_KEY = 'dummy';
 
     /**
      * @var DemandTrait
@@ -54,8 +54,7 @@ class DemandTraitTest extends UnitTestCase
 
         $this->mockSearchObject = $this->getMockBuilder(Search::class)->getMock();
 
-        $this->subject = new class ($this->mockSettingsUtility, $this->mockSearchObject)
-        {
+        $this->subject = new class ($this->mockSettingsUtility, $this->mockSearchObject) {
             use DemandTrait;
 
             public function __construct(SettingsUtility  $settingsUtility, private readonly Search $search)
@@ -86,7 +85,12 @@ class DemandTraitTest extends UnitTestCase
     {
         $demand = $this->getMockForAbstractClass(
             GenreAwareDemandInterface::class,
-            [], '', true, true, true, ['setGenres']
+            [],
+            '',
+            true,
+            true,
+            true,
+            ['setGenres']
         );
         $overwriteDemand = [SI::LEGACY_KEY_GENRE => '1,2,3'];
 
@@ -104,7 +108,12 @@ class DemandTraitTest extends UnitTestCase
         // support for legacy field 'genre'
         $demand = $this->getMockForAbstractClass(
             EventDemand::class,
-            [], '', true, true, true, ['setGenre']
+            [],
+            '',
+            true,
+            true,
+            true,
+            ['setGenre']
         );
         $overwriteDemand = [SI::LEGACY_KEY_GENRE => '1,2,3'];
 
@@ -121,7 +130,12 @@ class DemandTraitTest extends UnitTestCase
     {
         $demand = $this->getMockForAbstractClass(
             VenueAwareDemandInterface::class,
-            [], '', true, true, true, ['setVenues']
+            [],
+            '',
+            true,
+            true,
+            true,
+            ['setVenues']
         );
         $overwriteDemand = ['venue' => '1,2,3'];
 
@@ -168,7 +182,11 @@ class DemandTraitTest extends UnitTestCase
     {
         $demand = $this->getMockForAbstractClass(
             AbstractDemand::class,
-            [], '', true, true, true,
+            [],
+            '',
+            true,
+            true,
+            true,
             ['setCategoryConjunction']
         );
         $overwriteDemand = ['categoryConjunction' => 'asc'];
@@ -202,10 +220,10 @@ class DemandTraitTest extends UnitTestCase
             ]
         ];
 
-//        $this->subject->expects($this->once())
-//            ->method('createSearchObject')
-//            ->with($overwriteDemand['search'], $settings['search'])
-//            ->will($this->returnValue($mockSearchObject));
+        //        $this->subject->expects($this->once())
+        //            ->method('createSearchObject')
+        //            ->with($overwriteDemand['search'], $settings['search'])
+        //            ->will($this->returnValue($mockSearchObject));
 
         $demand->expects($this->once())->method('setSearch')
             ->with($this->mockSearchObject);
@@ -219,7 +237,13 @@ class DemandTraitTest extends UnitTestCase
     public function overwriteDemandObjectSetsSortBy(): void
     {
         $demand = $this->getMockForAbstractClass(
-            AbstractDemand::class, [], '', true, true, true, ['setSortBy']
+            AbstractDemand::class,
+            [],
+            '',
+            true,
+            true,
+            true,
+            ['setSortBy']
         );
         $overwriteDemand = [
             'sortBy' => 'foo'
@@ -237,7 +261,13 @@ class DemandTraitTest extends UnitTestCase
     public function overwriteDemandObjectSetsSortOrder(): void
     {
         $demand = $this->getMockForAbstractClass(
-            AbstractDemand::class, [], '', true, true, true, ['setOrder']
+            AbstractDemand::class,
+            [],
+            '',
+            true,
+            true,
+            true,
+            ['setOrder']
         );
         $overwriteDemand = array(
             'sortBy' => 'foo',
@@ -256,7 +286,13 @@ class DemandTraitTest extends UnitTestCase
     public function overwriteDemandObjectSetsDefaultSortDirectionAscending(): void
     {
         $demand = $this->getMockForAbstractClass(
-            AbstractDemand::class, [], '', true, true, true, ['setSortDirection']
+            AbstractDemand::class,
+            [],
+            '',
+            true,
+            true,
+            true,
+            ['setSortDirection']
         );
         $overwriteDemand = array(
             SI::SORT_DIRECTION => 'foo'
@@ -274,7 +310,13 @@ class DemandTraitTest extends UnitTestCase
     public function overwriteDemandObjectSetsSortDirectionDescending(): void
     {
         $demand = $this->getMockForAbstractClass(
-            AbstractDemand::class, [], '', true, true, true, ['setSortDirection']
+            AbstractDemand::class,
+            [],
+            '',
+            true,
+            true,
+            true,
+            ['setSortDirection']
         );
         $overwriteDemand = array(
             SI::SORT_DIRECTION => 'desc'
@@ -379,7 +421,8 @@ class DemandTraitTest extends UnitTestCase
     {
         $method = 'set' . ucfirst($key);
         $demand = $this->getMockBuilder(
-            DemandInterface::class)
+            DemandInterface::class
+        )
             ->setMethods([$method])->getMockForAbstractClass();
 
         $overwriteDemand = [

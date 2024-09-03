@@ -31,8 +31,7 @@ class PersonDemandFactoryTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = new class
-        {
+        $this->subject = new class () {
             use PersonDemandFactoryTrait;
 
             public function getPersonDemandFactory()

@@ -72,9 +72,9 @@ class AbstractPeriodDataProviderTest extends UnitTestCase
 
         /** @var AbstractPeriodDataProvider|MockObject subject */
         $subject = new class (true) extends AbstractPeriodDataProvider {
-            const VISIBLE_LAYERS = 'foo,bar';
-            const LAYERS_TO_HIDE = 'foo';
-            const LAYERS_TO_SHOW = 'baz';
+            public const VISIBLE_LAYERS = 'foo,bar';
+            public const LAYERS_TO_HIDE = 'foo';
+            public const LAYERS_TO_SHOW = 'baz';
         };
 
         $this->assertEquals(

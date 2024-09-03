@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Domain\Model\Dto;
 
 /**
@@ -19,5 +20,6 @@ namespace DWenzel\T3events\Domain\Model\Dto;
  */
 class PersonDemand extends AbstractDemand implements DemandInterface, OrderAwareDemandInterface, SearchAwareDemandInterface
 {
-    use SearchAwareDemandTrait, OrderAwareDemandTrait;
+    use SearchAwareDemandTrait;
+    use OrderAwareDemandTrait;
 }

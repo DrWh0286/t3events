@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\ViewHelpers\Event;
 
 /**
@@ -170,7 +171,8 @@ class PerformancesViewHelper extends AbstractTagBasedViewHelper
         foreach ($this->performances as $performance) {
             $status = $performance->getStatus();
             if ($status) {
-                array_push($states,
+                array_push(
+                    $states,
                     array(
                         'title' => $status->getTitle(),
                         'priority' => $status->getPriority(),

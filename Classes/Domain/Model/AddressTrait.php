@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Domain\Model;
 
 /***************************************************************
@@ -20,7 +21,6 @@ namespace DWenzel\T3events\Domain\Model;
  ***************************************************************/
 trait AddressTrait
 {
-
     /**
      * address
      *

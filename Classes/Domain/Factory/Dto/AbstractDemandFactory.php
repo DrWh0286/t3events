@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Domain\Factory\Dto;
 
 use DWenzel\T3events\Object\ObjectManagerTrait;
@@ -33,7 +34,9 @@ use DWenzel\T3events\Domain\Model\Dto\OrderAwareDemandInterface;
  */
 abstract class AbstractDemandFactory
 {
-    use SkipPropertyTrait, MapPropertyTrait, ObjectManagerTrait;
+    use SkipPropertyTrait;
+    use MapPropertyTrait;
+    use ObjectManagerTrait;
 
     /**
      * Properties which should be mapped when settings

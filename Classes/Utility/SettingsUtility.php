@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Utility;
 
 /***************************************************************
@@ -30,7 +31,6 @@ use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\DomainObjectInterface;
-
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
@@ -56,9 +56,9 @@ class SettingsUtility implements SingletonInterface
      */
     protected $controllerKeys = [];
 
-     /**
-     * @var ResourceFactory
-     */
+    /**
+    * @var ResourceFactory
+    */
     protected $resourceFactory;
     public function __construct(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObjectRenderer, \DWenzel\T3events\Resource\ResourceFactory $resourceFactory)
     {

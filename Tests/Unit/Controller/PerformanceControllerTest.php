@@ -663,7 +663,10 @@ class PerformanceControllerTest extends UnitTestCase
         //$this->markTestSkipped('wrong arguments in assignMultiple');
         $fixture = $this->getAccessibleMock(
             PerformanceController::class,
-            ['emitSignal'], [$this->performanceRepository, $this->genreRepository, $this->venueRepository, $this->eventTypeRepository], '', false
+            ['emitSignal'],
+            [$this->performanceRepository, $this->genreRepository, $this->venueRepository, $this->eventTypeRepository],
+            '',
+            false
         );
         $settings = ['foo'];
         $performance = new Performance();

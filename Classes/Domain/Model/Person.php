@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Domain\Model;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
@@ -25,9 +26,10 @@ use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
  ***************************************************************/
 class Person extends AbstractEntity
 {
-    use AddressTrait, EqualsTrait;
-    const PERSON_TYPE_UNKNOWN = 'Tx_T3events_Default';
-    const PERSON_TYPE_CONTACT = 'Tx_T3events_Contact';
+    use AddressTrait;
+    use EqualsTrait;
+    public const PERSON_TYPE_UNKNOWN = 'Tx_T3events_Default';
+    public const PERSON_TYPE_CONTACT = 'Tx_T3events_Contact';
 
     /**
      * type

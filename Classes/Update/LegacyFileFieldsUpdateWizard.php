@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DWenzel\T3events\Update;
@@ -48,9 +49,9 @@ class LegacyFileFieldsUpdateWizard implements UpgradeWizardInterface, ChattyInte
 
     public const TITLE = 'Update legacy file fields of event records';
     public const DESCRIPTION = 'Updates a number of legacy file fields containing file paths to'
-    . 'file references.'
-    . 'Moves files from `upload/*` folders to `fileadmin/_migrated/`.'
-    . 'Creates file records for existing files. Missing files are logged.';
+        . 'file references.'
+        . 'Moves files from `upload/*` folders to `fileadmin/_migrated/`.'
+        . 'Creates file records for existing files. Missing files are logged.';
     public const PREREQUISITES = [];
 
     public const TABLES_TO_UPDATE = [
@@ -137,13 +138,11 @@ class LegacyFileFieldsUpdateWizard implements UpgradeWizardInterface, ChattyInte
     {
         $count = 0;
         foreach (static::TABLES_TO_UPDATE as $tableName => $fields) {
-            if (empty($fields) || !is_array($fields))
-            {
+            if (empty($fields) || !is_array($fields)) {
                 continue;
             }
             foreach ($fields as $field) {
-                if ($this->countRecords($tableName, $field) > 0)
-                {
+                if ($this->countRecords($tableName, $field) > 0) {
                     $count++;
                 }
             }

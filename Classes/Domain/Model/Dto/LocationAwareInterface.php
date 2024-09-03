@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Domain\Model\Dto;
 
 interface LocationAwareInterface

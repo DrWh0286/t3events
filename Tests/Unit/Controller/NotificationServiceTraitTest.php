@@ -19,7 +19,6 @@ use DWenzel\T3events\Controller\NotificationServiceTrait;
 use DWenzel\T3events\Service\NotificationService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-
 /**
  * Class NotificationServiceTraitTest
  */
@@ -35,8 +34,7 @@ class NotificationServiceTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = new class
-        {
+        $this->subject = new class () {
             use NotificationServiceTrait;
 
             /**

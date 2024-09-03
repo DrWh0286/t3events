@@ -1,6 +1,7 @@
 <?php
 
 namespace DWenzel\T3events\Tests\Unit\Domain\Repository;
+
 use PHPUnit\Framework\MockObject\MockBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;

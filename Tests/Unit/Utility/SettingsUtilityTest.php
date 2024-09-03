@@ -52,7 +52,7 @@ class SettingsUtilityTest extends UnitTestCase
 {
     use MockObjectManagerTrait;
 
-    const SKIP_MESSAGE_FILEREFERENCE = 'Skipped due to incompatible implementation in core.';
+    public const SKIP_MESSAGE_FILEREFERENCE = 'Skipped due to incompatible implementation in core.';
 
     /**
      * @var SettingsUtility|AccessibleMockObjectInterface|MockObject
@@ -166,8 +166,8 @@ class SettingsUtilityTest extends UnitTestCase
      */
     public function getValueByKeyWrapsFieldValue(): void
     {
-//        $cObj = new ContentObjectRenderer();
-//        $this->subject->injectContentObjectRenderer($cObj);
+        //        $cObj = new ContentObjectRenderer();
+        //        $this->subject->injectContentObjectRenderer($cObj);
 
         $mockParentObject = $this->getMockBuilder(
             $this->buildAccessibleProxy(AbstractDomainObject::class)
@@ -271,7 +271,8 @@ class SettingsUtilityTest extends UnitTestCase
         self::assertSame(
             $mockObjectStorageFromObject,
             $this->subject->getFileStorage(
-                $mockObject, $config
+                $mockObject,
+                $config
             )
         );
     }
@@ -350,7 +351,8 @@ class SettingsUtilityTest extends UnitTestCase
         $this->resourceFactory->expects($this->exactly(2))
             ->method('getFileObjectByCombinedIdentifier')
             ->withConsecutive(
-                [$defaultValue], [$alwaysValue]
+                [$defaultValue],
+                [$alwaysValue]
             )
             ->will(self::returnValue($mockFile));
         $this->resourceFactory->expects($this->exactly(2))

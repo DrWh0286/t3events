@@ -33,7 +33,8 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 class PersonRepositoryTest extends UnitTestCase
 {
-    use MockQueryTrait, MockDemandTrait;
+    use MockQueryTrait;
+    use MockDemandTrait;
 
     /**
      * @var PersonRepository|MockObject

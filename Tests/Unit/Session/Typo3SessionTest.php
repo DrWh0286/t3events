@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Tests\Unit\Session;
 
 /**
@@ -26,7 +27,7 @@ use DWenzel\T3events\Session\Typo3Session;
  */
 class Typo3SessionTest extends UnitTestCase
 {
-    const SESSION_NAMESPACE = 'testNamespace';
+    public const SESSION_NAMESPACE = 'testNamespace';
 
     /**
      * @var \DWenzel\T3events\Session\Typo3Session
@@ -52,9 +53,18 @@ class Typo3SessionTest extends UnitTestCase
         $this->subject->setNamespace(self::SESSION_NAMESPACE);
 
         $this->tsfe = $this->getAccessibleMock(
-            TypoScriptFrontendController::class, [], [], '', false);
+            TypoScriptFrontendController::class,
+            [],
+            [],
+            '',
+            false
+        );
         $this->feUser = $this->getAccessibleMock(
-            FrontendUserAuthentication::class, [], [], '', false
+            FrontendUserAuthentication::class,
+            [],
+            [],
+            '',
+            false
         );
         $this->tsfe->fe_user = $this->feUser;
         $GLOBALS['TSFE'] = $this->tsfe;
@@ -110,7 +120,7 @@ class Typo3SessionTest extends UnitTestCase
         $identifier = 'bar';
         $this->feUser->expects($this->once())
             ->method('setKey')
-            ->with('ses', self::SESSION_NAMESPACE, [$identifier =>$value]);
+            ->with('ses', self::SESSION_NAMESPACE, [$identifier => $value]);
         $this->feUser->expects($this->once())
             ->method('storeSessionData');
         $this->subject->set($identifier, $value);
@@ -123,7 +133,7 @@ class Typo3SessionTest extends UnitTestCase
     {
         $value = 'foo';
         $identifier = 'bar';
-        $expectedSessionValue = [$identifier=>$value];
+        $expectedSessionValue = [$identifier => $value];
         $this->feUser->expects($this->once())
             ->method('getKey')
             ->with('ses', self::SESSION_NAMESPACE)

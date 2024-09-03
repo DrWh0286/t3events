@@ -153,7 +153,7 @@ class PerformanceDemandFactoryTest extends UnitTestCase
         ];
 
         $expected = new PerformanceDemand();
-        if ($propertyName !== 'search'){
+        if ($propertyName !== 'search') {
             $expected->_setProperty($propertyName, $propertyValue);
         }
 

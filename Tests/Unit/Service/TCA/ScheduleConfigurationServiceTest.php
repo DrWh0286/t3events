@@ -51,7 +51,7 @@ class ScheduleConfigurationServiceTest extends UnitTestCase
     public function getLabelGetsRecord(): void
     {
         $parameters = [
-            'row' =>[
+            'row' => [
                 'uid' => 23
             ]
         ];
@@ -71,7 +71,8 @@ class ScheduleConfigurationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function getLabelGetsTranslatedDateFormat(): void {
+    public function getLabelGetsTranslatedDateFormat(): void
+    {
         $parameters = [
             'row' => [
                 'uid' => 23
@@ -156,7 +157,7 @@ class ScheduleConfigurationServiceTest extends UnitTestCase
                     SI::TABLE_SCHEDULES,
                     $parameters['row']['uid']
                 ],
-[
+                [
                     BackendUtility::class,
                     'getRecord',
                     SI::TABLE_EVENTS,

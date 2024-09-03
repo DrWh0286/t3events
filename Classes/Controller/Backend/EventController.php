@@ -51,16 +51,28 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 class EventController extends AbstractBackendController implements FilterableControllerInterface
 {
     use
-        AudienceRepositoryTrait, BackendViewTrait, CallStaticTrait,
-        CategoryRepositoryTrait, CompanyRepositoryTrait, DemandTrait,
-        EventDemandFactoryTrait, EventRepositoryTrait, EventTypeRepositoryTrait,
-        FilterableControllerTrait, FormTrait, GenreRepositoryTrait,
-        ModuleDataTrait, NotificationRepositoryTrait, NotificationServiceTrait,
-        PersistenceManagerTrait, SettingsUtilityTrait, SignalTrait,
-        TranslateTrait;
+        AudienceRepositoryTrait;
+    use BackendViewTrait;
+    use CallStaticTrait;
+    use CategoryRepositoryTrait;
+    use CompanyRepositoryTrait;
+    use DemandTrait;
+    use EventDemandFactoryTrait;
+    use EventRepositoryTrait;
+    use EventTypeRepositoryTrait;
+    use FilterableControllerTrait;
+    use FormTrait;
+    use GenreRepositoryTrait;
+    use ModuleDataTrait;
+    use NotificationRepositoryTrait;
+    use NotificationServiceTrait;
+    use PersistenceManagerTrait;
+    use SettingsUtilityTrait;
+    use SignalTrait;
+    use TranslateTrait;
 
-    const LIST_ACTION = 'listAction';
-    const EXTENSION_KEY = 't3events';
+    public const LIST_ACTION = 'listAction';
+    public const EXTENSION_KEY = 't3events';
 
     protected $buttonConfiguration = [
         [

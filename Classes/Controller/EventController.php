@@ -33,11 +33,16 @@ use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
  */
 class EventController extends ActionController
 {
-    use DemandTrait, EventDemandFactoryTrait,
-        EventRepositoryTrait, EntityNotFoundHandlerTrait,
-        EventTypeRepositoryTrait, FilterableControllerTrait,
-        GenreRepositoryTrait, SessionTrait,
-        SettingsUtilityTrait, TranslateTrait;
+    use DemandTrait;
+    use EventDemandFactoryTrait;
+    use EventRepositoryTrait;
+    use EntityNotFoundHandlerTrait;
+    use EventTypeRepositoryTrait;
+    use FilterableControllerTrait;
+    use GenreRepositoryTrait;
+    use SessionTrait;
+    use SettingsUtilityTrait;
+    use TranslateTrait;
 
     private SearchFactory $searchFactory;
 
@@ -47,9 +52,9 @@ class EventController extends ActionController
         $this->searchFactory = $searchFactory;
     }
 
-    const EVENT_QUICK_MENU_ACTION = 'quickMenuAction';
-    const EVENT_LIST_ACTION = 'listAction';
-    const EVENT_SHOW_ACTION = 'showAction';
+    public const EVENT_QUICK_MENU_ACTION = 'quickMenuAction';
+    public const EVENT_LIST_ACTION = 'listAction';
+    public const EVENT_SHOW_ACTION = 'showAction';
 
     /**
      * initializes all actions

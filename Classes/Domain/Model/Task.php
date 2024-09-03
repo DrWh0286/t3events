@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Domain\Model;
 
 /**
@@ -25,10 +26,10 @@ class Task extends AbstractEntity
 {
     use EqualsTrait;
 
-    const ACTION_NONE = 0;
-    const ACTION_UPDATE_STATUS = 1;
-    const ACTION_DELETE = 2;
-    const ACTION_HIDE_PERFORMANCE = 3;
+    public const ACTION_NONE = 0;
+    public const ACTION_UPDATE_STATUS = 1;
+    public const ACTION_DELETE = 2;
+    public const ACTION_HIDE_PERFORMANCE = 3;
 
     /**
      * Provide a name for the task

@@ -31,7 +31,8 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 class VenueRepositoryTest extends UnitTestCase
 {
-    use MockQueryTrait, MockDemandTrait;
+    use MockQueryTrait;
+    use MockDemandTrait;
 
     /**
      * @var VenueRepository|MockObject

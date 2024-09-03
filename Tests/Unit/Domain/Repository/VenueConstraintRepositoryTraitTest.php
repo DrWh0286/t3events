@@ -19,7 +19,7 @@ class VenueConstraintRepositoryTraitTest extends UnitTestCase
     /**
      * mock venue field
      */
-    const VENUE_FIELD = 'foo';
+    public const VENUE_FIELD = 'foo';
 
     /**
      * @var VenueConstraintRepositoryTrait|MockObject

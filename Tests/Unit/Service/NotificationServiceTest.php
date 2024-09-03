@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Tests\Unit\Service;
 
 use DWenzel\T3events\Tests\Unit\Object\MockObjectManagerTrait;
@@ -118,7 +119,6 @@ class NotificationServiceTest extends UnitTestCase
         ];
 
         GeneralUtility::setContainer(new class ($classes) implements ContainerInterface {
-
             public function __construct(private array $classes = [])
             {
             }
@@ -153,7 +153,9 @@ class NotificationServiceTest extends UnitTestCase
             'foo',
             'bar',
             'baz',
-            [], null, null
+            [],
+            null,
+            null
         );
 
         $expectedAddresses = [];

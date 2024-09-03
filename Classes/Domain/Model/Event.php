@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Domain\Model;
 
 /***************************************************************
@@ -31,7 +32,9 @@ use DateTime;
  */
 class Event extends AbstractEntity
 {
-    use CategorizableTrait, EqualsTrait, RelatedSchedulesTrait;
+    use CategorizableTrait;
+    use EqualsTrait;
+    use RelatedSchedulesTrait;
 
     /**
      * Hidden
@@ -739,7 +742,8 @@ class Event extends AbstractEntity
     /**
      * @param \DWenzel\T3events\Domain\Model\Content $contentElements The Content Element to be removed
      */
-    public function addContentElements(Content $contentElements): void{
+    public function addContentElements(Content $contentElements): void
+    {
         $this->contentElements->attach($contentElements);
     }
 

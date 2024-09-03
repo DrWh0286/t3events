@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Hooks;
 
 /**
@@ -24,14 +25,13 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class ItemsProcFunc
 {
-
     /**
      * Key for look up in TYPO3_CONF_VARS and page TS config
      * Must be overwritten when sub classing this in another extension.
      *
      * @const EXTENSION_KEY
      */
-    const EXTENSION_KEY = 't3events';
+    public const EXTENSION_KEY = 't3events';
 
     /**
      * @var TemplateLayoutUtility

@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\View;
 
 /**
@@ -30,13 +31,14 @@ use DWenzel\T3events\View\Performance\ShowIcal;
  */
 trait IcalTrait
 {
-    use PatternReplacingTrait,CallStaticTrait;
+    use PatternReplacingTrait;
+    use CallStaticTrait;
 
     /**
      * Pattern to replace from content
      * @var array
      */
-    static protected $replacePatterns = [
+    protected static $replacePatterns = [
         '~\R~u' => "\r\n",
     ];
 
@@ -45,7 +47,7 @@ trait IcalTrait
      * (tabulator, NUL-Byte, vertical tabulator)
      * @var string Characters to trim from content
      */
-    static protected $trimCharacters = "\t\0\x0B";
+    protected static $trimCharacters = "\t\0\x0B";
 
     protected function getReplacePatterns()
     {

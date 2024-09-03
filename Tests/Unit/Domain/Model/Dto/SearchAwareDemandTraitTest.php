@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
 
 /***************************************************************
@@ -37,7 +38,6 @@ use DWenzel\T3events\Domain\Model\Dto\SearchAwareDemandTrait;
  */
 class SearchAwareDemandTraitTest extends UnitTestCase
 {
-
     /**
      * @var \DWenzel\T3events\Domain\Model\Dto\SearchAwareDemandTrait
      */

@@ -26,13 +26,12 @@ use DWenzel\T3events\Utility\SettingsInterface as SI;
  */
 class FilterResolver implements FilterResolverInterface
 {
-
     /**
      * @var array Map of keys to Filter Classes
      *
      * Override in order to add implementation
      */
-    static $map = [
+    public static $map = [
         SI::AUDIENCES => AudienceFilter::class,
         SI::EVENT_TYPES => EventTypeFilter::class,
         SI::GENRES => GenreFilter::class,

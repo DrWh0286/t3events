@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Domain\Repository;
 
 /***************************************************************
@@ -33,8 +34,9 @@ class EventRepository extends AbstractDemandedRepository implements
     LocationConstraintRepositoryInterface,
     AudienceConstraintRepositoryInterface
 {
-    use PeriodConstraintRepositoryTrait, LocationConstraintRepositoryTrait,
-        AudienceConstraintRepositoryTrait;
+    use PeriodConstraintRepositoryTrait;
+    use LocationConstraintRepositoryTrait;
+    use AudienceConstraintRepositoryTrait;
 
     /**
      * Create category constraints from demand

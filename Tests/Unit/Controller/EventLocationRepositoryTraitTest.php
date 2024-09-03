@@ -34,8 +34,7 @@ class EventLocationRepositoryTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = new class
-        {
+        $this->subject = new class () {
             use EventLocationRepositoryTrait;
 
             /**

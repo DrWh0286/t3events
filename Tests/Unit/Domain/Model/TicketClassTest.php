@@ -37,7 +37,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class TicketClassTest extends UnitTestCase
 {
-
     /**
      * @var TicketClass
      */

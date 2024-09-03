@@ -26,7 +26,6 @@ use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
-
 trait ModuleButtonTrait
 {
     /**
@@ -50,7 +49,7 @@ trait ModuleButtonTrait
      */
     public function getButtonConfiguration()
     {
-        if(property_exists($this, 'buttonConfiguration')) {
+        if (property_exists($this, 'buttonConfiguration')) {
             return $this->buttonConfiguration;
         }
         return [];

@@ -21,17 +21,16 @@ namespace DWenzel\T3events\ViewHelpers\Format;
 
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
-
 /**
  * Class AbstractDateRangeViewHelper
  */
 class AbstractDateRangeViewHelper extends AbstractViewHelper
 {
     use DateRangeTrait;
-    const ARGUMENT_FORMAT_DESCRIPTION = 'A string describing the date format for start and end date. Default is \'d.m.Y\'. See PHP date() function for options. If the string contains a % strftime() function will be used instead.';
-    const ARGUMENT_STARTFORMAT_DESCRIPTION = 'A string describing the date format for start date. Default is \'d.m.Y\'. See PHP date() function for options. If the string contains a % strftime() function will be used instead.';
-    const ARGUMENT_ENDFORMAT_DESCRIPTION = 'A string describing the date format for end date. Default is \'d.m.Y\'. See PHP date() function for options. If the string contains a % strftime() function will be used instead.';
-    const ARGUMENT_GLUE_DESCRIPTION = 'Glue between start and end date if applicable. Default is \' - \' ';
-    const DEFAULT_DATE_FORMAT = 'd.m.Y';
-    const DEFAULT_GLUE = ' - ';
+    public const ARGUMENT_FORMAT_DESCRIPTION = 'A string describing the date format for start and end date. Default is \'d.m.Y\'. See PHP date() function for options. If the string contains a % strftime() function will be used instead.';
+    public const ARGUMENT_STARTFORMAT_DESCRIPTION = 'A string describing the date format for start date. Default is \'d.m.Y\'. See PHP date() function for options. If the string contains a % strftime() function will be used instead.';
+    public const ARGUMENT_ENDFORMAT_DESCRIPTION = 'A string describing the date format for end date. Default is \'d.m.Y\'. See PHP date() function for options. If the string contains a % strftime() function will be used instead.';
+    public const ARGUMENT_GLUE_DESCRIPTION = 'Glue between start and end date if applicable. Default is \' - \' ';
+    public const DEFAULT_DATE_FORMAT = 'd.m.Y';
+    public const DEFAULT_GLUE = ' - ';
 }

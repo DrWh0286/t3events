@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Utility;
 
 /**
@@ -21,7 +22,6 @@ use TYPO3\CMS\Core\SingletonInterface;
  */
 class TemplateLayoutUtility implements SingletonInterface
 {
-
     /**
      * Tells if layouts are configured for a given extension
      *
@@ -58,8 +58,10 @@ class TemplateLayoutUtility implements SingletonInterface
 
         if ($this->hasLayouts($extensionKey, $pageId)) {
             if ($this->hasTYPO3ConfVarsTemplateLayouts($extensionKey)) {
-                $templateLayouts = array_merge($templateLayouts,
-                    $GLOBALS['TYPO3_CONF_VARS']['EXT'][$extensionKey]['templateLayouts']);
+                $templateLayouts = array_merge(
+                    $templateLayouts,
+                    $GLOBALS['TYPO3_CONF_VARS']['EXT'][$extensionKey]['templateLayouts']
+                );
             }
 
             $pageTSConfig = $this->getPageTSConfig($pageId);

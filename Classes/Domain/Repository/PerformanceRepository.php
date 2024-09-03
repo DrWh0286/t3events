@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Domain\Repository;
 
 /**
@@ -40,10 +41,14 @@ class PerformanceRepository extends Repository implements
     CategoryConstraintRepositoryInterface,
     AudienceConstraintRepositoryInterface
 {
-    use DemandedRepositoryTrait, PeriodConstraintRepositoryTrait, StatusConstraintRepositoryTrait,
-        GenreConstraintRepositoryTrait, EventTypeConstraintRepositoryTrait,
-        VenueConstraintRepositoryTrait, CategoryConstraintRepositoryTrait,
-        AudienceConstraintRepositoryTrait;
+    use DemandedRepositoryTrait;
+    use PeriodConstraintRepositoryTrait;
+    use StatusConstraintRepositoryTrait;
+    use GenreConstraintRepositoryTrait;
+    use EventTypeConstraintRepositoryTrait;
+    use VenueConstraintRepositoryTrait;
+    use CategoryConstraintRepositoryTrait;
+    use AudienceConstraintRepositoryTrait;
 
     protected $defaultOrderings = ['sorting' => QueryInterface::ORDER_ASCENDING];
 

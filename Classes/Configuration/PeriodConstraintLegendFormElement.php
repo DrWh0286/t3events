@@ -1,6 +1,5 @@
 <?php
 
-
 namespace DWenzel\T3events\Configuration;
 
 use TYPO3\CMS\Backend\Form\Element\AbstractFormElement;

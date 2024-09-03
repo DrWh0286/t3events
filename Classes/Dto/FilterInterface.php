@@ -24,7 +24,7 @@ namespace DWenzel\T3events\Dto;
  */
 interface FilterInterface
 {
-    const DEFAULT_SORT_FIELD = 'title';
+    public const DEFAULT_SORT_FIELD = 'title';
 
     /**
      * Returns the filter options

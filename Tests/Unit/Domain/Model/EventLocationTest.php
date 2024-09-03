@@ -39,7 +39,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class EventLocationTest extends UnitTestCase
 {
-
     /**
      * @var \DWenzel\T3events\Domain\Model\EventLocation
      */

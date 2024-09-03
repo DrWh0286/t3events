@@ -5,7 +5,6 @@ namespace DWenzel\T3events\Form\Element;
 use DWenzel\T3events\Configuration\PeriodConstraintLegend;
 use TYPO3\CMS\Backend\Form\Element\AbstractFormElement;
 use TYPO3\CMS\Backend\Form\NodeFactory;
-
 /***************************************************************
  *  Copyright notice
  *
@@ -32,7 +31,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class PeriodConstraintLegendNode extends AbstractFormElement
 {
-
     /**
      * @var PeriodConstraintLegend
      */

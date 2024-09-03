@@ -1,10 +1,10 @@
 <?php
+
 namespace DWenzel\T3events\Domain\Factory\Dto;
 
 use DWenzel\T3events\Domain\Model\Dto\DemandInterface;
 use DWenzel\T3events\Domain\Model\Dto\EventDemand;
 use DWenzel\T3events\Domain\Model\Dto\PeriodAwareDemandInterface;
-
 /***************************************************************
  *  Copyright notice
  *  (c) 2016 Dirk Wenzel <dirk.wenzel@cps-it.de>
@@ -38,7 +38,7 @@ class EventDemandFactory extends AbstractDemandFactory implements DemandFactoryI
     /**
      * Class name of the object created by this factory.
      */
-    const DEMAND_CLASS = EventDemand::class;
+    public const DEMAND_CLASS = EventDemand::class;
 
     /**
      * Properties which should be mapped when settings

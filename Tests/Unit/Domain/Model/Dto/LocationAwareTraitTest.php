@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Tests;
 
 /**
@@ -20,7 +21,6 @@ use DWenzel\T3events\Domain\Model\Dto\LocationAwareTrait;
  */
 class LocationAwareTraitTest extends UnitTestCase
 {
-
     /**
      * @var \DWenzel\T3events\Domain\Model\Dto\LocationAwareTrait
      */

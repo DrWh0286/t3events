@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Domain\Repository;
 
 /**
@@ -26,7 +27,6 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
  */
 trait DemandedRepositoryTrait
 {
-
     /**
      * Returns an array of constraints created from a given demand object.
      *
@@ -123,7 +123,7 @@ trait DemandedRepositoryTrait
             $query->getQuerySettings()->setIgnoreEnableFields(true);
         }
         // Call hook functions for additional constraints
-        if (ArrayUtility::isValidPath($GLOBALS['TYPO3_CONF_VARS']['EXT'],'t3events:Domain/Repository/AbstractDemandedRepository.php:findDemanded', ':')
+        if (ArrayUtility::isValidPath($GLOBALS['TYPO3_CONF_VARS']['EXT'], 't3events:Domain/Repository/AbstractDemandedRepository.php:findDemanded', ':')
             && is_array($GLOBALS['TYPO3_CONF_VARS']['EXT']['t3events']['Domain/Repository/AbstractDemandedRepository.php']['findDemanded'])) {
             $params = [
                 'demand' => &$demand,

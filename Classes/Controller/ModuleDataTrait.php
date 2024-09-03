@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Controller;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;

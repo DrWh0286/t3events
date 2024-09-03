@@ -36,7 +36,6 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
  */
 class EventTypeRepositoryTest extends UnitTestCase
 {
-
     /**
      * @var \DWenzel\T3events\Domain\Repository\EventTypeRepository
      */

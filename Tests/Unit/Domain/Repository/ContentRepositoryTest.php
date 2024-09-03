@@ -35,7 +35,6 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
  */
 class ContentRepositoryTest extends UnitTestCase
 {
-
     /**
      * @var \DWenzel\T3events\Domain\Repository\ContentRepository
      */

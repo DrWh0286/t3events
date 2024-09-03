@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Domain\Model;
 
 /***************************************************************
@@ -29,7 +30,6 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Notification extends AbstractEntity
 {
-
     /**
      * @var string $recipient
      */

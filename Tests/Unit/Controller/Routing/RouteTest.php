@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Tests\Unit\Controller\Routing;
 
 use DWenzel\T3events\Controller\Routing\Route;
@@ -25,7 +26,7 @@ class RouteTest extends UnitTestCase
     /**
      *  A dummy origin for the constructor of subject
      */
-    const DUMMY_ORIGIN = 'FooController|barMethod';
+    public const DUMMY_ORIGIN = 'FooController|barMethod';
 
     /**
      * @var Route

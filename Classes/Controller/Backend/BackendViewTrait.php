@@ -135,7 +135,7 @@ trait BackendViewTrait
      */
     protected function getUriBuilder()
     {
-        if(!$this->request instanceof Request) {
+        if (!$this->request instanceof Request) {
             throw new InvalidRequestException(
                 'Object requires a properly initialized member variable $request',
                 1684167963

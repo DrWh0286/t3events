@@ -41,13 +41,11 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
-
 /**
  * Class EventControllerTest
  */
 class EventControllerTest extends UnitTestCase
 {
-
     /**
      * @var EventController|\PHPUnit_Framework_MockObject_MockObject|AccessibleMockObjectInterface
      */

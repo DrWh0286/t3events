@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Tests\Unit\Controller;
 
 use DWenzel\T3events\Controller\EventDemandFactoryTrait;
@@ -34,8 +35,7 @@ class EventDemandFactoryTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = new class
-        {
+        $this->subject = new class () {
             use EventDemandFactoryTrait;
 
             /**

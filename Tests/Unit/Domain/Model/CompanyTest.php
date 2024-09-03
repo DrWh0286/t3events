@@ -32,7 +32,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class CompanyTest extends UnitTestCase
 {
-
     /**
      * @var Company
      */

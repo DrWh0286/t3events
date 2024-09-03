@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\ViewHelpers;
 
 /***************************************************************
@@ -28,7 +29,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class FindEventsViewHelper extends AbstractViewHelper
 {
-
     /**
      * @param int $timestamp
      * @param array $events

@@ -80,7 +80,7 @@ trait EntityNotFoundHandlerTrait
     public function processRequest(RequestInterface $request): ResponseInterface
     {
         try {
-           $response =  parent::processRequest($request);
+            $response =  parent::processRequest($request);
         } catch (\Exception $exception) {
             if (
                 (($exception instanceof PropertyException\TargetNotFoundException)

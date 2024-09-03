@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\ViewHelpers;
 
 /***************************************************************
@@ -29,7 +30,6 @@ namespace DWenzel\T3events\ViewHelpers;
  */
 class MetaTagViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper
 {
-
     /**
      * @var    string
      */

@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Tests\Unit\Domain\Factory\Dto;
 
 use DWenzel\T3events\Domain\Factory\Dto\EventDemandFactory;

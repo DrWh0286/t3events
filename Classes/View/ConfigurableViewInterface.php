@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\View;
 
 /***************************************************************
@@ -26,7 +27,7 @@ use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
  */
 interface ConfigurableViewInterface extends ViewInterface
 {
-    const SETTINGS_KEY = 'view';
+    public const SETTINGS_KEY = 'view';
 
     /**
      * Applies a given configuration to the view

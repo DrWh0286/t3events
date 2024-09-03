@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Utility;
 
 /**
@@ -21,7 +22,6 @@ use DWenzel\T3events\Domain\Model\GeoCodingInterface;
  */
 class GeoCoder
 {
-
     /**
      * Service Url
      *
@@ -93,8 +93,10 @@ class GeoCoder
         $rLatB = asin(sin($rLat) * cos($rAngDist) +
             cos($rLat) * sin($rAngDist) * cos($rBearing));
 
-        $rLonB = $rLon + atan2(sin($rBearing) * sin($rAngDist) * cos($rLat),
-                cos($rAngDist) - sin($rLat) * sin($rLatB));
+        $rLonB = $rLon + atan2(
+            sin($rBearing) * sin($rAngDist) * cos($rLat),
+            cos($rAngDist) - sin($rLat) * sin($rLatB)
+        );
 
         return array('lat' => rad2deg($rLatB), 'lng' => rad2deg($rLonB));
     }

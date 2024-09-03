@@ -34,7 +34,6 @@ use DWenzel\T3events\Domain\Model\PersonType;
  */
 class PersonTypeTest extends UnitTestCase
 {
-
     /**
      * @var \DWenzel\T3events\Domain\Model\PersonType
      */

@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Tests\Unit\Object;
 
 use PHPUnit\Framework\MockObject\MockBuilder;
@@ -24,7 +25,6 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 trait MockObjectManagerTrait
 {
-
     /**
      * @var MockObject*/
     protected $subject;

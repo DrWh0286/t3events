@@ -23,7 +23,8 @@ use DWenzel\T3events\Utility\SettingsInterface as SI;
 
 class MockSignalController implements SignalInterface
 {
-    use RoutingTrait, SignalTrait;
+    use RoutingTrait;
+    use SignalTrait;
 }
 
 /**
@@ -43,8 +44,7 @@ class RoutingTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = new class
-        {
+        $this->subject = new class () {
             use RoutingTrait;
 
             public function setRequest(Request $request)
@@ -68,7 +68,8 @@ class RoutingTraitTest extends UnitTestCase
         $this->subject->injectRouter($router);
 
         $this->assertEquals(
-            $router, $this->subject->getRouter()
+            $router,
+            $this->subject->getRouter()
         );
     }
 
@@ -128,7 +129,13 @@ class RoutingTraitTest extends UnitTestCase
         $mockRoute = $this->getMockRoute(['getMethod'], [$identifier]);
 
         $this->subject = $this->getMockForTrait(
-            RoutingTrait::class, [], '', true, true, true, [$method]
+            RoutingTrait::class,
+            [],
+            '',
+            true,
+            true,
+            true,
+            [$method]
         );
         $mockRouter = $this->getMockRouter();
 
@@ -175,7 +182,13 @@ class RoutingTraitTest extends UnitTestCase
         $mockRoute = $this->getMockRoute(['getOptions', 'getMethod'], [$identifier]);
 
         $this->subject = $this->getMockForTrait(
-            RoutingTrait::class, [], '', true, true, true, [$method]
+            RoutingTrait::class,
+            [],
+            '',
+            true,
+            true,
+            true,
+            [$method]
         );
 
         $mockRouter = $this->getMockRouter();
@@ -240,7 +253,13 @@ class RoutingTraitTest extends UnitTestCase
         $method = 'bam';
         $mockRoute = $this->getMockRoute(['getOptions', 'getOption', 'getMethod'], [$identifier]);
         $this->subject = $this->getMockForTrait(
-            RoutingTrait::class, [], '', true, true, true, [$method]
+            RoutingTrait::class,
+            [],
+            '',
+            true,
+            true,
+            true,
+            [$method]
         );
 
         /** @var RouterInterface|\PHPUnit_Framework_MockObject_MockObject $mockRouter */

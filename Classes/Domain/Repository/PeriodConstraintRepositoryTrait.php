@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Domain\Repository;
 
 use DWenzel\T3events\Domain\Model\Dto\PeriodAwareDemandInterface;
@@ -14,7 +15,6 @@ use DWenzel\T3events\Utility\SettingsInterface as SI;
  */
 trait PeriodConstraintRepositoryTrait
 {
-
     /**
      * Create period constraints from demand (time restriction)
      *

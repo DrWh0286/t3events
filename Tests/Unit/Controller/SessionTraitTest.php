@@ -39,8 +39,7 @@ class SessionTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = new class
-        {
+        $this->subject = new class () {
             use SessionTrait;
 
             public function __construct()

@@ -28,25 +28,26 @@ use RuntimeException;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 
-
 /**
  * Class PerformanceController
  *
  * @package DWenzel\T3events\Controller
  */
-class PerformanceController
-    extends ActionController
-    implements FilterableControllerInterface
+class PerformanceController extends ActionController implements FilterableControllerInterface
 {
-    use CategoryRepositoryTrait,
-        DemandTrait, EntityNotFoundHandlerTrait, FilterableControllerTrait,
-        PerformanceDemandFactoryTrait, SessionTrait,
-        SettingsUtilityTrait, TranslateTrait;
+    use CategoryRepositoryTrait;
+    use DemandTrait;
+    use EntityNotFoundHandlerTrait;
+    use FilterableControllerTrait;
+    use PerformanceDemandFactoryTrait;
+    use SessionTrait;
+    use SettingsUtilityTrait;
+    use TranslateTrait;
 
-    const PERFORMANCE_LIST_ACTION = 'listAction';
-    const PERFORMANCE_QUICK_MENU_ACTION = 'quickMenuAction';
-    const PERFORMANCE_SHOW_ACTION = 'showAction';
-    const SESSION_NAME_SPACE = 'performanceController';
+    public const PERFORMANCE_LIST_ACTION = 'listAction';
+    public const PERFORMANCE_QUICK_MENU_ACTION = 'quickMenuAction';
+    public const PERFORMANCE_SHOW_ACTION = 'showAction';
+    public const SESSION_NAME_SPACE = 'performanceController';
 
     /**
      * performanceRepository
@@ -148,7 +149,7 @@ class PerformanceController
      */
     public function listAction(array $overwriteDemand = null): \Psr\Http\Message\ResponseInterface
     {
-        if (!$overwriteDemand){
+        if (!$overwriteDemand) {
             if (!$this->session->has('tx_t3events_overwriteDemand') || !is_string($this->session->get('tx_t3events_overwriteDemand')) || empty($this->session->get('tx_t3events_overwriteDemand'))) {
                 throw new RuntimeException('tx_t3events_overwriteDemand is not set or is empty and also no overwriteDemand is set!');
             }

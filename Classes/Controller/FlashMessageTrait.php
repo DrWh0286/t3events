@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Controller;
 
 use DWenzel\T3events\Configuration\ConfigurationManagerTrait;
@@ -73,12 +74,18 @@ trait FlashMessageTrait
         $storeInSession = true
     ): void {
         if (!is_string($messageBody)) {
-            throw new \InvalidArgumentException('The message body must be of type string, "' . gettype($messageBody) . '" given.',
-                1243258395);
+            throw new \InvalidArgumentException(
+                'The message body must be of type string, "' . gettype($messageBody) . '" given.',
+                1243258395
+            );
         }
         /* @var \TYPO3\CMS\Core\Messaging\FlashMessage $flashMessage */
         $flashMessage = GeneralUtility::makeInstance(
-            'TYPO3\\CMS\\Core\\Messaging\\FlashMessage', $messageBody, $messageTitle, $severity, $storeInSession
+            'TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
+            $messageBody,
+            $messageTitle,
+            $severity,
+            $storeInSession
         );
 
         $this->getFlashMessageQueue()->enqueue($flashMessage);
@@ -90,9 +97,9 @@ trait FlashMessageTrait
     public function getFlashMessageQueue()
     {
         if (!$this->flashMessageQueue instanceof FlashMessageQueue) {
-                $this->flashMessageQueue = $this->flashMessageService->getMessageQueueByIdentifier(
-                    'extbase.flashmessages.' . $this->extensionService->getPluginNamespace($this->request->getControllerExtensionName(), $this->request->getPluginName())
-                );
+            $this->flashMessageQueue = $this->flashMessageService->getMessageQueueByIdentifier(
+                'extbase.flashmessages.' . $this->extensionService->getPluginNamespace($this->request->getControllerExtensionName(), $this->request->getPluginName())
+            );
         }
 
         return $this->flashMessageQueue;

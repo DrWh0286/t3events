@@ -1,4 +1,5 @@
 <?php
+
 namespace CPSIT\T3events\Tests\Unit\View;
 
 /**

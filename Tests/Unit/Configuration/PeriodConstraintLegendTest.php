@@ -56,8 +56,7 @@ class PeriodConstraintLegendTest extends TestCase
             PeriodDataProviderFactory::class => $this->periodDataProviderFactory
         ];
 
-        GeneralUtility::setContainer(new class ($classes) implements ContainerInterface
-        {
+        GeneralUtility::setContainer(new class ($classes) implements ContainerInterface {
             public function __construct(private readonly array $classes)
             {
             }
@@ -146,12 +145,12 @@ class PeriodConstraintLegendTest extends TestCase
             ->method('getVisibleLayerIds')
             ->willReturn($visibleLayers);
 
-//        $this->subject->expects($this->once())
-//            ->method('hideElements')
-//            ->with($allLayers);
-//        $this->subject->expects($this->once())
-//            ->method('showElements')
-//            ->with($visibleLayers);
+        //        $this->subject->expects($this->once())
+        //            ->method('hideElements')
+        //            ->with($allLayers);
+        //        $this->subject->expects($this->once())
+        //            ->method('showElements')
+        //            ->with($visibleLayers);
 
         /** @noinspection PhpUnhandledExceptionInspection */
         $this->subject->render($params);

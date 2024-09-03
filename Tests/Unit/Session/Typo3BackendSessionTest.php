@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Tests\Unit\Session;
 
 /**
@@ -21,7 +22,7 @@ use DWenzel\T3events\Session\Typo3BackendSession;
  */
 class Typo3BackendSessionTest extends UnitTestCase
 {
-    const SESSION_NAMESPACE = 'testNamespace';
+    public const SESSION_NAMESPACE = 'testNamespace';
 
     /**
      * @var \DWenzel\T3events\Session\Typo3BackendSession

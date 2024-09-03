@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Tests\Unit\Resource;
 
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -31,7 +32,11 @@ class VectorImageTest extends UnitTestCase
     protected function setUp(): void
     {
         $this->subject = $this->getAccessibleMock(
-            \DWenzel\T3events\Resource\VectorImage::class, [], [], '', true
+            \DWenzel\T3events\Resource\VectorImage::class,
+            [],
+            [],
+            '',
+            true
         );
         // initialize property
         $this->subject->getXPath();
@@ -58,7 +63,11 @@ class VectorImageTest extends UnitTestCase
     public function hideElementsSetsAttributeForExistingElement(): void
     {
         $this->subject = $this->getAccessibleMock(
-            VectorImage::class, ['getElementById'], [], '', true
+            VectorImage::class,
+            ['getElementById'],
+            [],
+            '',
+            true
         );
 
         /** @var \DOMElement $mockElement */
@@ -102,7 +111,11 @@ class VectorImageTest extends UnitTestCase
     public function showElementsSetsAttributeForExistingElement(): void
     {
         $this->subject = $this->getAccessibleMock(
-            \DWenzel\T3events\Resource\VectorImage::class, ['getElementById'], [], '', true
+            \DWenzel\T3events\Resource\VectorImage::class,
+            ['getElementById'],
+            [],
+            '',
+            true
         );
 
         /** @var \DOMElement $mockElement */
@@ -132,7 +145,11 @@ class VectorImageTest extends UnitTestCase
     {
         $nonExistingElementId = 'foo';
         $this->subject = $this->getAccessibleMock(
-            \DWenzel\T3events\Resource\VectorImage::class, ['removeChild', 'appendChild'], [], '', true
+            \DWenzel\T3events\Resource\VectorImage::class,
+            ['removeChild', 'appendChild'],
+            [],
+            '',
+            true
         );
         $this->subject->expects($this->never())
             ->method('removeChild');

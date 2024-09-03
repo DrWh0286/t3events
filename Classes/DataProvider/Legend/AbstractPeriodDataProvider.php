@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\DataProvider\Legend;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -22,11 +23,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  ***************************************************************/
 class AbstractPeriodDataProvider
 {
-    const ALL_LAYERS = 'long-re-off,long-re-on,arrow-right,arrow-left,text-start,text-end,start-point,end-point,
+    public const ALL_LAYERS = 'long-re-off,long-re-on,arrow-right,arrow-left,text-start,text-end,start-point,end-point,
                         right-re-on,right-off,right-re-off,middle-on,left-re-off,left-re-on,left-off';
-    const VISIBLE_LAYERS = '';
-    const LAYERS_TO_HIDE = '';
-    const LAYERS_TO_SHOW = '';
+    public const VISIBLE_LAYERS = '';
+    public const LAYERS_TO_HIDE = '';
+    public const LAYERS_TO_SHOW = '';
 
     /**
      * @var bool

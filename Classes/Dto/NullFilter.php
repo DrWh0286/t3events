@@ -24,7 +24,6 @@ namespace DWenzel\T3events\Dto;
  */
 class NullFilter implements FilterInterface
 {
-
     public function getOptions(): iterable
     {
         return [];

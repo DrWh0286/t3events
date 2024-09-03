@@ -24,7 +24,7 @@ use DWenzel\T3events\ViewHelpers\Format\AbstractDateRangeViewHelper;
  */
 class DateRangeViewHelper extends AbstractDateRangeViewHelper
 {
-    const ARGUMENT_EVENT_DESCRIPTION = 'Event for which the date range should be rendered.';
+    public const ARGUMENT_EVENT_DESCRIPTION = 'Event for which the date range should be rendered.';
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage

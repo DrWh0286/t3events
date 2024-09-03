@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Service\TCA;
 
 /***************************************************************
@@ -30,7 +31,8 @@ use DWenzel\T3events\Utility\SettingsInterface as SI;
  */
 class ScheduleConfigurationService
 {
-    use CallStaticTrait, TranslateTrait;
+    use CallStaticTrait;
+    use TranslateTrait;
 
     /**
      * @param array $parameters

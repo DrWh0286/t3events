@@ -109,8 +109,7 @@ class TableConfiguration
     {
         $path = 'LLL:EXT:' . $extension . '/';
 
-        if (static::getVersion() > 7)
-        {
+        if (static::getVersion() > 7) {
             $path = 'LLL:EXT:' . $extension . '/Resources/Private/Language/';
         }
 

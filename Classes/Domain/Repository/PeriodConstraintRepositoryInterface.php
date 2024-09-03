@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Domain\Repository;
 
 /**
@@ -25,17 +26,17 @@ use DWenzel\T3events\Utility\SettingsInterface as SI;
  */
 interface PeriodConstraintRepositoryInterface
 {
-    const PERIOD_ALL = SI::ALL;
-    const PERIOD_FUTURE = SI::FUTURE_ONLY;
-    const PERIOD_PAST = SI::PAST_ONLY;
-    const PERIOD_SPECIFIC = SI::SPECIFIC;
-    const PERIOD_TYPE = 'periodType';
-    const PERIOD_TYPE_DAY = 'byDay';
-    const PERIOD_TYPE_MONTH = 'byMonth';
-    const PERIOD_TYPE_YEAR = 'byYear';
-    const PERIOD_TYPE_DATE = 'byDate';
-    const PERIOD_END_DATE = 'periodEndDate';
-    const PERIOD_START_DATE = 'periodStartDate';
+    public const PERIOD_ALL = SI::ALL;
+    public const PERIOD_FUTURE = SI::FUTURE_ONLY;
+    public const PERIOD_PAST = SI::PAST_ONLY;
+    public const PERIOD_SPECIFIC = SI::SPECIFIC;
+    public const PERIOD_TYPE = 'periodType';
+    public const PERIOD_TYPE_DAY = 'byDay';
+    public const PERIOD_TYPE_MONTH = 'byMonth';
+    public const PERIOD_TYPE_YEAR = 'byYear';
+    public const PERIOD_TYPE_DATE = 'byDate';
+    public const PERIOD_END_DATE = 'periodEndDate';
+    public const PERIOD_START_DATE = 'periodStartDate';
 
     /**
      * Create period constraints from demand (time restriction)

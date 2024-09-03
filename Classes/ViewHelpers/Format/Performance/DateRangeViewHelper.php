@@ -27,7 +27,7 @@ use DWenzel\T3events\ViewHelpers\Format\AbstractDateRangeViewHelper;
  */
 class DateRangeViewHelper extends AbstractDateRangeViewHelper
 {
-    const ARGUMENT_PERFORMANCE_DESCRIPTION = 'Performance for which the date range should be rendered.';
+    public const ARGUMENT_PERFORMANCE_DESCRIPTION = 'Performance for which the date range should be rendered.';
 
     /**
      * @var \DWenzel\T3events\Domain\Model\Performance

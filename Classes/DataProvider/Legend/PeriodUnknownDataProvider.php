@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\DataProvider\Legend;
 
 /***************************************************************
@@ -29,7 +30,7 @@ namespace DWenzel\T3events\DataProvider\Legend;
  */
 class PeriodUnknownDataProvider extends AbstractPeriodDataProvider implements LayeredLegendDataProviderInterface
 {
-    const VISIBLE_LAYERS = PeriodAllDataProvider::VISIBLE_LAYERS;
-    const LAYERS_TO_HIDE = '';
-    const LAYERS_TO_SHOW = '';
+    public const VISIBLE_LAYERS = PeriodAllDataProvider::VISIBLE_LAYERS;
+    public const LAYERS_TO_HIDE = '';
+    public const LAYERS_TO_SHOW = '';
 }

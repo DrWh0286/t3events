@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Tests\Unit\Controller;
 
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -34,8 +35,7 @@ class EventTypeRepositoryTraitTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = new class
-        {
+        $this->subject = new class () {
             use EventTypeRepositoryTrait;
 
             /**

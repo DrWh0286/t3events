@@ -17,7 +17,7 @@ class CategoryConstraintRepositoryTraitTest extends UnitTestCase
     /**
      * mock category field
      */
-    const CATEGORY_FIELD = 'foo';
+    public const CATEGORY_FIELD = 'foo';
 
     /**
      * @var CategoryConstraintRepositoryTrait|MockObject

@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Utility;
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -12,7 +13,6 @@ use DWenzel\T3events\Domain\Model\Dto\EmConfiguration;
  */
 class EmConfigurationUtility
 {
-
     /**
      * Gets the settings from extension manager
      *
@@ -23,7 +23,7 @@ class EmConfigurationUtility
     {
         $configuration = self::parseSettings();
         // @ToDo: Check, why this is necessary - Maybe just reproducible in TYPO3 context. In Tests, this causes errors.
-//        require_once ExtensionManagementUtility::extPath('t3events') . 'Classes/Domain/Model/Dto/EmConfiguration.php';
+        //        require_once ExtensionManagementUtility::extPath('t3events') . 'Classes/Domain/Model/Dto/EmConfiguration.php';
         return new EmConfiguration($configuration);
     }
 

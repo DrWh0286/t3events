@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\ViewHelpers\Location;
 
 /**
@@ -24,7 +25,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class CountViewHelper extends AbstractViewHelper
 {
-    const ARGUMENT_EVENT_DESCRIPTION = 'Event whose location count should be rendered.';
+    public const ARGUMENT_EVENT_DESCRIPTION = 'Event whose location count should be rendered.';
 
     /**
      * Initialize Arguments

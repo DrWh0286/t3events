@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Domain\Model\Dto;
 
 /**
@@ -25,12 +26,14 @@ class EventDemand extends AbstractDemand implements
     AudienceAwareDemandInterface,
     OrderAwareDemandInterface
 {
-    use PeriodAwareDemandTrait, SearchAwareDemandTrait,
-        AudienceAwareDemandTrait, OrderAwareDemandTrait;
+    use PeriodAwareDemandTrait;
+    use SearchAwareDemandTrait;
+    use AudienceAwareDemandTrait;
+    use OrderAwareDemandTrait;
 
-    const START_DATE_FIELD = 'performances.date';
-    const END_DATE_FIELD = 'performances.endDate';
-    const AUDIENCE_FIELD = 'audience';
+    public const START_DATE_FIELD = 'performances.date';
+    public const END_DATE_FIELD = 'performances.endDate';
+    public const AUDIENCE_FIELD = 'audience';
 
     /**
      * Genre

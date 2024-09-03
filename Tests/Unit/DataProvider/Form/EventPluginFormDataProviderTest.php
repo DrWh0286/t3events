@@ -17,6 +17,7 @@ use DWenzel\T3events\Hooks\BackendUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Backend\Form\FormDataProviderInterface;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
+
 /**
  * Class EventPluginFormDataProviderTest
  */

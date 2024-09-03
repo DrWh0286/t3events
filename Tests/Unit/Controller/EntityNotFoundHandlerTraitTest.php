@@ -65,7 +65,6 @@ class DummyEntityNotFoundHandlerController extends DummyParent
  ***************************************************************/
 class EntityNotFoundHandlerTraitTest extends UnitTestCase
 {
-
     /**
      * @var EntityNotFoundHandlerTrait|\PHPUnit_Framework_MockObject_MockObject
      */
@@ -88,8 +87,7 @@ class EntityNotFoundHandlerTraitTest extends UnitTestCase
             UriBuilder::class
         );
 
-        $this->subject = new class ($this->mockDispatcher, $this->mockRequest, $this->mockUriBuilder) extends DummyParent
-        {
+        $this->subject = new class ($this->mockDispatcher, $this->mockRequest, $this->mockUriBuilder) extends DummyParent {
             use EntityNotFoundHandlerTrait;
             public function __construct(Dispatcher $signalSlotDispatcher, Request $request, UriBuilder $uriBuilder)
             {
@@ -161,8 +159,7 @@ class EntityNotFoundHandlerTraitTest extends UnitTestCase
     {
         $errorController = $this->createMock(ErrorController::class);
 
-        GeneralUtility::setContainer(new class ([ErrorController::class => $errorController]) implements ContainerInterface
-        {
+        GeneralUtility::setContainer(new class ([ErrorController::class => $errorController]) implements ContainerInterface {
             public function __construct(private readonly array $classes)
             {
             }
@@ -256,8 +253,8 @@ class EntityNotFoundHandlerTraitTest extends UnitTestCase
             ->with('https');
         $this->mockUriBuilder->expects(self::once())
                     ->method('build');
-//        'redirectToUri method called with: ; and delay: 0; and status code: 301'
-//
+        //        'redirectToUri method called with: ; and delay: 0; and status code: 301'
+        //
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('with: ; and delay: 0; and status code: 301; redirectToUri method was called');
         $this->expectExceptionCode(7864378);

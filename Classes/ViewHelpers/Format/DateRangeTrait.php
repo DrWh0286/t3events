@@ -49,7 +49,7 @@ trait DateRangeTrait
         }
 
         if (strpos($startFormat, '%') !== false
-            && strpos($endFormat, '%' ) !== false
+            && strpos($endFormat, '%') !== false
         ) {
             throw new \RuntimeException('Please don\'t use % in date format!');
         }

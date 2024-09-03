@@ -26,7 +26,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class BackendUtility
 {
-
     /**
      * Fields which are removed in event quick menu view
      *

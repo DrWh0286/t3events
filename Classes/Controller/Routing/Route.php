@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Controller\Routing;
 
 /**
@@ -21,22 +22,22 @@ class Route
     /**
      * @const METHOD_REDIRECT
      */
-    const METHOD_REDIRECT = SI::REDIRECT;
+    public const METHOD_REDIRECT = SI::REDIRECT;
 
     /**
      * @const METHOD_FORWARD
      */
-    const METHOD_FORWARD = SI::FORWARD;
+    public const METHOD_FORWARD = SI::FORWARD;
 
     /**
      * @const METHOD_REDIRECT_TO_URI
      */
-    const METHOD_REDIRECT_TO_URI = 'redirectToUri';
+    public const METHOD_REDIRECT_TO_URI = 'redirectToUri';
 
     /**
      * @const ORIGIN_SEPARATOR
      */
-    const ORIGIN_SEPARATOR = '|';
+    public const ORIGIN_SEPARATOR = '|';
 
     /**
      * Origin of route

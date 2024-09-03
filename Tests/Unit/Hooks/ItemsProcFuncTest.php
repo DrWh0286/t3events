@@ -26,7 +26,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class ItemsProcFuncTest extends UnitTestCase
 {
-
     /**
      * @var ItemsProcFunc | \PHPUnit_Framework_MockObject_MockObject
      */
@@ -44,9 +43,9 @@ class ItemsProcFuncTest extends UnitTestCase
     {
         $this->templateLayoutUtility = $this->getMockBuilder(TemplateLayoutUtility::class)->getMock();
 
-//        $this->subject = $this->getAccessibleMock(
-//            ItemsProcFunc::class, ['getLanguageService'], [$this->templateLayoutUtility], '', false
-//        );
+        //        $this->subject = $this->getAccessibleMock(
+        //            ItemsProcFunc::class, ['getLanguageService'], [$this->templateLayoutUtility], '', false
+        //        );
 
         $this->subject = new ItemsProcFunc($this->templateLayoutUtility);
     }

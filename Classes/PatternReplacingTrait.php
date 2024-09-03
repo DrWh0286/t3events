@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events;
 
 /**
@@ -43,8 +44,7 @@ trait PatternReplacingTrait
     public function replacePatterns($content)
     {
         $patterns = $this->getReplacePatterns();
-        foreach ($patterns as $pattern=>$replacement)
-        {
+        foreach ($patterns as $pattern => $replacement) {
             $content = preg_replace($pattern, $replacement, $content);
         }
 

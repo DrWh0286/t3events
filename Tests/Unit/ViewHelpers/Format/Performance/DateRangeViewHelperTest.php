@@ -36,7 +36,8 @@ class DateRangeViewHelperTest extends UnitTestCase
     protected function setUp(): void
     {
         $this->subject = $this->getAccessibleMock(
-            DateRangeViewHelper::class, ['initialize']
+            DateRangeViewHelper::class,
+            ['initialize']
         );
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Tests\Unit\Domain\Repository\Fixtures;
 
 use DWenzel\T3events\Domain\Repository\AbstractDemandedRepository;

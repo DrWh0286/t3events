@@ -31,8 +31,8 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 class PerformanceStatusRepositoryTest extends UnitTestCase
 {
-
-    use MockDemandTrait, MockQueryTrait;
+    use MockDemandTrait;
+    use MockQueryTrait;
 
     /**
      * @var PerformanceStatusRepository|MockObject

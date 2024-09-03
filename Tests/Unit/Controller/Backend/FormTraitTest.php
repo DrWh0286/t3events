@@ -11,7 +11,6 @@ use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 class FormTraitTest extends UnitTestCase
 {
-
     /**
      * @var FormTrait|MockObject
      */
@@ -36,8 +35,7 @@ class FormTraitTest extends UnitTestCase
         $version = GeneralUtility::makeInstance(Typo3Version::class);
         $key = 'M';
         $value = 'Events_T3eventsM1';
-        if (VersionNumberUtility::convertVersionNumberToInteger($version->getVersion()) >= 9000000)
-        {
+        if (VersionNumberUtility::convertVersionNumberToInteger($version->getVersion()) >= 9000000) {
             $key = 'route';
             $value = '/Events/T3eventsM1/';
 
@@ -53,8 +51,9 @@ class FormTraitTest extends UnitTestCase
      * @dataProvider getModuleKeyReturnsGetParameterDataProvider
      * @param string $expectedValue
      */
-    public function getModuleKeyReturnsGetParameter(string $expectedValue): void {
-        if(!defined('TYPO3_version')) {
+    public function getModuleKeyReturnsGetParameter(string $expectedValue): void
+    {
+        if (!defined('TYPO3_version')) {
             self::markTestSkipped('required constant `TYPO3_version` is not defined');
         }
         self::assertSame(

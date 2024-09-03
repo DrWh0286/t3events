@@ -1,6 +1,7 @@
 <?php
 
 namespace DWenzel\T3events\Tests\Unit\Domain\Model\Dto;
+
 use DWenzel\T3events\Domain\Model\Dto\ButtonDemand;
 use DWenzel\T3events\Domain\Model\Dto\ButtonDemandCollection;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -26,7 +27,6 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class ButtonDemandCollectionTest extends UnitTestCase
 {
-
     /**
      * @var ButtonDemandCollection|MockObject
      */
@@ -43,7 +43,8 @@ class ButtonDemandCollectionTest extends UnitTestCase
     /**
      * @test
      */
-    public function getDemandInitiallyReturnsEmptyObjectStorage(): void {
+    public function getDemandInitiallyReturnsEmptyObjectStorage(): void
+    {
         $this->assertInstanceOf(
             ObjectStorage::class,
             $this->subject->getDemands()
@@ -53,8 +54,9 @@ class ButtonDemandCollectionTest extends UnitTestCase
     /**
      * @test
      */
-    public function demandsCanBeSet(): void {
-        $demands = new  ObjectStorage();
+    public function demandsCanBeSet(): void
+    {
+        $demands = new ObjectStorage();
         $this->subject->setDemands($demands);
         $this->assertSame(
             $demands,
@@ -65,7 +67,8 @@ class ButtonDemandCollectionTest extends UnitTestCase
     /**
      * @test
      */
-    public function demandCanBeAdded(): void {
+    public function demandCanBeAdded(): void
+    {
         $demand = new ButtonDemand();
         $this->subject->addDemand($demand);
         $this->assertContains(
@@ -77,7 +80,8 @@ class ButtonDemandCollectionTest extends UnitTestCase
     /**
      * @test
      */
-    public function demandCanBeRemoved(): void {
+    public function demandCanBeRemoved(): void
+    {
         $demands = new ObjectStorage();
         $demandToBeRemoved = new ButtonDemand();
         $demands->attach($demandToBeRemoved);
@@ -93,7 +97,8 @@ class ButtonDemandCollectionTest extends UnitTestCase
     /**
      * @test
      */
-    public function constructorCreatesDemandFromSettings(): void {
+    public function constructorCreatesDemandFromSettings(): void
+    {
         $singleButtonConfig = [
             ButtonDemand::TABLE_KEY => 'foo',
             ButtonDemand::ACTION_KEY => 'bar',

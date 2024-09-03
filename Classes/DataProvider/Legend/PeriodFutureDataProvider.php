@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\DataProvider\Legend;
 
 /***************************************************************
@@ -20,7 +21,7 @@ namespace DWenzel\T3events\DataProvider\Legend;
  ***************************************************************/
 class PeriodFutureDataProvider extends AbstractPeriodDataProvider implements LayeredLegendDataProviderInterface
 {
-    const VISIBLE_LAYERS = 'arrow-right,text-start,start-point,middle-on,left-off,left-re-off';
-    const LAYERS_TO_HIDE = 'left-re-off';
-    const LAYERS_TO_SHOW = 'left-re-on';
+    public const VISIBLE_LAYERS = 'arrow-right,text-start,start-point,middle-on,left-off,left-re-off';
+    public const LAYERS_TO_HIDE = 'left-re-off';
+    public const LAYERS_TO_SHOW = 'left-re-on';
 }

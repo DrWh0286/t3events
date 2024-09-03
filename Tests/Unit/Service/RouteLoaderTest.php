@@ -105,7 +105,8 @@ class RouteLoaderTest extends UnitTestCase
             ->will($this->returnValue($mockRoute));
 
         $this->subject->register(
-            $origin, $method
+            $origin,
+            $method
         );
     }
 
@@ -125,7 +126,9 @@ class RouteLoaderTest extends UnitTestCase
             ->will($this->returnValue($mockRoute));
 
         $this->subject->register(
-            $origin, null, $options
+            $origin,
+            null,
+            $options
         );
     }
 

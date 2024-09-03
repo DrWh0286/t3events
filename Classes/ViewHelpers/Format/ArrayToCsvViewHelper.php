@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\ViewHelpers\Format;
 
 /**
@@ -25,9 +26,9 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class ArrayToCsvViewHelper extends AbstractViewHelper
 {
-    const ARGUMENT_SOURCE_DESCRIPTION = 'Array to be transformed';
-    const ARGUMENT_DELIMITER_DESCRIPTION = 'String delimiter or separator. Default ist (,)';
-    const ARGUMENT_QUOTE_DESCRIPTION = 'Quote-character to wrap around the values. Default ist (")';
+    public const ARGUMENT_SOURCE_DESCRIPTION = 'Array to be transformed';
+    public const ARGUMENT_DELIMITER_DESCRIPTION = 'String delimiter or separator. Default ist (,)';
+    public const ARGUMENT_QUOTE_DESCRIPTION = 'Quote-character to wrap around the values. Default ist (")';
 
     /**
      * Initializes the arguments for the ViewHelper

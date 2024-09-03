@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\T3events\Tests\Unit\Controller;
 
 use DWenzel\T3events\Controller\ModuleDataTrait;
@@ -48,8 +49,7 @@ class ModuleDataTraitTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->subject = new class
-        {
+        $this->subject = new class () {
             use ModuleDataTrait;
 
             /**
@@ -84,10 +84,8 @@ class ModuleDataTraitTest extends TestCase
                 $controllerName = null,
                 $extensionName = null,
                 array $arguments = null
-            )
-            {
-                throw new class ('forward method called', 872634598237456) extends \Exception
-                {
+            ) {
+                throw new class ('forward method called', 872634598237456) extends \Exception {
                 };
             }
 
@@ -116,7 +114,8 @@ class ModuleDataTraitTest extends TestCase
 
         $this->subject->injectModuleDataStorageService($mockService);
         $this->assertSame(
-            $mockService, $this->subject->getModuleDataStorageService()
+            $mockService,
+            $this->subject->getModuleDataStorageService()
         );
     }
 
@@ -131,8 +130,7 @@ class ModuleDataTraitTest extends TestCase
             ModuleData::class => $mockModuleData = $this->getMockBuilder(ModuleData::class)->getMock()
         ];
 
-        GeneralUtility::setContainer(new class ($classes) implements ContainerInterface
-        {
+        GeneralUtility::setContainer(new class ($classes) implements ContainerInterface {
             public function __construct(private array $classes)
             {
             }
@@ -199,7 +197,8 @@ class ModuleDataTraitTest extends TestCase
     /**
      * @test
      */
-    public function getModuleDataInitiallyReturnsNull(): void {
+    public function getModuleDataInitiallyReturnsNull(): void
+    {
         $this->assertNull(
             $this->subject->getModuleData()
         );
@@ -208,7 +207,8 @@ class ModuleDataTraitTest extends TestCase
     /**
      * @test
      */
-    public function moduleDataCanBeSet(): void {
+    public function moduleDataCanBeSet(): void
+    {
         $moduleData = $this->getMockBuilder(ModuleData::class)->getMock();
         $this->subject->setModuleData($moduleData);
 
