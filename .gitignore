@@ -4,3 +4,8 @@ Documentation/_build/
 .Build/
 composer.lock
 tools/php-cs-fixer/vendor
+.php-cs-fixer.cache
+Tests/Build/.phpunit.result.cache
+.idea
+var
+.ddev
