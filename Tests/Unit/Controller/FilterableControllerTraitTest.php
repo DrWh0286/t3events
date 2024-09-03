@@ -81,7 +81,7 @@ class FilterableControllerTraitTest extends UnitTestCase
         $this->subject = new class () {
             use FilterableControllerTrait;
 
-            public function translate($key, $extension = 't3events', $arguments = null)
+            public function translate($key, $extension = 't3events', $arguments = null): void
             {
                 // TODO: Implement translate() method.
             }

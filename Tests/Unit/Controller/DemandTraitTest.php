@@ -67,7 +67,7 @@ class DemandTraitTest extends UnitTestCase
                 return $this->search;
             }
 
-            public function setSettings(array $settings)
+            public function setSettings(array $settings): void
             {
                 $this->settings = $settings;
             }

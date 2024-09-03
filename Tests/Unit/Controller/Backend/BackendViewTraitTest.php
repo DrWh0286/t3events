@@ -93,7 +93,7 @@ class BackendViewTraitTest extends UnitTestCase
             /**
              * @return ButtonBar
              */
-            protected function getButtonBar()
+            protected function getButtonBar(): void
             {
 
             }
@@ -101,7 +101,7 @@ class BackendViewTraitTest extends UnitTestCase
             /**
              * @return UriBuilder
              */
-            protected function getUriBuilder()
+            protected function getUriBuilder(): void
             {
 
             }
@@ -109,7 +109,7 @@ class BackendViewTraitTest extends UnitTestCase
             /**
              * @return IconFactory
              */
-            protected function getIconFactory()
+            protected function getIconFactory(): void
             {
 
             }
@@ -122,12 +122,12 @@ class BackendViewTraitTest extends UnitTestCase
              * @param array $arguments
              * @return string
              */
-            public function translate($key, $extension = 't3events', $arguments = null)
+            public function translate($key, $extension = 't3events', $arguments = null): void
             {
 
             }
 
-            public function setGetViewPropertyReturnValue(array $configuration)
+            public function setGetViewPropertyReturnValue(array $configuration): void
             {
                 $this->getViewPropertyReturnValue = $configuration;
             }

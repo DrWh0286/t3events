@@ -96,7 +96,7 @@ class EntityNotFoundHandlerTraitTest extends UnitTestCase
                 $this->uriBuilder = $uriBuilder;
             }
 
-            public function setSettings(array $settings)
+            public function setSettings(array $settings): void
             {
                 $this->settings = $settings;
             }
@@ -106,7 +106,7 @@ class EntityNotFoundHandlerTraitTest extends UnitTestCase
                 return true;
             }
 
-            public function forward($actionName, $controllerName = null, $extensionName = null, array $arguments = null)
+            public function forward($actionName, $controllerName = null, $extensionName = null, array $arguments = null): void
             {
                 throw new class (
                     'forward method called',

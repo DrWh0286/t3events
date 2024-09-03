@@ -47,7 +47,7 @@ class RoutingTraitTest extends UnitTestCase
         $this->subject = new class () {
             use RoutingTrait;
 
-            public function setRequest(Request $request)
+            public function setRequest(Request $request): void
             {
                 $this->request = $request;
             }

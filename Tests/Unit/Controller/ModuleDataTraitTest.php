@@ -84,7 +84,7 @@ class ModuleDataTraitTest extends TestCase
                 $controllerName = null,
                 $extensionName = null,
                 array $arguments = null
-            ) {
+            ): void {
                 throw new class ('forward method called', 872634598237456) extends \Exception {
                 };
             }

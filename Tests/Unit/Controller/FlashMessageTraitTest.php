@@ -53,12 +53,12 @@ class FlashMessageTraitTest extends UnitTestCase
                 return $this->flashMessageService;
             }
 
-            public function setFlashMessageQueue($flashMessageQueue)
+            public function setFlashMessageQueue($flashMessageQueue): void
             {
                 $this->flashMessageQueue = $flashMessageQueue;
             }
 
-            public function setRequest($request)
+            public function setRequest($request): void
             {
                 $this->request = $request;
             }
