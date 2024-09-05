@@ -1,33 +1,24 @@
 <?php
 
-namespace DWenzel\T3events\Controller;
+declare(strict_types=1);
+
+namespace DWenzel\T3events\Service;
 
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
-/**
- * Class TranslateTrait
- *
- * @package DWenzel\T3events\Controller
- * @todo: Move this in a service class and replace trait usage.
- * @deprecated see todo!
- */
-trait TranslateTrait
+class TranslationService
 {
     /**
      * Translate a given key
      *
      * @param string $key
      * @param string $extension
-     * @param array $arguments
+     * @param array|null $arguments
      * @codeCoverageIgnore
      * @return string
      */
-    public function translate($key, $extension = 't3events', $arguments = null)
+    public function translate(string $key, string $extension = 't3events', array $arguments = null): string
     {
-        if (defined(get_class($this) . '::EXTENSION_KEY')) {
-            $extension = static::EXTENSION_KEY;
-        }
-
         $translatedString = LocalizationUtility::translate($key, $extension, $arguments);
         if (is_null($translatedString)) {
             return $key;

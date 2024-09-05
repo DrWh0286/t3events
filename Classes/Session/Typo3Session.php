@@ -2,6 +2,8 @@
 
 namespace DWenzel\T3events\Session;
 
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+
 /**
  * This file is part of the TYPO3 CMS project.
  *
@@ -67,8 +69,10 @@ class Typo3Session implements SessionInterface
     public function set($identifier, $value): void
     {
         $this->data[$identifier] = $value;
-        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->namespace, $this->data);
-        $GLOBALS['TSFE']->fe_user->storeSessionData();
+        /** @var TypoScriptFrontendController $tsfe */
+        $tsfe = $GLOBALS['TSFE'];
+        $tsfe->fe_user->setKey('ses', $this->namespace, $this->data);
+        $tsfe->fe_user->storeSessionData();
     }
 
     /**

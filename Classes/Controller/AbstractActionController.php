@@ -1,74 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DWenzel\T3events\Controller;
 
+use DWenzel\T3events\Event\EntityNotFoundErrorWasTriggered;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Http\ImmediateResponseException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Extbase\Property\Exception as PropertyException;
 use TYPO3\CMS\Frontend\Controller\ErrorController;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\CMS\Frontend\Page\PageAccessFailureReasons;
 
-/**
- * Class EntityNotFoundHandlerTrait
- *
- * @package DWenzel\T3events\Controller
- * @deprecated This needs to be replaced errorAction()!
- * @todo: Replace this! Use maybe an Abstract class for this, that extends the ActionController.
- */
-trait EntityNotFoundHandlerTrait
+abstract class AbstractActionController extends ActionController
 {
-    use SignalTrait;
-
-    protected static $handleEntityNotFoundError = 'handleEntityNotFoundError';
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder
-     */
-    protected $uriBuilder;
-
     /**
      * @var string
      */
     protected $entityNotFoundMessage = 'The requested entity could not be found';
-
-    /**
-     * The current request.
-     *
-     * @var \TYPO3\CMS\Extbase\Mvc\Request
-     */
-    protected $request;
-
-    /**
-     * @var array
-     */
-    protected $settings;
-
-    /**
-     * Forwards the request to another action and / or controller.
-     *
-     * Request is directly transferred to the other action / controller
-     * without the need for a new request.
-     *
-     * @param string $actionName Name of the action to forward to
-     * @param string $controllerName Unqualified object name of the controller to forward to. If not specified, the current controller is used.
-     * @param string $extensionName Name of the extension containing the controller to forward to. If not specified, the current extension is assumed.
-     * @param array $arguments Arguments to pass to the target action
-     * @return void
-     */
-    abstract public function forward($actionName, $controllerName = null, $extensionName = null, array $arguments = null);
-
-    /**
-     * @return string
-     */
-    public function getEntityNotFoundMessage()
-    {
-        return $this->entityNotFoundMessage;
-    }
 
     /**
      * @param \TYPO3\CMS\Extbase\Mvc\RequestInterface $request
@@ -80,7 +32,7 @@ trait EntityNotFoundHandlerTrait
     public function processRequest(RequestInterface $request): ResponseInterface
     {
         try {
-            $response =  parent::processRequest($request);
+            $response = parent::processRequest($request);
         } catch (\Exception $exception) {
             if (
                 (($exception instanceof PropertyException\TargetNotFoundException)
@@ -126,7 +78,7 @@ trait EntityNotFoundHandlerTrait
                     throw new \InvalidArgumentException($msg);
                 }
                 $this->uriBuilder->reset();
-                $this->uriBuilder->setTargetPageUid($conf[1]);
+                $this->uriBuilder->setTargetPageUid((int)$conf[1]);
                 $this->uriBuilder->setCreateAbsoluteUri(true);
                 if ($this->isSSLEnabled()) {
                     $this->uriBuilder->setAbsoluteUriScheme('https');
@@ -139,10 +91,10 @@ trait EntityNotFoundHandlerTrait
                 }
                 break;
             case 'pageNotFoundHandler':
-                //@todo: pageNotFoundAndExit() does not exist anymore!
                 /** @var ErrorController $errorController */
                 $errorController = GeneralUtility::makeInstance(ErrorController::class);
                 $response = $errorController->pageNotFoundAction($this->request, $this->entityNotFoundMessage, ['code' => PageAccessFailureReasons::PAGE_NOT_FOUND]);
+                //@todo: Check if ImmediateResponseException ist the correct way to do this.
                 throw new ImmediateResponseException($response);
                 break;
             default:
@@ -151,12 +103,11 @@ trait EntityNotFoundHandlerTrait
                     'requestArguments' => $this->request->getArguments(),
                     SI::ACTION_NAME => $this->request->getControllerActionName()
                 ];
-                // @todo: Replace with EntityNotFoundErrorWasTriggered event later!
-                $this->emitSignal(
-                    get_class($this),
-                    self::$handleEntityNotFoundError,
-                    $params
-                );
+
+                /** @var EntityNotFoundErrorWasTriggered $entityNotFoundErrorWasTriggered */
+                $entityNotFoundErrorWasTriggered = $this->eventDispatcher->dispatch(new EntityNotFoundErrorWasTriggered($params));
+                $params = $entityNotFoundErrorWasTriggered->getParameters();
+
                 if (isset($params[SI::REDIRECT_URI])) {
                     $this->redirectToUri($params[SI::REDIRECT_URI]);
                 }
@@ -182,30 +133,15 @@ trait EntityNotFoundHandlerTrait
         }
     }
 
-
-
     /**
-     * Redirects the request to another action and / or controller.
+     * Tells if TYPO3 SSL is enabled
      *
-     * Redirect will be sent to the client which then performs another request to the new URI.
+     * Wrapper method for static call
      *
-     * @param string $actionName Name of the action to forward to
-     * @param string $controllerName Unqualified object name of the controller to forward to. If not specified, the current controller is used.
-     * @param string $extensionName Name of the extension containing the controller to forward to. If not specified, the current extension is assumed.
-     * @param array $arguments Arguments to pass to the target action
-     * @param integer $pageUid Target page uid. If NULL, the current page uid is used
-     * @param integer $delay (optional) The delay in seconds. Default is no delay.
-     * @param integer $statusCode (optional) The HTTP status code for the redirect. Default is "303 See Other
-     * @return void
+     * @return bool
      */
-    abstract protected function redirect($actionName, $controllerName = null, $extensionName = null, array $arguments = null, $pageUid = null, $delay = 0, $statusCode = 303);
-
-    /**
-     * Redirects the web request to another uri.
-     *
-     * @param mixed $uri A string representation of a URI
-     * @param integer $delay (optional) The delay in seconds. Default is no delay.
-     * @param integer $statusCode (optional) The HTTP status code for the redirect. Default is "303 See Other
-     */
-    abstract protected function redirectToUri($uri, $delay = 0, $statusCode = 303);
+    private function isSSLEnabled()
+    {
+        return GeneralUtility::getIndpEnv('TYPO3_SSL');
+    }
 }

@@ -50,8 +50,7 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
  */
 class EventController extends AbstractBackendController implements FilterableControllerInterface
 {
-    use
-        AudienceRepositoryTrait;
+    use AudienceRepositoryTrait;
     use BackendViewTrait;
     use CallStaticTrait;
     use CategoryRepositoryTrait;

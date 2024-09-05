@@ -26,6 +26,7 @@ use DWenzel\T3events\Domain\Repository\EventRepository;
  * Provides a EventRepository
  *
  * @package DWenzel\T3events\Controller
+ * @deprecated Use DI!
  */
 trait EventRepositoryTrait
 {

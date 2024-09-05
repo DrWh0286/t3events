@@ -7,6 +7,7 @@ namespace DWenzel\T3events\Controller;
  *
  * @package DWenzel\T3events\Tests\Unit\Controller
  * @deprecated Needs to be replaced by PSR-14, maybe a wrapping service (basically not needed) and constructor DI!
+ * @todo: Switch to \Psr\EventDispatcher\EventDispatcherInterface everywhere and replace the trait usage with DI
  */
 trait SignalTrait
 {

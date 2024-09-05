@@ -21,11 +21,6 @@ use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 trait DemandTrait
 {
     /**
-     * @var \DWenzel\T3events\Utility\SettingsUtility
-     */
-    protected $settingsUtility;
-
-    /**
      * Settings
      *
      * @var array

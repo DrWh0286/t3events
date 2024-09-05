@@ -9,6 +9,9 @@ use DWenzel\T3events\Session\SessionInterface;
  * Provides session handling for controllers
  *
  * @package DWenzel\T3events\Controller
+ * @deprecated This needs to be solved via DI!
+ * @todo: Replace with DI. Needs implementation configuration in Services.yaml, because there are two implementations
+ *        for interface \DWenzel\T3events\Session\SessionInterface.
  */
 trait SessionTrait
 {

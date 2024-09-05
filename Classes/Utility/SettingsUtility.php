@@ -28,6 +28,7 @@ namespace DWenzel\T3events\Utility;
  ***************************************************************/
 use DWenzel\T3events\Object\ObjectManagerTrait;
 use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\DomainObjectInterface;
@@ -220,5 +221,37 @@ class SettingsUtility implements SingletonInterface
         }
 
         return $value;
+    }
+
+    /**
+     * Merges TypoScript settings for action and controller into one array
+     *
+     * @param array $settings
+     * @param string $actionMethodName
+     * @param object $controller
+     * @return array
+     */
+    public function mergeSettings(array $settings, string $actionMethodName, object $controller): array
+    {
+        $actionName = preg_replace('/Action$/', '', $actionMethodName);
+        $controllerKey = $this->getControllerKey($controller);
+        $controllerSettings = [];
+        $actionSettings = [];
+        if (!empty($settings[$controllerKey])) {
+            $controllerSettings = $settings[$controllerKey];
+        }
+        $allowedControllerSettingKeys = ['search', 'notify'];
+        foreach ($controllerSettings as $key => $value) {
+            if (!in_array($key, $allowedControllerSettingKeys)) {
+                unset($controllerSettings[$key]);
+            }
+        }
+        if (!empty($settings[$controllerKey][$actionName])) {
+            $actionSettings = $settings[$controllerKey][$actionName];
+        }
+
+        ArrayUtility::mergeRecursiveWithOverrule($controllerSettings, $actionSettings);
+        ArrayUtility::mergeRecursiveWithOverrule($controllerSettings, $settings);
+        return $controllerSettings;
     }
 }

@@ -11,6 +11,7 @@ use TYPO3\CMS\Core\Utility\ArrayUtility;
  * @package Controller
  * @todo: This needs another solution. Property $settings is also the property of the Controller itself - never set
  *        here,never forced to be set when the trait is use - trait is the wrong solution for this.
+ * @deprecated Seems not to be used as intended anymore.
  */
 trait SettingsUtilityTrait
 {
@@ -40,7 +41,7 @@ trait SettingsUtilityTrait
     }
 
     /**
-     * Merges TypoScript settings for action an controller into one array
+     * Merges TypoScript settings for action and controller into one array
      * @return array
      */
     public function mergeSettings()

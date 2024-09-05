@@ -15,46 +15,48 @@ namespace DWenzel\T3events\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DWenzel\T3events\Domain\Factory\Dto\EventDemandFactory;
 use DWenzel\T3events\Domain\Model\Dto\Search;
 use DWenzel\T3events\Domain\Model\Dto\SearchFactory;
 use DWenzel\T3events\Domain\Model\Event;
+use DWenzel\T3events\Domain\Repository\EventRepository;
+use DWenzel\T3events\Domain\Repository\EventTypeRepository;
+use DWenzel\T3events\Domain\Repository\GenreRepository;
 use DWenzel\T3events\Domain\Repository\VenueRepository;
+use DWenzel\T3events\Event\EventControllerListActionWasExecuted;
+use DWenzel\T3events\Event\EventControllerQuickMenuActionWasExecuted;
+use DWenzel\T3events\Event\EventControllerShowActionWasExecuted;
+use DWenzel\T3events\Service\TranslationService;
+use DWenzel\T3events\Session\SessionInterface;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
+use DWenzel\T3events\Utility\SettingsUtility;
 use RuntimeException;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
-use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 
 /**
  * Class EventController
  *
  * @package DWenzel\T3events\Controller
  */
-class EventController extends ActionController
+class EventController extends AbstractActionController
 {
     use DemandTrait;
-    use EventDemandFactoryTrait;
-    use EventRepositoryTrait;
-    use EntityNotFoundHandlerTrait;
-    use EventTypeRepositoryTrait;
-    use FilterableControllerTrait;
-    use GenreRepositoryTrait;
-    use SessionTrait;
-    use SettingsUtilityTrait;
-    use TranslateTrait;
 
-    private SearchFactory $searchFactory;
-
-    public function __construct(private readonly VenueRepository $venueRepository, Dispatcher $dispatcher, SearchFactory $searchFactory)
-    {
-        $this->signalSlotDispatcher = $dispatcher;
-        $this->searchFactory = $searchFactory;
+    public function __construct(
+        private readonly VenueRepository $venueRepository,
+        private readonly SearchFactory $searchFactory,
+        private readonly EventDemandFactory $eventDemandFactory,
+        private readonly EventRepository $eventRepository,
+        private readonly GenreRepository $genreRepository,
+        private readonly EventTypeRepository $eventTypeRepository,
+        private readonly SessionInterface $session,
+        private readonly TranslationService $translationService,
+        private readonly SettingsUtility $settingsUtility
+    ) {
+        // @todo: Check if the following line is neccessary:
+        $this->session->setNamespace(self::class);
     }
-
-    public const EVENT_QUICK_MENU_ACTION = 'quickMenuAction';
-    public const EVENT_LIST_ACTION = 'listAction';
-    public const EVENT_SHOW_ACTION = 'showAction';
 
     /**
      * initializes all actions
@@ -62,7 +64,7 @@ class EventController extends ActionController
      */
     public function initializeAction(): void
     {
-        $this->settings = $this->mergeSettings();
+        $this->settings = $this->settingsUtility->mergeSettings($this->settings, $this->actionMethodName, $this);
         if ($this->request->hasArgument(SI::OVERWRITE_DEMAND)) {
             $this->session->set(
                 'tx_t3events_overwriteDemand',
@@ -102,8 +104,8 @@ class EventController extends ActionController
             && !$this->settings['hideIfEmptyResult']
         ) {
             $this->addFlashMessage(
-                $this->translate('tx_t3events.noEventsForSelectionMessage'),
-                $this->translate('tx_t3events.noEventsForSelectionTitle'),
+                $this->translationService->translate('tx_t3events.noEventsForSelectionMessage'),
+                $this->translationService->translate('tx_t3events.noEventsForSelectionTitle'),
                 FlashMessage::WARNING
             );
         }
@@ -116,8 +118,10 @@ class EventController extends ActionController
             'data' => $this->configurationManager->getContentObject()->data
         ];
 
-        $this->emitSignal(__CLASS__, self::EVENT_LIST_ACTION, $templateVariables);
-        $this->view->assignMultiple($templateVariables);
+        /** @var EventControllerListActionWasExecuted $eventControllerListActionWasExecuted */
+        $eventControllerListActionWasExecuted = $this->eventDispatcher->dispatch(new EventControllerListActionWasExecuted($templateVariables));
+
+        $this->view->assignMultiple($eventControllerListActionWasExecuted->getTemplateVariables());
         return $this->htmlResponse();
     }
 
@@ -135,8 +139,11 @@ class EventController extends ActionController
             SI::SETTINGS => $this->settings,
             'event' => $event
         ];
-        $this->emitSignal(__CLASS__, self::EVENT_SHOW_ACTION, $templateVariables);
-        $this->view->assignMultiple($templateVariables);
+
+        /** @var EventControllerShowActionWasExecuted $eventControllerShowActionWasExecuted */
+        $eventControllerShowActionWasExecuted = $this->eventDispatcher->dispatch(new EventControllerShowActionWasExecuted($templateVariables));
+
+        $this->view->assignMultiple($eventControllerShowActionWasExecuted->getTemplateVariables());
         return $this->htmlResponse();
     }
 
@@ -167,9 +174,10 @@ class EventController extends ActionController
             SI::OVERWRITE_DEMAND => $overwriteDemand
         ];
 
-        $this->emitSignal(__CLASS__, self::EVENT_QUICK_MENU_ACTION, $templateVariables);
+        /** @var EventControllerQuickMenuActionWasExecuted $eventControllerQuickMenuActionWasExecuted */
+        $eventControllerQuickMenuActionWasExecuted = $this->eventDispatcher->dispatch(new EventControllerQuickMenuActionWasExecuted($templateVariables));
         $this->view->assignMultiple(
-            $templateVariables
+            $eventControllerQuickMenuActionWasExecuted->getTemplateVariables()
         );
         return $this->htmlResponse();
     }

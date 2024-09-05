@@ -26,6 +26,7 @@ use DWenzel\T3events\Domain\Factory\Dto\EventDemandFactory;
  * Provides an EventDemandFactory
  *
  * @package DWenzel\T3events\Controller
+ * @deprecated Use DI!
  */
 trait EventDemandFactoryTrait
 {
