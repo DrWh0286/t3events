@@ -29,7 +29,7 @@ trait ModuleDataTrait
     /**
      * @return array
      */
-    abstract public function mergeSettings();
+//    abstract public function mergeSettings();
 
     /**
      * @return string

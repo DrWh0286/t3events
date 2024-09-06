@@ -75,4 +75,6 @@ interface DemandInterface
      * @return string Comma separated list of storage page ids
      */
     public function getStoragePages();
+
+    public function overwriteDemandObject($overwriteDemand, $settings): void;
 }

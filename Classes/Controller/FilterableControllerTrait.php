@@ -38,7 +38,7 @@ trait FilterableControllerTrait
      * @param array $settings
      * @return array
      */
-    public function getFilterOptions($settings)
+    public function getFilterOptions(array $settings): array
     {
         $filterOptions = [];
         foreach ($settings as $key => $value) {

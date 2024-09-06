@@ -141,8 +141,8 @@ trait DemandTrait
                 if ($propertyValue !== 'desc') {
                     $propertyValue = 'asc';
                 }
-                // fall through to default
-                // no break
+            // fall through to default
+            // no break
             default:
                 if (ObjectAccess::isPropertySettable($demand, $propertyName)) {
                     ObjectAccess::setProperty($demand, $propertyName, $propertyValue);

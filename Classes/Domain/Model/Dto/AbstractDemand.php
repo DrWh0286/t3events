@@ -15,7 +15,11 @@ namespace DWenzel\T3events\Domain\Model\Dto;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DWenzel\T3events\Domain\Repository\PeriodConstraintRepositoryInterface;
+use DWenzel\T3events\Utility\SettingsInterface as SI;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 /**
  * Class AbstractDemand
@@ -267,5 +271,117 @@ class AbstractDemand extends AbstractEntity implements DemandInterface
     public function setCategoryConjunction($categoryConjunction): void
     {
         $this->categoryConjunction = $categoryConjunction;
+    }
+
+    public function overwriteDemandObject($overwriteDemand, $settings): void
+    {
+        if (!(bool)$overwriteDemand) {
+            return;
+        }
+        $timeZone = new \DateTimeZone(date_default_timezone_get());
+
+        foreach ($overwriteDemand as $propertyName => $propertyValue) {
+            if (empty($propertyValue)) {
+                continue;
+            }
+            $this->overwriteProperty($overwriteDemand, $propertyName, $propertyValue, $timeZone, $settings);
+        }
+    }
+
+    /**
+     * Overwrites a single property according to the setting in overwriteDemand
+     * @param $demand
+     * @param $overwriteDemand
+     * @param $propertyName
+     * @param $propertyValue
+     * @param $timeZone
+     */
+    protected function overwriteProperty($overwriteDemand, $propertyName, $propertyValue, $timeZone, $settings)
+    {
+        switch ($propertyName) {
+            case 'sortBy':
+                $orderings = $propertyValue;
+                if (isset($overwriteDemand[SI::SORT_DIRECTION])) {
+                    $orderings .= '|' . $overwriteDemand[SI::SORT_DIRECTION];
+                }
+                $this->setOrder($orderings);
+                $this->setSortBy($overwriteDemand['sortBy']);
+                break;
+            case 'search':
+                if ($this instanceof SearchAwareDemandInterface) {
+                    /** @var SearchFactory $factory */
+                    $factory = GeneralUtility::makeInstance(SearchFactory::class);
+                    $searchObj = $factory->get(
+                        $propertyValue,
+                        $settings['search']
+                    );
+                    $this->setSearch($searchObj);
+                }
+                break;
+            case 'venue':
+            case SI::VENUES:
+                if ($this instanceof EventDemand) {
+                    $this->setVenue($propertyValue);
+                }
+                if ($this instanceof VenueAwareDemandInterface) {
+                    $this->setVenues($propertyValue);
+                }
+                break;
+            case SI::LEGACY_KEY_GENRE:
+                //fall through to 'genres'
+            case SI::GENRES:
+                if ($this instanceof EventDemand) {
+                    $this->setGenre($propertyValue);
+                }
+                if ($this instanceof GenreAwareDemandInterface) {
+                    $this->setGenres($propertyValue);
+                }
+                break;
+            case 'eventType':
+                // fall through to 'eventTypes
+            case SI::EVENT_TYPES:
+                if ($this instanceof EventDemand) {
+                    $this->setEventType($propertyValue);
+                }
+                if ($this instanceof EventTypeAwareDemandInterface) {
+                    $this->setEventTypes($propertyValue);
+                }
+                break;
+            case 'eventLocation':
+                if ($this instanceof EventLocationAwareDemandInterface) {
+                    $this->setEventLocations($propertyValue);
+                }
+                break;
+            case 'period':
+                if ($propertyValue === PeriodConstraintRepositoryInterface::PERIOD_SPECIFIC
+                    && empty($overwriteDemand[SI::START_DATE])) {
+                    $this->setPeriod(PeriodConstraintRepositoryInterface::PERIOD_ALL);
+                    break;
+                }
+                $this->setPeriod($propertyValue);
+                break;
+            case 'periodType':
+                if ($propertyValue === 'byDate' && empty($overwriteDemand[SI::START_DATE])) {
+                    break;
+                }
+                $this->setPeriodType($propertyValue);
+                break;
+            case SI::START_DATE:
+                $this->setStartDate(new \DateTime($propertyValue, $timeZone));
+                break;
+            case SI::END_DATE:
+                $this->setEndDate(new \DateTime($propertyValue, $timeZone));
+                break;
+            case SI::SORT_DIRECTION:
+                if ($propertyValue !== 'desc') {
+                    $propertyValue = 'asc';
+                }
+            // fall through to default
+            // no break
+            default:
+                if (ObjectAccess::isPropertySettable($this, $propertyName)) {
+                    ObjectAccess::setProperty($this, $propertyName, $propertyValue);
+                }
+        }
     }
 }

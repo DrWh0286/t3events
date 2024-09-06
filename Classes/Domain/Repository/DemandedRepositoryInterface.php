@@ -4,6 +4,7 @@ namespace DWenzel\T3events\Domain\Repository;
 
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use DWenzel\T3events\Domain\Model\Dto\DemandInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /***************************************************************
  *  Copyright notice

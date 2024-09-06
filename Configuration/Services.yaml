@@ -17,8 +17,10 @@ services:
       $session: '@DWenzel\T3events\Session\Typo3Session'
 
   DWenzel\T3events\Controller\PerformanceController:
-    calls:
-      - injectSession:
-          - '@DWenzel\T3events\Session\Typo3Session'
+    arguments:
+      $session: '@DWenzel\T3events\Session\Typo3Session'
+
+  DWenzel\T3events\Service\FilterOptionsService:
+    public: true
 
   DWenzel\T3events\Domain\Repository\TaskRepositoryInterface: '@DWenzel\T3events\Domain\Repository\TaskRepository'

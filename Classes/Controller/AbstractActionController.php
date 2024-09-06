@@ -22,6 +22,11 @@ abstract class AbstractActionController extends ActionController
      */
     protected $entityNotFoundMessage = 'The requested entity could not be found';
 
+    public function getEntityNotFoundMessage(): string
+    {
+        return $this->entityNotFoundMessage;
+    }
+
     /**
      * @param \TYPO3\CMS\Extbase\Mvc\RequestInterface $request
      * @param \TYPO3\CMS\Extbase\Mvc\ResponseInterface $response

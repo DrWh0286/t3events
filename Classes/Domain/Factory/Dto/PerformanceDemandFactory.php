@@ -61,7 +61,7 @@ class PerformanceDemandFactory extends AbstractDemandFactory implements DemandFa
      * @param array $settings
      * @return DemandInterface
      */
-    public function createFromSettings(array $settings)
+    public function createFromSettings(array $settings): PeriodAwareDemandInterface|DemandInterface|PerformanceDemand
     {
         /** @var PerformanceDemand $demand */
         $demand = GeneralUtility::makeInstance(static::DEMAND_CLASS);

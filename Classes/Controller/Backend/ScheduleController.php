@@ -5,7 +5,18 @@ namespace DWenzel\T3events\Controller\Backend;
 use DWenzel\T3events\Controller\ModuleDataTrait;
 use DWenzel\T3events\Controller\PerformanceController;
 use DWenzel\T3events\Controller\SettingsUtilityTrait;
+use DWenzel\T3events\Domain\Factory\Dto\PerformanceDemandFactory;
+use DWenzel\T3events\Domain\Model\Dto\SearchFactory;
+use DWenzel\T3events\Domain\Repository\CategoryRepository;
+use DWenzel\T3events\Domain\Repository\EventTypeRepository;
+use DWenzel\T3events\Domain\Repository\GenreRepository;
+use DWenzel\T3events\Domain\Repository\PerformanceRepository;
+use DWenzel\T3events\Domain\Repository\VenueRepository;
+use DWenzel\T3events\Event\ScheduleControllerListActionWasExecuted;
+use DWenzel\T3events\Service\FilterOptionsService;
+use DWenzel\T3events\Session\SessionInterface;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
+use DWenzel\T3events\Utility\SettingsUtility;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException;
@@ -18,7 +29,6 @@ class ScheduleController extends PerformanceController
 {
     use ModuleDataTrait;
     use FormTrait;
-    use SettingsUtilityTrait;
 
     /**
      * Load and persist module data
@@ -50,7 +60,7 @@ class ScheduleController extends PerformanceController
     {
         $demand = $this->performanceDemandFactory->createFromSettings($this->settings);
         $filterSettings = $this->settings['filter'] ?? [];
-        $filterOptions = $this->getFilterOptions($filterSettings);
+        $filterOptions = $this->filterOptionsService->getFilterOptions($filterSettings);
 
         if ($overwriteDemand === null) {
             $overwriteDemand = $this->moduleData->getOverwriteDemand();
@@ -69,8 +79,12 @@ class ScheduleController extends PerformanceController
             SI::MODULE => SI::ROUTE_SCHEDULE_MODULE
         ];
 
-        $this->emitSignal(__CLASS__, self::PERFORMANCE_LIST_ACTION, $templateVariables);
-        $this->view->assignMultiple($templateVariables);
+        /** @var ScheduleControllerListActionWasExecuted $performanceControllerShowActionWasExecuted */
+        $performanceControllerShowActionWasExecuted = $this->eventDispatcher->dispatch(
+            new ScheduleControllerListActionWasExecuted($templateVariables)
+        );
+
+        $this->view->assignMultiple($performanceControllerShowActionWasExecuted->getTemplateVariables());
         return $this->htmlResponse();
     }
 }

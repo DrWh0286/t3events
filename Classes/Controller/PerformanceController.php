@@ -15,67 +15,39 @@ namespace DWenzel\T3events\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DWenzel\T3events\Domain\Factory\Dto\PerformanceDemandFactory;
 use DWenzel\T3events\Domain\Model\Dto\PerformanceDemand;
 use DWenzel\T3events\Domain\Model\Dto\Search;
 use DWenzel\T3events\Domain\Model\Dto\SearchFactory;
 use DWenzel\T3events\Domain\Model\Performance;
+use DWenzel\T3events\Domain\Repository\CategoryRepository;
 use DWenzel\T3events\Domain\Repository\EventTypeRepository;
 use DWenzel\T3events\Domain\Repository\GenreRepository;
 use DWenzel\T3events\Domain\Repository\PerformanceRepository;
 use DWenzel\T3events\Domain\Repository\VenueRepository;
+use DWenzel\T3events\Event\PerformanceControllerListActionWasExecuted;
+use DWenzel\T3events\Event\PerformanceControllerQuickMenuActionWasExecuted;
+use DWenzel\T3events\Event\PerformanceControllerShowActionWasExecuted;
+use DWenzel\T3events\Service\FilterOptionsService;
+use DWenzel\T3events\Session\SessionInterface;
+use DWenzel\T3events\Utility\SettingsUtility;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
+use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 
 /**
  * Class PerformanceController
  *
  * @package DWenzel\T3events\Controller
  */
-class PerformanceController extends ActionController implements FilterableControllerInterface
+class PerformanceController extends AbstractActionController
 {
-    use CategoryRepositoryTrait;
-    use DemandTrait;
-    use EntityNotFoundHandlerTrait;
-    use FilterableControllerTrait;
-    use PerformanceDemandFactoryTrait;
-    use SessionTrait;
-    use SettingsUtilityTrait;
-    use TranslateTrait;
-
     public const PERFORMANCE_LIST_ACTION = 'listAction';
     public const PERFORMANCE_QUICK_MENU_ACTION = 'quickMenuAction';
     public const PERFORMANCE_SHOW_ACTION = 'showAction';
     public const SESSION_NAME_SPACE = 'performanceController';
-
-    /**
-     * performanceRepository
-     *
-     * @var PerformanceRepository
-     */
-    protected $performanceRepository;
-
-    /**
-     * genreRepository
-     *
-     * @var GenreRepository
-     */
-    protected $genreRepository;
-
-    /**
-     * venueRepository
-     *
-     * @var VenueRepository
-     */
-    protected $venueRepository;
-
-    /**
-     * eventTypeRepository
-     *
-     * @var EventTypeRepository
-     */
-    protected $eventTypeRepository;
 
     /**
      * TYPO3 Content Object
@@ -85,19 +57,22 @@ class PerformanceController extends ActionController implements FilterableContro
     protected $contentObject;
 
     protected $buttonConfiguration = [];
-    private SearchFactory $searchFactory;
+    protected string $namespace = '';
 
-    /**
-     * Constructor
-     */
-    public function __construct(PerformanceRepository $performanceRepository, GenreRepository $genreRepository, VenueRepository $venueRepository, EventTypeRepository $eventTypeRepository, SearchFactory $searchFactory)
-    {
+    public function __construct(
+        protected readonly PerformanceRepository $performanceRepository,
+        protected readonly GenreRepository $genreRepository,
+        protected readonly VenueRepository $venueRepository,
+        protected readonly EventTypeRepository $eventTypeRepository,
+        protected readonly SearchFactory $searchFactory,
+        protected readonly FilterOptionsService $filterOptionsService,
+        protected readonly CategoryRepository $categoryRepository,
+        protected readonly PerformanceDemandFactory $performanceDemandFactory,
+        protected readonly SessionInterface $session,
+        protected readonly SettingsUtility $settingsUtility
+    ) {
         $this->namespace = get_class($this);
-        $this->performanceRepository = $performanceRepository;
-        $this->genreRepository = $genreRepository;
-        $this->venueRepository = $venueRepository;
-        $this->eventTypeRepository = $eventTypeRepository;
-        $this->searchFactory = $searchFactory;
+        $this->session->setNamespace($this->namespace);
     }
 
     /**
@@ -125,7 +100,8 @@ class PerformanceController extends ActionController implements FilterableContro
      */
     public function initializeAction(): void
     {
-        $this->settings = $this->mergeSettings();
+        $this->settings = $this->settingsUtility->mergeSettings($this->settings, $this->actionMethodName, $this);
+
         $this->contentObject = $this->configurationManager->getContentObject();
         if ($this->request->hasArgument(SI::OVERWRITE_DEMAND)) {
             $this->session->set(
@@ -147,7 +123,7 @@ class PerformanceController extends ActionController implements FilterableContro
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      */
-    public function listAction(array $overwriteDemand = null): \Psr\Http\Message\ResponseInterface
+    public function listAction(array $overwriteDemand = null): ResponseInterface
     {
         if (!$overwriteDemand) {
             if (!$this->session->has('tx_t3events_overwriteDemand') || !is_string($this->session->get('tx_t3events_overwriteDemand')) || empty($this->session->get('tx_t3events_overwriteDemand'))) {
@@ -157,7 +133,7 @@ class PerformanceController extends ActionController implements FilterableContro
         }
 
         $demand = $this->performanceDemandFactory->createFromSettings($this->settings);
-        $this->overwriteDemandObject($demand, $overwriteDemand);
+        $demand->overwriteDemandObject($overwriteDemand, $this->settings);
         $performances = $this->performanceRepository->findDemanded($demand);
 
         $templateVariables = [
@@ -167,8 +143,12 @@ class PerformanceController extends ActionController implements FilterableContro
             'data' => $this->contentObject->data
         ];
 
-        $this->emitSignal(__CLASS__, self::PERFORMANCE_LIST_ACTION, $templateVariables);
-        $this->view->assignMultiple($templateVariables);
+        /** @var PerformanceControllerListActionWasExecuted $performanceControllerListActionWasExecuted */
+        $performanceControllerListActionWasExecuted = $this->eventDispatcher->dispatch(
+            new PerformanceControllerListActionWasExecuted($templateVariables)
+        );
+
+        $this->view->assignMultiple($performanceControllerListActionWasExecuted->getTemplateVariables());
         return $this->htmlResponse();
     }
 
@@ -180,15 +160,19 @@ class PerformanceController extends ActionController implements FilterableContro
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      */
-    public function showAction(Performance $performance): \Psr\Http\Message\ResponseInterface
+    public function showAction(Performance $performance): ResponseInterface
     {
         $templateVariables = [
             SI::SETTINGS => $this->settings,
             'performance' => $performance
         ];
 
-        $this->emitSignal(__CLASS__, self::PERFORMANCE_SHOW_ACTION, $templateVariables);
-        $this->view->assignMultiple($templateVariables);
+        /** @var PerformanceControllerShowActionWasExecuted $performanceControllerShowActionWasExecuted */
+        $performanceControllerShowActionWasExecuted = $this->eventDispatcher->dispatch(
+            new PerformanceControllerShowActionWasExecuted($templateVariables)
+        );
+
+        $this->view->assignMultiple($performanceControllerShowActionWasExecuted->getTemplateVariables());
         return $this->htmlResponse();
     }
 
@@ -201,7 +185,7 @@ class PerformanceController extends ActionController implements FilterableContro
      *
      * @todo Check if removing initialize action has any impact or breaks things!
      */
-    public function quickMenuAction(): \Psr\Http\Message\ResponseInterface
+    public function quickMenuAction(): ResponseInterface
     {
         if (!$this->session->has('tx_t3events_overwriteDemand') || !is_string($this->session->get('tx_t3events_overwriteDemand')) || empty($this->session->get('tx_t3events_overwriteDemand'))) {
             throw new RuntimeException('tx_t3events_overwriteDemand is not set or is empty and also no overwriteDemand is set!');
@@ -215,7 +199,7 @@ class PerformanceController extends ActionController implements FilterableContro
             'eventType' => $this->settings[SI::EVENT_TYPES] ?? null,
             'category' => $this->settings['categories'] ?? null
         ];
-        $filterOptions = $this->getFilterOptions($filterConfiguration);
+        $filterOptions = $this->filterOptionsService->getFilterOptions($filterConfiguration);
 
         $templateVariables = [
             'filterOptions' => $filterOptions,
@@ -225,12 +209,55 @@ class PerformanceController extends ActionController implements FilterableContro
             SI::SETTINGS => $this->settings,
             SI::OVERWRITE_DEMAND => $overwriteDemand
         ];
-        $this->emitSignal(__CLASS__, self::PERFORMANCE_QUICK_MENU_ACTION, $templateVariables);
+
+        /** @var PerformanceControllerQuickMenuActionWasExecuted $performanceControllerQuickMenuActionWasExecuted */
+        $performanceControllerQuickMenuActionWasExecuted = $this->eventDispatcher->dispatch(
+            new PerformanceControllerQuickMenuActionWasExecuted($templateVariables)
+        );
+
         $this->view->assignMultiple(
-            $templateVariables
+            $performanceControllerQuickMenuActionWasExecuted->getTemplateVariables()
         );
 
         return $this->htmlResponse();
+    }
+
+    /**
+     * @internal Only for testing purpose!
+     */
+    public function setView(ViewInterface $view): void
+    {
+        if (!$this->view instanceof ViewInterface) {
+            $this->view = $view;
+        }
+    }
+
+    public function getView(): ViewInterface
+    {
+        return $this->view;
+    }
+
+    /**
+     * @internal Only for testing purpose!
+     */
+    public function setRequest(RequestInterface $request): void
+    {
+        if (!$this->request instanceof RequestInterface) {
+            $this->request = $request;
+        }
+    }
+
+    /**
+     * @internal Only for testing purpose!
+     */
+    public function overrideSettings(array $settings): void
+    {
+        $this->settings = $settings;
+    }
+
+    public function getNamespace(): string
+    {
+        return $this->namespace;
     }
 
     /**
@@ -245,10 +272,5 @@ class PerformanceController extends ActionController implements FilterableContro
     {
         /** @var PerformanceDemand $demand */
         return $this->performanceDemandFactory->createFromSettings($settings);
-    }
-
-    public function createSearchObject($searchRequest, $settings): Search
-    {
-        return $this->searchFactory->get($searchRequest, $settings);
     }
 }
