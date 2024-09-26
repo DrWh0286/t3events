@@ -221,7 +221,7 @@ class LegacyFileFieldsUpdateWizard implements UpgradeWizardInterface, ChattyInte
                     )
                 )->orderBy('uid')->executeQuery();
 
-            return $result->fetchAll();
+            return $result->fetchAllAssociative();
         } catch (Exception $e) {
             throw new \RuntimeException(
                 'Database query failed. Error was: ' . $e->getPrevious()->getMessage(),
