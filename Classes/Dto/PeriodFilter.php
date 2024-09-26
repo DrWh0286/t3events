@@ -19,7 +19,7 @@ namespace DWenzel\T3events\Dto;
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use DWenzel\T3events\Controller\TranslateTrait;
+use DWenzel\T3events\Service\TranslationService;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -28,7 +28,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class PeriodFilter implements FilterInterface
 {
-    use TranslateTrait;
+    public function __construct(
+        private readonly TranslationService $translationService
+    )
+    {
+    }
 
     public const DEFAULT_OPTION_KEYS = [
         SI::FUTURE_ONLY,
@@ -59,7 +63,7 @@ class PeriodFilter implements FilterInterface
 
         }
         foreach ($keys as $key) {
-            $label = $this->translate(
+            $label = $this->translationService->translate(
                 static::PREFIX_OPTION_LABEL_KEY . $key,
                 SI::EXTENSION_KEY
             );

@@ -19,11 +19,12 @@ namespace DWenzel\T3events\Tests\Unit\Service\TCA;
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use DWenzel\T3events\Service\BackendUtilityServiceInterface;
 use DWenzel\T3events\Service\TCA\ScheduleConfigurationService;
+use DWenzel\T3events\Service\TranslationService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
-use TYPO3\CMS\Backend\Utility\BackendUtility;
 
 /**
  * Class ScheduleConfigurationServiceTest
@@ -34,15 +35,21 @@ class ScheduleConfigurationServiceTest extends UnitTestCase
      * @var ScheduleConfigurationService|MockObject
      */
     protected $subject;
+    private TranslationService|MockObject $translationService;
+    private BackendUtilityServiceInterface|MockObject $backendUtilityService;
 
     /**
      * set up subject
      */
     protected function setUp(): void
     {
-        $this->subject = $this->getMockBuilder(ScheduleConfigurationService::class)
-            ->setMethods(['callStatic', 'translate'])
-            ->getMock();
+        $this->translationService = $this->createMock(TranslationService::class);
+        $this->backendUtilityService = $this->createMock(BackendUtilityServiceInterface::class);
+
+        $this->subject = new ScheduleConfigurationService(
+            $this->translationService,
+            $this->backendUtilityService
+        );
     }
 
     /**
@@ -56,11 +63,10 @@ class ScheduleConfigurationServiceTest extends UnitTestCase
             ]
         ];
 
-        $this->subject->expects($this->once())
-            ->method('callStatic')
+        $this->backendUtilityService
+            ->expects($this->once())
+            ->method('getRecord')
             ->with(
-                BackendUtility::class,
-                'getRecord',
                 SI::TABLE_SCHEDULES,
                 $parameters['row']['uid']
             );
@@ -84,10 +90,11 @@ class ScheduleConfigurationServiceTest extends UnitTestCase
             'date' => $timeStamp
         ];
         $expectedTranslationKey = SI::TRANSLATION_FILE_DB . ':' . SI::DATE_FORMAT_SHORT;
-        $this->subject->expects($this->once())
-            ->method('callStatic')
+        $this->backendUtilityService
+            ->expects($this->once())
+            ->method('getRecord')
             ->willReturn($record);
-        $this->subject->expects($this->once())
+        $this->translationService->expects($this->once())
             ->method('translate')
             ->with($expectedTranslationKey);
 
@@ -111,10 +118,10 @@ class ScheduleConfigurationServiceTest extends UnitTestCase
         ];
         $dateFormat = 'Y-m-d';
 
-        $this->subject->expects($this->once())
-            ->method('callStatic')
+        $this->backendUtilityService->expects($this->once())
+            ->method('getRecord')
             ->willReturn($record);
-        $this->subject->expects($this->once())
+        $this->translationService->expects($this->once())
             ->method('translate')
             ->willReturn($dateFormat);
         $timeZone = new \DateTimeZone(date_default_timezone_get());
@@ -148,33 +155,30 @@ class ScheduleConfigurationServiceTest extends UnitTestCase
         $mockEventRecord = ['foo'];
         $mockEventTitle = 'baz';
 
-        $this->subject->expects($this->exactly(3))
-            ->method('callStatic')
+        $this->backendUtilityService
+            ->expects($this->exactly(2))
+            ->method('getRecord')
             ->withConsecutive(
                 [
-                    BackendUtility::class,
-                    'getRecord',
                     SI::TABLE_SCHEDULES,
                     $parameters['row']['uid']
                 ],
                 [
-                    BackendUtility::class,
-                    'getRecord',
                     SI::TABLE_EVENTS,
                     $mockScheduleRecord['event']
-                ],
-                [
-                    BackendUtility::class,
-                    'getRecordTitle',
-                    SI::TABLE_EVENTS,
-                    $mockEventRecord
                 ]
             )
             ->willReturnOnConsecutiveCalls(
                 $mockScheduleRecord,
-                $mockEventRecord,
-                $mockEventTitle
+                $mockEventRecord
             );
+
+        $this->backendUtilityService
+            ->expects($this->once())
+            ->method('getRecordTitle')
+            ->with(SI::TABLE_EVENTS, $mockEventRecord)
+            ->willReturn($mockEventTitle);
+
         $expectedTitle = ' - ' . $mockEventTitle;
         $this->subject->getLabel($parameters);
         $this->assertEquals(

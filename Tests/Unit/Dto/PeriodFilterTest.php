@@ -4,6 +4,7 @@ namespace DWenzel\T3events\Tests\Unit\Dto;
 
 use DWenzel\T3events\Dto\FilterInterface;
 use DWenzel\T3events\Dto\PeriodFilter;
+use DWenzel\T3events\Service\TranslationService;
 use PHPUnit\Framework\MockObject\MockObject;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 use PHPUnit\Framework\TestCase;
@@ -34,13 +35,16 @@ class PeriodFilterTest extends TestCase
      * @var PeriodFilter|MockObject
      */
     protected $subject;
+    /**
+     * @var TranslationService|(TranslationService&object&MockObject)|(TranslationService&MockObject)|(object&MockObject)|MockObject
+     */
+    private TranslationService|MockObject $translationService;
 
     /** @noinspection ReturnTypeCanBeDeclaredInspection */
     protected function setUp(): void
     {
-        $this->subject = $this->getMockBuilder(PeriodFilter::class)
-            ->setMethods(['translate'])
-            ->getMock();
+        $this->translationService = $this->createMock(TranslationService::class);
+        $this->subject = new PeriodFilter($this->translationService);
     }
 
     public function testClassImplementsFilterInterface(): void
@@ -72,7 +76,7 @@ class PeriodFilterTest extends TestCase
         $expectedKeys = PeriodFilter::DEFAULT_OPTION_KEYS;
         $expectedCount = count($expectedKeys);
 
-        $this->subject->expects(self::exactly($expectedCount))
+        $this->translationService->expects(self::exactly($expectedCount))
             ->method('translate')
             ->willReturn($translatedLabel);
 
@@ -99,7 +103,7 @@ class PeriodFilterTest extends TestCase
                 PeriodFilter::PREFIX_OPTION_LABEL_KEY . $key, SI::EXTENSION_KEY
             ];
         }
-        $this->subject->expects(self::exactly($expectedCount))
+        $this->translationService->expects(self::exactly($expectedCount))
             ->method('translate')
             ->willReturn($translatedLabel);
 

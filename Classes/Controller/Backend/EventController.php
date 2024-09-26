@@ -15,12 +15,9 @@ namespace DWenzel\T3events\Controller\Backend;
  * The TYPO3 project - inspiring people to share!
  */
 
-use DWenzel\T3events\CallStaticTrait;
-use DWenzel\T3events\Controller\AbstractBackendController;
 use DWenzel\T3events\Controller\ModuleDataTrait;
 use DWenzel\T3events\Controller\NotificationRepositoryTrait;
 use DWenzel\T3events\Controller\NotificationServiceTrait;
-use DWenzel\T3events\Controller\SettingsUtilityTrait;
 use DWenzel\T3events\Domain\Factory\Dto\EventDemandFactory;
 use DWenzel\T3events\Domain\Model\Dto\ButtonDemand;
 use DWenzel\T3events\Domain\Model\Dto\Search;
@@ -32,31 +29,34 @@ use DWenzel\T3events\Domain\Repository\EventRepository;
 use DWenzel\T3events\Domain\Repository\EventTypeRepository;
 use DWenzel\T3events\Domain\Repository\GenreRepository;
 use DWenzel\T3events\Domain\Repository\VenueRepository;
-use DWenzel\T3events\Event\EventControllerListActionWasExecuted;
+use DWenzel\T3events\Event\BackendEventControllerListActionWasExecuted;
 use DWenzel\T3events\Service\FilterOptionsService;
+use DWenzel\T3events\Service\ModuleDataStorageService;
 use DWenzel\T3events\Service\TranslationService;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
+use DWenzel\T3events\Utility\SettingsUtility;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
  * Class EventController
  */
-class EventController extends AbstractBackendController
+class EventController extends ActionController
 {
     use BackendViewTrait;
-    use CallStaticTrait;
     use FormTrait;
     use ModuleDataTrait;
     use NotificationRepositoryTrait;
     use NotificationServiceTrait;
-    use SettingsUtilityTrait;
 
-    public const LIST_ACTION = 'listAction';
     public const EXTENSION_KEY = 't3events';
 
     protected $buttonConfiguration = [
@@ -83,8 +83,29 @@ class EventController extends AbstractBackendController
         private readonly GenreRepository $genreRepository,
         private readonly PersistenceManagerInterface $persistenceManager,
         private readonly TranslationService $translationService,
-        private readonly FilterOptionsService $filterOptionsService
+        private readonly FilterOptionsService $filterOptionsService,
+        private readonly SettingsUtility $settingsUtility,
+        protected ModuleDataStorageService $moduleDataStorageService
     ) {
+    }
+
+    /**
+     * Load and persist module data
+     */
+    public function processRequest(RequestInterface $request): ResponseInterface
+    {
+        $this->moduleData = $this->moduleDataStorageService->loadModuleData($this->getModuleKey());
+
+        try {
+            $response = parent::processRequest($request);
+            $this->moduleDataStorageService->persistModuleData($this->moduleData, $this->getModuleKey());
+            // @todo: Check if this still works, because The StopActionException is deprecated.
+        } catch (StopActionException $e) {
+            $this->moduleDataStorageService->persistModuleData($this->moduleData, $this->getModuleKey());
+            throw $e;
+        }
+
+        return $response;
     }
 
     /**
@@ -112,7 +133,7 @@ class EventController extends AbstractBackendController
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      */
-    public function listAction($overwriteDemand = null): \Psr\Http\Message\ResponseInterface
+    public function listAction($overwriteDemand = null): ResponseInterface
     {
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
         $demand = $this->eventDemandFactory->createFromSettings($this->settings);
@@ -150,8 +171,8 @@ class EventController extends AbstractBackendController
             SI::MODULE => SI::ROUTE_EVENT_MODULE
         ];
 
-        /** @var EventControllerListActionWasExecuted $eventControllerListActionWasCalled */
-        $eventControllerListActionWasCalled = $this->eventDispatcher->dispatch(new EventControllerListActionWasExecuted($templateVariables));
+        /** @var BackendEventControllerListActionWasExecuted $eventControllerListActionWasCalled */
+        $eventControllerListActionWasCalled = $this->eventDispatcher->dispatch(new BackendEventControllerListActionWasExecuted($templateVariables));
 
         $this->view->assignMultiple($eventControllerListActionWasCalled->getTemplateVariables());
         $moduleTemplate->setContent($this->view->render());
@@ -161,12 +182,9 @@ class EventController extends AbstractBackendController
     /**
      * Redirect to new record form
      */
-    public function newAction(): \Psr\Http\Message\ResponseInterface
+    public function newAction(): ResponseInterface
     {
-        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-        $this->redirectToCreateNewRecord(SI::TABLE_EVENTS);
-        $moduleTemplate->setContent($this->view->render());
-        return $this->htmlResponse($moduleTemplate->renderContent());
+        return $this->redirectToCreateNewRecord(SI::TABLE_EVENTS);
     }
 
     /**

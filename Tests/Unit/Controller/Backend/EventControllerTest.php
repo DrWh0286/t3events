@@ -30,9 +30,12 @@ use DWenzel\T3events\Domain\Repository\GenreRepository;
 use DWenzel\T3events\Domain\Repository\VenueRepository;
 use DWenzel\T3events\Event\EventControllerListActionWasExecuted;
 use DWenzel\T3events\Service\FilterOptionsService;
+use DWenzel\T3events\Service\ModuleDataStorageService;
 use DWenzel\T3events\Service\TranslationService;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
+use DWenzel\T3events\Utility\SettingsUtility;
 use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
+use Psr\Container\ContainerInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -40,13 +43,13 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
+use TYPO3\CMS\Core\Http\RedirectResponse;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\FormProtection\FormProtectionFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\HttpUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
@@ -140,10 +143,12 @@ class EventControllerTest extends UnitTestCase
         $this->persistenceManager = $this->getMockBuilder(PersistenceManager::class)->disableOriginalConstructor()->getMock();
         $this->translationService = $this->getMockBuilder(TranslationService::class)->disableOriginalConstructor()->getMock();
         $this->filterOptionService = $this->getMockBuilder(FilterOptionsService::class)->disableOriginalConstructor()->getMock();
+        $this->settingsUtility = $this->getMockBuilder(SettingsUtility::class)->disableOriginalConstructor()->getMock();
+        $this->moduleDataStorageService = $this->getMockBuilder(ModuleDataStorageService::class)->disableOriginalConstructor()->getMock();
 
         $this->subject = $this->getAccessibleMock(
             EventController::class,
-            ['addFlashMessage', 'callStatic'],
+            ['addFlashMessage'],
             [
                 $this->moduleTemplateFactory,
                 $this->venueRepository,
@@ -157,7 +162,9 @@ class EventControllerTest extends UnitTestCase
                 $this->genreRepository,
                 $this->persistenceManager,
                 $this->translationService,
-                $this->filterOptionService
+                $this->filterOptionService,
+                $this->settingsUtility,
+                $this->moduleDataStorageService
             ]
         );
         $this->view = $this->getMockForAbstractClass(
@@ -191,6 +198,29 @@ class EventControllerTest extends UnitTestCase
             ->getMock();
         $this->uriBuilder = $this->getMockBuilder(UriBuilder::class)
             ->disableOriginalConstructor()->getMock();
+
+        $classes = [
+            UriBuilder::class => $this->uriBuilder
+        ];
+
+        GeneralUtility::setContainer(
+            new class ($classes) implements ContainerInterface
+            {
+                public function __construct(private readonly array $classes)
+                {
+                }
+
+                public function get(string $id): ?object
+                {
+                    return $this->classes[$id] ?? null;
+                }
+
+                public function has(string $id): bool
+                {
+                    return isset($this->classes[$id]);
+                }
+            }
+        );
 
         $this->request = $this->getMockBuilder(ServerRequestInterface::class)->getMock();
         $this->subject->_set('request', $this->request);
@@ -350,16 +380,6 @@ class EventControllerTest extends UnitTestCase
         ];
         $redirectUrl = 'fakeUrl';
 
-        $this->subject->expects($this->exactly(2))
-            ->method('callStatic')
-            ->withConsecutive(
-                [GeneralUtility::class, 'makeInstance', UriBuilder::class],
-                [HttpUtility::class, SI::REDIRECT]
-            )->willReturnOnConsecutiveCalls(
-                $this->uriBuilder,
-                null
-            );
-
         $this->uriBuilder->expects($this->exactly(2))
             ->method('buildUriFromRoute')
             ->withConsecutive(
@@ -371,12 +391,10 @@ class EventControllerTest extends UnitTestCase
                 $redirectUrl
             );
 
-        $response = $this->createMock(ResponseInterface::class);
-        $this->responseFactory->expects($this->once())->method('createResponse')->willReturn($response);
-        $response->expects($this->any())->method('withHeader')->willReturn($response);
-        $response->expects($this->any())->method('withBody')->willReturn($response);
+        $response = $this->subject->newAction();
 
-        $this->subject->newAction();
+        $this->assertInstanceOf(RedirectResponse::class, $response);
+        $this->assertSame($redirectUrl, $response->getHeader('location')[0]);
     }
 
     /**

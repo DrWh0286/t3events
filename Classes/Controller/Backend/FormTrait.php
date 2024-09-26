@@ -18,6 +18,7 @@ namespace DWenzel\T3events\Controller\Backend;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
+use TYPO3\CMS\Core\Http\RedirectResponse;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\HttpUtility;
@@ -77,11 +78,7 @@ trait FormTrait
     protected function redirectToCreateNewRecord($table)
     {
         /** @var UriBuilder $uriBuilder */
-        $uriBuilder = $this->callStatic(
-            GeneralUtility::class,
-            'makeInstance',
-            UriBuilder::class
-        );
+        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $returnUrl = (string)$uriBuilder->buildUriFromRoute(SI::ROUTE_EVENT_MODULE);
         $url = (string)$uriBuilder->buildUriFromRoute(
             SI::ROUTE_EDIT_RECORD_MODULE,
@@ -94,7 +91,8 @@ trait FormTrait
                 SI::RETURN_URL => $returnUrl
             ]
         );
-        $this->callStatic(HttpUtility::class, SI::REDIRECT, $url);
+
+        return new RedirectResponse($url);
     }
 
     /**

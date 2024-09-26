@@ -20,9 +20,8 @@ namespace DWenzel\T3events\Service\TCA;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use DWenzel\T3events\CallStaticTrait;
-use DWenzel\T3events\Controller\TranslateTrait;
-use TYPO3\CMS\Backend\Utility\BackendUtility;
+use DWenzel\T3events\Service\BackendUtilityServiceInterface;
+use DWenzel\T3events\Service\TranslationService;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 
 /**
@@ -31,8 +30,12 @@ use DWenzel\T3events\Utility\SettingsInterface as SI;
  */
 class ScheduleConfigurationService
 {
-    use CallStaticTrait;
-    use TranslateTrait;
+    public function __construct(
+        private readonly TranslationService  $translationService,
+        private readonly BackendUtilityServiceInterface $backendUtilityService
+    )
+    {
+    }
 
     /**
      * @param array $parameters
@@ -41,15 +44,13 @@ class ScheduleConfigurationService
     public function getLabel(&$parameters, $parentObject = null): void
     {
         $recordLabel = '';
-        $record = $this->callStatic(
-            BackendUtility::class,
-            'getRecord',
+        $record = $this->backendUtilityService->getRecord(
             SI::TABLE_SCHEDULES,
             $parameters['row']['uid']
         );
 
         if (isset($record['date'])) {
-            $dateFormat = $this->translate(
+            $dateFormat = $this->translationService->translate(
                 SI::TRANSLATION_FILE_DB . ':' . SI::DATE_FORMAT_SHORT
             );
 
@@ -59,16 +60,13 @@ class ScheduleConfigurationService
             $recordLabel = $date->format($dateFormat);
         }
         if (isset($record['event'])) {
-            $eventRecord = $this->callStatic(
-                BackendUtility::class,
-                'getRecord',
+            $eventRecord = $this->backendUtilityService->getRecord(
                 SI::TABLE_EVENTS,
                 $record['event']
             );
+
             $recordLabel .= ' - '
-                . $this->callStatic(
-                    BackendUtility::class,
-                    'getRecordTitle',
+                . $this->backendUtilityService->getRecordTitle(
                     SI::TABLE_EVENTS,
                     $eventRecord
                 );
