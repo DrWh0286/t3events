@@ -62,7 +62,6 @@ class EventControllerTest extends UnitTestCase
     private VenueRepository|MockObject $venueRepository;
     private MockObject|ResponseFactoryInterface $responseFactory;
     private MockObject|SessionInterface $session;
-    private MockObject|SearchFactory $searchFacotry;
     private MockObject|EventDispatcherInterface $eventDispatcher;
     private TranslationService|MockObject $translationService;
     private SettingsUtility|MockObject $settingsUtility;
@@ -72,7 +71,7 @@ class EventControllerTest extends UnitTestCase
         $this->venueRepository = $this->getMockBuilder(VenueRepository::class)->disableOriginalConstructor()->getMock();
         $this->searchFacotry = $this->getMockBuilder(SearchFactory::class)->disableOriginalConstructor()->getMock();
         $this->eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)->getMock();
-        $this->eventDemandFactory = $this->createMock(EventDemandFactory::class);
+        $this->eventDemandFactory = $this->getMockBuilder(EventDemandFactory::class)->disableOriginalConstructor()->getMock();
         $this->eventRepository = $this->getMockBuilder(EventRepository::class)->disableOriginalConstructor()->getMock();
         $this->genreRepository = $this->getMockBuilder(GenreRepository::class)->disableOriginalConstructor()->getMock();
         $this->eventTypeRepository = $this->getMockBuilder(EventTypeRepository::class)->disableOriginalConstructor()->getMock();
@@ -82,10 +81,9 @@ class EventControllerTest extends UnitTestCase
 
         $this->subject = $this->getAccessibleMock(
             EventController::class,
-            ['addFlashMessage', 'overwriteDemandObject'],
+            ['addFlashMessage'],
             [
                 $this->venueRepository,
-                $this->searchFacotry,
                 $this->eventDemandFactory,
                 $this->eventRepository,
                 $this->genreRepository,
@@ -102,9 +100,6 @@ class EventControllerTest extends UnitTestCase
             ->disableOriginalConstructor()
             ->getMock();
         $this->subject->_set('view', $this->view);
-
-        $mockDemand = $this->getMockEventDemand();
-        $this->eventDemandFactory->method('createFromSettings')->will($this->returnValue($mockDemand));
 
         $mockResult = $this->getMockBuilder(QueryResultInterface::class)->getMock();
         $this->eventRepository->method('findDemanded')->will($this->returnValue($mockResult));
@@ -125,33 +120,6 @@ class EventControllerTest extends UnitTestCase
         $this->subject->injectStreamFactory($this->streamFactory);
 
         $this->subject->_set(SI::SETTINGS, $this->settings);
-    }
-
-    /**
-     * @return EventDemand|\PHPUnit_Framework_MockObject_MockObject
-     */
-    protected function getMockEventDemand(array $methods = [])
-    {
-        return $this->getMockBuilder(EventDemand::class)
-            ->setMethods($methods)
-            ->getMock();
-    }
-
-    /**
-     * mocks getting an EventDemandObject from ObjectManager
-     * @return \PHPUnit_Framework_MockObject_MockObject|EventDemand
-     */
-    public function mockGetEventDemandFromFactory()
-    {
-        $this->eventDemandFactory = $this->getMockBuilder(EventDemandFactory::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['createFromSettings'])->getMock();
-        $mockEventDemand = $this->getMockEventDemand();
-        $this->eventDemandFactory->expects($this->once())
-            ->method('createFromSettings')
-            ->will($this->returnValue($mockEventDemand));
-        $this->subject->injectEventDemandFactory($this->eventDemandFactory);
-        return $mockEventDemand;
     }
 
     /**
@@ -231,7 +199,7 @@ class EventControllerTest extends UnitTestCase
      */
     public function listActionGetsEventDemandFromFactory(): void
     {
-        $mockDemand = $this->getMockEventDemand();
+        $mockDemand = $this->getMockBuilder(EventDemand::class)->getMock();
         $this->eventDemandFactory->expects($this->once())
             ->method('createFromSettings')
             ->with($this->settings)
@@ -257,12 +225,13 @@ class EventControllerTest extends UnitTestCase
      */
     public function listActionOverwritesDemandObject(): void
     {
-        $mockDemand = $this->getMockEventDemand();
-        $this->eventDemandFactory->method('createFromSettings')
+        $mockDemand = $this->getMockBuilder(EventDemand::class)->getMock();
+        $this->eventDemandFactory->expects($this->once())
+            ->method('createFromSettings')
             ->will($this->returnValue($mockDemand));
-        $this->subject->expects($this->once())
+        $mockDemand->expects($this->once())
             ->method('overwriteDemandObject')
-            ->with($mockDemand);
+            ->with(['demand' => 'dummy'], $this->settings);
 
         $this->eventDispatcher->expects($this->once())->method('dispatch')
             ->with($this->isInstanceOf(EventControllerListActionWasExecuted::class))
@@ -288,6 +257,14 @@ class EventControllerTest extends UnitTestCase
             ->method('findDemanded')
             ->with($this->isInstanceOf(EventDemand::class));
 
+        $mockDemand = $this->getMockBuilder(EventDemand::class)->getMock();
+        $this->eventDemandFactory->expects($this->once())
+            ->method('createFromSettings')
+            ->will($this->returnValue($mockDemand));
+        $mockDemand->expects($this->once())
+            ->method('overwriteDemandObject')
+            ->with(['demand' => 'dummy'], $this->settings);
+
         $this->eventDispatcher->expects($this->once())->method('dispatch')
             ->with($this->isInstanceOf(EventControllerListActionWasExecuted::class))
             ->willReturn(new EventControllerListActionWasExecuted(['foo' => 'bar']));
@@ -312,6 +289,14 @@ class EventControllerTest extends UnitTestCase
         $message = 'bar';
 
         $this->subject->_set(SI::SETTINGS, ['hideIfEmptyResult' => false]);
+
+        $mockDemand = $this->getMockBuilder(EventDemand::class)->getMock();
+        $this->eventDemandFactory->expects($this->once())
+            ->method('createFromSettings')
+            ->will($this->returnValue($mockDemand));
+        $mockDemand->expects($this->once())
+            ->method('overwriteDemandObject')
+            ->with(['demand' => 'dummy'], ['hideIfEmptyResult' => false]);
 
         $this->translationService->expects($this->exactly(2))
             ->method('translate')
@@ -344,6 +329,14 @@ class EventControllerTest extends UnitTestCase
      */
     public function listActionDispatchesListActionWasCalledEvent(): void
     {
+        $mockDemand = $this->getMockBuilder(EventDemand::class)->getMock();
+        $this->eventDemandFactory->expects($this->once())
+            ->method('createFromSettings')
+            ->will($this->returnValue($mockDemand));
+        $mockDemand->expects($this->once())
+            ->method('overwriteDemandObject')
+            ->with(['demand' => 'dummy'], $this->settings);
+
         $this->eventDispatcher->expects($this->once())
             ->method('dispatch')
             ->with($this->isInstanceOf(EventControllerListActionWasExecuted::class))
@@ -365,6 +358,14 @@ class EventControllerTest extends UnitTestCase
      */
     public function listActionAssignsVariablesToView(): void
     {
+        $mockDemand = $this->getMockBuilder(EventDemand::class)->getMock();
+        $this->eventDemandFactory->expects($this->once())
+            ->method('createFromSettings')
+            ->will($this->returnValue($mockDemand));
+        $mockDemand->expects($this->once())
+            ->method('overwriteDemandObject')
+            ->with(['demand' => 'dummy'], $this->settings);
+
         $this->eventDispatcher->expects($this->once())->method('dispatch')
             ->with($this->isInstanceOf(EventControllerListActionWasExecuted::class))
             ->willReturn(new EventControllerListActionWasExecuted(['foo' => 'bar']));

@@ -28,6 +28,7 @@ trait ModuleDataTrait
 
     /**
      * @return array
+     * @todo Check, if this is replaced completely now!
      */
 //    abstract public function mergeSettings();
 
@@ -70,6 +71,7 @@ trait ModuleDataTrait
     public function initializeAction(): void
     {
         $this->pageUid = (int)GeneralUtility::_GET('id');
+        // @todo: Replace this!
         $this->settings = $this->mergeSettings();
     }
 

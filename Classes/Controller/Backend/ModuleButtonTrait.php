@@ -114,14 +114,4 @@ trait ModuleButtonTrait
      */
     abstract protected function getIconFactory();
 
-    /**
-     * Translate a given key
-     *
-     * @param string $key
-     * @param string $extension
-     * @param array $arguments
-     * @return string
-     */
-    abstract public function translate($key, $extension = 't3events', $arguments = null);
-
 }

@@ -16,8 +16,6 @@ namespace DWenzel\T3events\Controller;
  */
 
 use DWenzel\T3events\Domain\Factory\Dto\EventDemandFactory;
-use DWenzel\T3events\Domain\Model\Dto\Search;
-use DWenzel\T3events\Domain\Model\Dto\SearchFactory;
 use DWenzel\T3events\Domain\Model\Event;
 use DWenzel\T3events\Domain\Repository\EventRepository;
 use DWenzel\T3events\Domain\Repository\EventTypeRepository;
@@ -30,6 +28,7 @@ use DWenzel\T3events\Service\TranslationService;
 use DWenzel\T3events\Session\SessionInterface;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 use DWenzel\T3events\Utility\SettingsUtility;
+use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
@@ -41,11 +40,8 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
  */
 class EventController extends AbstractActionController
 {
-    use DemandTrait;
-
     public function __construct(
         private readonly VenueRepository $venueRepository,
-        private readonly SearchFactory $searchFactory,
         private readonly EventDemandFactory $eventDemandFactory,
         private readonly EventRepository $eventRepository,
         private readonly GenreRepository $genreRepository,
@@ -85,7 +81,7 @@ class EventController extends AbstractActionController
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      */
-    public function listAction($overwriteDemand = null): \Psr\Http\Message\ResponseInterface
+    public function listAction($overwriteDemand = null): ResponseInterface
     {
         if (!$overwriteDemand) {
             if (!$this->session->has('tx_t3events_overwriteDemand') || !is_string($this->session->get('tx_t3events_overwriteDemand')) || empty($this->session->get('tx_t3events_overwriteDemand'))) {
@@ -95,7 +91,7 @@ class EventController extends AbstractActionController
         }
 
         $demand = $this->eventDemandFactory->createFromSettings($this->settings);
-        $this->overwriteDemandObject($demand, $overwriteDemand);
+        $demand->overwriteDemandObject($overwriteDemand, $this->settings);
         $events = $this->eventRepository->findDemanded($demand);
 
         /** @var QueryResultInterface $events */
@@ -133,7 +129,7 @@ class EventController extends AbstractActionController
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      */
-    public function showAction(Event $event): \Psr\Http\Message\ResponseInterface
+    public function showAction(Event $event): ResponseInterface
     {
         $templateVariables = [
             SI::SETTINGS => $this->settings,
@@ -156,7 +152,7 @@ class EventController extends AbstractActionController
      *
      * @todo Check, if removed initializeQuickMenuAction() breaks something.
      */
-    public function quickMenuAction(): \Psr\Http\Message\ResponseInterface
+    public function quickMenuAction(): ResponseInterface
     {
         // get session data
         $overwriteDemand = unserialize($this->session->get('tx_t3events_overwriteDemand'), ['allowed_classes' => false]);
@@ -180,10 +176,5 @@ class EventController extends AbstractActionController
             $eventControllerQuickMenuActionWasExecuted->getTemplateVariables()
         );
         return $this->htmlResponse();
-    }
-
-    public function createSearchObject($searchRequest, $settings): Search
-    {
-        return $this->searchFactory->get($searchRequest, $settings);
     }
 }

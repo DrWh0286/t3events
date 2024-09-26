@@ -17,7 +17,6 @@ namespace DWenzel\T3events\Controller;
 
 use DWenzel\T3events\Domain\Factory\Dto\PerformanceDemandFactory;
 use DWenzel\T3events\Domain\Model\Dto\PerformanceDemand;
-use DWenzel\T3events\Domain\Model\Dto\Search;
 use DWenzel\T3events\Domain\Model\Dto\SearchFactory;
 use DWenzel\T3events\Domain\Model\Performance;
 use DWenzel\T3events\Domain\Repository\CategoryRepository;
@@ -44,11 +43,6 @@ use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
  */
 class PerformanceController extends AbstractActionController
 {
-    public const PERFORMANCE_LIST_ACTION = 'listAction';
-    public const PERFORMANCE_QUICK_MENU_ACTION = 'quickMenuAction';
-    public const PERFORMANCE_SHOW_ACTION = 'showAction';
-    public const SESSION_NAME_SPACE = 'performanceController';
-
     /**
      * TYPO3 Content Object
      *

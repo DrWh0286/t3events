@@ -17,58 +17,44 @@ namespace DWenzel\T3events\Controller\Backend;
 
 use DWenzel\T3events\CallStaticTrait;
 use DWenzel\T3events\Controller\AbstractBackendController;
-use DWenzel\T3events\Controller\AudienceRepositoryTrait;
-use DWenzel\T3events\Controller\CategoryRepositoryTrait;
-use DWenzel\T3events\Controller\CompanyRepositoryTrait;
-use DWenzel\T3events\Controller\DemandTrait;
-use DWenzel\T3events\Controller\EventDemandFactoryTrait;
-use DWenzel\T3events\Controller\EventRepositoryTrait;
-use DWenzel\T3events\Controller\EventTypeRepositoryTrait;
-use DWenzel\T3events\Controller\FilterableControllerInterface;
-use DWenzel\T3events\Controller\FilterableControllerTrait;
-use DWenzel\T3events\Controller\GenreRepositoryTrait;
 use DWenzel\T3events\Controller\ModuleDataTrait;
 use DWenzel\T3events\Controller\NotificationRepositoryTrait;
 use DWenzel\T3events\Controller\NotificationServiceTrait;
-use DWenzel\T3events\Controller\PersistenceManagerTrait;
 use DWenzel\T3events\Controller\SettingsUtilityTrait;
-use DWenzel\T3events\Controller\SignalTrait;
-use DWenzel\T3events\Controller\TranslateTrait;
+use DWenzel\T3events\Domain\Factory\Dto\EventDemandFactory;
 use DWenzel\T3events\Domain\Model\Dto\ButtonDemand;
 use DWenzel\T3events\Domain\Model\Dto\Search;
 use DWenzel\T3events\Domain\Model\Dto\SearchFactory;
+use DWenzel\T3events\Domain\Repository\AudienceRepository;
+use DWenzel\T3events\Domain\Repository\CategoryRepository;
+use DWenzel\T3events\Domain\Repository\CompanyRepository;
+use DWenzel\T3events\Domain\Repository\EventRepository;
+use DWenzel\T3events\Domain\Repository\EventTypeRepository;
+use DWenzel\T3events\Domain\Repository\GenreRepository;
 use DWenzel\T3events\Domain\Repository\VenueRepository;
+use DWenzel\T3events\Event\EventControllerListActionWasExecuted;
+use DWenzel\T3events\Service\FilterOptionsService;
+use DWenzel\T3events\Service\TranslationService;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
  * Class EventController
  */
-class EventController extends AbstractBackendController implements FilterableControllerInterface
+class EventController extends AbstractBackendController
 {
-    use AudienceRepositoryTrait;
     use BackendViewTrait;
     use CallStaticTrait;
-    use CategoryRepositoryTrait;
-    use CompanyRepositoryTrait;
-    use DemandTrait;
-    use EventDemandFactoryTrait;
-    use EventRepositoryTrait;
-    use EventTypeRepositoryTrait;
-    use FilterableControllerTrait;
     use FormTrait;
-    use GenreRepositoryTrait;
     use ModuleDataTrait;
     use NotificationRepositoryTrait;
     use NotificationServiceTrait;
-    use PersistenceManagerTrait;
     use SettingsUtilityTrait;
-    use SignalTrait;
-    use TranslateTrait;
 
     public const LIST_ACTION = 'listAction';
     public const EXTENSION_KEY = 't3events';
@@ -83,12 +69,22 @@ class EventController extends AbstractBackendController implements FilterableCon
             ButtonDemand::ICON_SIZE_KEY => Icon::SIZE_SMALL
         ]
     ];
-    private SearchFactory $searchFactory;
 
-    public function __construct(private ModuleTemplateFactory $moduleTemplateFactory, private VenueRepository $venueRepository, SearchFactory $searchFactory)
-    {
-        $this->searchFactory = $searchFactory;
-        $this->settings;
+    public function __construct(
+        private readonly ModuleTemplateFactory $moduleTemplateFactory,
+        private readonly VenueRepository $venueRepository,
+        private readonly AudienceRepository $audienceRepository,
+        private readonly SearchFactory $searchFactory,
+        private readonly CategoryRepository $categoryRepository,
+        private readonly CompanyRepository $companyRepository,
+        private readonly EventDemandFactory $eventDemandFactory,
+        private readonly EventRepository $eventRepository,
+        private readonly EventTypeRepository $eventTypeRepository,
+        private readonly GenreRepository $genreRepository,
+        private readonly PersistenceManagerInterface $persistenceManager,
+        private readonly TranslationService $translationService,
+        private readonly FilterOptionsService $filterOptionsService
+    ) {
     }
 
     /**
@@ -127,7 +123,7 @@ class EventController extends AbstractBackendController implements FilterableCon
             $this->moduleData->setOverwriteDemand($overwriteDemand);
         }
 
-        $this->overwriteDemandObject($demand, $overwriteDemand);
+        $demand->overwriteDemandObject($overwriteDemand, $this->settings);
         $this->moduleData->setDemand($demand);
 
         $events = $this->eventRepository->findDemanded($demand);
@@ -136,8 +132,8 @@ class EventController extends AbstractBackendController implements FilterableCon
             || !count($events)
         ) {
             $this->addFlashMessage(
-                $this->translate('message.noEventFound.text'),
-                $this->translate('message.noEventFound.title'),
+                $this->translationService->translate('message.noEventFound.text'),
+                $this->translationService->translate('message.noEventFound.title'),
                 FlashMessage::WARNING
             );
         }
@@ -148,14 +144,16 @@ class EventController extends AbstractBackendController implements FilterableCon
             SI::EVENTS => $events,
             SI::DEMAND => $demand,
             SI::OVERWRITE_DEMAND => $overwriteDemand,
-            'filterOptions' => $this->getFilterOptions($this->settings[SI::FILTER] ?? []),
+            'filterOptions' => $this->filterOptionsService->getFilterOptions($this->settings[SI::FILTER] ?? []),
             SI::STORAGE_PID => $configuration[SI::PERSISTENCE][SI::STORAGE_PID] ?? null,
             SI::SETTINGS => $this->settings,
             SI::MODULE => SI::ROUTE_EVENT_MODULE
         ];
 
-        $this->emitSignal(__CLASS__, self::LIST_ACTION, $templateVariables);
-        $this->view->assignMultiple($templateVariables);
+        /** @var EventControllerListActionWasExecuted $eventControllerListActionWasCalled */
+        $eventControllerListActionWasCalled = $this->eventDispatcher->dispatch(new EventControllerListActionWasExecuted($templateVariables));
+
+        $this->view->assignMultiple($eventControllerListActionWasCalled->getTemplateVariables());
         $moduleTemplate->setContent($this->view->render());
         return $this->htmlResponse($moduleTemplate->renderContent());
     }
@@ -182,5 +180,10 @@ class EventController extends AbstractBackendController implements FilterableCon
     public function createSearchObject($searchRequest, $settings): Search
     {
         return $this->searchFactory->get($searchRequest, $settings);
+    }
+
+    public function overrideSettings(array $settings = []): void
+    {
+        $this->settings = $settings;
     }
 }
