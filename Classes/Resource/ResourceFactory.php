@@ -27,10 +27,10 @@ namespace DWenzel\T3events\Resource;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use DWenzel\T3events\Object\ObjectManagerTrait;
 use TYPO3\CMS\Core\Resource\FileInterface;
 use TYPO3\CMS\Core\Resource\ResourceFactory as CoreResourceFactory;
 use TYPO3\CMS\Core\Resource\File;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 
 /**
@@ -40,8 +40,6 @@ use TYPO3\CMS\Extbase\Domain\Model\FileReference;
  */
 class ResourceFactory extends CoreResourceFactory
 {
-    use ObjectManagerTrait;
-
     /**
      * Gets a file by combined identifier using the
      * resource factory's method.
@@ -78,9 +76,7 @@ class ResourceFactory extends CoreResourceFactory
             ]
         );
         /** @var \TYPO3\CMS\Extbase\Domain\Model\FileReference $fileReference */
-        $fileReference = $this->objectManager->get(
-            FileReference::class
-        );
+        $fileReference = GeneralUtility::makeInstance(FileReference::class);
         $fileReference->setOriginalResource($coreFileReference);
 
         return $fileReference;

@@ -4,6 +4,7 @@ namespace DWenzel\T3events\Domain\Repository;
 
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use DWenzel\T3events\Domain\Model\Dto\DemandInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /***************************************************************
  *
@@ -29,7 +30,7 @@ use DWenzel\T3events\Domain\Model\Dto\DemandInterface;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRepository implements DemandedRepositoryInterface
+class CategoryRepository extends Repository implements DemandedRepositoryInterface
 {
     use DemandedRepositoryTrait;
 

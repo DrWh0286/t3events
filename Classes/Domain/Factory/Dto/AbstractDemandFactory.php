@@ -2,7 +2,6 @@
 
 namespace DWenzel\T3events\Domain\Factory\Dto;
 
-use DWenzel\T3events\Object\ObjectManagerTrait;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
@@ -36,7 +35,6 @@ abstract class AbstractDemandFactory
 {
     use SkipPropertyTrait;
     use MapPropertyTrait;
-    use ObjectManagerTrait;
 
     /**
      * Properties which should be mapped when settings

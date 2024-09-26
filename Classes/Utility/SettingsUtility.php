@@ -26,17 +26,15 @@ namespace DWenzel\T3events\Utility;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use DWenzel\T3events\Object\ObjectManagerTrait;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\DomainObjectInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use DWenzel\T3events\Resource\ResourceFactory;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * Class SettingsUtility
@@ -45,10 +43,8 @@ use DWenzel\T3events\Resource\ResourceFactory;
  */
 class SettingsUtility implements SingletonInterface
 {
-    use ObjectManagerTrait;
-
     /**
-     * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
+     * @var ContentObjectRenderer
      */
     protected $contentObjectRenderer;
 
@@ -61,7 +57,7 @@ class SettingsUtility implements SingletonInterface
     * @var ResourceFactory
     */
     protected $resourceFactory;
-    public function __construct(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObjectRenderer, \DWenzel\T3events\Resource\ResourceFactory $resourceFactory)
+    public function __construct(ContentObjectRenderer $contentObjectRenderer, ResourceFactory $resourceFactory)
     {
         $this->contentObjectRenderer = $contentObjectRenderer;
         $this->resourceFactory = $resourceFactory;

@@ -38,24 +38,6 @@ trait ModuleDataTrait
     abstract public function getModuleKey();
 
     /**
-     * Forwards the request to another action and / or controller.
-     * Request is directly transfered to the other action / controller
-     * without the need for a new request.
-     *
-     * @param string $actionName Name of the action to forward to
-     * @param string $controllerName Unqualified object name of the controller to forward to. If not specified, the current controller is used.
-     * @param string $extensionName Name of the extension containing the controller to forward to. If not specified, the current extension is assumed.
-     * @param array $arguments Arguments to pass to the target action
-     * @return void
-     */
-    abstract public function forward(
-        $actionName,
-        $controllerName = null,
-        $extensionName = null,
-        array $arguments = null
-    );
-
-    /**
      * injects the module data storage service
      *
      * @param ModuleDataStorageService $service
@@ -83,7 +65,8 @@ trait ModuleDataTrait
     {
         $this->moduleData = GeneralUtility::makeInstance(ModuleData::class);
         $this->moduleDataStorageService->persistModuleData($this->moduleData, $this->getModuleKey());
-        $this->forward('list');
+        //@todo: This works different now!
+//        $this->forward('list');
     }
 
     /**

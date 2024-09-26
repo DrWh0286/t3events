@@ -14,11 +14,9 @@ namespace DWenzel\T3events\Service;
  *
  * The TYPO3 project - inspiring people to share!
  */
-use DWenzel\T3events\Object\ObjectManagerTrait;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use DWenzel\T3events\Domain\Model\Dto\ModuleData;
 
 /**

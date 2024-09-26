@@ -30,9 +30,9 @@ use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Request;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3Fluid\Fluid\View\ViewInterface;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 
 /**
  * Trait BackendViewTrait
@@ -51,11 +51,6 @@ trait BackendViewTrait
     protected $settings;
 
     /**
-     * @var ObjectManagerInterface
-     */
-    protected $objectManager;
-
-    /**
      * @var UriBuilder
      */
     protected $uriBuilder;
@@ -63,7 +58,7 @@ trait BackendViewTrait
     /**
      * @var Request
      */
-    protected $request;
+    protected RequestInterface $request;
 
     /**
      * The current view, as resolved by resolveView()

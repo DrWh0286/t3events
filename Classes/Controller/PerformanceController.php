@@ -19,7 +19,6 @@ use DWenzel\T3events\Domain\Factory\Dto\PerformanceDemandFactory;
 use DWenzel\T3events\Domain\Model\Dto\PerformanceDemand;
 use DWenzel\T3events\Domain\Model\Dto\SearchFactory;
 use DWenzel\T3events\Domain\Model\Performance;
-use DWenzel\T3events\Domain\Repository\CategoryRepository;
 use DWenzel\T3events\Domain\Repository\EventTypeRepository;
 use DWenzel\T3events\Domain\Repository\GenreRepository;
 use DWenzel\T3events\Domain\Repository\PerformanceRepository;
@@ -60,7 +59,6 @@ class PerformanceController extends AbstractActionController
         protected readonly EventTypeRepository $eventTypeRepository,
         protected readonly SearchFactory $searchFactory,
         protected readonly FilterOptionsService $filterOptionsService,
-        protected readonly CategoryRepository $categoryRepository,
         protected readonly PerformanceDemandFactory $performanceDemandFactory,
         protected readonly SessionInterface $session,
         protected readonly SettingsUtility $settingsUtility

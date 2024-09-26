@@ -24,15 +24,9 @@ use DWenzel\T3events\Domain\Model\Dto\ButtonDemandCollection;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 trait ModuleButtonTrait
 {
-    /**
-     * @var ObjectManager
-     */
-    protected $objectManager;
-
     /**
      * Returns a configuration array for buttons
      * in the form

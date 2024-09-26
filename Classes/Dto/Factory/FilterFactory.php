@@ -5,7 +5,6 @@ namespace DWenzel\T3events\Dto\Factory;
 use DWenzel\T3events\Dto\FilterInterface;
 use DWenzel\T3events\Dto\FilterResolver;
 use DWenzel\T3events\Dto\FilterResolverInterface;
-use DWenzel\T3events\Object\ObjectManagerTrait;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /***************************************************************
@@ -31,14 +30,12 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class FilterFactory
 {
-    use ObjectManagerTrait;
-
     /**
      * @var FilterResolverInterface
      */
     protected $filterResolver;
 
-    public function __construct(\DWenzel\T3events\Dto\FilterResolverInterface $filterResolver)
+    public function __construct(FilterResolverInterface $filterResolver)
     {
         $this->filterResolver = $filterResolver;
     }

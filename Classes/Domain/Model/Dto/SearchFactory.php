@@ -2,9 +2,7 @@
 
 namespace DWenzel\T3events\Domain\Model\Dto;
 
-use DWenzel\T3events\Object\ObjectManagerTrait;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 
 /***************************************************************
  *  Copyright notice

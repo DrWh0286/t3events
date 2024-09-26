@@ -23,7 +23,6 @@ use DWenzel\T3events\Domain\Model\Dto\ButtonDemand;
 use DWenzel\T3events\Domain\Model\Dto\Search;
 use DWenzel\T3events\Domain\Model\Dto\SearchFactory;
 use DWenzel\T3events\Domain\Repository\AudienceRepository;
-use DWenzel\T3events\Domain\Repository\CategoryRepository;
 use DWenzel\T3events\Domain\Repository\CompanyRepository;
 use DWenzel\T3events\Domain\Repository\EventRepository;
 use DWenzel\T3events\Domain\Repository\EventTypeRepository;
@@ -75,7 +74,6 @@ class EventController extends ActionController
         private readonly VenueRepository $venueRepository,
         private readonly AudienceRepository $audienceRepository,
         private readonly SearchFactory $searchFactory,
-        private readonly CategoryRepository $categoryRepository,
         private readonly CompanyRepository $companyRepository,
         private readonly EventDemandFactory $eventDemandFactory,
         private readonly EventRepository $eventRepository,
