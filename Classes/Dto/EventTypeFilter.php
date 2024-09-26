@@ -2,8 +2,8 @@
 
 namespace DWenzel\T3events\Dto;
 
-use DWenzel\T3events\Controller\EventTypeRepositoryTrait;
 use DWenzel\T3events\Domain\Repository\DemandedRepositoryInterface;
+use DWenzel\T3events\Domain\Repository\EventTypeRepository;
 
 /***************************************************************
  *  Copyright notice
@@ -27,8 +27,13 @@ use DWenzel\T3events\Domain\Repository\DemandedRepositoryInterface;
  */
 class EventTypeFilter implements FilterInterface
 {
-    use EventTypeRepositoryTrait;
     use OptionsTrait;
+
+    public function __construct(
+        private readonly EventTypeRepository $eventTypeRepository
+    )
+    {
+    }
 
     public function getOptionRepository(): DemandedRepositoryInterface
     {

@@ -2,9 +2,8 @@
 
 namespace DWenzel\T3events\Dto;
 
-use DWenzel\T3events\Controller\GenreRepositoryTrait;
 use DWenzel\T3events\Domain\Repository\DemandedRepositoryInterface;
-use DWenzel\T3events\Utility\SettingsInterface as SI;
+use DWenzel\T3events\Domain\Repository\GenreRepository;
 
 /***************************************************************
  *  Copyright notice
@@ -28,8 +27,13 @@ use DWenzel\T3events\Utility\SettingsInterface as SI;
  */
 class GenreFilter implements FilterInterface
 {
-    use GenreRepositoryTrait;
     use OptionsTrait;
+
+    public function __construct(
+        private readonly GenreRepository $genreRepository
+    )
+    {
+    }
 
     public function getOptionRepository(): DemandedRepositoryInterface
     {
