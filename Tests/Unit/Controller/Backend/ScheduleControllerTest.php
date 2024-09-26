@@ -23,7 +23,7 @@ use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
-use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+use TYPO3Fluid\Fluid\View\ViewInterface;
 
 /**
  * This file is part of the TYPO3 CMS project.

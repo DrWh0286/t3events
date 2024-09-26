@@ -20,7 +20,6 @@ namespace DWenzel\T3events\Tests\Unit\Controller\Backend;
  ***************************************************************/
 
 use DWenzel\T3events\Controller\Backend\BackendViewTrait;
-use DWenzel\T3events\InvalidRequestException;
 use DWenzel\T3events\Utility\SettingsInterface;
 use DWenzel\T3events\View\ConfigurableViewInterface;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
@@ -33,8 +32,7 @@ use TYPO3\CMS\Backend\View\BackendTemplateView;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
-use DWenzel\T3events\Utility\SettingsInterface as SI;
+use TYPO3Fluid\Fluid\View\ViewInterface;
 
 /**
  * Class BackendViewTraitTest
@@ -178,7 +176,7 @@ class BackendViewTraitTest extends UnitTestCase
         $this->subject->setSettings(
             $settings
         );
-        /** @var ConfigurableViewInterface|ViewInterface|\PHPUnit_Framework_MockObject_MockObject $mockView */
+        /** @var ConfigurableViewInterface|ViewInterface|MockObject $mockView */
         $mockView = $this->getMockBuilder(ConfigurableViewInterface::class)
             ->onlyMethods(['apply'])
             ->getMockForAbstractClass();

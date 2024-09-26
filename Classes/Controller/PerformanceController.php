@@ -34,7 +34,7 @@ use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
-use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+use TYPO3Fluid\Fluid\View\ViewInterface;
 
 /**
  * Class PerformanceController

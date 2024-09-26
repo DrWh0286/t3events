@@ -20,7 +20,7 @@ namespace DWenzel\T3events\View;
  ***************************************************************/
 
 
-use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+use TYPO3Fluid\Fluid\View\ViewInterface;
 
 /**
  * Interface ConfigurableViewInterface
