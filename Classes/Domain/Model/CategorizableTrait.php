@@ -37,8 +37,8 @@ trait CategorizableTrait
 {
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
-     * @Lazy
      */
+    #[Lazy]
     protected $categories;
 
     /**

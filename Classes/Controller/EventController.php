@@ -102,7 +102,7 @@ class EventController extends AbstractActionController
             $this->addFlashMessage(
                 $this->translationService->translate('tx_t3events.noEventsForSelectionMessage'),
                 $this->translationService->translate('tx_t3events.noEventsForSelectionTitle'),
-                FlashMessage::WARNING
+                \TYPO3\CMS\Core\Type\ContextualFeedbackSeverity::WARNING
             );
         }
 
@@ -111,7 +111,7 @@ class EventController extends AbstractActionController
             'demand' => $demand,
             SI::SETTINGS => $this->settings,
             SI::OVERWRITE_DEMAND => $overwriteDemand,
-            'data' => $this->configurationManager->getContentObject()->data
+            'data' => $this->request->getAttribute('currentContentObject')->data
         ];
 
         /** @var EventControllerListActionWasExecuted $eventControllerListActionWasExecuted */

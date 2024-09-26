@@ -11,7 +11,6 @@ return [
         'label' => 'headline',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
         'dividers2tabs' => true,
         'sortby' => 'sorting',
         'versioningWS' => true,
@@ -70,7 +69,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['', 0],
+                    ['label' => '', 'value' => 0],
                 ],
                 'foreign_table' => 'tx_t3events_domain_model_event',
                 'foreign_table_where' => 'AND tx_t3events_domain_model_event.pid=###CURRENT_PID### AND tx_t3events_domain_model_event.sys_language_uid IN (-1,0)',
@@ -93,10 +92,8 @@ return [
             'exclude' => 1,
             'label' => $cll . 'LGL.starttime',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
+                'type' => 'datetime',
                 'size' => 10,
-                'eval' => 'datetime',
                 'checkbox' => 0,
                 'default' => 0,
                 'behaviour' => [
@@ -108,10 +105,8 @@ return [
             'exclude' => 1,
             'label' => $cll . 'LGL.endtime',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
+                'type' => 'datetime',
                 'size' => 10,
-                'eval' => 'datetime',
                 'checkbox' => 0,
                 'default' => 0,
                 'behaviour' => [
@@ -129,16 +124,16 @@ return [
                 'maxitems' => 20,
                 'items' => [
                     [
-                        $cll . 'LGL.hide_at_login',
-                        -1,
+                        'label' => $cll . 'LGL.hide_at_login',
+                        'value' => -1,
                     ],
                     [
-                        $cll . 'LGL.any_login',
-                        -2,
+                        'label' => $cll . 'LGL.any_login',
+                        'value' => -2,
                     ],
                     [
-                        $cll . 'LGL.usergroups',
-                        '--div--',
+                        'label' => $cll . 'LGL.usergroups',
+                        'value' => '--div--',
                     ],
                 ],
                 'exclusiveKeys' => '-1,-2',
@@ -152,7 +147,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required'
+                'eval' => 'trim',
+                'required' => true
             ],
         ],
         'subtitle' => [
@@ -198,7 +194,10 @@ return [
         'images' => [
             'exclude' => 1,
             'label' => $ll . ':tx_t3events_domain_model_event.images',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('images', [
+            'config' => [
+                ### !!! Watch out for fieldName different from columnName
+                'type' => 'file',
+                'allowed' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
                 'appearance' => [
                     'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference'
                 ],
@@ -238,12 +237,15 @@ return [
                         ]
                     ]
                 ],
-            ], $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'])
+            ]
         ],
         'files' => [
             'exclude' => 1,
             'label' => $ll . ':tx_t3events_domain_model_event.files',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('files', [
+            'config' => [
+                ### !!! Watch out for fieldName different from columnName
+                'type' => 'file',
+                'allowed' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
                 'appearance' => [
                     'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference'
                 ],
@@ -283,7 +285,7 @@ return [
                         ]
                     ]
                 ],
-            ], $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'])
+            ]
         ],
         'related' => [
             'exclude' => 1,
@@ -441,22 +443,19 @@ return [
             'exclude' => 1,
             'label' => $ll . ':tx_t3events_domain_model_event.new_until',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
+                'type' => 'datetime',
                 'size' => 10,
-                'eval' => 'datetime',
-                'default' => '0'
+                'default' => 0
             ]
         ],
         'archive_date' => [
             'exclude' => 1,
             'label' => $ll . ':tx_t3events_domain_model_event.archive_date',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
+                'type' => 'datetime',
                 'size' => 10,
-                'eval' => 'date',
-                'default' => '0'
+                'default' => 0,
+                'format' => 'date'
             ]
         ],
         'content_elements' => [

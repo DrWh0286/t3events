@@ -307,7 +307,7 @@ class EventControllerTest extends UnitTestCase
             ->will($this->onConsecutiveCalls($message, $title));
         $this->subject->expects($this->once())
             ->method('addFlashMessage')
-            ->with($message, $title, FlashMessage::WARNING);
+            ->with($message, $title, \TYPO3\CMS\Core\Type\ContextualFeedbackSeverity::WARNING);
 
         $this->eventDispatcher->expects($this->once())->method('dispatch')
             ->with($this->isInstanceOf(EventControllerListActionWasExecuted::class))

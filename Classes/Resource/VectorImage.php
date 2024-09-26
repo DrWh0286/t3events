@@ -94,7 +94,7 @@ class VectorImage extends \DOMDocument
      * @param string $elementId
      * @return \DOMNode | null
      */
-    public function getElementById($elementId)
+    public function getElementById($elementId): ?\DOMElement
     {
         return $this->getXPath()->query("//*[@id='" . $elementId . "']")->item(0);
     }

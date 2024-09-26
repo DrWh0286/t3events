@@ -42,8 +42,8 @@ class Person extends AbstractEntity
      * email
      *
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("EmailAddress")
      */
+    #[\TYPO3\CMS\Extbase\Annotation\Validate(['validator' => 'EmailAddress'])]
     protected $email = '';
 
     /**
@@ -99,8 +99,8 @@ class Person extends AbstractEntity
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @Lazy
      */
+    #[Lazy]
     protected $images;
 
     /**

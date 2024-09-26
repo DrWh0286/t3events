@@ -144,7 +144,7 @@ class ModuleDataTraitTest extends TestCase
                 return null;
             }
 
-            public function has(string $id)
+            public function has(string $id): bool
             {
                 if (isset($this->classes[$id])) {
                     return true;

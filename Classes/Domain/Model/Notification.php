@@ -52,16 +52,16 @@ class Notification extends AbstractEntity
 
     /**
      * @var string $subject
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
+    #[\TYPO3\CMS\Extbase\Annotation\Validate(['validator' => 'NotEmpty'])]
     protected $subject;
 
     /**
      * Body text
      *
      * @var string $bodytext
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
+    #[\TYPO3\CMS\Extbase\Annotation\Validate(['validator' => 'NotEmpty'])]
     protected $bodytext;
 
     /**
@@ -78,8 +78,8 @@ class Notification extends AbstractEntity
 
     /**
      * @var ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @Lazy
      */
+    #[Lazy]
     protected $attachments;
 
     public function __construct(

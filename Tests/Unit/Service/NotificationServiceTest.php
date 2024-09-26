@@ -128,7 +128,7 @@ class NotificationServiceTest extends UnitTestCase
                 return $this->classes[$id];
             }
 
-            public function has(string $id)
+            public function has(string $id): bool
             {
                 return isset($this->classes[$id]);
             }

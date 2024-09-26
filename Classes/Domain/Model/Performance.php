@@ -94,16 +94,16 @@ class Performance extends AbstractEntity
      * images
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @Lazy
      */
+    #[Lazy]
     protected $images;
 
     /**
      * plan
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @Lazy
      */
+    #[Lazy]
     protected $plan;
 
     /**
@@ -122,32 +122,32 @@ class Performance extends AbstractEntity
 
     /**
      * @var \DWenzel\T3events\Domain\Model\Event
-     * @Lazy
      */
+    #[Lazy]
     protected $event;
 
     /**
      * eventLocation
      *
-     * @Lazy
      * @var \DWenzel\T3events\Domain\Model\EventLocation
      */
+    #[Lazy]
     protected $eventLocation;
 
     /**
      * ticketClass
      *
-     * @Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\T3events\Domain\Model\TicketClass>
      */
+    #[Lazy]
     protected $ticketClass;
 
     /**
      * status
      *
-     * @Lazy
      * @var \DWenzel\T3events\Domain\Model\PerformanceStatus
      */
+    #[Lazy]
     protected $status;
 
     /**

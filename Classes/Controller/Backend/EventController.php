@@ -155,7 +155,7 @@ class EventController extends ActionController
             $this->addFlashMessage(
                 $this->translationService->translate('message.noEventFound.text'),
                 $this->translationService->translate('message.noEventFound.title'),
-                FlashMessage::WARNING
+                \TYPO3\CMS\Core\Type\ContextualFeedbackSeverity::WARNING
             );
         }
         $configuration = $this->configurationManager->getConfiguration(

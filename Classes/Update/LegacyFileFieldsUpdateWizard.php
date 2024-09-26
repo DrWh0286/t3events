@@ -167,20 +167,14 @@ class LegacyFileFieldsUpdateWizard implements UpgradeWizardInterface, ChattyInte
         try {
             return $queryBuilder
                 ->count($fieldToMigrate)
-                ->from($table)
-                ->where(
-                    $queryBuilder->expr()->isNotNull($fieldToMigrate),
-                    $queryBuilder->expr()->neq(
-                        $fieldToMigrate,
-                        $queryBuilder->createNamedParameter('', \PDO::PARAM_STR)
-                    ),
-                    $queryBuilder->expr()->comparison(
-                        'CAST(CAST(' . $queryBuilder->quoteIdentifier($fieldToMigrate) . ' AS DECIMAL) AS CHAR)',
-                        ExpressionBuilder::NEQ,
-                        'CAST(' . $queryBuilder->quoteIdentifier($fieldToMigrate) . ' AS CHAR)'
-                    )
-                )
-                ->execute()
+                ->from($table)->where($queryBuilder->expr()->isNotNull($fieldToMigrate), $queryBuilder->expr()->neq(
+                $fieldToMigrate,
+                $queryBuilder->createNamedParameter('', \PDO::PARAM_STR)
+            ), $queryBuilder->expr()->comparison(
+                'CAST(CAST(' . $queryBuilder->quoteIdentifier($fieldToMigrate) . ' AS DECIMAL) AS CHAR)',
+                ExpressionBuilder::NEQ,
+                'CAST(' . $queryBuilder->quoteIdentifier($fieldToMigrate) . ' AS CHAR)'
+            ))->executeQuery()
                 ->fetchOne();
         } catch (\Exception $exception) {
             $this->logger->error(
@@ -225,9 +219,7 @@ class LegacyFileFieldsUpdateWizard implements UpgradeWizardInterface, ChattyInte
                         ExpressionBuilder::NEQ,
                         'CAST(' . $queryBuilder->quoteIdentifier($fieldToMigrate) . ' AS CHAR)'
                     )
-                )
-                ->orderBy('uid')
-                ->execute();
+                )->orderBy('uid')->executeQuery();
 
             return $result->fetchAll();
         } catch (Exception $e) {
@@ -284,16 +276,13 @@ class LegacyFileFieldsUpdateWizard implements UpgradeWizardInterface, ChattyInte
 
                 $queryBuilder = $connectionPool->getQueryBuilderForTable('sys_file');
                 $queryBuilder->getRestrictions()->removeAll();
-                $existingFileRecord = $queryBuilder->select('uid')->from('sys_file')->where(
-                    $queryBuilder->expr()->eq(
-                        'sha1',
-                        $queryBuilder->createNamedParameter($fileSha1, \PDO::PARAM_STR)
-                    ),
-                    $queryBuilder->expr()->eq(
-                        'storage',
-                        $queryBuilder->createNamedParameter($storageUid, \PDO::PARAM_INT)
-                    )
-                )->execute()->fetch();
+                $existingFileRecord = $queryBuilder->select('uid')->from('sys_file')->where($queryBuilder->expr()->eq(
+                    'sha1',
+                    $queryBuilder->createNamedParameter($fileSha1, \PDO::PARAM_STR)
+                ), $queryBuilder->expr()->eq(
+                    'storage',
+                    $queryBuilder->createNamedParameter($storageUid, \PDO::PARAM_INT)
+                ))->executeQuery()->fetchAssociative();
 
                 // the file exists, the file does not have to be moved again
                 if (is_array($existingFileRecord)) {
@@ -342,7 +331,7 @@ class LegacyFileFieldsUpdateWizard implements UpgradeWizardInterface, ChattyInte
                 ];
 
                 $queryBuilder = $connectionPool->getQueryBuilderForTable('sys_file_reference');
-                $queryBuilder->insert('sys_file_reference')->values($fields)->execute();
+                $queryBuilder->insert('sys_file_reference')->values($fields)->executeStatement();
                 ++$i;
             }
         }
@@ -356,7 +345,7 @@ class LegacyFileFieldsUpdateWizard implements UpgradeWizardInterface, ChattyInte
                     'uid',
                     $queryBuilder->createNamedParameter($row['uid'], \PDO::PARAM_INT)
                 )
-            )->set($fieldToMigrate, $i)->execute();
+            )->set($fieldToMigrate, $i)->executeStatement();
         }
 
         $this->output->writeln(sprintf(

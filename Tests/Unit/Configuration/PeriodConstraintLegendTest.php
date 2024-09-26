@@ -68,11 +68,13 @@ class PeriodConstraintLegendTest extends TestCase
                 }
             }
 
-            public function has(string $id)
+            public function has(string $id): bool
             {
                 if (array_key_exists($id, $this->classes)) {
                     return true;
                 }
+
+                return false;
             }
         });
 

@@ -38,8 +38,8 @@ class EventLocation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity imple
      * name
      *
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
+    #[\TYPO3\CMS\Extbase\Annotation\Validate(['validator' => 'NotEmpty'])]
     protected $name;
 
     /**
@@ -53,8 +53,8 @@ class EventLocation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity imple
      * image
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @Lazy
      */
+    #[Lazy]
     protected $image;
 
     /**

@@ -70,7 +70,7 @@ trait ModuleDataTrait
      */
     public function initializeAction(): void
     {
-        $this->pageUid = (int)GeneralUtility::_GET('id');
+        $this->pageUid = (int)$GLOBALS['TYPO3_REQUEST']->getQueryParams()['id'];
         // @todo: Replace this!
         $this->settings = $this->mergeSettings();
     }

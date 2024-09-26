@@ -12,7 +12,6 @@ return [
         'label' => 'title',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
         'dividers2tabs' => true,
         'sortby' => 'sorting',
         'versioningWS' => true,
@@ -56,7 +55,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['', 0],
+                    ['label' => '', 'value' => 0],
                 ],
                 'foreign_table' => 'tx_t3events_domain_model_audience',
                 'foreign_table_where' => 'AND tx_t3events_domain_model_audience.pid=###CURRENT_PID### AND tx_t3events_domain_model_audience.sys_language_uid IN (-1,0)',
@@ -82,7 +81,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required'
+                'eval' => 'trim',
+                'required' => true
             ],
         ],
         'description' => [
@@ -105,9 +105,7 @@ return [
             'exclude' => 1,
             'label' => $ll . ':label.link',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputLink',
-                'softref' => 'typolink'
+                'type' => 'link'
             ]
         ]
     ],

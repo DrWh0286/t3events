@@ -92,72 +92,72 @@ class Event extends AbstractEntity
      * images
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @Lazy
      */
+    #[Lazy]
     protected $images;
 
     /**
      * files
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @Lazy
      */
+    #[Lazy]
     protected $files;
 
     /**
      * related
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\T3events\Domain\Model\Event>
-     * @Lazy
      */
+    #[Lazy]
     protected $related;
 
     /**
      * genre
      *
-     * @Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\T3events\Domain\Model\Genre>
      */
+    #[Lazy]
     protected $genre;
 
     /**
      * venue
      *
-     * @Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\T3events\Domain\Model\Venue>
      */
+    #[Lazy]
     protected $venue;
 
     /**
      * eventType
      *
-     * @Lazy
      * @var \DWenzel\T3events\Domain\Model\EventType
      */
+    #[Lazy]
     protected $eventType;
 
     /**
      * performances
      *
-     * @Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\T3events\Domain\Model\Performance>
      */
+    #[Lazy]
     protected $performances;
 
     /**
      * organizer
      *
-     * @Lazy
      * @var \DWenzel\T3events\Domain\Model\Organizer
      */
+    #[Lazy]
     protected $organizer;
 
     /**
      * Audience
      *
-     * @Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\T3events\Domain\Model\Audience>
      */
+    #[Lazy]
     protected $audience;
 
     /**
@@ -171,9 +171,9 @@ class Event extends AbstractEntity
     protected $archiveDate;
 
     /**
-     * @Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\T3events\Domain\Model\Content>
      */
+    #[Lazy]
     protected $contentElements;
 
     /**

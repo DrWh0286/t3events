@@ -53,7 +53,7 @@ class ButtonDemand
     /**
      * @var string
      */
-    protected $iconSize = Icon::SIZE_DEFAULT;
+    protected $iconSize = \TYPO3\CMS\Core\Imaging\Icon::SIZE_MEDIUM;
 
     /**
      * @var string

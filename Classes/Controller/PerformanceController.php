@@ -96,7 +96,7 @@ class PerformanceController extends AbstractActionController
     {
         $this->settings = $this->settingsUtility->mergeSettings($this->settings, $this->actionMethodName, $this);
 
-        $this->contentObject = $this->configurationManager->getContentObject();
+        $this->contentObject = $this->request->getAttribute('currentContentObject');
         if ($this->request->hasArgument(SI::OVERWRITE_DEMAND)) {
             $this->session->set(
                 'tx_t3events_overwriteDemand',

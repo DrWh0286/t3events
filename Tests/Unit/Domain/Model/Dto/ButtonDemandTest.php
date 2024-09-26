@@ -159,7 +159,7 @@ class ButtonDemandTest extends UnitTestCase
     public function getIconSizeInitiallyDefaultValue(): void
     {
         $this->assertSame(
-            Icon::SIZE_DEFAULT,
+            \TYPO3\CMS\Core\Imaging\Icon::SIZE_MEDIUM,
             $this->subject->getIconSize()
         );
     }
