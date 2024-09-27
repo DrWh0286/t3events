@@ -30,6 +30,19 @@ use DWenzel\T3events\Utility\SettingsInterface as SI;
 class PerformancesViewHelper extends AbstractTagBasedViewHelper
 {
     /**
+     * @var mixed[]
+     */
+    public $settings;
+    /**
+     * @var mixed
+     */
+    public $tagNameChildren;
+    /**
+     * @var mixed
+     */
+    public $classChildren;
+    public $class;
+    /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\T3events\Domain\Model\Performance>
      */
     protected $performances;
@@ -166,13 +179,10 @@ class PerformancesViewHelper extends AbstractTagBasedViewHelper
         foreach ($this->performances as $performance) {
             $status = $performance->getStatus();
             if ($status) {
-                array_push(
-                    $states,
-                    ['title' => $status->getTitle(), 'priority' => $status->getPriority(), 'cssClass' => $status->getCssClass()]
-                );
+                $states[] = ['title' => $status->getTitle(), 'priority' => $status->getPriority(), 'cssClass' => $status->getCssClass()];
             }
         }
-        if (count($states)) {
+        if ($states !== []) {
             usort($states, fn ($a, $b) => $a['priority'] - $b['priority']);
 
             return $states[0];

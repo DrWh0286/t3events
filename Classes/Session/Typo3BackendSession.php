@@ -41,11 +41,7 @@ class Typo3BackendSession implements SessionInterface
      */
     public function has($identifier)
     {
-        if ($this->get($identifier)) {
-            return true;
-        }
-
-        return false;
+        return (bool) $this->get($identifier);
     }
 
     /**
@@ -69,7 +65,7 @@ class Typo3BackendSession implements SessionInterface
      */
     public function get($identifier)
     {
-        if (empty($this->data)) {
+        if ($this->data === []) {
             //should read from backend user session
         }
 

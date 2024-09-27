@@ -50,7 +50,7 @@ class UniqueViewHelper extends AbstractViewHelper
         ) {
             /** @var ObjectStorage $performances */
             $performances = $this->arguments['event']->getPerformances();
-            if (count($performances)) {
+            if (count($performances) > 0) {
                 foreach ($performances as $performance) {
                     if ($eventLocation = $performance->getEventLocation()) {
                         $locations[] = $eventLocation;

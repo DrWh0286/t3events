@@ -43,7 +43,7 @@ class FilterCollectionFactory
         /** @var FilterCollection $collection */
         $collection = GeneralUtility::makeInstance(FilterCollection::class);
 
-        if (empty($configuration)) {
+        if ($configuration === []) {
             return $collection;
         }
 

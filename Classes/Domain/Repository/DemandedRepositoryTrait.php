@@ -88,14 +88,14 @@ trait DemandedRepositoryTrait
         if ($demand->getOrder()) {
             $orderList = GeneralUtility::trimExplode(',', $demand->getOrder(), true);
 
-            if (!empty($orderList)) {
+            if ($orderList !== []) {
                 // go through every order statement
                 foreach ($orderList as $orderItem) {
                     $array = GeneralUtility::trimExplode('|', $orderItem, true);
                     [$orderField, $ascDesc] = array_pad($array, 2, null);
                     // count == 1 means that no direction is given
                     if ($ascDesc) {
-                        $orderings[$orderField] = ((strtolower((string) $ascDesc) == 'desc') ?
+                        $orderings[$orderField] = ((strtolower((string) $ascDesc) === 'desc') ?
                             QueryInterface::ORDER_DESCENDING :
                             QueryInterface::ORDER_ASCENDING);
                     } else {
@@ -213,7 +213,7 @@ trait DemandedRepositoryTrait
             if (!empty($subject)) {
                 // search text in specified search fields
                 $searchFields = GeneralUtility::trimExplode(',', $search->getFields(), true);
-                if (count($searchFields) === 0) {
+                if ($searchFields === []) {
                     throw new \UnexpectedValueException('No search fields given', 1382608407);
                 }
                 foreach ($searchFields as $field) {

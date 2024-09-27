@@ -38,13 +38,13 @@ trait DateRangeTrait
         if (!empty($this->arguments['format'])) {
             $format = $this->arguments['format'];
         }
-        if (empty($startFormat)) {
+        if ($startFormat === '' || $startFormat === '0') {
             $startFormat = $format;
         }
-        if (empty($endFormat)) {
+        if ($endFormat === '' || $endFormat === '0') {
             $endFormat = $format;
         }
-        if (empty($glue)) {
+        if ($glue === '' || $glue === '0') {
             $glue = static::DEFAULT_GLUE;
         }
 

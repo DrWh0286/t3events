@@ -84,7 +84,7 @@ class GeoCoder
      */
     public function destination($lat, $lng, $bearing, $distance, $units = 'km')
     {
-        $radius = strcasecmp($units, 'km') ? 3963.19 : 6378.137;
+        $radius = strcasecmp($units, 'km') !== 0 ? 3963.19 : 6378.137;
         $rLat = deg2rad($lat);
         $rLon = deg2rad($lng);
         $rBearing = deg2rad($bearing);
@@ -129,7 +129,7 @@ class GeoCoder
      */
     public function distance($latA, $lonA, $latB, $lonB, $units = 'km')
     {
-        $radius = strcasecmp($units, 'km') ? 3963.19 : 6378.137;
+        $radius = strcasecmp($units, 'km') !== 0 ? 3963.19 : 6378.137;
         $rLatA = deg2rad($latA);
         $rLatB = deg2rad($latB);
         $rHalfDeltaLat = deg2rad(($latB - $latA) / 2);
@@ -155,7 +155,7 @@ class GeoCoder
         if (!empty($city)) {
             $address = '';
             $zip = $object->getZip();
-            $address .= (!empty($zip)) ? $zip . ' ' : null;
+            $address .= (empty($zip)) ? null : $zip . ' ';
             $address .= $city;
             $geoLocation = $this->getLocation($address);
             if ($geoLocation) {

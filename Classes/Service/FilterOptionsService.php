@@ -26,11 +26,7 @@ class FilterOptionsService
             try {
                 $repository = $this->demandedRepositoryFactory->getDemandedRepositoryImplementationByKey($key);
 
-                if (!empty($value)) {
-                    $result = $repository->findMultipleByUid($value, 'title');
-                } else {
-                    $result = $repository->findAll();
-                }
+                $result = empty($value) ? $repository->findAll() : $repository->findMultipleByUid($value, 'title');
                 $filterOptions[$key . 's'] = $result;
 
             } catch (NoDemandedRepositoryFoundForKeyException) {

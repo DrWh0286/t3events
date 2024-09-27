@@ -53,7 +53,7 @@ class CountViewHelper extends AbstractViewHelper
             foreach ($performances as $performance) {
                 $eventLocation = $performance->getEventLocation();
                 if ($eventLocation) {
-                    array_push($locationsArray, $eventLocation->getUid());
+                    $locationsArray[] = $eventLocation->getUid();
                 }
             }
             // make unique

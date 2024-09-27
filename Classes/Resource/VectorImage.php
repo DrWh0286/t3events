@@ -35,7 +35,7 @@ class VectorImage extends \DOMDocument
     public function replaceNodeText($nodeId, $content): void
     {
         $element = $this->getElementById($nodeId);
-        if ($element === null) {
+        if (!$element instanceof \DOMElement) {
             return;
         }
 
@@ -58,7 +58,7 @@ class VectorImage extends \DOMDocument
     {
         foreach ($elementIds as $elementId) {
             $element = $this->getElementById($elementId);
-            if ($element === null) {
+            if (!$element instanceof \DOMElement) {
                 continue;
             }
             $element->setAttribute($attributeName, $attributeValue);

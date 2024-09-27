@@ -26,10 +26,6 @@ trait SkipPropertyTrait
         if (empty($value)) {
             return true;
         }
-        if (in_array($name, $this->getCompositeProperties())) {
-            return true;
-        }
-
-        return false;
+        return in_array($name, $this->getCompositeProperties());
     }
 }

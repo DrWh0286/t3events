@@ -118,7 +118,7 @@ class PerformanceController extends AbstractActionController
     public function listAction(array $overwriteDemand = null): ResponseInterface
     {
         if (!$overwriteDemand) {
-            if (!$this->session->has('tx_t3events_overwriteDemand') || !is_string($this->session->get('tx_t3events_overwriteDemand')) || empty($this->session->get('tx_t3events_overwriteDemand'))) {
+            if (!$this->session->has('tx_t3events_overwriteDemand') || !is_string($this->session->get('tx_t3events_overwriteDemand')) || ($this->session->get('tx_t3events_overwriteDemand') === '' || $this->session->get('tx_t3events_overwriteDemand') === '0')) {
                 throw new RuntimeException('tx_t3events_overwriteDemand is not set or is empty and also no overwriteDemand is set!');
             }
             $overwriteDemand = unserialize($this->session->get('tx_t3events_overwriteDemand'), ['allowed_classes' => false]);
@@ -179,7 +179,7 @@ class PerformanceController extends AbstractActionController
      */
     public function quickMenuAction(): ResponseInterface
     {
-        if (!$this->session->has('tx_t3events_overwriteDemand') || !is_string($this->session->get('tx_t3events_overwriteDemand')) || empty($this->session->get('tx_t3events_overwriteDemand'))) {
+        if (!$this->session->has('tx_t3events_overwriteDemand') || !is_string($this->session->get('tx_t3events_overwriteDemand')) || ($this->session->get('tx_t3events_overwriteDemand') === '' || $this->session->get('tx_t3events_overwriteDemand') === '0')) {
             throw new RuntimeException('tx_t3events_overwriteDemand is not set or is empty and also no overwriteDemand is set!');
         }
         $overwriteDemand = unserialize($this->session->get('tx_t3events_overwriteDemand'), ['allowed_classes' => false]);

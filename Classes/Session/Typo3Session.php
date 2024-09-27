@@ -46,11 +46,7 @@ class Typo3Session implements SessionInterface
      */
     public function has($identifier)
     {
-        if ($this->get($identifier)) {
-            return true;
-        }
-
-        return false;
+        return (bool) $this->get($identifier);
     }
 
     /**
@@ -77,7 +73,7 @@ class Typo3Session implements SessionInterface
      */
     public function get($identifier)
     {
-        if (empty($this->data)) {
+        if ($this->data === []) {
             $this->data = (array) $GLOBALS['TSFE']->fe_user->getKey('ses', $this->namespace);
         }
 

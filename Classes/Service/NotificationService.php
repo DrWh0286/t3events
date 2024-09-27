@@ -108,7 +108,7 @@ class NotificationService
             $message->html($notification->getBodytext());
         }
 
-        if ($files = $notification->getAttachments()) {
+        if (($files = $notification->getAttachments()) instanceof \TYPO3\CMS\Extbase\Persistence\ObjectStorage) {
             /** @var FileReference $file */
             foreach ($files as $file) {
                 $message->attachFromPath($file->getOriginalResource()->getPublicUrl());

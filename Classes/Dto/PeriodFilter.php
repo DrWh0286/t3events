@@ -57,7 +57,7 @@ class PeriodFilter implements FilterInterface
     public function configure(array $configuration): void
     {
         $keys = static::DEFAULT_OPTION_KEYS;
-        if (!empty($configuration)) {
+        if ($configuration !== []) {
             $keys = GeneralUtility::trimExplode(',', $configuration[0], true);
 
         }

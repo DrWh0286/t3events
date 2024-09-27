@@ -36,7 +36,7 @@ class ButtonDemandCollection
     {
         //Do not remove the next line: It would break the functionality
         $this->initStorageObjects();
-        if (empty($settings)) {
+        if ($settings === null || $settings === []) {
             return;
         }
 
