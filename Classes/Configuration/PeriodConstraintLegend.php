@@ -40,12 +40,19 @@ use DWenzel\T3events\Resource\VectorImage;
 class PeriodConstraintLegend extends VectorImage
 {
     public const LANGUAGE_FILE = 'LLL:EXT:t3events/Resources/Private/Language/locallang_be.xlf:';
+
     public const START_POINT_KEY = 'label.start';
+
     public const END_POINT_KEY = 'label.end';
+
     public const START_TEXT_LAYER_ID = 'text-start-text';
+
     public const END_TEXT_LAYER_ID = 'text-end-text';
+
     public const DOM_VERSION_DEFAULT = '';
+
     public const DOM_ENCODING_DEFAULT = '';
+
     public const PARAM_XML_FILE_PATH = 'xmlFilePath';
 
     public function __construct()

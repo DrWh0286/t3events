@@ -51,10 +51,12 @@ class FilterCollectionFactory
             if (!is_array($singleConfiguration)) {
                 $singleConfiguration = [$singleConfiguration];
             }
+
             $filter = $this->filterFactory->get($key, $singleConfiguration);
             if ($filter instanceof NullFilter) {
                 continue;
             }
+
             $collection->attach($filter);
         }
 

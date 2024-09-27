@@ -58,6 +58,7 @@ class ScheduleConfigurationService
             $date->setTimestamp($record['date']);
             $recordLabel = $date->format($dateFormat);
         }
+
         if (isset($record['event'])) {
             $eventRecord = $this->backendUtilityService->getRecord(
                 SI::TABLE_EVENTS,

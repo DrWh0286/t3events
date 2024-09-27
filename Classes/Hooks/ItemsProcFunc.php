@@ -49,6 +49,7 @@ class ItemsProcFunc
         if (!empty($config['row']['pid']) && is_numeric($config['row']['pid'])) {
             $pageId = $config['row']['pid'];
         }
+
         if (!empty($config['flexParentDatabaseRow']['pid']) && is_numeric($config['flexParentDatabaseRow']['pid'])) {
             $pageId = $config['flexParentDatabaseRow']['pid'];
         }

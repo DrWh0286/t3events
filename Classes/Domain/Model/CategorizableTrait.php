@@ -51,6 +51,7 @@ trait CategorizableTrait
     {
         $this->categories->attach($category);
     }
+
     /**
      * Removes a Category
      *
@@ -61,6 +62,7 @@ trait CategorizableTrait
     {
         $this->categories->detach($categoryToRemove);
     }
+
     /**
      * Returns the categories
      *

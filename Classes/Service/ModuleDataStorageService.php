@@ -38,11 +38,13 @@ class ModuleDataStorageService implements SingletonInterface
         if ($this->getBackendUserAuthentication() instanceof BackendUserAuthentication) {
             $moduleData = $this->getBackendUserAuthentication()->getModuleData($key);
         }
+
         if (empty($moduleData) || !$moduleData) {
             $moduleData = GeneralUtility::makeInstance(ModuleData::class);
         } else {
             $moduleData = unserialize($moduleData, ['allowed_classes' => true]);
         }
+
         return $moduleData;
     }
 

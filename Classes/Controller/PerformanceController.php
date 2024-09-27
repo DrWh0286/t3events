@@ -50,6 +50,7 @@ class PerformanceController extends AbstractActionController
     protected $contentObject;
 
     protected $buttonConfiguration = [];
+
     protected string $namespace = '';
 
     public function __construct(
@@ -90,7 +91,7 @@ class PerformanceController extends AbstractActionController
      * initializes all actions
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
      */
-    public function initializeAction(): void
+    protected function initializeAction(): void
     {
         $this->settings = $this->settingsUtility->mergeSettings($this->settings, $this->actionMethodName, $this);
 
@@ -121,11 +122,13 @@ class PerformanceController extends AbstractActionController
             if (!$this->session->has('tx_t3events_overwriteDemand') || !is_string($this->session->get('tx_t3events_overwriteDemand')) || ($this->session->get('tx_t3events_overwriteDemand') === '' || $this->session->get('tx_t3events_overwriteDemand') === '0')) {
                 throw new RuntimeException('tx_t3events_overwriteDemand is not set or is empty and also no overwriteDemand is set!');
             }
+
             $overwriteDemand = unserialize($this->session->get('tx_t3events_overwriteDemand'), ['allowed_classes' => false]);
         }
 
         $demand = $this->performanceDemandFactory->createFromSettings($this->settings);
         $demand->overwriteDemandObject($overwriteDemand, $this->settings);
+
         $performances = $this->performanceRepository->findDemanded($demand);
 
         $templateVariables = [
@@ -182,6 +185,7 @@ class PerformanceController extends AbstractActionController
         if (!$this->session->has('tx_t3events_overwriteDemand') || !is_string($this->session->get('tx_t3events_overwriteDemand')) || ($this->session->get('tx_t3events_overwriteDemand') === '' || $this->session->get('tx_t3events_overwriteDemand') === '0')) {
             throw new RuntimeException('tx_t3events_overwriteDemand is not set or is empty and also no overwriteDemand is set!');
         }
+
         $overwriteDemand = unserialize($this->session->get('tx_t3events_overwriteDemand'), ['allowed_classes' => false]);
 
         // get filter options from plugin

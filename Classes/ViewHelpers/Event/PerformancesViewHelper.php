@@ -33,15 +33,19 @@ class PerformancesViewHelper extends AbstractTagBasedViewHelper
      * @var mixed[]
      */
     public $settings;
+
     /**
      * @var mixed
      */
     public $tagNameChildren;
+
     /**
      * @var mixed
      */
     public $classChildren;
+
     public $class;
+
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\T3events\Domain\Model\Performance>
      */
@@ -123,10 +127,12 @@ class PerformancesViewHelper extends AbstractTagBasedViewHelper
                         $content = $status['title'];
                     }
                 }
+
                 break;
             default:
                 break;
         }
+
         $this->tag->setContent($content);
         $this->tag->addAttribute('class', $this->class);
         $this->tag->addAttribute('title', $title);
@@ -156,6 +162,7 @@ class PerformancesViewHelper extends AbstractTagBasedViewHelper
         foreach ($this->performances as $performance) {
             $timestamps[] = $performance->getDate()->getTimestamp();
         }
+
         sort($timestamps);
         if (str_contains((string) $format, '%')) {
             $dateRange = strftime($format, $timestamps[0]);
@@ -182,6 +189,7 @@ class PerformancesViewHelper extends AbstractTagBasedViewHelper
                 $states[] = ['title' => $status->getTitle(), 'priority' => $status->getPriority(), 'cssClass' => $status->getCssClass()];
             }
         }
+
         if ($states !== []) {
             usort($states, fn ($a, $b) => $a['priority'] - $b['priority']);
 
@@ -205,6 +213,7 @@ class PerformancesViewHelper extends AbstractTagBasedViewHelper
                 $prices[] = $ticketClass->getPrice() ?: 0;
             }
         }
+
         sort($prices);
 
         return (float)$prices[0];

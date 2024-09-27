@@ -26,8 +26,11 @@ class Main extends DefaultRegistration implements ModuleRegistrationInterface
     use ModuleRegistrationTrait;
 
     protected static $subModuleName = '';
+
     protected static string $mainModuleName = 'events';
+
     protected static $controllerActions = [];
+
     protected static $moduleConfiguration = [
         'access' => 'user,group',
         'icon' => 'EXT:t3events/Resources/Public/Icons/event-calendar.svg',

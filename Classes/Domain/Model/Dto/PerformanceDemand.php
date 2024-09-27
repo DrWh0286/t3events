@@ -47,13 +47,21 @@ class PerformanceDemand extends AbstractDemand implements
     use StatusAwareDemandTrait;
     use VenueAwareDemandTrait;
     public const START_DATE_FIELD = 'date';
+
     public const END_DATE_FIELD = SI::END_DATE;
+
     public const STATUS_FIELD = 'status';
+
     public const CATEGORY_FIELD = 'event.categories';
+
     public const EVENT_LOCATION_FIELD = 'eventLocation';
+
     public const GENRE_FIELD = 'event.genre';
+
     public const VENUE_FIELD = 'event.venue';
+
     public const EVENT_TYPE_FIELD = 'event.eventType';
+
     public const AUDIENCE_FIELD = 'event.audience';
 
     /**

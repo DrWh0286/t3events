@@ -36,6 +36,7 @@ trait PeriodAwareDemandFactoryTrait
             $settings['period'] === SI::SPECIFIC) {
             $demand->setPeriodType($settings['periodType']);
         }
+
         if (isset($settings['periodType']) && $settings['periodType'] !== 'byDate') {
             if (isset($settings['periodStart'])) {
                 $demand->setPeriodStart($settings['periodStart']);
@@ -45,6 +46,7 @@ trait PeriodAwareDemandFactoryTrait
                 $demand->setPeriodDuration($settings['periodDuration']);
             }
         }
+
         if (
             isset($settings['periodType']) &&
             $settings['periodType'] === 'byDate'
@@ -55,6 +57,7 @@ trait PeriodAwareDemandFactoryTrait
                     $this->createDate($settings['periodStartDate'])
                 );
             }
+
             if (!empty($settings['periodEndDate'])) {
                 $demand->setEndDate(
                     $this->createDate($settings['periodEndDate'])

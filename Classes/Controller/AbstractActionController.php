@@ -53,6 +53,7 @@ abstract class AbstractActionController extends ActionController
                 }
 
             }
+
             throw $exception;
         }
 
@@ -72,6 +73,7 @@ abstract class AbstractActionController extends ActionController
         if ($configuration === '' || $configuration === '0') {
             return;
         }
+
         $conf = GeneralUtility::trimExplode(',', $configuration);
         switch ($conf[0]) {
             case 'redirectToListView':
@@ -82,18 +84,21 @@ abstract class AbstractActionController extends ActionController
                     $msg = sprintf('If error handling "%s" is used, either 2 or 3 arguments, splitted by "," must be used', $configuration[0]);
                     throw new \InvalidArgumentException($msg);
                 }
+
                 $this->uriBuilder->reset();
                 $this->uriBuilder->setTargetPageUid((int)$conf[1]);
                 $this->uriBuilder->setCreateAbsoluteUri(true);
                 if ($this->isSSLEnabled()) {
                     $this->uriBuilder->setAbsoluteUriScheme('https');
                 }
+
                 $url = $this->uriBuilder->build();
                 if (isset($conf[2])) {
                     $this->redirectToUri($url, 0, (int)$conf[2]);
                 } else {
                     $this->redirectToUri($url);
                 }
+
                 break;
             case 'pageNotFoundHandler':
                 /** @var ErrorController $errorController */
@@ -116,6 +121,7 @@ abstract class AbstractActionController extends ActionController
                 if (isset($params[SI::REDIRECT_URI])) {
                     $this->redirectToUri($params[SI::REDIRECT_URI]);
                 }
+
                 if (isset($params[SI::REDIRECT])) {
                     $this->redirect(
                         $params[SI::REDIRECT][SI::ACTION_NAME],
@@ -127,6 +133,7 @@ abstract class AbstractActionController extends ActionController
                         $params[SI::REDIRECT]['statusCode']
                     );
                 }
+
                 if (isset($params[SI::FORWARD])) {
                     $this->forward(
                         $params[SI::FORWARD][SI::ACTION_NAME],

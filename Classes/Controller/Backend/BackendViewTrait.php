@@ -103,6 +103,7 @@ trait BackendViewTrait
             !\is_array($rendererConfiguration[SettingsInterface::REQUIRE_JS])) {
             return;
         }
+
         $pageRenderer = $view->getModuleTemplate()->getPageRenderer();
 
         $configuration[SettingsInterface::PATH] = [];
@@ -116,6 +117,7 @@ trait BackendViewTrait
                 }
             }
         }
+
         $pageRenderer->addRequireJsConfiguration($configuration);
         foreach ($modulesToLoad as $moduleToLoad) {
             $pageRenderer->loadRequireJsModule($moduleToLoad);
@@ -135,10 +137,12 @@ trait BackendViewTrait
                 1684167963
             );
         }
+
         if (!$this->uriBuilder instanceof UriBuilder) {
             $this->uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
             $this->uriBuilder->setRequest($this->request);
         }
+
         return $this->uriBuilder;
     }
 

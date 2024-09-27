@@ -45,6 +45,7 @@ trait LocationConstraintRepositoryTrait
                 $geoLocation = $this->geoCoder->getLocation($location);
                 $bounds = $this->geoCoder->getBoundsByRadius($geoLocation['lat'], $geoLocation['lng'], $radius / 1000);
             }
+
             if ($bounds &&
                 !empty($bounds['N']) &&
                 !empty($bounds['S']) &&

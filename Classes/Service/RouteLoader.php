@@ -54,6 +54,7 @@ class RouteLoader
         if (!is_null($options)) {
             $route->setOptions($options);
         }
+
         $this->router->addRoute($route);
     }
 

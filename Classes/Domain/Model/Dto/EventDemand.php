@@ -32,7 +32,9 @@ class EventDemand extends AbstractDemand implements
     use OrderAwareDemandTrait;
 
     public const START_DATE_FIELD = 'performances.date';
+
     public const END_DATE_FIELD = 'performances.endDate';
+
     public const AUDIENCE_FIELD = 'audience';
 
     /**

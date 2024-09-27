@@ -58,6 +58,7 @@ class EventRepository extends AbstractDemandedRepository implements
                 $categoryConstraints[] = $query->contains(SI::LEGACY_KEY_GENRE, $genre);
             }
         }
+
         // venue
         if ($demand->getVenue()) {
             $venues = GeneralUtility::intExplode(',', $demand->getVenue());
@@ -65,6 +66,7 @@ class EventRepository extends AbstractDemandedRepository implements
                 $categoryConstraints[] = $query->contains('venue', $venue);
             }
         }
+
         // event type
         if ($demand->getEventType()) {
             $eventTypes = GeneralUtility::intExplode(',', $demand->getEventType());
@@ -79,6 +81,7 @@ class EventRepository extends AbstractDemandedRepository implements
                 $categoryConstraints[] = $query->contains('categories', $category);
             }
         }
+
         return $categoryConstraints;
     }
 
@@ -95,15 +98,19 @@ class EventRepository extends AbstractDemandedRepository implements
         if ((bool) $periodConstraints = $this->createPeriodConstraints($query, $demand)) {
             $this->combineConstraints($query, $constraints, $periodConstraints, 'AND');
         }
+
         if ((bool) $categoryConstraints = $this->createCategoryConstraints($query, $demand)) {
             $this->combineConstraints($query, $constraints, $categoryConstraints, $demand->getCategoryConjunction());
         }
+
         if ((bool) $searchConstraints = $this->createSearchConstraints($query, $demand)) {
             $this->combineConstraints($query, $constraints, $searchConstraints, 'OR');
         }
+
         if ((bool) $locationConstraints = $this->createLocationConstraints($query, $demand)) {
             $this->combineConstraints($query, $constraints, $locationConstraints, 'AND');
         }
+
         if ((bool) $audienceConstraints = $this->createAudienceConstraints($query, $demand)) {
             $this->combineConstraints($query, $constraints, $audienceConstraints, 'AND');
         }

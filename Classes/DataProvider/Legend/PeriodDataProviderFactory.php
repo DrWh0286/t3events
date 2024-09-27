@@ -41,9 +41,11 @@ class PeriodDataProviderFactory
                 $pluginSettings = $params['row']['pi_flexform'];
             }
         }
+
         if (isset($pluginSettings['data'])) {
             $flexFormData = $pluginSettings['data'];
         }
+
         $periodPath = 'constraints/lDEF/settings.period/vDEF';
         $respectEndDatePath = 'constraints/lDEF/settings.respectEndDate/vDEF';
 
@@ -60,6 +62,7 @@ class PeriodDataProviderFactory
         if (ArrayUtility::isValidPath($flexFormData, $periodPath)) {
             $period = ArrayUtility::getValueByPath($flexFormData, $periodPath);
         }
+
         $respectEndDate = false;
         if (ArrayUtility::isValidPath($flexFormData, $respectEndDatePath)) {
             $respectEndDate = (bool)ArrayUtility::getValueByPath($flexFormData, $respectEndDatePath);

@@ -76,6 +76,7 @@ class TableConfiguration
         if (isset(self::$iconPaths[$version]) && !empty(self::$iconPaths[$version][$wizardName])) {
             return self::$iconPaths[$version][$wizardName];
         }
+
         return null;
     }
 
@@ -93,6 +94,7 @@ class TableConfiguration
         if ($versionNumber >= 6000000 && $versionNumber < 7000000) {
             $version = 6;
         }
+
         if ($versionNumber >= 7000000 && $versionNumber < 8000000) {
             $version = 7;
         }

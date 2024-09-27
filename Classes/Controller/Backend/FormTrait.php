@@ -56,6 +56,7 @@ trait FormTrait
             $key = 'route';
 
         }
+
         return $key;
     }
 
@@ -104,6 +105,7 @@ trait FormTrait
         if ($this->isTypo3VersionGreaterThan8()) {
             $tokenParameterKey = SI::TOKEN_KEY;
         }
+
         return $tokenParameterKey;
     }
 }

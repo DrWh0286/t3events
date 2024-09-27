@@ -217,6 +217,7 @@ class Performance extends AbstractEntity
         if ($this->eventLocation instanceof LazyLoadingProxy) {
             $this->eventLocation->_loadRealInstance();
         }
+
         return $this->eventLocation;
     }
 
@@ -509,6 +510,7 @@ class Performance extends AbstractEntity
         if ($this->status instanceof LazyLoadingProxy) {
             $this->status->_loadRealInstance();
         }
+
         return $this->status;
     }
 

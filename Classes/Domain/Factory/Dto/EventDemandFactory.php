@@ -82,6 +82,7 @@ class EventDemandFactory extends AbstractDemandFactory implements DemandFactoryI
         if ($demand instanceof PeriodAwareDemandInterface) {
             $this->setPeriodConstraints($demand, $settings);
         }
+
         $this->applySettings($demand, $settings);
 
         return $demand;

@@ -47,6 +47,7 @@ class FilterOptionsService
                     $period->value = $this->translationService->translate('label.period.' . $entry, 't3events');
                     $periodOptions[] = $period;
                 }
+
                 $filterOptions['periods'] = $periodOptions;
             }
         }

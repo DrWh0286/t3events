@@ -48,6 +48,7 @@ trait PeriodConstraintRepositoryTrait
                 } else {
                     $periodConstraint[] = $query->greaterThanOrEqual($startDateField, $lowerLimit);
                 }
+
                 break;
             case PeriodConstraintRepositoryInterface::PERIOD_PAST:
                 if ($respectEndDate) {
@@ -58,6 +59,7 @@ trait PeriodConstraintRepositoryTrait
                 } else {
                     $periodConstraint[] = $query->lessThanOrEqual($startDateField, $lowerLimit);
                 }
+
                 break;
             case PeriodConstraintRepositoryInterface::PERIOD_SPECIFIC:
                 if ($respectEndDate) {
@@ -84,6 +86,7 @@ trait PeriodConstraintRepositoryTrait
                         $query->greaterThanOrEqual($startDateField, $lowerLimit)
                     );
                 }
+
                 break;
         }
 
@@ -131,6 +134,7 @@ trait PeriodConstraintRepositoryTrait
                     if (!is_null($demand->getStartDate())) {
                         $startDate = $demand->getStartDate();
                     }
+
                     if (!is_null($demand->getEndDate())) {
                         $endDate = $demand->getEndDate();
                     } else {
@@ -138,8 +142,10 @@ trait PeriodConstraintRepositoryTrait
                         $endDate = clone($startDate);
                         $endDate->modify($deltaEnd);
                     }
+
                     break;
             }
+
             if ($periodType != 'byDate') {
                 $startDate->setTime(0, 0, 0);
                 $startDate->modify($deltaStart);

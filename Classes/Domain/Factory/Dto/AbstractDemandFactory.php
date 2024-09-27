@@ -101,6 +101,7 @@ abstract class AbstractDemandFactory
             if ($this->shouldSkipProperty($propertyName, $propertyValue)) {
                 continue;
             }
+
             $this->mapPropertyName($propertyName);
             if (ObjectAccess::isPropertySettable($demand, $propertyName)) {
                 ObjectAccess::setProperty($demand, $propertyName, $propertyValue);

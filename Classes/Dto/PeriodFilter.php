@@ -61,6 +61,7 @@ class PeriodFilter implements FilterInterface
             $keys = GeneralUtility::trimExplode(',', $configuration[0], true);
 
         }
+
         foreach ($keys as $key) {
             $label = $this->translationService->translate(
                 static::PREFIX_OPTION_LABEL_KEY . $key,

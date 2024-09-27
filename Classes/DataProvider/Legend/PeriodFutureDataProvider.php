@@ -22,6 +22,8 @@ namespace DWenzel\T3events\DataProvider\Legend;
 class PeriodFutureDataProvider extends AbstractPeriodDataProvider implements LayeredLegendDataProviderInterface
 {
     public const VISIBLE_LAYERS = 'arrow-right,text-start,start-point,middle-on,left-off,left-re-off';
+
     public const LAYERS_TO_HIDE = 'left-re-off';
+
     public const LAYERS_TO_SHOW = 'left-re-on';
 }

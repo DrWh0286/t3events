@@ -46,6 +46,7 @@ trait ModuleButtonTrait
         if (property_exists($this, 'buttonConfiguration')) {
             return $this->buttonConfiguration;
         }
+
         return [];
     }
 
@@ -57,6 +58,7 @@ trait ModuleButtonTrait
         if (!$configuration->getDemands()->count()) {
             return;
         }
+
         $buttonBar = $this->getButtonBar();
         $uriBuilder = $this->getUriBuilder();
         $request = $uriBuilder->getRequest();

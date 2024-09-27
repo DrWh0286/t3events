@@ -45,12 +45,14 @@ trait DemandTrait
         if (!(bool)$overwriteDemand) {
             return;
         }
+
         $timeZone = new \DateTimeZone(date_default_timezone_get());
 
         foreach ($overwriteDemand as $propertyName => $propertyValue) {
             if (empty($propertyValue)) {
                 continue;
             }
+
             $this->overwriteProperty($demand, $overwriteDemand, $propertyName, $propertyValue, $timeZone);
         }
     }
@@ -71,6 +73,7 @@ trait DemandTrait
                 if (isset($overwriteDemand[SI::SORT_DIRECTION])) {
                     $orderings .= '|' . $overwriteDemand[SI::SORT_DIRECTION];
                 }
+
                 $demand->setOrder($orderings);
                 $demand->setSortBy($overwriteDemand['sortBy']);
                 break;
@@ -82,15 +85,18 @@ trait DemandTrait
                     );
                     $demand->setSearch($searchObj);
                 }
+
                 break;
             case 'venue':
             case SI::VENUES:
                 if ($demand instanceof EventDemand) {
                     $demand->setVenue($propertyValue);
                 }
+
                 if ($demand instanceof VenueAwareDemandInterface) {
                     $demand->setVenues($propertyValue);
                 }
+
                 break;
             case SI::LEGACY_KEY_GENRE:
                 //fall through to 'genres'
@@ -98,9 +104,11 @@ trait DemandTrait
                 if ($demand instanceof EventDemand) {
                     $demand->setGenre($propertyValue);
                 }
+
                 if ($demand instanceof GenreAwareDemandInterface) {
                     $demand->setGenres($propertyValue);
                 }
+
                 break;
             case 'eventType':
                 // fall through to 'eventTypes
@@ -108,14 +116,17 @@ trait DemandTrait
                 if ($demand instanceof EventDemand) {
                     $demand->setEventType($propertyValue);
                 }
+
                 if ($demand instanceof EventTypeAwareDemandInterface) {
                     $demand->setEventTypes($propertyValue);
                 }
+
                 break;
             case 'eventLocation':
                 if ($demand instanceof EventLocationAwareDemandInterface) {
                     $demand->setEventLocations($propertyValue);
                 }
+
                 break;
             case 'period':
                 if ($propertyValue === PeriodConstraintRepositoryInterface::PERIOD_SPECIFIC
@@ -123,12 +134,14 @@ trait DemandTrait
                     $demand->setPeriod(PeriodConstraintRepositoryInterface::PERIOD_ALL);
                     break;
                 }
+
                 $demand->setPeriod($propertyValue);
                 break;
             case 'periodType':
                 if ($propertyValue === 'byDate' && empty($overwriteDemand[SI::START_DATE])) {
                     break;
                 }
+
                 $demand->setPeriodType($propertyValue);
                 break;
             case SI::START_DATE:

@@ -39,6 +39,7 @@ class SearchFactory
             $searchObject->setFields($settings['fields']);
             $searchObject->setSubject($searchRequest['subject']);
         }
+
         if (isset($searchRequest['location']) && isset($searchRequest['radius'])) {
             $searchObject->setLocation($searchRequest['location']);
             $searchObject->setRadius($searchRequest['radius']);

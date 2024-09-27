@@ -27,8 +27,11 @@ class Task extends AbstractEntity
     use EqualsTrait;
 
     public const ACTION_NONE = 0;
+
     public const ACTION_UPDATE_STATUS = 1;
+
     public const ACTION_DELETE = 2;
+
     public const ACTION_HIDE_PERFORMANCE = 3;
 
     /**

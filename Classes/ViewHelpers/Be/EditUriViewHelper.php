@@ -40,7 +40,9 @@ use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 class EditUriViewHelper extends AbstractViewHelper
 {
     public const DESCRIPTION_ARGUMENT_TABLE = 'table of record to edit';
+
     public const DESCRIPTION_ARGUMENT_RECORD = 'id of record';
+
     public const DESCRIPTION_ARGUMENT_MODULE = 'module to return to';
 
     /**

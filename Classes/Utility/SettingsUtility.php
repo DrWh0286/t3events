@@ -47,6 +47,7 @@ class SettingsUtility implements SingletonInterface
      * @var array
      */
     protected $controllerKeys = [];
+
     public function __construct(protected \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObjectRenderer, protected \DWenzel\T3events\Resource\ResourceFactory $resourceFactory)
     {
     }
@@ -141,6 +142,7 @@ class SettingsUtility implements SingletonInterface
         if ($valueFromSettings instanceof FileReference) {
             $fileStorage->attach($valueFromSettings);
         }
+
         // should add File object from field?
 
         // omit default value
@@ -154,6 +156,7 @@ class SettingsUtility implements SingletonInterface
             if (!is_string($valueFromSettings)) {
                 $valueFromSettings = '';
             }
+
             $valueFromSettings = $valueFromSettings . ',' . $config['always'];
         }
 
@@ -164,6 +167,7 @@ class SettingsUtility implements SingletonInterface
                 if ($file === null) {
                     continue;
                 }
+
                 $fileReference = $this->resourceFactory->createFileReferenceFromFileObject($file);
                 $fileStorage->attach($fileReference);
             }
@@ -196,6 +200,7 @@ class SettingsUtility implements SingletonInterface
                 $value = $this->contentObjectRenderer->noTrimWrap($value, $config['noTrimWrap']);
             }
         }
+
         if ($value === null && isset($config['default'])) {
             $value = $config['default'];
         }
@@ -224,12 +229,14 @@ class SettingsUtility implements SingletonInterface
         if (!empty($settings[$controllerKey])) {
             $controllerSettings = $settings[$controllerKey];
         }
+
         $allowedControllerSettingKeys = ['search', 'notify'];
         foreach ($controllerSettings as $key => $value) {
             if (!in_array($key, $allowedControllerSettingKeys)) {
                 unset($controllerSettings[$key]);
             }
         }
+
         if (!empty($settings[$controllerKey][$actionName])) {
             $actionSettings = $settings[$controllerKey][$actionName];
         }

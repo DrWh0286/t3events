@@ -84,6 +84,7 @@ class Typo3Session implements SessionInterface
     {
         $GLOBALS['TSFE']->fe_user->setKey('ses', $this->namespace, []);
         $GLOBALS['TSFE']->fe_user->storeSessionData();
+
         $this->data = [];
     }
 

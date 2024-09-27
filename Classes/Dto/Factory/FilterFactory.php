@@ -58,6 +58,7 @@ class FilterFactory
         if (!$this->filterResolver instanceof FilterResolverInterface) {
             $this->filterResolver = new FilterResolver();
         }
+
         return $this->filterResolver;
     }
 }

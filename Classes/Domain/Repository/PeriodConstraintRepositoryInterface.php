@@ -27,15 +27,25 @@ use DWenzel\T3events\Utility\SettingsInterface as SI;
 interface PeriodConstraintRepositoryInterface
 {
     public const PERIOD_ALL = SI::ALL;
+
     public const PERIOD_FUTURE = SI::FUTURE_ONLY;
+
     public const PERIOD_PAST = SI::PAST_ONLY;
+
     public const PERIOD_SPECIFIC = SI::SPECIFIC;
+
     public const PERIOD_TYPE = 'periodType';
+
     public const PERIOD_TYPE_DAY = 'byDay';
+
     public const PERIOD_TYPE_MONTH = 'byMonth';
+
     public const PERIOD_TYPE_YEAR = 'byYear';
+
     public const PERIOD_TYPE_DATE = 'byDate';
+
     public const PERIOD_END_DATE = 'periodEndDate';
+
     public const PERIOD_START_DATE = 'periodStartDate';
 
     /**

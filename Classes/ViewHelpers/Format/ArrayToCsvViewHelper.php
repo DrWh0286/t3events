@@ -27,7 +27,9 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 class ArrayToCsvViewHelper extends AbstractViewHelper
 {
     public const ARGUMENT_SOURCE_DESCRIPTION = 'Array to be transformed';
+
     public const ARGUMENT_DELIMITER_DESCRIPTION = 'String delimiter or separator. Default ist (,)';
+
     public const ARGUMENT_QUOTE_DESCRIPTION = 'Quote-character to wrap around the values. Default ist (")';
 
     /**
@@ -50,6 +52,7 @@ class ArrayToCsvViewHelper extends AbstractViewHelper
         foreach ($this->arguments['source'] as $value) {
             $out[] = str_replace($quote, $quote . $quote, $value);
         }
+
         $str = $quote . implode(($quote . $this->arguments['delimiter'] . $quote), $out) . $quote;
 
         return $str;

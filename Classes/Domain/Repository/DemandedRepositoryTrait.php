@@ -57,6 +57,7 @@ trait DemandedRepositoryTrait
         if ((bool)$uids) {
             $query->matching($query->in('uid', $uids));
         }
+
         $query->setOrderings([$sortField => $sortOrder]);
 
         return $query->execute();
@@ -122,6 +123,7 @@ trait DemandedRepositoryTrait
         if ($respectEnableFields === false) {
             $query->getQuerySettings()->setIgnoreEnableFields(true);
         }
+
         // Call hook functions for additional constraints
         if (ArrayUtility::isValidPath($GLOBALS['TYPO3_CONF_VARS']['EXT'], 't3events:Domain/Repository/AbstractDemandedRepository.php:findDemanded', ':')
             && is_array($GLOBALS['TYPO3_CONF_VARS']['EXT']['t3events']['Domain/Repository/AbstractDemandedRepository.php']['findDemanded'])) {
@@ -183,12 +185,14 @@ trait DemandedRepositoryTrait
                     foreach ($additionalConstraints as $additionalConstraint) {
                         $constraints[] = $query->logicalNot($query->logicalAnd($additionalConstraint));
                     }
+
                     break;
                 case 'notor':
                     /** @var ConstraintInterface $additionalConstraint */
                     foreach ($additionalConstraints as $additionalConstraint) {
                         $constraints[] = $query->logicalNot($query->logicalOr($additionalConstraint));
                     }
+
                     break;
                 default:
                     $constraints[] = $query->logicalAnd(...$additionalConstraints);
@@ -216,6 +220,7 @@ trait DemandedRepositoryTrait
                 if ($searchFields === []) {
                     throw new \UnexpectedValueException('No search fields given', 1382608407);
                 }
+
                 foreach ($searchFields as $field) {
                     $searchConstraints[] = $query->like($field, '%' . $subject . '%');
                 }

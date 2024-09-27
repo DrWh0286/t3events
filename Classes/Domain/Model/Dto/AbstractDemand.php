@@ -278,12 +278,14 @@ class AbstractDemand extends AbstractEntity implements DemandInterface
         if (!(bool)$overwriteDemand) {
             return;
         }
+
         $timeZone = new \DateTimeZone(date_default_timezone_get());
 
         foreach ($overwriteDemand as $propertyName => $propertyValue) {
             if (empty($propertyValue)) {
                 continue;
             }
+
             $this->overwriteProperty($overwriteDemand, $propertyName, $propertyValue, $timeZone, $settings);
         }
     }
@@ -304,6 +306,7 @@ class AbstractDemand extends AbstractEntity implements DemandInterface
                 if (isset($overwriteDemand[SI::SORT_DIRECTION])) {
                     $orderings .= '|' . $overwriteDemand[SI::SORT_DIRECTION];
                 }
+
                 $this->setOrder($orderings);
                 $this->setSortBy($overwriteDemand['sortBy']);
                 break;
@@ -317,15 +320,18 @@ class AbstractDemand extends AbstractEntity implements DemandInterface
                     );
                     $this->setSearch($searchObj);
                 }
+
                 break;
             case 'venue':
             case SI::VENUES:
                 if ($this instanceof EventDemand) {
                     $this->setVenue($propertyValue);
                 }
+
                 if ($this instanceof VenueAwareDemandInterface) {
                     $this->setVenues($propertyValue);
                 }
+
                 break;
             case SI::LEGACY_KEY_GENRE:
                 //fall through to 'genres'
@@ -333,9 +339,11 @@ class AbstractDemand extends AbstractEntity implements DemandInterface
                 if ($this instanceof EventDemand) {
                     $this->setGenre($propertyValue);
                 }
+
                 if ($this instanceof GenreAwareDemandInterface) {
                     $this->setGenres($propertyValue);
                 }
+
                 break;
             case 'eventType':
                 // fall through to 'eventTypes
@@ -343,14 +351,17 @@ class AbstractDemand extends AbstractEntity implements DemandInterface
                 if ($this instanceof EventDemand) {
                     $this->setEventType($propertyValue);
                 }
+
                 if ($this instanceof EventTypeAwareDemandInterface) {
                     $this->setEventTypes($propertyValue);
                 }
+
                 break;
             case 'eventLocation':
                 if ($this instanceof EventLocationAwareDemandInterface) {
                     $this->setEventLocations($propertyValue);
                 }
+
                 break;
             case 'period':
                 if ($propertyValue === PeriodConstraintRepositoryInterface::PERIOD_SPECIFIC
@@ -358,12 +369,14 @@ class AbstractDemand extends AbstractEntity implements DemandInterface
                     $this->setPeriod(PeriodConstraintRepositoryInterface::PERIOD_ALL);
                     break;
                 }
+
                 $this->setPeriod($propertyValue);
                 break;
             case 'periodType':
                 if ($propertyValue === 'byDate' && empty($overwriteDemand[SI::START_DATE])) {
                     break;
                 }
+
                 $this->setPeriodType($propertyValue);
                 break;
             case SI::START_DATE:

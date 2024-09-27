@@ -34,6 +34,7 @@ interface StatusAwareDemandInterface
      * @param string $statuses
      */
     public function setStatuses($statuses);
+
     /**
      * @return boolean
      */

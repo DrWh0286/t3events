@@ -79,6 +79,7 @@ class BackendUtility
         } else {
             $flexformSelection = $row['pi_flexform'];
         }
+
         if (is_array($flexformSelection) && is_array($flexformSelection['data'])) {
             $selectedView = $flexformSelection['data']['sDEF']['lDEF']['switchableControllerActions']['vDEF'] ?? '';
             if (!empty($selectedView)) {

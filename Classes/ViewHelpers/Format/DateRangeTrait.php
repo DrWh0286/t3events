@@ -38,12 +38,15 @@ trait DateRangeTrait
         if (!empty($this->arguments['format'])) {
             $format = $this->arguments['format'];
         }
+
         if ($startFormat === '' || $startFormat === '0') {
             $startFormat = $format;
         }
+
         if ($endFormat === '' || $endFormat === '0') {
             $endFormat = $format;
         }
+
         if ($glue === '' || $glue === '0') {
             $glue = static::DEFAULT_GLUE;
         }
@@ -51,7 +54,7 @@ trait DateRangeTrait
         if (str_contains($startFormat, '%')
             && str_contains($endFormat, '%')
         ) {
-            throw new \RuntimeException('Please don\'t use % in date format!');
+            throw new \RuntimeException("Please don't use % in date format!");
         }
 
         $dateTime = new \DateTime();

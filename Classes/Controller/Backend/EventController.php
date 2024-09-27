@@ -98,9 +98,9 @@ class EventController extends ActionController
             $response = parent::processRequest($request);
             $this->moduleDataStorageService->persistModuleData($this->moduleData, $this->getModuleKey());
             // @todo: Check if this still works, because The StopActionException is deprecated.
-        } catch (StopActionException $e) {
+        } catch (StopActionException $stopActionException) {
             $this->moduleDataStorageService->persistModuleData($this->moduleData, $this->getModuleKey());
-            throw $e;
+            throw $stopActionException;
         }
 
         return $response;
@@ -118,6 +118,7 @@ class EventController extends ActionController
         if (!empty($configuration[SI::PERSISTENCE][SI::STORAGE_PID])) {
             $this->pageUid = $configuration[SI::PERSISTENCE][SI::STORAGE_PID];
         }
+
         if (!empty($configuration[SI::SETTINGS][SI::PERSISTENCE][SI::STORAGE_PID])) {
             $this->pageUid = $configuration[SI::SETTINGS][SI::PERSISTENCE][SI::STORAGE_PID];
         }
@@ -156,6 +157,7 @@ class EventController extends ActionController
                 \TYPO3\CMS\Core\Type\ContextualFeedbackSeverity::WARNING
             );
         }
+
         $configuration = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
         );

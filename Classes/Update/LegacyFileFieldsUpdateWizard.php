@@ -44,14 +44,17 @@ use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 class LegacyFileFieldsUpdateWizard implements UpgradeWizardInterface, ChattyInterface, LoggerAwareInterface
 {
     public $storage;
+
     use LoggerAwareTrait;
 
     public const IDENTIFIER = 't3eventsLegacyFileFieldUpdateWizard';
 
     public const TITLE = 'Update legacy file fields of event records';
+
     public const DESCRIPTION = 'Updates a number of legacy file fields containing file paths tofile references.'
         . 'Moves files from `upload/*` folders to `fileadmin/_migrated/`.'
         . 'Creates file records for existing files. Missing files are logged.';
+
     public const PREREQUISITES = [];
 
     public const TABLES_TO_UPDATE = [
@@ -141,6 +144,7 @@ class LegacyFileFieldsUpdateWizard implements UpgradeWizardInterface, ChattyInte
             if (empty($fields) || !is_array($fields)) {
                 continue;
             }
+
             foreach ($fields as $field) {
                 if ($this->countRecords($tableName, $field) > 0) {
                     $count++;
@@ -222,8 +226,8 @@ class LegacyFileFieldsUpdateWizard implements UpgradeWizardInterface, ChattyInte
                 )->orderBy('uid')->executeQuery();
 
             return $result->fetchAllAssociative();
-        } catch (Exception $e) {
-            throw new \RuntimeException('Database query failed. Error was: ' . $e->getPrevious()->getMessage(), 1511950673, $e);
+        } catch (Exception $exception) {
+            throw new \RuntimeException('Database query failed. Error was: ' . $exception->getPrevious()->getMessage(), 1511950673, $exception);
         }
     }
 
@@ -249,6 +253,7 @@ class LegacyFileFieldsUpdateWizard implements UpgradeWizardInterface, ChattyInte
         if ($fieldItems === [] || is_numeric($row[$fieldToMigrate])) {
             return;
         }
+
         $fileadminDirectory = rtrim((string) $GLOBALS['TYPO3_CONF_VARS']['BE']['fileadminDir'], '/') . '/';
         $i = 0;
 

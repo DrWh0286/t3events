@@ -58,7 +58,7 @@ class EventController extends AbstractActionController
      * initializes all actions
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
      */
-    public function initializeAction(): void
+    protected function initializeAction(): void
     {
         $this->settings = $this->settingsUtility->mergeSettings($this->settings, $this->actionMethodName, $this);
         if ($this->request->hasArgument(SI::OVERWRITE_DEMAND)) {
@@ -87,11 +87,13 @@ class EventController extends AbstractActionController
             if (!$this->session->has('tx_t3events_overwriteDemand') || !is_string($this->session->get('tx_t3events_overwriteDemand')) || ($this->session->get('tx_t3events_overwriteDemand') === '' || $this->session->get('tx_t3events_overwriteDemand') === '0')) {
                 throw new RuntimeException('tx_t3events_overwriteDemand is not set or is empty and also no overwriteDemand is set!');
             }
+
             $overwriteDemand = unserialize($this->session->get('tx_t3events_overwriteDemand'), ['allowed_classes' => false]);
         }
 
         $demand = $this->eventDemandFactory->createFromSettings($this->settings);
         $demand->overwriteDemandObject($overwriteDemand, $this->settings);
+
         $events = $this->eventRepository->findDemanded($demand);
 
         /** @var QueryResultInterface $events */

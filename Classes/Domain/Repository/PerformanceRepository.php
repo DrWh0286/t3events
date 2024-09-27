@@ -119,12 +119,14 @@ class PerformanceRepository extends Repository implements
         if ((bool)$searchConstraints = $this->createSearchConstraints($query, $demand)) {
             $this->combineConstraints($query, $constraints, $searchConstraints, 'OR');
         }
+
         if ($demand instanceof StatusAwareDemandInterface &&
             (bool)$statusConstraints = $this->createStatusConstraints($query, $demand)) {
             $conjunction = 'OR';
             if ($demand->isExcludeSelectedStatuses()) {
                 $conjunction = 'NOTOR';
             }
+
             $this->combineConstraints($query, $constraints, $statusConstraints, $conjunction);
         }
 
@@ -132,6 +134,7 @@ class PerformanceRepository extends Repository implements
             $pages = GeneralUtility::intExplode(',', $demand->getStoragePages());
             $constraints[] = $query->in('pid', $pages);
         }
+
         if ($demand->getEventLocations()) {
             $eventLocations = GeneralUtility::intExplode(',', $demand->getEventLocations());
             $constraints[] = $query->in('eventLocation', $eventLocations);

@@ -51,18 +51,21 @@ trait FilterableControllerTrait
                 $result = empty($value) ? $repository->findAll() : $repository->findMultipleByUid($value, 'title');
                 $filterOptions[$key . 's'] = $result;
             }
+
             if ($key === 'periods') {
                 $periodOptions = [];
                 $periodEntries = [SI::FUTURE_ONLY, SI::PAST_ONLY, SI::ALL, SI::SPECIFIC];
                 if (!empty($value)) {
                     $periodEntries = GeneralUtility::trimExplode(',', $value, true);
                 }
+
                 foreach ($periodEntries as $entry) {
                     $period = new \stdClass();
                     $period->key = $entry;
                     $period->value = $this->translate('label.period.' . $entry, 't3events');
                     $periodOptions[] = $period;
                 }
+
                 $filterOptions['periods'] = $periodOptions;
             }
         }

@@ -29,6 +29,7 @@ class Person extends AbstractEntity
     use AddressTrait;
     use EqualsTrait;
     public const PERSON_TYPE_UNKNOWN = 'Tx_T3events_Default';
+
     public const PERSON_TYPE_CONTACT = 'Tx_T3events_Contact';
 
     /**

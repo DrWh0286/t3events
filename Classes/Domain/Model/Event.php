@@ -600,6 +600,7 @@ class Event extends AbstractEntity
         foreach ($this->performances as $performance) {
             $dates[] = $performance->getDate()->getTimestamp();
         }
+
         sort($dates);
 
         return $dates[0] ?? null;

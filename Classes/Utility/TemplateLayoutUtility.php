@@ -35,6 +35,7 @@ class TemplateLayoutUtility implements SingletonInterface
         if (!is_null($pageId)) {
             $pageTSConfig = $this->getPageTSConfig($pageId);
         }
+
         $pageTSKey = $this->getPageTSKey($extensionKey);
 
         return (

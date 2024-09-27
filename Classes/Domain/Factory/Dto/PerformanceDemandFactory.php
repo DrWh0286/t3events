@@ -70,23 +70,28 @@ class PerformanceDemandFactory extends AbstractDemandFactory implements DemandFa
             if ($settings['sortBy'] === 'headline') {
                 $settings['sortBy'] = 'event.headline';
             }
+
             if ($settings['sortBy'] === 'performances.date') {
                 $settings['sortBy'] = 'date';
             }
         }
+
         if (!empty($settings['order'])
             && $settings['order'] === 'performances.date|asc,performances.begin|asc'
         ) {
             $settings['order'] = 'date|asc,begin|asc';
         }
+
         if (!empty($settings['order'])
             && $settings['order'] === 'performances.date|desc,performances.begin|desc'
         ) {
             $settings['order'] = 'date|desc,begin|desc';
         }
+
         if ($demand instanceof PeriodAwareDemandInterface) {
             $this->setPeriodConstraints($demand, $settings);
         }
+
         $this->applySettings($demand, $settings);
 
         return $demand;

@@ -41,6 +41,7 @@ class NotificationService
     {
         $templateView = $this->buildTemplateView($templateName, $format, $folderName);
         $templateView->assignMultiple($variables);
+
         $body = $templateView->render();
         $recipient = GeneralUtility::trimExplode(',', $recipient, true);
 
@@ -165,6 +166,7 @@ class NotificationService
             $data['folderName']
         );
         $attachmentView->assignMultiple($data['variables']);
+
         $content = $attachmentView->render();
         $message->attach(
             $content,

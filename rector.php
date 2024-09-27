@@ -43,6 +43,10 @@ return RectorConfig::configure()
     ->withPHPStanConfigs([
         Typo3Option::PHPSTAN_FOR_RECTOR_PATH
     ])
+    ->withPreparedSets(
+        codeQuality: true,
+        codingStyle: true,
+    )
     ->withRules([
         AddVoidReturnTypeWhereNoReturnRector::class,
         ConvertImplicitVariablesToExplicitGlobalsRector::class,

@@ -42,6 +42,7 @@ class VectorImage extends \DOMDocument
         while ($element->hasChildNodes()) {
             $element->removeChild($element->firstChild);
         }
+
         $textNode = $this->createTextNode($content);
         $element->appendChild($textNode);
     }
@@ -61,6 +62,7 @@ class VectorImage extends \DOMDocument
             if (!$element instanceof \DOMElement) {
                 continue;
             }
+
             $element->setAttribute($attributeName, $attributeValue);
         }
     }

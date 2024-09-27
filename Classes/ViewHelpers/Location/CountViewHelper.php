@@ -56,6 +56,7 @@ class CountViewHelper extends AbstractViewHelper
                     $locationsArray[] = $eventLocation->getUid();
                 }
             }
+
             // make unique
             $locationsArray = array_values(array_unique($locationsArray));
         }

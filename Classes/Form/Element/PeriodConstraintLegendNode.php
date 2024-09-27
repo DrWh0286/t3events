@@ -38,6 +38,7 @@ class PeriodConstraintLegendNode extends AbstractFormElement
 
 
     protected $parameters = [];
+
     public function __construct(NodeFactory $nodeFactory, array $data)
     {
         parent::__construct($nodeFactory, $data);

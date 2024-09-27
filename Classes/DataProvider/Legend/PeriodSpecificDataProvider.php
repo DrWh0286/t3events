@@ -23,6 +23,8 @@ class PeriodSpecificDataProvider extends AbstractPeriodDataProvider implements L
 {
     public const VISIBLE_LAYERS = 'text-start,text-end,start-point,end-point,middle-on,left-off,left-re-off,
                             right-off,long-re-off,right-re-off';
+
     public const LAYERS_TO_HIDE = 'left-re-off,right-re-off,long-re-off';
+
     public const LAYERS_TO_SHOW = 'left-re-on,right-re-on,long-re-on';
 }
