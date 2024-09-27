@@ -33,10 +33,7 @@ class ItemsProcFunc
      */
     public const EXTENSION_KEY = 't3events';
 
-    /**
-     * @var TemplateLayoutUtility
-     */
-    protected $templateLayoutUtility;
+    protected \DWenzel\T3events\Utility\TemplateLayoutUtility $templateLayoutUtility;
 
     public function __construct(TemplateLayoutUtility $templateLayoutUtility)
     {

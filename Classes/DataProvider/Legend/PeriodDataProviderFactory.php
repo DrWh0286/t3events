@@ -30,7 +30,7 @@ class PeriodDataProviderFactory
      * @param array $params
      * @return \DWenzel\T3events\DataProvider\Legend\LayeredLegendDataProviderInterface
      */
-    public function get(array $params)
+    public function get(array $params): object
     {
         $class = PeriodUnknownDataProvider::class;
         $flexFormData = [];

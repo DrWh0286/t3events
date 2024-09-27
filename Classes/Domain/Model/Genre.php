@@ -69,7 +69,7 @@ class Genre extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return int
      */
-    public function getLanguageUid()
+    public function getLanguageUid(): ?int
     {
         return $this->_languageUid;
     }

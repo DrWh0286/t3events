@@ -75,7 +75,7 @@ trait FormTrait
      * @param string $table table name
      * @throws RouteNotFoundException
      */
-    protected function redirectToCreateNewRecord($table)
+    protected function redirectToCreateNewRecord($table): \TYPO3\CMS\Core\Http\RedirectResponse
     {
         /** @var UriBuilder $uriBuilder */
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);

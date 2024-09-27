@@ -43,20 +43,14 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 class SettingsUtility implements SingletonInterface
 {
-    /**
-     * @var ContentObjectRenderer
-     */
-    protected $contentObjectRenderer;
+    protected \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObjectRenderer;
 
     /**
      * @var array
      */
     protected $controllerKeys = [];
 
-    /**
-    * @var ResourceFactory
-    */
-    protected $resourceFactory;
+    protected \DWenzel\T3events\Resource\ResourceFactory $resourceFactory;
     public function __construct(ContentObjectRenderer $contentObjectRenderer, ResourceFactory $resourceFactory)
     {
         $this->contentObjectRenderer = $contentObjectRenderer;

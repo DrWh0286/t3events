@@ -198,7 +198,7 @@ class Route
      * @param string $name Option name
      * @return bool true if the option is set, otherwise false
      */
-    public function hasOption($name)
+    public function hasOption($name): bool
     {
         return array_key_exists($name, $this->options);
     }

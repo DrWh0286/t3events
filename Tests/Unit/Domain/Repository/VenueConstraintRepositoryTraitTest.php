@@ -100,7 +100,7 @@ class VenueConstraintRepositoryTraitTest extends UnitTestCase
      * @param array $methods Methods to mock
      * @return VenueAwareDemandInterface|MockObject
      */
-    protected function getMockVenueAwareDemand(array $methods = [])
+    protected function getMockVenueAwareDemand(array $methods = []): \PHPUnit\Framework\MockObject\MockObject
     {
         return $this->getMockBuilder(VenueAwareDemandInterface::class)
             ->setMethods($methods)->getMockForAbstractClass();

@@ -551,7 +551,7 @@ class PerformanceRepositoryTest extends UnitTestCase
     /**
      * @return PerformanceDemand|\PHPUnit_Framework_MockObject_MockObject
      */
-    protected function getMockPerformanceDemand(array $methods = [])
+    protected function getMockPerformanceDemand(array $methods = []): \PHPUnit\Framework\MockObject\MockObject
     {
         return $this->getMockBuilder(PerformanceDemand::class)
             ->setMethods($methods)
@@ -561,7 +561,7 @@ class PerformanceRepositoryTest extends UnitTestCase
     /**
      * @return mixed
      */
-    protected function getMockSearch(array $methods = [])
+    protected function getMockSearch(array $methods = []): \PHPUnit\Framework\MockObject\MockObject
     {
         return $this->getMockBuilder(Search::class)->setMethods($methods)->getMock();
     }

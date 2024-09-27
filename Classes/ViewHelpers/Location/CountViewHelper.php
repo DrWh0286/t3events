@@ -40,7 +40,7 @@ class CountViewHelper extends AbstractViewHelper
      *
      * @return int
      */
-    public function render()
+    public function render(): int
     {
         $locationsArray = [];
 

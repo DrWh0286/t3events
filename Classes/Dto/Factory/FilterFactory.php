@@ -30,10 +30,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class FilterFactory
 {
-    /**
-     * @var FilterResolverInterface
-     */
-    protected $filterResolver;
+    protected \DWenzel\T3events\Dto\FilterResolverInterface $filterResolver;
 
     public function __construct(FilterResolverInterface $filterResolver)
     {

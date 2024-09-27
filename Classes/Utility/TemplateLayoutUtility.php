@@ -86,7 +86,7 @@ class TemplateLayoutUtility implements SingletonInterface
      * @return  array
      * @codeCoverageIgnore
      */
-    protected function getPageTSConfig($pageId)
+    protected function getPageTSConfig($pageId): array
     {
         return BackendUtility::getPagesTSconfig($pageId);
     }

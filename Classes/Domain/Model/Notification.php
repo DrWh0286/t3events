@@ -30,44 +30,24 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Notification extends AbstractEntity
 {
-    /**
-     * @var string $recipient
-     */
-    protected $recipient;
+    protected string $recipient;
 
-    /**
-     * @var string $sender
-     */
-    protected $sender;
+    protected string $sender;
 
-    /**
-     * @var string
-     */
-    protected $senderEmail = '';
+    protected string $senderEmail;
 
-    /**
-     * @var string
-     */
-    protected $senderName;
+    protected string $senderName;
 
-    /**
-     * @var string $subject
-     */
     #[\TYPO3\CMS\Extbase\Annotation\Validate(['validator' => 'NotEmpty'])]
-    protected $subject;
+    protected string $subject;
 
     /**
      * Body text
-     *
-     * @var string $bodytext
      */
     #[\TYPO3\CMS\Extbase\Annotation\Validate(['validator' => 'NotEmpty'])]
-    protected $bodytext;
+    protected string $bodytext;
 
-    /**
-     * @var string|null $format
-     */
-    protected $format;
+    protected ?string $format;
 
     /**
      * Send time
@@ -80,7 +60,7 @@ class Notification extends AbstractEntity
      * @var ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
      */
     #[Lazy]
-    protected $attachments;
+    protected ?\TYPO3\CMS\Extbase\Persistence\ObjectStorage $attachments;
 
     public function __construct(
         string $recipient = '',

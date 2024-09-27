@@ -54,7 +54,7 @@ class PersonDemandFactoryTest extends UnitTestCase
      * @param array $methods Methods to mock
      * @return PersonDemand|MockObject
      */
-    protected function getMockPersonDemand(array $methods = [])
+    protected function getMockPersonDemand(array $methods = []): \PHPUnit\Framework\MockObject\MockObject
     {
         return $this->getMockBuilder(PersonDemand::class)
             ->setMethods($methods)

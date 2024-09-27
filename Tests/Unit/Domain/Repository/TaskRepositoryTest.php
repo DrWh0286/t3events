@@ -5,7 +5,6 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Repository;
 use DWenzel\T3events\Domain\Repository\TaskRepository;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 
 /**
@@ -28,19 +27,11 @@ class TaskRepositoryTest extends UnitTestCase
     protected $subject;
 
     /**
-     * @var ObjectManagerInterface |MockObject
-     */
-    protected $objectManager;
-
-    /**
      * set up subject
      */
     protected function setUp(): void
     {
-        $this->objectManager = $this->getMockBuilder(ObjectManagerInterface::class)
-            ->getMockForAbstractClass();
-
-        $this->subject = new TaskRepository($this->objectManager);
+        $this->subject = new TaskRepository();
     }
 
     /**
@@ -50,13 +41,10 @@ class TaskRepositoryTest extends UnitTestCase
     {
         $mockQuerySettings = $this->getMockBuilder(Typo3QuerySettings::class)
             ->disableOriginalConstructor()->getMock();
-        $this->objectManager->expects($this->once())
-            ->method('get')
-            ->with(Typo3QuerySettings::class)
-            ->will($this->returnValue($mockQuerySettings));
         $mockQuerySettings->expects($this->once())
             ->method('setRespectStoragePage')
             ->with(false);
+        $this->subject->setDefaultQuerySettings($mockQuerySettings);
 
         $this->subject->initializeObject();
 

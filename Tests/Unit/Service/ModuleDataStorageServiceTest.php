@@ -48,7 +48,7 @@ class ModuleDataStorageServiceTest extends UnitTestCase
         $this->subject = new ModuleDataStorageService();
     }
 
-    protected function mockBackendUserAuthentication()
+    protected function mockBackendUserAuthentication(): \PHPUnit\Framework\MockObject\MockObject
     {
         return $this->getMockBuilder(BackendUserAuthentication::class)
             ->disableOriginalConstructor()

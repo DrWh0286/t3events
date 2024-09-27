@@ -389,7 +389,7 @@ class SettingsUtilityTest extends UnitTestCase
      * @param array $methods Methods to mock
      * @return ObjectStorage|MockObject
      */
-    protected function getMockObjectStorage(array $methods = [])
+    protected function getMockObjectStorage(array $methods = []): \PHPUnit\Framework\MockObject\MockObject
     {
         return $this->getMockBuilder(ObjectStorage::class)
             ->setMethods($methods)->getMock();
@@ -406,7 +406,7 @@ class SettingsUtilityTest extends UnitTestCase
     /**
      * @return mixed
      */
-    protected function getMockFile()
+    protected function getMockFile(): \PHPUnit\Framework\MockObject\MockObject
     {
         return $this->getMockBuilder(File::class)
             ->disableOriginalConstructor()

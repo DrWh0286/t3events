@@ -201,7 +201,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
         );
         $mockDemand = $this->getMockDemand();
         $mockQuery = $this->getMockForAbstractClass(
-            'TYPO3\\CMS\\Extbase\\Persistence\\QueryInterface'
+            \TYPO3\CMS\Extbase\Persistence\QueryInterface::class
         );
 
         $fixture->expects($this->once())
@@ -335,7 +335,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
             false
         );
         /** @var AbstractDemand|MockObject|AccessibleMockObjectInterface $mockDemand */
-        $mockDemand = $this->getAccessibleMockForAbstractClass('DWenzel\\T3events\\Domain\\Model\\Dto\\AbstractDemand');
+        $mockDemand = $this->getAccessibleMockForAbstractClass(\DWenzel\T3events\Domain\Model\Dto\AbstractDemand::class);
         $offset = 3;
         $mockDemand->setOffset($offset);
         $mockQuery = $this->getMockQuery(['setOffset']);

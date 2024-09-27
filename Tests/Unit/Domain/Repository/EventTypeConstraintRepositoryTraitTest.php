@@ -96,7 +96,7 @@ class EventTypeConstraintRepositoryTraitTest extends UnitTestCase
      * @param array $methods
      * @return EventTypeAwareDemandInterface|MockObject
      */
-    protected function getMockEventTypeAwareDemand(array $methods = [])
+    protected function getMockEventTypeAwareDemand(array $methods = []): \PHPUnit\Framework\MockObject\MockObject
     {
         return $this->getMockBuilder(EventTypeAwareDemandInterface::class)
             ->setMethods($methods)

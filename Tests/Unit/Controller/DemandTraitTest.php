@@ -62,7 +62,7 @@ class DemandTraitTest extends UnitTestCase
                 $this->settings = $settingsUtility;
             }
 
-            public function createSearchObject($searchRequest, $settings)
+            public function createSearchObject($searchRequest, $settings): \DWenzel\T3events\Domain\Model\Dto\Search
             {
                 return $this->search;
             }

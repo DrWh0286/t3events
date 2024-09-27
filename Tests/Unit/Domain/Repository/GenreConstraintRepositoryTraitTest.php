@@ -101,7 +101,7 @@ class GenreConstraintRepositoryTraitTest extends UnitTestCase
      * @param array $methods
      * @return GenreAwareDemandInterface|MockObject
      */
-    protected function getMockGenreAwareDemand(array $methods = [])
+    protected function getMockGenreAwareDemand(array $methods = []): \PHPUnit\Framework\MockObject\MockObject
     {
         return $this->getMockBuilder(GenreAwareDemandInterface::class)
             ->setMethods($methods)

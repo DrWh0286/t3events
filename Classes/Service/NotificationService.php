@@ -37,7 +37,7 @@ class NotificationService
      * @param null|string $format
      * @return bool
      */
-    public function notify($recipient, $sender, $subject, $templateName, $folderName, $variables = [], $attachments = null, $format = null)
+    public function notify($recipient, $sender, $subject, $templateName, $folderName, $variables = [], $attachments = null, $format = null): bool
     {
         $templateView = $this->buildTemplateView($templateName, $format, $folderName);
         $templateView->assignMultiple($variables);
@@ -92,7 +92,7 @@ class NotificationService
      * @param \DWenzel\T3events\Domain\Model\Notification $notification
      * @return bool
      */
-    public function send(Notification $notification)
+    public function send(Notification $notification): bool
     {
         /** @var $message MailMessage */
         $message = GeneralUtility::makeInstance(MailMessage::class);

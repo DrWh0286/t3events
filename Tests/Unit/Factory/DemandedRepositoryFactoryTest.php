@@ -17,25 +17,23 @@ use DWenzel\T3events\Domain\Repository\VenueRepository;
 use DWenzel\T3events\Factory\DemandedRepositoryFactory;
 use Psr\Container\ContainerInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class DemandedRepositoryFactoryTest extends UnitTestCase
 {
     protected function setUp(): void
     {
-        $objectManager = $this->createMock(ObjectManagerInterface::class);
         $classes = [
-            CategoryRepository::class => new CategoryRepository($objectManager),
-            EventRepository::class => new EventRepository($objectManager),
-            EventTypeRepository::class => new EventTypeRepository($objectManager),
-            PersonRepository::class => new PersonRepository($objectManager),
-            PerformanceStatusRepository::class  => new PerformanceStatusRepository($objectManager),
-            PerformanceRepository::class  => new PerformanceRepository($objectManager),
-            ContentRepository::class  => new ContentRepository($objectManager),
-            VenueRepository::class  => new VenueRepository($objectManager),
-            GenreRepository::class  => new GenreRepository($objectManager),
-            AudienceRepository::class  => new AudienceRepository($objectManager),
+            CategoryRepository::class => new CategoryRepository(),
+            EventRepository::class => new EventRepository(),
+            EventTypeRepository::class => new EventTypeRepository(),
+            PersonRepository::class => new PersonRepository(),
+            PerformanceStatusRepository::class  => new PerformanceStatusRepository(),
+            PerformanceRepository::class  => new PerformanceRepository(),
+            ContentRepository::class  => new ContentRepository(),
+            VenueRepository::class  => new VenueRepository(),
+            GenreRepository::class  => new GenreRepository(),
+            AudienceRepository::class  => new AudienceRepository(),
         ];
 
         GeneralUtility::setContainer(

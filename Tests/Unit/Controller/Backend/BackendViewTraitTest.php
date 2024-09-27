@@ -83,7 +83,7 @@ class BackendViewTraitTest extends UnitTestCase
             {
             }
 
-            public function getConfigurationManager()
+            public function getConfigurationManager(): \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
             {
                 return $this->configurationManager;
             }

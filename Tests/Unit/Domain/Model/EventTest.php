@@ -597,7 +597,7 @@ class EventTest extends UnitTestCase
      * @param array $methods Methods to mock
      * @return Performance|MockObject
      */
-    protected function getMockPerformance(array $methods = [])
+    protected function getMockPerformance(array $methods = []): \PHPUnit\Framework\MockObject\MockObject
     {
         return $this->getMockBuilder(Performance::class)
             ->setMethods($methods)

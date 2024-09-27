@@ -170,7 +170,7 @@ class EventControllerTest extends UnitTestCase
     /**
      * @return mixed
      */
-    protected function getMockEvent()
+    protected function getMockEvent(): \PHPUnit\Framework\MockObject\MockObject
     {
         return $this->getMockBuilder(Event::class)->getMock();
     }

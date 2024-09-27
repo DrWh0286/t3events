@@ -75,7 +75,7 @@ class AbstractPeriodDataProvider
      * @param string $layerList
      * @return array
      */
-    protected function getLayerIds($layerList)
+    protected function getLayerIds($layerList): array
     {
         return GeneralUtility::trimExplode(',', $layerList, true);
     }

@@ -123,7 +123,7 @@ class StatusConstraintRepositoryTraitTest extends UnitTestCase
      * @param array $methods Methods to mock
      * @return StatusAwareDemandInterface|MockObject
      */
-    protected function getMockStatusAwareDemand(array $methods = [])
+    protected function getMockStatusAwareDemand(array $methods = []): \PHPUnit\Framework\MockObject\MockObject
     {
         return $this->getMockBuilder(StatusAwareDemandInterface::class)
             ->setMethods($methods)

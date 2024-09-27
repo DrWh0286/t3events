@@ -134,7 +134,7 @@ class RouterTest extends UnitTestCase
      * @param array $constructorArguments
      * @return mixed
      */
-    protected function getMockRoute(array $methods = [], array $constructorArguments = [])
+    protected function getMockRoute(array $methods = [], array $constructorArguments = []): \PHPUnit\Framework\MockObject\MockObject
     {
         return $this->getMockBuilder(Route::class)
             ->setConstructorArgs($constructorArguments)

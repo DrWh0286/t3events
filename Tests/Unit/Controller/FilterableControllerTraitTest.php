@@ -36,7 +36,7 @@ class DummyControllerWithAudienceRepository
 {
     use FilterableControllerTrait;
 
-    protected $audienceRepository;
+    protected \DWenzel\T3events\Domain\Repository\AudienceRepository $audienceRepository;
 
     public function __construct(AudienceRepository $audienceRepository)
     {
@@ -260,7 +260,7 @@ class FilterableControllerTraitTest extends UnitTestCase
     /**
      * @return QueryResultInterface|\PHPUnit_Framework_MockObject_MockObject
      */
-    protected function getMockQueryResult()
+    protected function getMockQueryResult(): \PHPUnit\Framework\MockObject\MockObject
     {
         return $this->getMockBuilder(QueryResultInterface::class)
             ->getMockForAbstractClass();

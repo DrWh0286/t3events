@@ -401,7 +401,7 @@ class PeriodConstraintRepositoryTraitTest extends UnitTestCase
      * @param array $methods Methods to mock
      * @return PeriodAwareDemandInterface|MockObject
      */
-    protected function getMockPeriodAwareDemand(array $methods = [])
+    protected function getMockPeriodAwareDemand(array $methods = []): \PHPUnit\Framework\MockObject\MockObject
     {
         return $this->getMockBuilder(PeriodAwareDemandInterface::class)
             ->setMethods($methods)

@@ -187,7 +187,7 @@ class ModuleDataTraitTest extends TestCase
      * @param array $methods Methods to mock
      * @return ModuleDataStorageService|\PHPUnit_Framework_MockObject_MockObject
      */
-    protected function getMockModuleDataStorageService(array $methods = [])
+    protected function getMockModuleDataStorageService(array $methods = []): \PHPUnit\Framework\MockObject\MockObject
     {
         return $this->getMockBuilder(ModuleDataStorageService::class)
             ->setMethods($methods)

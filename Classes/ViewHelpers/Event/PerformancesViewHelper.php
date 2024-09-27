@@ -36,10 +36,8 @@ class PerformancesViewHelper extends AbstractTagBasedViewHelper
 
     /**
      * eventRepository
-     *
-     * @var EventRepository
      */
-    protected $eventRepository;
+    protected \DWenzel\T3events\Domain\Repository\EventRepository $eventRepository;
 
     public function __construct(\DWenzel\T3events\Domain\Repository\EventRepository $eventRepository, protected \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager)
     {

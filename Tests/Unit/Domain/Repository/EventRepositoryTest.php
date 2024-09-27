@@ -583,7 +583,7 @@ class EventRepositoryTest extends UnitTestCase
      * @param array $methods
      * @return EventDemand|MockObject
      */
-    protected function getMockEventDemand(array $methods = [])
+    protected function getMockEventDemand(array $methods = []): \PHPUnit\Framework\MockObject\MockObject
     {
         return $this->getMockBuilder(EventDemand::class)
             ->setMethods($methods)->getMock();
@@ -593,7 +593,7 @@ class EventRepositoryTest extends UnitTestCase
      * @param array $methods Methods to mock
      * @return Search|MockObject
      */
-    protected function getMockSearch(array $methods = [])
+    protected function getMockSearch(array $methods = []): \PHPUnit\Framework\MockObject\MockObject
     {
         return $this->getMockBuilder(Search::class)
             ->setMethods($methods)->getMock();

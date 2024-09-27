@@ -316,7 +316,7 @@ class PerformanceDemandFactoryTest extends UnitTestCase
      * @param array $methods Methods to mock
      * @return PerformanceDemand|MockObject
      */
-    protected function getMockPerformanceDemand(array $methods = [])
+    protected function getMockPerformanceDemand(array $methods = []): \PHPUnit\Framework\MockObject\MockObject
     {
         return $this->getMockBuilder(PerformanceDemand::class)
             ->setMethods($methods)
