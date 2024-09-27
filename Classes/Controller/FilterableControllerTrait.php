@@ -43,7 +43,7 @@ trait FilterableControllerTrait
         $filterOptions = [];
         foreach ($settings as $key => $value) {
             $propertyName = lcfirst($key) . 'Repository';
-            if (property_exists(get_class($this), $propertyName)
+            if (property_exists($this::class, $propertyName)
                 && $this->{$propertyName} instanceof DemandedRepositoryInterface
             ) {
                 /** @var DemandedRepositoryInterface $repository */

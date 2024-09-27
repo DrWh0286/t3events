@@ -111,7 +111,7 @@ class NotificationService
         if ($files = $notification->getAttachments()) {
             /** @var FileReference $file */
             foreach ($files as $file) {
-                $message->attachFromPath($file->getOriginalResource()->getPublicUrl(true));
+                $message->attachFromPath($file->getOriginalResource()->getPublicUrl());
             }
         }
 

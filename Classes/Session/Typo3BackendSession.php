@@ -20,11 +20,6 @@ namespace DWenzel\T3events\Session;
 class Typo3BackendSession implements SessionInterface
 {
     /**
-     * @var string
-     */
-    protected $namespace;
-
-    /**
      * @var array
      */
     protected $data = [];
@@ -34,9 +29,8 @@ class Typo3BackendSession implements SessionInterface
      *
      * @param string $namespace
      */
-    public function __construct($namespace = '')
+    public function __construct(protected $namespace = '')
     {
-        $this->namespace = $namespace;
     }
 
     /**
@@ -78,11 +72,8 @@ class Typo3BackendSession implements SessionInterface
         if (empty($this->data)) {
             //should read from backend user session
         }
-        if (isset($this->data[$identifier])) {
-            return $this->data[$identifier];
-        }
 
-        return null;
+        return $this->data[$identifier] ?? null;
     }
 
     public function clean(): void

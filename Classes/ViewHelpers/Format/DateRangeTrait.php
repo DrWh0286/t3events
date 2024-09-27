@@ -48,8 +48,8 @@ trait DateRangeTrait
             $glue = static::DEFAULT_GLUE;
         }
 
-        if (strpos($startFormat, '%') !== false
-            && strpos($endFormat, '%') !== false
+        if (str_contains($startFormat, '%')
+            && str_contains($endFormat, '%')
         ) {
             throw new \RuntimeException('Please don\'t use % in date format!');
         }

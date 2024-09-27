@@ -40,13 +40,6 @@ class Route
     public const ORIGIN_SEPARATOR = '|';
 
     /**
-     * Origin of route
-     *
-     * @var string A string of fully qualified controller class name and action method separated by ORIGIN_SEPARATOR.
-     */
-    protected $origin;
-
-    /**
      * Options for routing method
      * default is
      * [
@@ -95,10 +88,17 @@ class Route
      * Route constructor.
      *
      * @var string $origin Pipe separated string of fully qualified controller class name and action method
+     * @param string $origin
      */
-    public function __construct($origin)
+    public function __construct(
+        /**
+         * Origin of route
+         *
+         * @var string A string of fully qualified controller class name and action method separated by ORIGIN_SEPARATOR.
+         */
+        protected $origin
+    )
     {
-        $this->origin = $origin;
     }
 
     /**
@@ -156,7 +156,7 @@ class Route
      */
     public function getOption($name)
     {
-        return isset($this->options[$name]) ? $this->options[$name] : null;
+        return $this->options[$name] ?? null;
     }
 
     /**
@@ -167,7 +167,7 @@ class Route
      * @param mixed $value Option value
      * @return Route The current route instance.
      */
-    public function setOption($name, $value)
+    public function setOption($name, mixed $value)
     {
         $this->options[$name] = $value;
 

@@ -55,8 +55,8 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     {
         $this->fixture = $this->getAccessibleMock(
             AbstractDemandedRepository::class,
-            array('createConstraintsFromDemand', 'createQuery'),
-            array(),
+            ['createConstraintsFromDemand', 'createQuery'],
+            [],
             '',
             false
         );
@@ -67,7 +67,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
      */
     public function createOrderingsFromDemandReturnsInitiallyEmptyArray(): void
     {
-        $expectedResult = array();
+        $expectedResult = [];
         $demand = $this->getMockDemand();
         $this->assertEquals(
             $expectedResult,
@@ -80,7 +80,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
      */
     public function createOrderingsFromDemandReturnsEmptyArrayForEmptyOrderList(): void
     {
-        $expectedResult = array();
+        $expectedResult = [];
         $mockDemand = $this->getMockDemand(['getOrder']);
         $emptyOrderList = '';
         $mockDemand->expects($this->once())
@@ -99,9 +99,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     public function createOrderingsFromDemandReturnsOrderingsForFieldWithoutOrder(): void
     {
         $fieldName = 'foo';
-        $expectedResult = array(
-            $fieldName => QueryInterface::ORDER_ASCENDING
-        );
+        $expectedResult = [$fieldName => QueryInterface::ORDER_ASCENDING];
         $mockDemand = $this->getMockDemand(['getOrder']);
 
         $mockDemand->expects($this->any())
@@ -120,9 +118,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     public function createOrderingsFromDemandReturnsOrderingsForFieldWithDescendingOrder(): void
     {
         $fieldWithDescendingOrder = 'foo|desc';
-        $expectedResult = array(
-            'foo' => QueryInterface::ORDER_DESCENDING
-        );
+        $expectedResult = ['foo' => QueryInterface::ORDER_DESCENDING];
         $mockDemand = $this->getMockDemand(['getOrder']);
 
         $mockDemand->expects($this->any())
@@ -141,10 +137,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     public function createOrderingsFromDemandReturnsOrderingsForMultipleFieldsWithDifferentOrder(): void
     {
         $fieldsWithDifferentOrder = 'foo|desc,bar|asc';
-        $expectedResult = array(
-            'foo' => QueryInterface::ORDER_DESCENDING,
-            'bar' => QueryInterface::ORDER_ASCENDING
-        );
+        $expectedResult = ['foo' => QueryInterface::ORDER_DESCENDING, 'bar' => QueryInterface::ORDER_ASCENDING];
         $mockDemand = $this->getMockDemand(['getOrder']);
 
         $mockDemand->expects($this->any())
@@ -194,8 +187,8 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
         /** @var AbstractDemandedRepository|MockObject $fixture */
         $fixture = $this->getAccessibleMock(
             AbstractDemandedRepository::class,
-            array('createConstraintsFromDemand', 'createQuery'),
-            array(),
+            ['createConstraintsFromDemand', 'createQuery'],
+            [],
             '',
             false
         );
@@ -211,7 +204,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
         $fixture->expects($this->once())
             ->method('createConstraintsFromDemand')
             ->with($mockQuery, $mockDemand)
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
 
         $this->assertSame(
             $mockQuery,
@@ -227,14 +220,14 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
         /** @var AbstractDemandedRepository|MockObject $fixture */
         $fixture = $this->getAccessibleMock(
             AbstractDemandedRepository::class,
-            array('createConstraintsFromDemand', 'createQuery'),
-            array(),
+            ['createConstraintsFromDemand', 'createQuery'],
+            [],
             '',
             false
         );
         $mockDemand = $this->getMockDemand();
         $mockQuery = $this->getMockQuery(['matching', 'logicalAnd']);
-        $mockConstraints = array('foo');
+        $mockConstraints = ['foo'];
 
         $fixture->expects($this->once())
             ->method('createQuery')
@@ -263,14 +256,14 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
         /** @var AbstractDemandedRepository|MockObject|AccessibleMockObjectInterface $fixture */
         $fixture = $this->getAccessibleMock(
             AbstractDemandedRepository::class,
-            array('createQuery', 'createConstraintsFromDemand', 'createOrderingsFromDemand'),
-            array(),
+            ['createQuery', 'createConstraintsFromDemand', 'createOrderingsFromDemand'],
+            [],
             '',
             false
         );
         $mockDemand = $this->getMockDemand();
         $mockQuery = $this->getMockQuery(['setOrderings']);
-        $mockOrderings = array('foo' => 'bar');
+        $mockOrderings = ['foo' => 'bar'];
 
         $fixture->expects($this->once())
             ->method('createQuery')
@@ -294,8 +287,8 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
         /** @var AbstractDemandedRepository|AccessibleMockObjectInterface|MockObject $fixture */
         $fixture = $this->getAccessibleMock(
             AbstractDemandedRepository::class,
-            array('createQuery', 'createConstraintsFromDemand', 'createOrderingsFromDemand'),
-            array(),
+            ['createQuery', 'createConstraintsFromDemand', 'createOrderingsFromDemand'],
+            [],
             '',
             false
         );
@@ -329,8 +322,8 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
         /** @var AbstractDemandedRepository|AccessibleMockObjectInterface|MockObject $fixture */
         $fixture = $this->getAccessibleMock(
             AbstractDemandedRepository::class,
-            array('createQuery', 'createConstraintsFromDemand'),
-            array(),
+            ['createQuery', 'createConstraintsFromDemand'],
+            [],
             '',
             false
         );
@@ -359,12 +352,12 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     {
         $fixture = $this->getAccessibleMock(
             AbstractDemandedRepository::class,
-            array('createConstraintsFromDemand'),
-            array(),
+            ['createConstraintsFromDemand'],
+            [],
             '',
             false
         );
-        $constraints = array();
+        $constraints = [];
         $mockQuery = $this->getMockQuery(['logicalAnd']);
         $additionalConstraint = [$this->getMockConstraint()];
 
@@ -385,12 +378,12 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     {
         $fixture = $this->getAccessibleMock(
             AbstractDemandedRepository::class,
-            array('createConstraintsFromDemand'),
-            array(),
+            ['createConstraintsFromDemand'],
+            [],
             '',
             false
         );
-        $constraints = array();
+        $constraints = [];
         $conjunction = 'or';
         $mockQuery = $this->getMockQuery(['logicalOr']);
         $additionalConstraint = [$this->getMockConstraint()];
@@ -413,12 +406,12 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     {
         $fixture = $this->getAccessibleMock(
             AbstractDemandedRepository::class,
-            array('createConstraintsFromDemand'),
-            array(),
+            ['createConstraintsFromDemand'],
+            [],
             '',
             false
         );
-        $constraints = array();
+        $constraints = [];
         $conjunction = 'NotAnd';
         $mockQuery = $this->getMockQuery(['logicalNot', 'logicalAnd']);
         $mockConstraint = $this->getMockConstraint();
@@ -445,7 +438,7 @@ class AbstractDemandedRepositoryTest extends UnitTestCase
     public function combineConstraintsCombinesLogicalNotOr(): void
     {
         $fixture = $this->getMockBuilder(AbstractDemandedRepository::class)->disableOriginalConstructor()->getMockForAbstractClass();
-        $constraints = array();
+        $constraints = [];
         $conjunction = 'NotOr';
         $mockQuery = $this->getMockQuery(['logicalNot', 'logicalOr']);
         $mockConstraint = $this->getMockConstraint();

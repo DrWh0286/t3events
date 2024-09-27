@@ -269,10 +269,7 @@ class DemandTraitTest extends UnitTestCase
             true,
             ['setOrder']
         );
-        $overwriteDemand = array(
-            'sortBy' => 'foo',
-            SI::SORT_DIRECTION => 'bar'
-        );
+        $overwriteDemand = ['sortBy' => 'foo', SI::SORT_DIRECTION => 'bar'];
 
         $demand->expects($this->once())->method('setOrder')
             ->with('foo|bar');
@@ -294,9 +291,7 @@ class DemandTraitTest extends UnitTestCase
             true,
             ['setSortDirection']
         );
-        $overwriteDemand = array(
-            SI::SORT_DIRECTION => 'foo'
-        );
+        $overwriteDemand = [SI::SORT_DIRECTION => 'foo'];
 
         $demand->expects($this->once())->method('setSortDirection')
             ->with('asc');
@@ -318,9 +313,7 @@ class DemandTraitTest extends UnitTestCase
             true,
             ['setSortDirection']
         );
-        $overwriteDemand = array(
-            SI::SORT_DIRECTION => 'desc'
-        );
+        $overwriteDemand = [SI::SORT_DIRECTION => 'desc'];
 
         $demand->expects($this->once())->method('setSortDirection')
             ->with('desc');
@@ -419,7 +412,7 @@ class DemandTraitTest extends UnitTestCase
      */
     public function overWriteDemandNeverSetsEmptyValues($key): void
     {
-        $method = 'set' . ucfirst($key);
+        $method = 'set' . ucfirst((string) $key);
         $demand = $this->getMockBuilder(
             DemandInterface::class
         )

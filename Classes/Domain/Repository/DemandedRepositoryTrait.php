@@ -95,7 +95,7 @@ trait DemandedRepositoryTrait
                     [$orderField, $ascDesc] = array_pad($array, 2, null);
                     // count == 1 means that no direction is given
                     if ($ascDesc) {
-                        $orderings[$orderField] = ((strtolower($ascDesc) == 'desc') ?
+                        $orderings[$orderField] = ((strtolower((string) $ascDesc) == 'desc') ?
                             QueryInterface::ORDER_DESCENDING :
                             QueryInterface::ORDER_ASCENDING);
                     } else {
@@ -252,7 +252,7 @@ trait DemandedRepositoryTrait
         }
 
         throw new UnsupportedMethodException(
-            'The method "' . $methodName . '" is not supported by class' . __CLASS__ . 'using trait ' . __TRAIT__,
+            'The method "' . $methodName . '" is not supported by class' . self::class . 'using trait ' . __TRAIT__,
             1479289568
         );
     }

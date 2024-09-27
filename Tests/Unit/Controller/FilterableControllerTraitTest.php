@@ -36,11 +36,8 @@ class DummyControllerWithAudienceRepository
 {
     use FilterableControllerTrait;
 
-    protected \DWenzel\T3events\Domain\Repository\AudienceRepository $audienceRepository;
-
-    public function __construct(AudienceRepository $audienceRepository)
+    public function __construct(protected \DWenzel\T3events\Domain\Repository\AudienceRepository $audienceRepository)
     {
-        $this->audienceRepository = $audienceRepository;
     }
 
     /**
@@ -95,7 +92,7 @@ class FilterableControllerTraitTest extends UnitTestCase
     private function getFilterOptionsReflection(): \ReflectionMethod
     {
         $reflectionMethod = new \ReflectionMethod(
-            \get_class($this->subject),
+            $this->subject::class,
             'getFilterOptions'
         );
         $reflectionMethod->setAccessible(true);

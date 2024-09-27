@@ -31,32 +31,18 @@ class BackendUtility
      *
      * @var array
      */
-    public $removedFieldsInEventQuickMenuView = array(
-        'sDEF' => 'settings.cache.makeNonCacheable',
-        'constraints' => 'settings.statuses,settings.excludeSelectedStatuses,settings.respectEndDate,legend,settings.period,settings.periodType,settings.periodStart,settings.periodDuration,settings.periodStartDate, settings.periodEndDate',
-        'pages' => 'settings.detailPid,settings.backPid',
-        'template' => 'settings.hideIfEmptyResult'
-    );
+    public $removedFieldsInEventQuickMenuView = ['sDEF' => 'settings.cache.makeNonCacheable', 'constraints' => 'settings.statuses,settings.excludeSelectedStatuses,settings.respectEndDate,legend,settings.period,settings.periodType,settings.periodStart,settings.periodDuration,settings.periodStartDate, settings.periodEndDate', 'pages' => 'settings.detailPid,settings.backPid', 'template' => 'settings.hideIfEmptyResult'];
 
     /**
      * Fields which are removed in performance quick menu view
      *
      * @var array
      */
-    public $removedFieldsInPerformanceQuickMenuView = array(
-        'sDEF' => 'settings.cache.makeNonCacheable',
-        'constraints' => 'settings.statuses,settings.excludeSelectedStatuses,settings.respectEndDate,legend,settings.period,settings.periodType,settings.periodStart,settings.periodDuration,settings.periodStartDate, settings.periodEndDate',
-        'pages' => 'settings.detailPid,settings.backPid',
-        'template' => 'settings.hideIfEmptyResult'
-    );
+    public $removedFieldsInPerformanceQuickMenuView = ['sDEF' => 'settings.cache.makeNonCacheable', 'constraints' => 'settings.statuses,settings.excludeSelectedStatuses,settings.respectEndDate,legend,settings.period,settings.periodType,settings.periodStart,settings.periodDuration,settings.periodStartDate, settings.periodEndDate', 'pages' => 'settings.detailPid,settings.backPid', 'template' => 'settings.hideIfEmptyResult'];
 
-    public $removedFieldsInEventDetailView = array(
-        'sDEF' => 'settings.sortBy,settings.sortDirection,settings.order,settings.maxItems',
-        'constraints' => 'settings.statuses,settings.excludeSelectedStatuses,settings.respectEndDate,legend,settings.period,settings.periodType,settings.periodStart,settings.periodDuration,
+    public $removedFieldsInEventDetailView = ['sDEF' => 'settings.sortBy,settings.sortDirection,settings.order,settings.maxItems', 'constraints' => 'settings.statuses,settings.excludeSelectedStatuses,settings.respectEndDate,legend,settings.period,settings.periodType,settings.periodStart,settings.periodDuration,
 			settings.periodStartDate,settings.periodEndDate,settings.categoryConjunction,settings.venues,settings.genres,
-			settings.eventTypes,settings.statuses,settings.excludeSelectedStatuses,settings.categories',
-        'template' => 'settings.hideIfEmptyResult'
-    );
+			settings.eventTypes,settings.statuses,settings.excludeSelectedStatuses,settings.categories', 'template' => 'settings.hideIfEmptyResult'];
 
     /**
      * Hook function of t3lib_befunc
@@ -101,7 +87,7 @@ class BackendUtility
             }
 
             // new plugin element
-        } elseif (\str_starts_with($row['uid'], 'NEW')) {
+        } elseif (\str_starts_with((string) $row['uid'], 'NEW')) {
             // use List as starting view
             $selectedView = 'Event->list';
         }
@@ -125,10 +111,7 @@ class BackendUtility
 
             if (ArrayUtility::isValidPath($GLOBALS['TYPO3_CONF_VARS']['EXT'], 't3events/Hooks/BackendUtility.php/updateFlexforms')
                 && is_array($GLOBALS['TYPO3_CONF_VARS']['EXT']['t3events']['Hooks/BackendUtility.php']['updateFlexforms'])) {
-                $params = array(
-                    'selectedView' => $selectedView,
-                    'dataStructure' => &$dataStructure,
-                );
+                $params = ['selectedView' => $selectedView, 'dataStructure' => &$dataStructure];
                 foreach ($GLOBALS['TYPO3_CONF_VARS']['EXT']['t3events']['Hooks/BackendUtility.php']['updateFlexforms'] as $reference) {
                     GeneralUtility::callUserFunction($reference, $params, $this);
                 }

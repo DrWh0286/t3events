@@ -63,7 +63,7 @@ class PerformanceController extends AbstractActionController
         protected readonly SessionInterface $session,
         protected readonly SettingsUtility $settingsUtility
     ) {
-        $this->namespace = get_class($this);
+        $this->namespace = static::class;
         $this->session->setNamespace($this->namespace);
     }
 

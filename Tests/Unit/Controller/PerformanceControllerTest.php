@@ -284,9 +284,7 @@ class PerformanceControllerTest extends UnitTestCase
         /** @var PerformanceDemand|\PHPUnit_Framework_MockObject_MockObject $demand */
         $demand = $this->getMockBuilder(PerformanceDemand::class)
             ->getMock();
-        $overwriteDemand = array(
-            SI::LEGACY_KEY_GENRE => '1,2,3'
-        );
+        $overwriteDemand = [SI::LEGACY_KEY_GENRE => '1,2,3'];
 
         $demand->expects(self::once())->method('setGenres')
             ->with('1,2,3');
@@ -405,9 +403,7 @@ class PerformanceControllerTest extends UnitTestCase
         $this->markTestSkipped('this test needs to be moved to PerformanceDemandTest');
         /** @var PerformanceDemand|\PHPUnit_Framework_MockObject_MockObject $demand */
         $demand = $this->getMockBuilder(PerformanceDemand::class)->getMock();
-        $overwriteDemand = array(
-            'sortBy' => 'foo'
-        );
+        $overwriteDemand = ['sortBy' => 'foo'];
 
         $demand->expects(self::once())->method('setSortBy')
             ->with('foo');
@@ -424,10 +420,7 @@ class PerformanceControllerTest extends UnitTestCase
         $this->markTestSkipped('this test needs to be moved to PerformanceDemandTest');
         /** @var PerformanceDemand|\PHPUnit_Framework_MockObject_MockObject $demand */
         $demand = $this->getMockBuilder(PerformanceDemand::class)->getMock();
-        $overwriteDemand = array(
-            'sortBy' => 'foo',
-            SI::SORT_DIRECTION => 'bar'
-        );
+        $overwriteDemand = ['sortBy' => 'foo', SI::SORT_DIRECTION => 'bar'];
 
         $demand->expects(self::once())->method('setOrder')
             ->with('foo|bar');
@@ -444,9 +437,7 @@ class PerformanceControllerTest extends UnitTestCase
         $this->markTestSkipped('this test needs to be moved to PerformanceDemandTest');
         /** @var PerformanceDemand|\PHPUnit_Framework_MockObject_MockObject $demand */
         $demand = $this->getMockBuilder(PerformanceDemand::class)->getMock();
-        $overwriteDemand = array(
-            SI::SORT_DIRECTION => 'foo'
-        );
+        $overwriteDemand = [SI::SORT_DIRECTION => 'foo'];
 
         $demand->expects(self::once())->method('setSortDirection')
             ->with('asc');
@@ -463,9 +454,7 @@ class PerformanceControllerTest extends UnitTestCase
         $this->markTestSkipped('this test needs to be moved to PerformanceDemandTest');
         /** @var PerformanceDemand|\PHPUnit_Framework_MockObject_MockObject $demand */
         $demand = $this->getMockBuilder(PerformanceDemand::class)->getMock();
-        $overwriteDemand = array(
-            SI::SORT_DIRECTION => 'desc'
-        );
+        $overwriteDemand = [SI::SORT_DIRECTION => 'desc'];
 
         $demand->expects(self::once())->method('setSortDirection')
             ->with('desc');
@@ -521,7 +510,7 @@ class PerformanceControllerTest extends UnitTestCase
      */
     public function listActionCallsOverwriteDemandObject(): void
     {
-        $settings = array('foo');
+        $settings = ['foo'];
         $this->subject->overrideSettings($settings);
         /** @var PerformanceDemand|\PHPUnit_Framework_MockObject_MockObject $demand */
         $mockDemand = $this->getMockBuilder(PerformanceDemand::class)->getMock();
@@ -559,7 +548,7 @@ class PerformanceControllerTest extends UnitTestCase
      */
     public function listActionCallsFindDemanded(): void
     {
-        $settings = array('foo');
+        $settings = ['foo'];
         $this->subject->overrideSettings($settings);
 
         /** @var PerformanceDemand|MockObject $demand */
@@ -791,7 +780,7 @@ class PerformanceControllerTest extends UnitTestCase
     {
         $namespace = $this->subject->getNamespace();
         $this->assertSame(
-            get_class($this->subject),
+            $this->subject::class,
             $namespace
         );
     }

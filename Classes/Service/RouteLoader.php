@@ -66,7 +66,7 @@ class RouteLoader
     {
         $configuration = $dataProvider->getConfiguration();
         foreach ($configuration as $routeConfiguration) {
-            call_user_func_array([$this, 'register'], $routeConfiguration);
+            call_user_func_array($this->register(...), $routeConfiguration);
         }
     }
 

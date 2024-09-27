@@ -50,7 +50,7 @@ class GeoCoder
         $url = $this->serviceUrl . urlencode($address);
 
         $response_json = $this->getUrl($url);
-        $response = json_decode($response_json, true);
+        $response = json_decode((string) $response_json, true);
         if ($response['status'] == 'OK') {
             return $response['results'][0]['geometry']['location'];
         } else {
@@ -98,7 +98,7 @@ class GeoCoder
             cos($rAngDist) - sin($rLat) * sin($rLatB)
         );
 
-        return array('lat' => rad2deg($rLatB), 'lng' => rad2deg($rLonB));
+        return ['lat' => rad2deg($rLatB), 'lng' => rad2deg($rLonB)];
     }
 
     /**
@@ -113,10 +113,7 @@ class GeoCoder
      */
     public function getBoundsByRadius($lat, $lng, $distance, $units = 'km')
     {
-        return array('N' => $this->destination($lat, $lng, 0, $distance, $units),
-            'E' => $this->destination($lat, $lng, 90, $distance, $units),
-            'S' => $this->destination($lat, $lng, 180, $distance, $units),
-            'W' => $this->destination($lat, $lng, 270, $distance, $units));
+        return ['N' => $this->destination($lat, $lng, 0, $distance, $units), 'E' => $this->destination($lat, $lng, 90, $distance, $units), 'S' => $this->destination($lat, $lng, 180, $distance, $units), 'W' => $this->destination($lat, $lng, 270, $distance, $units)];
     }
 
     /**
@@ -138,8 +135,8 @@ class GeoCoder
         $rHalfDeltaLat = deg2rad(($latB - $latA) / 2);
         $rHalfDeltaLon = deg2rad(($lonB - $lonA) / 2);
 
-        return 2 * $radius * asin(sqrt(pow(sin($rHalfDeltaLat), 2) +
-            cos($rLatA) * cos($rLatB) * pow(sin($rHalfDeltaLon), 2)));
+        return 2 * $radius * asin(sqrt(sin($rHalfDeltaLat) ** 2 +
+            cos($rLatA) * cos($rLatB) * sin($rHalfDeltaLon) ** 2));
     }
 
     /**

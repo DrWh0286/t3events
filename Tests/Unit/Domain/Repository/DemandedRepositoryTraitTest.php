@@ -96,8 +96,8 @@ class DemandedRepositoryTraitTest extends UnitTestCase
         /** @var AbstractDemandedRepository|AccessibleMockObjectInterface|MockObject $fixture */
         $fixture = $this->getAccessibleMock(
             AbstractDemandedRepository::class,
-            array('createQuery', 'createConstraintsFromDemand'),
-            array(),
+            ['createQuery', 'createConstraintsFromDemand'],
+            [],
             '',
             false
         );
@@ -129,8 +129,8 @@ class DemandedRepositoryTraitTest extends UnitTestCase
         /** @var AbstractDemandedRepository|MockObject|AccessibleMockObjectInterface $fixture */
         $fixture = $this->getAccessibleMock(
             AbstractDemandedRepository::class,
-            array('createQuery', 'createConstraintsFromDemand'),
-            array(),
+            ['createQuery', 'createConstraintsFromDemand'],
+            [],
             '',
             false
         );

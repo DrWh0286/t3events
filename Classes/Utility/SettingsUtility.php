@@ -43,18 +43,12 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 class SettingsUtility implements SingletonInterface
 {
-    protected \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObjectRenderer;
-
     /**
      * @var array
      */
     protected $controllerKeys = [];
-
-    protected \DWenzel\T3events\Resource\ResourceFactory $resourceFactory;
-    public function __construct(ContentObjectRenderer $contentObjectRenderer, ResourceFactory $resourceFactory)
+    public function __construct(protected \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObjectRenderer, protected \DWenzel\T3events\Resource\ResourceFactory $resourceFactory)
     {
-        $this->contentObjectRenderer = $contentObjectRenderer;
-        $this->resourceFactory = $resourceFactory;
     }
 
     /**
@@ -92,7 +86,7 @@ class SettingsUtility implements SingletonInterface
      */
     public function getControllerKey($controller)
     {
-        $className = get_class($controller);
+        $className = $controller::class;
         if (isset($this->controllerKeys[$className])) {
             $controllerKey = $this->controllerKeys[$className];
         } else {

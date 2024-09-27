@@ -34,7 +34,7 @@ class FilterOptionsService
                 }
                 $filterOptions[$key . 's'] = $result;
 
-            } catch (NoDemandedRepositoryFoundForKeyException $exception) {
+            } catch (NoDemandedRepositoryFoundForKeyException) {
                 // Log this - what should be done? Configuration is wrong in this case...
             }
 

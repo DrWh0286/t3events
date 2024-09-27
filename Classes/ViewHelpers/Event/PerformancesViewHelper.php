@@ -34,15 +34,11 @@ class PerformancesViewHelper extends AbstractTagBasedViewHelper
      */
     protected $performances;
 
-    /**
+    public function __construct(/**
      * eventRepository
      */
-    protected \DWenzel\T3events\Domain\Repository\EventRepository $eventRepository;
-
-    public function __construct(\DWenzel\T3events\Domain\Repository\EventRepository $eventRepository, protected \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager)
+    protected \DWenzel\T3events\Domain\Repository\EventRepository $eventRepository, protected \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager)
     {
-        $this->eventRepository = $eventRepository;
-
         $tsSettings = $this->configurationManager->getConfiguration(
             \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
             't3events',
@@ -140,14 +136,14 @@ class PerformancesViewHelper extends AbstractTagBasedViewHelper
             $format = $GLOBALS['TYPO3_CONF_VARS']['SYS']['ddmmyy'] ?: 'Y-m-d';
         }
 
-        $timestamps = array();
+        $timestamps = [];
         $dateRange = '';
         /** @var Performance $performance */
         foreach ($this->performances as $performance) {
             $timestamps[] = $performance->getDate()->getTimestamp();
         }
         sort($timestamps);
-        if (strpos($format, '%') !== false) {
+        if (str_contains((string) $format, '%')) {
             $dateRange = strftime($format, $timestamps[0]);
             $dateRange .= ' - ' . strftime($format, end($timestamps));
         } else {
@@ -165,24 +161,18 @@ class PerformancesViewHelper extends AbstractTagBasedViewHelper
      */
     public function getCrucialStatus()
     {
-        $states = array();
+        $states = [];
         foreach ($this->performances as $performance) {
             $status = $performance->getStatus();
             if ($status) {
                 array_push(
                     $states,
-                    array(
-                        'title' => $status->getTitle(),
-                        'priority' => $status->getPriority(),
-                        'cssClass' => $status->getCssClass()
-                    )
+                    ['title' => $status->getTitle(), 'priority' => $status->getPriority(), 'cssClass' => $status->getCssClass()]
                 );
             }
         }
         if (count($states)) {
-            usort($states, function ($a, $b) {
-                return $a['priority'] - $b['priority'];
-            });
+            usort($states, fn($a, $b) => $a['priority'] - $b['priority']);
 
             return $states[0];
         } else {
@@ -197,11 +187,11 @@ class PerformancesViewHelper extends AbstractTagBasedViewHelper
      */
     private function getLowestPrice()
     {
-        $prices = array();
+        $prices = [];
         foreach ($this->performances as $performance) {
             $ticketClasses = $performance->getTicketClass();
             foreach ($ticketClasses as $ticketClass) {
-                $prices[] = ($ticketClass->getPrice()) ? $ticketClass->getPrice() : 0;
+                $prices[] = $ticketClass->getPrice() ?: 0;
             }
         }
         sort($prices);

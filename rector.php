@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Rector\CodingStyle\ClassNameImport\ClassNameImportSkipVoter\FullyQualifiedNameClassNameImportSkipVoter;
 use Rector\CodingStyle\Rector\Stmt\RemoveUselessAliasInUseStatementRector;
 use Rector\Config\RectorConfig;
 use Rector\Php55\Rector\String_\StringClassNameToClassConstantRector;
@@ -31,7 +32,7 @@ return RectorConfig::configure()
         __DIR__ . '/ext_tables.php',
     ])
     // uncomment to reach your current PHP version
-    // ->withPhpSets()
+     ->withPhpSets()
     ->withPhpVersion(PhpVersion::PHP_81)
     ->withSets([
         Typo3SetList::CODE_QUALITY,
@@ -64,10 +65,8 @@ return RectorConfig::configure()
     ->withSkip([
         // @see https://github.com/sabbelasichon/typo3-rector/issues/2536
         __DIR__ . '/**/Configuration/ExtensionBuilder/*',
-        NameImportingPostRector::class => [
-            'ext_localconf.php', // This line can be removed since TYPO3 11.4, see https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/11.4/Important-94280-MoveContentsOfExtPhpIntoLocalScopes.html
-            'ext_tables.php', // This line can be removed since TYPO3 11.4, see https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/11.4/Important-94280-MoveContentsOfExtPhpIntoLocalScopes.html
-            'ClassAliasMap.php',
-        ]
+//        NameImportingPostRector::class => [
+//            'ClassAliasMap.php',
+//        ]
     ])
 ;

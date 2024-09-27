@@ -30,24 +30,18 @@ class AbstractPeriodDataProvider
     public const LAYERS_TO_SHOW = '';
 
     /**
-     * @var bool
-     */
-    protected $respectEndDate;
-
-    /**
      * AbstractPeriodDataProvider constructor.
      *
      * @param bool $respectEndDate
      */
-    public function __construct($respectEndDate = false)
+    public function __construct(protected $respectEndDate = false)
     {
-        $this->respectEndDate = $respectEndDate;
     }
 
     /**
      * @return array
      */
-    public function getAllLayerIds()
+    public function getAllLayerIds(): array
     {
         return $this->getLayerIds(self::ALL_LAYERS);
     }

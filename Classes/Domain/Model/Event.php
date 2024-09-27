@@ -596,7 +596,7 @@ class Event extends AbstractEntity
      */
     public function getEarliestDate()
     {
-        $dates = array();
+        $dates = [];
         foreach ($this->performances as $performance) {
             $dates[] = $performance->getDate()->getTimestamp();
         }

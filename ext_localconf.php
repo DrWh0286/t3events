@@ -6,7 +6,7 @@ if (!defined('TYPO3')) {
 \DWenzel\T3events\Configuration\ExtensionConfiguration::configurePlugins();
 // Modify flexform values
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_befunc.php']['getFlexFormDSClass']['t3events'] =
-    'DWenzel\\T3events\\Hooks\\BackendUtility';
+    \DWenzel\T3events\Hooks\BackendUtility::class;
 
 /** @var \TYPO3\CMS\Core\Information\Typo3Version $typo3Version */
 $typo3Version = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Information\Typo3Version::class);

@@ -252,7 +252,7 @@ class LegacyFileFieldsUpdateWizard implements UpgradeWizardInterface, ChattyInte
         if (empty($fieldItems) || is_numeric($row[$fieldToMigrate])) {
             return;
         }
-        $fileadminDirectory = rtrim($GLOBALS['TYPO3_CONF_VARS']['BE']['fileadminDir'], '/') . '/';
+        $fileadminDirectory = rtrim((string) $GLOBALS['TYPO3_CONF_VARS']['BE']['fileadminDir'], '/') . '/';
         $i = 0;
 
         $storageUid = (int)$this->storage->getUid();
@@ -301,7 +301,7 @@ class LegacyFileFieldsUpdateWizard implements UpgradeWizardInterface, ChattyInte
                     /** @var File $file */
                     $file = $this->storage->getFile(self::TARGET_PATH . $item);
                     $fileUid = $file->getUid();
-                } catch (\InvalidArgumentException $e) {
+                } catch (\InvalidArgumentException) {
 
                     // no file found, no reference can be set
                     $this->output->warning(sprintf(

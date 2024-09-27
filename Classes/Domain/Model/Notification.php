@@ -30,25 +30,6 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Notification extends AbstractEntity
 {
-    protected string $recipient;
-
-    protected string $sender;
-
-    protected string $senderEmail;
-
-    protected string $senderName;
-
-    #[\TYPO3\CMS\Extbase\Annotation\Validate(['validator' => 'NotEmpty'])]
-    protected string $subject;
-
-    /**
-     * Body text
-     */
-    #[\TYPO3\CMS\Extbase\Annotation\Validate(['validator' => 'NotEmpty'])]
-    protected string $bodytext;
-
-    protected ?string $format;
-
     /**
      * Send time
      *
@@ -56,30 +37,26 @@ class Notification extends AbstractEntity
      */
     protected $sentAt;
 
-    /**
-     * @var ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     */
-    #[Lazy]
-    protected ?\TYPO3\CMS\Extbase\Persistence\ObjectStorage $attachments;
-
     public function __construct(
-        string $recipient = '',
-        string $sender = '',
-        string $senderEmail = '',
-        string $senderName = '',
-        string $subject = '',
-        string $bodytext = '',
-        ?string $format = null,
-        ?ObjectStorage $attachments = null
-    ) {
-        $this->recipient = $recipient;
-        $this->sender = $sender;
-        $this->senderEmail = $senderEmail;
-        $this->senderName = $senderName;
-        $this->subject = $subject;
-        $this->bodytext = $bodytext;
-        $this->format = $format;
-        $this->attachments = $attachments;
+        protected string $recipient = '',
+        protected string $sender = '',
+        protected string $senderEmail = '',
+        protected string $senderName = '',
+        #[\TYPO3\CMS\Extbase\Annotation\Validate(['validator' => 'NotEmpty'])]
+        protected string $subject = '',
+        /**
+         * Body text
+         */
+        #[\TYPO3\CMS\Extbase\Annotation\Validate(['validator' => 'NotEmpty'])]
+        protected string $bodytext = '',
+        protected ?string $format = null,
+        /**
+         * @var ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+         */
+        #[Lazy]
+        protected ?\TYPO3\CMS\Extbase\Persistence\ObjectStorage $attachments = null
+    )
+    {
     }
 
 
@@ -88,7 +65,7 @@ class Notification extends AbstractEntity
      *
      * @return string
      */
-    public function getRecipient()
+    public function getRecipient(): string
     {
         return $this->recipient;
     }
@@ -108,7 +85,7 @@ class Notification extends AbstractEntity
      *
      * @return string
      */
-    public function getSubject()
+    public function getSubject(): string
     {
         return $this->subject;
     }
@@ -129,7 +106,7 @@ class Notification extends AbstractEntity
      * @return string
      * @deprecated Use getSenderEmail and getSenderName instead
      */
-    public function getSender()
+    public function getSender(): string
     {
         return $this->sender;
     }
@@ -151,7 +128,7 @@ class Notification extends AbstractEntity
      *
      * @return string
      */
-    public function getBodytext()
+    public function getBodytext(): string
     {
         return $this->bodytext;
     }
@@ -171,7 +148,7 @@ class Notification extends AbstractEntity
      *
      * @return string
      */
-    public function getFormat()
+    public function getFormat(): ?string
     {
         return $this->format;
     }
@@ -209,7 +186,7 @@ class Notification extends AbstractEntity
     /**
      * @return ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
      */
-    public function getAttachments()
+    public function getAttachments(): ?\TYPO3\CMS\Extbase\Persistence\ObjectStorage
     {
         return $this->attachments;
     }
@@ -245,7 +222,7 @@ class Notification extends AbstractEntity
     /**
      * @return string
      */
-    public function getSenderEmail()
+    public function getSenderEmail(): string
     {
         if (!isset($this->senderEmail)) {
             return($this->sender);
@@ -266,7 +243,7 @@ class Notification extends AbstractEntity
     /**
      * @return string
      */
-    public function getSenderName()
+    public function getSenderName(): string
     {
         return $this->senderName;
     }

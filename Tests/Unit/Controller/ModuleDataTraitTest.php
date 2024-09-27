@@ -84,7 +84,7 @@ class ModuleDataTraitTest extends TestCase
                 $controllerName = null,
                 $extensionName = null,
                 array $arguments = null
-            ): void {
+            ): never {
                 throw new class ('forward method called', 872634598237456) extends \Exception {
                 };
             }
@@ -137,11 +137,7 @@ class ModuleDataTraitTest extends TestCase
 
             public function get(string $id)
             {
-                if (isset($this->classes[$id])) {
-                    return $this->classes[$id];
-                }
-
-                return null;
+                return $this->classes[$id] ?? null;
             }
 
             public function has(string $id): bool

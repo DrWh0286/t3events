@@ -40,7 +40,7 @@ class EmConfiguration
     public function __construct(array $configuration)
     {
         foreach ($configuration as $key => $value) {
-            if (property_exists(__CLASS__, $key)) {
+            if (property_exists(self::class, $key)) {
                 $this->$key = $value;
             }
         }

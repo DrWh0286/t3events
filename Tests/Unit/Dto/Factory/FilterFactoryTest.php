@@ -62,7 +62,7 @@ class FilterFactoryTest extends UnitTestCase
 
         $invalidKey = 'fo0Bar4BAz';
 
-        $this->filterResolver->expects($this->once())->method('resolve')->willReturn(get_class($expectedFilter));
+        $this->filterResolver->expects($this->once())->method('resolve')->willReturn($expectedFilter::class);
 
         $this->assertEquals(
             $expectedFilter,
