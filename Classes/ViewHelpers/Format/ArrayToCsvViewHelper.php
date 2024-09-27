@@ -45,7 +45,7 @@ class ArrayToCsvViewHelper extends AbstractViewHelper
     /**
      * @return string
      */
-    public function render()
+    public function render(): string
     {
         $quote = $this->arguments['quote'];
         $out = [];

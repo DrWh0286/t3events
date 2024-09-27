@@ -50,9 +50,9 @@ class AbstractPeriodDataProvider
     }
 
     /**
-     * @return mixed
+     * @return mixed[]
      */
-    public function getVisibleLayerIds()
+    public function getVisibleLayerIds(): array
     {
         $visibleLayers = $this->getLayerIds(static::VISIBLE_LAYERS);
 

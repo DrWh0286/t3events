@@ -55,7 +55,7 @@ class BackendUtility
      * @param string $fieldName some strange field name
      * @return void
      */
-    public function getFlexFormDS_postProcessDS(&$dataStructure, $conf, $row, $table, $fieldName): void
+    public function getFlexFormDS_postProcessDS(&$dataStructure, $conf, array $row, $table, $fieldName): void
     {
         if ($table === 'tt_content' && $row['list_type'] === 't3events_events' && is_array($dataStructure)) {
             $this->updateFlexforms($dataStructure, $row);

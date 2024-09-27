@@ -21,7 +21,7 @@ trait AudienceConstraintRepositoryTrait
      * @param \DWenzel\T3events\Domain\Model\Dto\AudienceAwareDemandInterface $demand
      * @return array<\TYPO3\CMS\Extbase\Persistence\QOM\Constraint>
      */
-    public function createAudienceConstraints(QueryInterface $query, AudienceAwareDemandInterface $demand)
+    public function createAudienceConstraints(QueryInterface $query, AudienceAwareDemandInterface $demand): array
     {
         $audienceConstraints = [];
         $audienceField = $demand->getAudienceField();

@@ -48,7 +48,7 @@ class ResourceFactory extends CoreResourceFactory
      * @param $identifier
      * @return null|\TYPO3\CMS\Core\Resource\FileInterface
      */
-    public function getFileObjectByCombinedIdentifier($identifier)
+    public function getFileObjectByCombinedIdentifier($identifier): ?\TYPO3\CMS\Core\Resource\FileInterface
     {
         $file = $this->retrieveFileOrFolderObject(
             $identifier

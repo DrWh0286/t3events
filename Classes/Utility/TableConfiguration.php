@@ -85,7 +85,7 @@ class TableConfiguration
      *
      * @return int
      */
-    protected static function getVersion()
+    protected static function getVersion(): int
     {
         $version = 8;
         $versionNumber = VersionNumberUtility::convertVersionNumberToInteger(
@@ -107,7 +107,7 @@ class TableConfiguration
      * @param string $extension Extension key containing the language files
      * @return string
      */
-    public static function getLanguageFilePath($extension = 'core')
+    public static function getLanguageFilePath(string $extension = 'core'): string
     {
         $path = 'LLL:EXT:' . $extension . '/';
 

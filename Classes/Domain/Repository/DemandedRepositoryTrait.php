@@ -82,7 +82,7 @@ trait DemandedRepositoryTrait
      * @param \DWenzel\T3events\Domain\Model\Dto\DemandInterface $demand
      * @return array<\TYPO3\CMS\Extbase\Persistence\Generic\Qom\Constraint>
      */
-    public function createOrderingsFromDemand(DemandInterface $demand)
+    public function createOrderingsFromDemand(DemandInterface $demand): array
     {
         $orderings = [];
 
@@ -208,7 +208,7 @@ trait DemandedRepositoryTrait
      * @return array<\TYPO3\CMS\Extbase\Persistence\QOM\Constraint>
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function createSearchConstraints(QueryInterface $query, SearchAwareDemandInterface $demand)
+    public function createSearchConstraints(QueryInterface $query, SearchAwareDemandInterface $demand): array
     {
         $searchConstraints = [];
         if ($search = $demand->getSearch()) {
@@ -240,7 +240,7 @@ trait DemandedRepositoryTrait
      * @return mixed
      * @throws UnsupportedMethodException
      */
-    public function __call($methodName, $arguments)
+    public function __call(string $methodName, $arguments)
     {
         $substring = substr($methodName, 0, 15);
         if ($substring === 'countContaining' && strlen($methodName) > 16) {

@@ -21,7 +21,7 @@ trait GenreConstraintRepositoryTrait
      * @param \DWenzel\T3events\Domain\Model\Dto\GenreAwareDemandInterface $demand
      * @return array<\TYPO3\CMS\Extbase\Persistence\QOM\Constraint>
      */
-    public function createGenreConstraints(QueryInterface $query, GenreAwareDemandInterface $demand)
+    public function createGenreConstraints(QueryInterface $query, GenreAwareDemandInterface $demand): array
     {
         $genreConstraints = [];
         $genreField = $demand->getGenreField();

@@ -23,7 +23,7 @@ trait PeriodConstraintRepositoryTrait
      * @return array<\TYPO3\CMS\Extbase\Persistence\QOM\Constraint>
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function createPeriodConstraints(QueryInterface $query, PeriodAwareDemandInterface $demand)
+    public function createPeriodConstraints(QueryInterface $query, PeriodAwareDemandInterface $demand): array
     {
         // set start date initial to now
         $timezone = new \DateTimeZone(date_default_timezone_get());

@@ -257,7 +257,7 @@ class Content extends AbstractEntity
      *
      * @return int
      */
-    public function getColPos()
+    public function getColPos(): int
     {
         return (int)$this->colPos;
     }

@@ -40,7 +40,7 @@ class ScheduleConfigurationService
      * @param array $parameters
      * @param $parentObject
      */
-    public function getLabel(&$parameters, $parentObject = null): void
+    public function getLabel(array &$parameters, $parentObject = null): void
     {
         $recordLabel = '';
         $record = $this->backendUtilityService->getRecord(

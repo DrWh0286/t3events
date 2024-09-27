@@ -46,6 +46,7 @@ return RectorConfig::configure()
     ->withPreparedSets(
         codeQuality: true,
         codingStyle: true,
+        typeDeclarations: true
     )
     ->withRules([
         AddVoidReturnTypeWhereNoReturnRector::class,

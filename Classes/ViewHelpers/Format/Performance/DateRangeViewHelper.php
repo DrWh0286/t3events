@@ -58,7 +58,7 @@ class DateRangeViewHelper extends AbstractDateRangeViewHelper
     /**
      * @return array An array of timestamps
      */
-    protected function getTimestamps()
+    protected function getTimestamps(): array
     {
         $startDate = $this->performance->getDate();
         $timestamps = [$startDate->getTimestamp()];

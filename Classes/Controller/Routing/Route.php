@@ -128,7 +128,7 @@ class Route
      * @param string $method Routing method. Allowed: redirect, forward, redirectToUri
      * @return Route The current route instance.
      */
-    public function setMethod($method)
+    public function setMethod($method): static
     {
         if (in_array($method, static::$validMethods)) {
             $this->method = $method;
@@ -166,7 +166,7 @@ class Route
      * @param mixed $value Option value
      * @return Route The current route instance.
      */
-    public function setOption($name, mixed $value)
+    public function setOption($name, mixed $value): static
     {
         $this->options[$name] = $value;
 
@@ -184,7 +184,7 @@ class Route
      * @param array $options An array of option
      * @return Route The current route instance.
      */
-    public function setOptions(array $options)
+    public function setOptions(array $options): static
     {
         $this->options = $options;
 

@@ -59,7 +59,7 @@ class DateRangeViewHelper extends AbstractDateRangeViewHelper
     /**
      * @return array An array of timestamps
      */
-    protected function getTimestamps()
+    protected function getTimestamps(): array
     {
         $timestamps = [];
         /** @var Performance $performance */

@@ -25,7 +25,7 @@ class ContentRepository extends Repository implements DemandedRepositoryInterfac
      * @param DemandInterface $demand
      * @return array
      */
-    public function createConstraintsFromDemand(QueryInterface $query, DemandInterface $demand)
+    public function createConstraintsFromDemand(QueryInterface $query, DemandInterface $demand): array
     {
         // add constraints if required
         return [];

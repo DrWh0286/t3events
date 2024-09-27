@@ -82,7 +82,7 @@ class GeoCoder
      * @return array An array with lat and lng values
      * @codeCoverageIgnore
      */
-    public function destination($lat, $lng, $bearing, $distance, $units = 'km')
+    public function destination($lat, $lng, $bearing, $distance, $units = 'km'): array
     {
         $radius = strcasecmp($units, 'km') !== 0 ? 3963.19 : 6378.137;
         $rLat = deg2rad($lat);
@@ -111,7 +111,7 @@ class GeoCoder
      * @return array An array describing a bounding box
      * @codeCoverageIgnore
      */
-    public function getBoundsByRadius($lat, $lng, $distance, $units = 'km')
+    public function getBoundsByRadius($lat, $lng, $distance, $units = 'km'): array
     {
         return ['N' => $this->destination($lat, $lng, 0, $distance, $units), 'E' => $this->destination($lat, $lng, 90, $distance, $units), 'S' => $this->destination($lat, $lng, 180, $distance, $units), 'W' => $this->destination($lat, $lng, 270, $distance, $units)];
     }
@@ -127,7 +127,7 @@ class GeoCoder
      * @return float
      * @codeCoverageIgnore
      */
-    public function distance($latA, $lonA, $latB, $lonB, $units = 'km')
+    public function distance($latA, $lonA, $latB, $lonB, $units = 'km'): float
     {
         $radius = strcasecmp($units, 'km') !== 0 ? 3963.19 : 6378.137;
         $rLatA = deg2rad($latA);

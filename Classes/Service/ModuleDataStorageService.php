@@ -33,7 +33,7 @@ class ModuleDataStorageService implements SingletonInterface
      * @param string $key
      * @return \DWenzel\T3events\Domain\Model\Dto\ModuleData
      */
-    public function loadModuleData($key)
+    public function loadModuleData(string $key)
     {
         if ($this->getBackendUserAuthentication() instanceof BackendUserAuthentication) {
             $moduleData = $this->getBackendUserAuthentication()->getModuleData($key);
@@ -55,7 +55,7 @@ class ModuleDataStorageService implements SingletonInterface
      * @param string $key
      * @return void
      */
-    public function persistModuleData(ModuleData $moduleData, $key): void
+    public function persistModuleData(ModuleData $moduleData, string $key): void
     {
         $this->getBackendUserAuthentication()->pushModuleData($key, serialize($moduleData));
     }

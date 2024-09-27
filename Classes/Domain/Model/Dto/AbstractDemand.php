@@ -298,7 +298,7 @@ class AbstractDemand extends AbstractEntity implements DemandInterface
      * @param $propertyValue
      * @param $timeZone
      */
-    protected function overwriteProperty($overwriteDemand, $propertyName, $propertyValue, $timeZone, $settings)
+    protected function overwriteProperty($overwriteDemand, $propertyName, $propertyValue, $timeZone, array $settings)
     {
         switch ($propertyName) {
             case 'sortBy':

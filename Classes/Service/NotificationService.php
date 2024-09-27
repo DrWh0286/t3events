@@ -158,7 +158,7 @@ class NotificationService
      * @var array $data An array containing data for attachement generation
      * @var MailMessage $message
      */
-    protected function buildAttachmentFromTemplate($data, MailMessage $message): void
+    protected function buildAttachmentFromTemplate(array $data, MailMessage $message): void
     {
         $attachmentView = $this->buildTemplateView(
             $data['templateName'],
@@ -182,7 +182,7 @@ class NotificationService
      * @var string $folderName Optional folder name, default 'Email'
      * @return string
      */
-    protected function getTemplatePathAndFileName($templateName, $folderName = 'Email')
+    protected function getTemplatePathAndFileName(string $templateName, string $folderName = 'Email'): string
     {
         $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
         $templateRootPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
@@ -196,7 +196,7 @@ class NotificationService
      *
      * @return array
      */
-    protected function getLayoutRootPaths()
+    protected function getLayoutRootPaths(): array
     {
         $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
         return is_array($extbaseFrameworkConfiguration['view']['layoutRootPaths']) ? $extbaseFrameworkConfiguration['view']['layoutRootPaths'] : [];
@@ -207,7 +207,7 @@ class NotificationService
      *
      * @return array
      */
-    protected function getTemplateRootPaths()
+    protected function getTemplateRootPaths(): array
     {
         $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
         return is_array($extbaseFrameworkConfiguration['view']['templateRootPaths']) ? $extbaseFrameworkConfiguration['view']['templateRootPaths'] : [];
@@ -218,7 +218,7 @@ class NotificationService
      *
      * @return array
      */
-    protected function getPartialRootPaths()
+    protected function getPartialRootPaths(): array
     {
         $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
         return is_array($extbaseFrameworkConfiguration['view']['partialRootPaths']) ? $extbaseFrameworkConfiguration['view']['partialRootPaths'] : [];

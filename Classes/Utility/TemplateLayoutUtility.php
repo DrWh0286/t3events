@@ -29,7 +29,7 @@ class TemplateLayoutUtility implements SingletonInterface
      * @param int|null $pageId Optional page id for pages TS config. If empty only the settings in TYPO3_CONF_VARS are considered.
      * @return bool
      */
-    public function hasLayouts($extensionKey, $pageId = null)
+    public function hasLayouts($extensionKey, $pageId = null): bool
     {
         $pageTSConfig = [];
         if (!is_null($pageId)) {
@@ -53,7 +53,7 @@ class TemplateLayoutUtility implements SingletonInterface
      * @param int|null $pageId Optional page id for pages TS config. If empty only the settings in TYPO3_CONF_VARS are considered.
      * @return array
      */
-    public function getLayouts($extensionKey, $pageId = null)
+    public function getLayouts($extensionKey, $pageId = null): array
     {
         $templateLayouts = [];
 
@@ -99,7 +99,7 @@ class TemplateLayoutUtility implements SingletonInterface
      * @param string $pageTSKey Extension key
      * @return bool
      */
-    protected function hasTSConfigTemplateLayouts($pageTSConfig, $pageTSKey)
+    protected function hasTSConfigTemplateLayouts(array $pageTSConfig, $pageTSKey): bool
     {
         return isset($pageTSConfig[$pageTSKey]['templateLayouts.'])
         && is_array($pageTSConfig[$pageTSKey]['templateLayouts.']);
@@ -111,7 +111,7 @@ class TemplateLayoutUtility implements SingletonInterface
      * @param string $extensionKey
      * @return string
      */
-    protected function getPageTSKey($extensionKey)
+    protected function getPageTSKey(string $extensionKey): string
     {
         return 'tx_' . $extensionKey . '.';
     }
@@ -122,7 +122,7 @@ class TemplateLayoutUtility implements SingletonInterface
      * @param string $extensionKey Extension key
      * @return bool
      */
-    protected function hasTYPO3ConfVarsTemplateLayouts($extensionKey)
+    protected function hasTYPO3ConfVarsTemplateLayouts($extensionKey): bool
     {
         return isset($GLOBALS['TYPO3_CONF_VARS']['EXT'][$extensionKey]['templateLayouts'])
         && is_array($GLOBALS['TYPO3_CONF_VARS']['EXT'][$extensionKey]['templateLayouts']);

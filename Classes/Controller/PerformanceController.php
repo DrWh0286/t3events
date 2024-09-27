@@ -264,7 +264,7 @@ class PerformanceController extends AbstractActionController
      * @return \DWenzel\T3events\Domain\Model\Dto\DemandInterface
      * @deprecated Use demand factory instead
      */
-    protected function createDemandFromSettings($settings): \DWenzel\T3events\Domain\Model\Dto\PeriodAwareDemandInterface|\DWenzel\T3events\Domain\Model\Dto\DemandInterface
+    protected function createDemandFromSettings(array $settings): \DWenzel\T3events\Domain\Model\Dto\PeriodAwareDemandInterface|\DWenzel\T3events\Domain\Model\Dto\DemandInterface
     {
         /** @var PerformanceDemand $demand */
         return $this->performanceDemandFactory->createFromSettings($settings);

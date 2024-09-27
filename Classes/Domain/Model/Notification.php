@@ -74,7 +74,7 @@ class Notification extends AbstractEntity
      *
      * @var string $recipient
      */
-    public function setRecipient($recipient): void
+    public function setRecipient(string $recipient): void
     {
         $this->recipient = $recipient;
     }
@@ -94,7 +94,7 @@ class Notification extends AbstractEntity
      *
      * @var string $subject
      */
-    public function setSubject($subject): void
+    public function setSubject(string $subject): void
     {
         $this->subject = $subject;
     }
@@ -116,7 +116,7 @@ class Notification extends AbstractEntity
      * @var string $sender
      * @deprecated Use setSenderEmail and setSenderName instead
      */
-    public function setSender($sender): void
+    public function setSender(string $sender): void
     {
         $this->sender = $sender;
         $this->senderEmail = $sender;
@@ -137,7 +137,7 @@ class Notification extends AbstractEntity
      *
      * @var string $bodytext
      */
-    public function setBodytext($bodytext): void
+    public function setBodytext(string $bodytext): void
     {
         $this->bodytext = $bodytext;
     }
@@ -157,7 +157,7 @@ class Notification extends AbstractEntity
      *
      * @var string $format
      */
-    public function setFormat($format): void
+    public function setFormat(?string $format): void
     {
         $this->format = $format;
     }
@@ -193,7 +193,7 @@ class Notification extends AbstractEntity
     /**
      * @param ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $attachments
      */
-    public function setAttachments($attachments): void
+    public function setAttachments(?\TYPO3\CMS\Extbase\Persistence\ObjectStorage $attachments): void
     {
         $this->attachments = $attachments;
     }
@@ -233,7 +233,7 @@ class Notification extends AbstractEntity
     /**
      * @param string $senderEmail
      */
-    public function setSenderEmail($senderEmail): void
+    public function setSenderEmail(string $senderEmail): void
     {
         $this->senderEmail = $senderEmail;
         $this->sender = $senderEmail;
@@ -250,7 +250,7 @@ class Notification extends AbstractEntity
     /**
      * @param string $senderName
      */
-    public function setSenderName($senderName): void
+    public function setSenderName(string $senderName): void
     {
         $this->senderName = $senderName;
     }

@@ -22,7 +22,7 @@ trait StatusConstraintRepositoryTrait
      * @param \DWenzel\T3events\Domain\Model\Dto\StatusAwareDemandInterface $demand
      * @return array<\TYPO3\CMS\Extbase\Persistence\QOM\Constraint>
      */
-    public function createStatusConstraints(QueryInterface $query, StatusAwareDemandInterface $demand)
+    public function createStatusConstraints(QueryInterface $query, StatusAwareDemandInterface $demand): array
     {
         $statusConstraints = [];
         $statusField = $demand->getStatusField();

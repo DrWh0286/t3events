@@ -88,7 +88,7 @@ class DateViewHelper extends AbstractViewHelper
      *
      * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
      */
-    public function render()
+    public function render(): string|false
     {
         $date = $this->arguments['date'];
         $format = $this->arguments['format'];

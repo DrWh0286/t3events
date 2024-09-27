@@ -149,7 +149,7 @@ class PerformancesViewHelper extends AbstractTagBasedViewHelper
      *
      * @return array
      */
-    public function getDateRange()
+    public function getDateRange(): string
     {
         $format = $this->arguments['dateFormat'];
         if ($format === '') {
@@ -180,7 +180,7 @@ class PerformancesViewHelper extends AbstractTagBasedViewHelper
      *
      * @return string
      */
-    public function getCrucialStatus()
+    public function getCrucialStatus(): array|string
     {
         $states = [];
         foreach ($this->performances as $performance) {
@@ -191,7 +191,7 @@ class PerformancesViewHelper extends AbstractTagBasedViewHelper
         }
 
         if ($states !== []) {
-            usort($states, fn ($a, $b) => $a['priority'] - $b['priority']);
+            usort($states, fn ($a, $b): int => $a['priority'] - $b['priority']);
 
             return $states[0];
         } else {
@@ -204,7 +204,7 @@ class PerformancesViewHelper extends AbstractTagBasedViewHelper
      *
      * @return float
      */
-    private function getLowestPrice()
+    private function getLowestPrice(): float
     {
         $prices = [];
         foreach ($this->performances as $performance) {

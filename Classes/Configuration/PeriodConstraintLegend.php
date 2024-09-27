@@ -161,7 +161,7 @@ class PeriodConstraintLegend extends VectorImage
      * @param string $key
      * @return string
      */
-    public function translate($key): string
+    public function translate(string $key): string
     {
         $translatedString = $this->getLanguageService()->sL(self::LANGUAGE_FILE . $key);
         if ($translatedString === '' || $translatedString === '0') {

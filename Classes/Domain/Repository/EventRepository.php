@@ -46,7 +46,7 @@ class EventRepository extends AbstractDemandedRepository implements
      * @return array<\TYPO3\CMS\Extbase\Persistence\QOM\Constraint>
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function createCategoryConstraints(QueryInterface $query, $demand)
+    public function createCategoryConstraints(QueryInterface $query, $demand): array
     {
         // gather OR constraints (categories)
         $categoryConstraints = [];

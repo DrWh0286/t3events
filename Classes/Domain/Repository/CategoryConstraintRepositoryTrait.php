@@ -22,7 +22,7 @@ trait CategoryConstraintRepositoryTrait
      * @return array<\TYPO3\CMS\Extbase\Persistence\QOM\Constraint>
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function createCategoryConstraints(QueryInterface $query, CategoryAwareDemandInterface $demand)
+    public function createCategoryConstraints(QueryInterface $query, CategoryAwareDemandInterface $demand): array
     {
         $categoryConstraints = [];
         $categoryField = $demand->getCategoryField();

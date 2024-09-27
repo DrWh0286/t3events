@@ -44,7 +44,7 @@ class Typo3Session implements SessionInterface
      * @param string $identifier
      * @return bool
      */
-    public function has($identifier)
+    public function has($identifier): bool
     {
         return (bool) $this->get($identifier);
     }
