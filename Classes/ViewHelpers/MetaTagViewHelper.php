@@ -2,6 +2,11 @@
 
 namespace DWenzel\T3events\ViewHelpers;
 
+use TYPO3\CMS\Core\Page\PageRenderer;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
+
 /***************************************************************
      *  Copyright notice
      *  written by
@@ -28,7 +33,7 @@ namespace DWenzel\T3events\ViewHelpers;
  * @package TYPO3
  * @subpackage tx_t3events
  */
-class MetaTagViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper
+class MetaTagViewHelper extends AbstractTagBasedViewHelper
 {
     /**
      * @var    string
@@ -60,19 +65,22 @@ class MetaTagViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBas
 
         // set current domain
         if ($useCurrentDomain) {
-            $this->tag->addAttribute('content', \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL'));
+            $this->tag->addAttribute('content', GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL'));
         }
 
         // prepend current domain
         if ($forceAbsoluteUrl) {
             $path = $this->arguments['content'];
-            if (!\str_starts_with($path, \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('TYPO3_SITE_URL'))) {
-                $this->tag->addAttribute('content', \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('TYPO3_SITE_URL') . $this->arguments['content']);
+            if (!\str_starts_with($path, GeneralUtility::getIndpEnv('TYPO3_SITE_URL'))) {
+                $this->tag->addAttribute('content', GeneralUtility::getIndpEnv('TYPO3_SITE_URL') . $this->arguments['content']);
             }
         }
 
         if ($useCurrentDomain || (isset($this->arguments['content']) && !empty($this->arguments['content']))) {
-            $GLOBALS['TSFE']->getPageRenderer()->addMetaTag($this->tag->render());
+            //@todo: check if this works correctly. Especially the meta tag type is now hard coded - needs verification!
+            /** @var PageRenderer $pageRenderer */
+            $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
+            $pageRenderer->setMetaTag('property', $this->arguments['name'], $this->arguments['content']);
         }
     }
 }
