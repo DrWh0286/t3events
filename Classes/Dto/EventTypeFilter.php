@@ -31,8 +31,7 @@ class EventTypeFilter implements FilterInterface
 
     public function __construct(
         private readonly EventTypeRepository $eventTypeRepository
-    )
-    {
+    ) {
     }
 
     public function getOptionRepository(): DemandedRepositoryInterface

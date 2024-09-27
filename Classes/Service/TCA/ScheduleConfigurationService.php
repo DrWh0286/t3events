@@ -33,8 +33,7 @@ class ScheduleConfigurationService
     public function __construct(
         private readonly TranslationService  $translationService,
         private readonly BackendUtilityServiceInterface $backendUtilityService
-    )
-    {
+    ) {
     }
 
     /**

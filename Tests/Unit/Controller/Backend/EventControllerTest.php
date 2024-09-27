@@ -204,8 +204,7 @@ class EventControllerTest extends UnitTestCase
         ];
 
         GeneralUtility::setContainer(
-            new class ($classes) implements ContainerInterface
-            {
+            new class ($classes) implements ContainerInterface {
                 public function __construct(private readonly array $classes)
                 {
                 }

@@ -55,8 +55,7 @@ class Notification extends AbstractEntity
          */
         #[Lazy]
         protected ?\TYPO3\CMS\Extbase\Persistence\ObjectStorage $attachments = null
-    )
-    {
+    ) {
     }
 
 

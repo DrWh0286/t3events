@@ -31,8 +31,7 @@ class GenreFilter implements FilterInterface
 
     public function __construct(
         private readonly GenreRepository $genreRepository
-    )
-    {
+    ) {
     }
 
     public function getOptionRepository(): DemandedRepositoryInterface

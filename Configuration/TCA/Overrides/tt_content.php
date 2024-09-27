@@ -17,5 +17,6 @@ $temporaryColumns = [
 );
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
-    'tt_content', 'tx_t3events_event'
+    'tt_content',
+    'tx_t3events_event'
 );

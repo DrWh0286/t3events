@@ -37,8 +37,9 @@ class PerformancesViewHelper extends AbstractTagBasedViewHelper
     public function __construct(/**
      * eventRepository
      */
-    protected \DWenzel\T3events\Domain\Repository\EventRepository $eventRepository, protected \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager)
-    {
+        protected \DWenzel\T3events\Domain\Repository\EventRepository $eventRepository,
+        protected \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
+    ) {
         $tsSettings = $this->configurationManager->getConfiguration(
             \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
             't3events',
@@ -172,7 +173,7 @@ class PerformancesViewHelper extends AbstractTagBasedViewHelper
             }
         }
         if (count($states)) {
-            usort($states, fn($a, $b) => $a['priority'] - $b['priority']);
+            usort($states, fn ($a, $b) => $a['priority'] - $b['priority']);
 
             return $states[0];
         } else {

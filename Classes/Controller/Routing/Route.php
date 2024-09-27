@@ -97,8 +97,7 @@ class Route
          * @var string A string of fully qualified controller class name and action method separated by ORIGIN_SEPARATOR.
          */
         protected $origin
-    )
-    {
+    ) {
     }
 
     /**

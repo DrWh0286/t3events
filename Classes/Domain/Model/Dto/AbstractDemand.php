@@ -376,8 +376,8 @@ class AbstractDemand extends AbstractEntity implements DemandInterface
                 if ($propertyValue !== 'desc') {
                     $propertyValue = 'asc';
                 }
-            // fall through to default
-            // no break
+                // fall through to default
+                // no break
             default:
                 if (ObjectAccess::isPropertySettable($this, $propertyName)) {
                     ObjectAccess::setProperty($this, $propertyName, $propertyValue);

@@ -8,5 +8,4 @@ use Exception;
 
 final class NoDemandedRepositoryFoundForKeyException extends Exception
 {
-
 }

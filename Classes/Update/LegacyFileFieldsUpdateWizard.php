@@ -168,13 +168,13 @@ class LegacyFileFieldsUpdateWizard implements UpgradeWizardInterface, ChattyInte
             return $queryBuilder
                 ->count($fieldToMigrate)
                 ->from($table)->where($queryBuilder->expr()->isNotNull($fieldToMigrate), $queryBuilder->expr()->neq(
-                $fieldToMigrate,
-                $queryBuilder->createNamedParameter('', \PDO::PARAM_STR)
-            ), $queryBuilder->expr()->comparison(
-                'CAST(CAST(' . $queryBuilder->quoteIdentifier($fieldToMigrate) . ' AS DECIMAL) AS CHAR)',
-                ExpressionBuilder::NEQ,
-                'CAST(' . $queryBuilder->quoteIdentifier($fieldToMigrate) . ' AS CHAR)'
-            ))->executeQuery()
+                    $fieldToMigrate,
+                    $queryBuilder->createNamedParameter('', \PDO::PARAM_STR)
+                ), $queryBuilder->expr()->comparison(
+                    'CAST(CAST(' . $queryBuilder->quoteIdentifier($fieldToMigrate) . ' AS DECIMAL) AS CHAR)',
+                    ExpressionBuilder::NEQ,
+                    'CAST(' . $queryBuilder->quoteIdentifier($fieldToMigrate) . ' AS CHAR)'
+                ))->executeQuery()
                 ->fetchOne();
         } catch (\Exception $exception) {
             $this->logger->error(

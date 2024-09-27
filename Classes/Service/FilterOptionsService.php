@@ -14,8 +14,7 @@ class FilterOptionsService
     public function __construct(
         private readonly TranslationService $translationService,
         private readonly DemandedRepositoryFactory $demandedRepositoryFactory
-    )
-    {
+    ) {
     }
 
     public function getFilterOptions(array $settings): array

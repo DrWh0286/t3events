@@ -629,8 +629,7 @@ class PerformanceControllerTest extends UnitTestCase
     {
         $this->injectMockRepositories(['findMultipleByUid', 'findAll']);
 
-        $eventDispatcher = new class implements EventDispatcherInterface
-        {
+        $eventDispatcher = new class () implements EventDispatcherInterface {
             public function dispatch(object $event): object
             {
                 return $event;

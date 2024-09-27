@@ -30,7 +30,7 @@ trait ModuleDataTrait
      * @return array
      * @todo Check, if this is replaced completely now!
      */
-//    abstract public function mergeSettings();
+    //    abstract public function mergeSettings();
 
     /**
      * @return string
@@ -66,7 +66,7 @@ trait ModuleDataTrait
         $this->moduleData = GeneralUtility::makeInstance(ModuleData::class);
         $this->moduleDataStorageService->persistModuleData($this->moduleData, $this->getModuleKey());
         //@todo: This works different now!
-//        $this->forward('list');
+        //        $this->forward('list');
     }
 
     /**

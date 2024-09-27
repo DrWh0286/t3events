@@ -30,8 +30,7 @@ class PeriodFilter implements FilterInterface
 {
     public function __construct(
         private readonly TranslationService $translationService
-    )
-    {
+    ) {
     }
 
     public const DEFAULT_OPTION_KEYS = [
