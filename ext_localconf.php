@@ -43,11 +43,13 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry']['t3eventsLegend
 
 // @todo: We need to find a better way to do this!
 if (isset($GLOBALS['TSFE'])) {
-    \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class)
-        ->registerImplementation(\DWenzel\T3events\Session\SessionInterface::class, \DWenzel\T3events\Session\Typo3Session::class);
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\DWenzel\T3events\Session\SessionInterface::class] = [
+        'className' => \DWenzel\T3events\Session\Typo3Session::class
+    ];
 } else {
-    \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class)
-        ->registerImplementation(\DWenzel\T3events\Session\SessionInterface::class, \DWenzel\T3events\Session\Typo3BackendSession::class);
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\DWenzel\T3events\Session\SessionInterface::class] = [
+        'className' => \DWenzel\T3events\Session\Typo3BackendSession::class
+    ];
 }
 
 

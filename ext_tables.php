@@ -12,6 +12,6 @@ require_once \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath(\DWenze
 \DWenzel\T3events\Configuration\ExtensionConfiguration::configureTables();
 
 // enable event module
-if (TYPO3_MODE === 'BE' && (bool)$emSettings['showEventModule']) {
+if ((bool)$emSettings['showEventModule']) {
     \DWenzel\T3events\Configuration\ExtensionConfiguration::registerAndConfigureModules();
 }

@@ -27,7 +27,7 @@ use DWenzel\T3events\Event\PerformanceControllerListActionWasExecuted;
 use DWenzel\T3events\Event\PerformanceControllerQuickMenuActionWasExecuted;
 use DWenzel\T3events\Event\PerformanceControllerShowActionWasExecuted;
 use DWenzel\T3events\Service\FilterOptionsService;
-use DWenzel\T3events\Session\SessionInterface;
+use DWenzel\T3events\Session\Typo3Session;
 use DWenzel\T3events\Utility\SettingsUtility;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
@@ -61,7 +61,7 @@ class PerformanceController extends AbstractActionController
         protected readonly SearchFactory $searchFactory,
         protected readonly FilterOptionsService $filterOptionsService,
         protected readonly PerformanceDemandFactory $performanceDemandFactory,
-        protected readonly SessionInterface $session,
+        protected readonly Typo3Session $session,
         protected readonly SettingsUtility $settingsUtility
     ) {
         $this->namespace = static::class;
@@ -268,5 +268,18 @@ class PerformanceController extends AbstractActionController
     {
         /** @var PerformanceDemand $demand */
         return $this->performanceDemandFactory->createFromSettings($settings);
+    }
+
+    /**
+     * Injects the session service.
+     * This can be used in testing or other purposes where you need to set the session object manually.
+     *
+     * @param \DWenzel\T3events\Session\Typo3Session $session
+     * @return void
+     */
+    public function injectSession(Typo3Session $session): void
+    {
+        $this->session = $session;
+        $this->session->setNamespace($this->namespace);
     }
 }

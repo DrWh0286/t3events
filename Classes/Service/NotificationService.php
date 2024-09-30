@@ -3,7 +3,7 @@
 namespace DWenzel\T3events\Service;
 
 use DWenzel\T3events\Domain\Model\Notification;
-use Symfony\Component\Mailer\MailerInterface;
+use TYPO3\CMS\Core\Mail\MailerInterface;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
