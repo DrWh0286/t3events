@@ -12,7 +12,6 @@ return [
         'label' => 'headline',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'dividers2tabs' => true,
         'sortby' => 'sorting',
         'versioningWS' => true,
         'origUid' => 't3_origuid',
@@ -26,21 +25,22 @@ return [
             'endtime' => 'endtime',
             'fe_group' => 'fe_group',
         ],
-        'searchFields' => 'headline,subtitle,teaser,description,keywords,genre,venue,event_type,performances,organizer,',
-        'iconfile' => 'EXT:t3events/Resources/Public/Icons/tx_t3events_domain_model_event.gif'
+        'searchFields' => 'headline,subtitle,teaser,description,keywords,genre,venue,event_type,performances,organizer',
+        'iconfile' => 'EXT:t3events/Resources/Public/Icons/tx_t3events_domain_model_event.gif',
     ],
     'types' => [
         '1' => [
             'showitem' => '
-			    	 event_type,headline, subtitle,teaser,description,content_elements,
-			    	 --div--;' . $ll . ':tx_t3events_domain_model_event.tab.relations,
-			    	    images, files, related, related_schedules,
-			    	 --div--;LLL:EXT:t3events/Resources/Private/Language/locallang_db.xlf:tx_t3events_domain_model_event.extended,
-			    	 sys_language_uid,audience,organizer, genre, venue, keywords,
-			    	 --div--;LLL:EXT:t3events/Resources/Private/Language/locallang_db.xlf:tx_t3events_domain_model_event.performances,
-			    	 performances,
-			    	 --palette--;;paletteSys,
-			    	 --div--;LLL:EXT:t3events/Resources/Private/Language/locallang_db.xlf:tab.access,new_until,archive_date,hidden,starttime,endtime,fe_group'],
+                event_type,headline, subtitle,teaser,description,content_elements,
+                --div--;' . $ll . ':tx_t3events_domain_model_event.tab.relations,
+                images, files, related, related_schedules,
+                --div--;' . $ll . ':tx_t3events_domain_model_event.extended,
+                sys_language_uid,audience,organizer, genre, venue, keywords,
+                --div--;' . $ll . ':tx_t3events_domain_model_event.performances,
+                performances,
+                --palette--;;paletteSys,
+                --div--;' . $ll . ':tab.access,new_until,archive_date,hidden,starttime,endtime,fe_group',
+        ],
     ],
     'palettes' => [
         'paletteSys' => [
@@ -61,7 +61,9 @@ return [
         'sys_language_uid' => [
             'exclude' => 1,
             'label' => $cll . 'LGL.language',
-            'config' => ['type' => 'language'],
+            'config' => [
+                'type' => 'language',
+            ],
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -81,7 +83,6 @@ return [
                 'type' => 'passthrough',
             ],
         ],
-
         'hidden' => [
             'exclude' => 1,
             'label' => $cll . 'LGL.hidden',
@@ -94,12 +95,10 @@ return [
             'label' => $cll . 'LGL.starttime',
             'config' => [
                 'type' => 'datetime',
-                'size' => 10,
-                'checkbox' => 0,
                 'default' => 0,
                 'behaviour' => [
-                    'allowLanguageSynchronization' => true
-                ]
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'endtime' => [
@@ -107,12 +106,10 @@ return [
             'label' => $cll . 'LGL.endtime',
             'config' => [
                 'type' => 'datetime',
-                'size' => 10,
-                'checkbox' => 0,
                 'default' => 0,
                 'behaviour' => [
-                    'allowLanguageSynchronization' => true
-                ]
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'fe_group' => [
@@ -148,8 +145,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim',
-                'required' => true
+                'eval' => 'trim,required',
             ],
         ],
         'subtitle' => [
@@ -158,7 +154,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
             ],
         ],
         'teaser' => [
@@ -168,7 +164,7 @@ return [
                 'type' => 'text',
                 'cols' => 40,
                 'rows' => 5,
-                'eval' => 'trim'
+                'eval' => 'trim',
             ],
         ],
         'description' => [
@@ -179,8 +175,8 @@ return [
                 'enableRichtext' => true,
                 'cols' => 32,
                 'rows' => 10,
-                'eval' => 'trim'
-            ]
+                'eval' => 'trim',
+            ],
         ],
         'keywords' => [
             'exclude' => 1,
@@ -189,104 +185,44 @@ return [
                 'type' => 'text',
                 'cols' => 32,
                 'rows' => 5,
-                'eval' => 'trim'
+                'eval' => 'trim',
             ],
         ],
         'images' => [
             'exclude' => 1,
             'label' => $ll . ':tx_t3events_domain_model_event.images',
             'config' => [
-                ### !!! Watch out for fieldName different from columnName
                 'type' => 'file',
                 'allowed' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
                 'appearance' => [
-                    'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference'
+                    'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference',
                 ],
-                // custom configuration for displaying fields in the overlay/reference table
-                // to use the imageoverlayPalette instead of the basicoverlayPalette
                 'overrideChildTca' => [
                     'types' => [
-                        '0' => [
-                            'showitem' => '
-                            --palette--;;imageoverlayPalette,
-                            --palette--;;filePalette'
-                        ],
-                        \TYPO3\CMS\Core\Resource\File::FILETYPE_TEXT => [
-                            'showitem' => '
-                            --palette--;;imageoverlayPalette,
-                            --palette--;;filePalette'
-                        ],
                         \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
-                            'showitem' => '
-                            --palette--;;imageoverlayPalette,
-                            --palette--;;filePalette'
+                            'showitem' => '--palette--;;imageoverlayPalette,--palette--;;filePalette',
                         ],
-                        \TYPO3\CMS\Core\Resource\File::FILETYPE_AUDIO => [
-                            'showitem' => '
-                            --palette--;;audioOverlayPalette,
-                            --palette--;;filePalette'
-                        ],
-                        \TYPO3\CMS\Core\Resource\File::FILETYPE_VIDEO => [
-                            'showitem' => '
-                            --palette--;;videoOverlayPalette,
-                            --palette--;;filePalette'
-                        ],
-                        \TYPO3\CMS\Core\Resource\File::FILETYPE_APPLICATION => [
-                            'showitem' => '
-                            --palette--;;imageoverlayPalette,
-                            --palette--;;filePalette'
-                        ]
-                    ]
+                    ],
                 ],
-            ]
+            ],
         ],
         'files' => [
             'exclude' => 1,
             'label' => $ll . ':tx_t3events_domain_model_event.files',
             'config' => [
-                ### !!! Watch out for fieldName different from columnName
                 'type' => 'file',
                 'allowed' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
                 'appearance' => [
-                    'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference'
+                    'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference',
                 ],
-                // custom configuration for displaying fields in the overlay/reference table
-                // to use the imageoverlayPalette instead of the basicoverlayPalette
                 'overrideChildTca' => [
                     'types' => [
-                        '0' => [
-                            'showitem' => '
-                            --palette--;;imageoverlayPalette,
-                            --palette--;;filePalette'
-                        ],
                         \TYPO3\CMS\Core\Resource\File::FILETYPE_TEXT => [
-                            'showitem' => '
-                            --palette--;;imageoverlayPalette,
-                            --palette--;;filePalette'
+                            'showitem' => '--palette--;;filePalette',
                         ],
-                        \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
-                            'showitem' => '
-                            --palette--;;imageoverlayPalette,
-                            --palette--;;filePalette'
-                        ],
-                        \TYPO3\CMS\Core\Resource\File::FILETYPE_AUDIO => [
-                            'showitem' => '
-                            --palette--;;audioOverlayPalette,
-                            --palette--;;filePalette'
-                        ],
-                        \TYPO3\CMS\Core\Resource\File::FILETYPE_VIDEO => [
-                            'showitem' => '
-                            --palette--;;videoOverlayPalette,
-                            --palette--;;filePalette'
-                        ],
-                        \TYPO3\CMS\Core\Resource\File::FILETYPE_APPLICATION => [
-                            'showitem' => '
-                            --palette--;;imageoverlayPalette,
-                            --palette--;;filePalette'
-                        ]
-                    ]
+                    ],
                 ],
-            ]
+            ],
         ],
         'related' => [
             'exclude' => 1,

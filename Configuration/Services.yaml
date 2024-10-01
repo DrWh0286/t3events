@@ -24,3 +24,9 @@ services:
     public: true
 
   DWenzel\T3events\Domain\Repository\TaskRepositoryInterface: '@DWenzel\T3events\Domain\Repository\TaskRepository'
+
+  DWenzel\T3events\Service\TCA\ScheduleConfigurationService:
+    public: true
+
+  DWenzel\T3events\DataProvider\Form\EventPluginFormDataProvider:
+    public: true
