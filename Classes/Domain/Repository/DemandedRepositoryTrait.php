@@ -140,7 +140,7 @@ trait DemandedRepositoryTrait
 
         if (!empty($constraints)) {
             $query->matching(
-                $query->logicalAnd($constraints)
+                $query->logicalAnd(...array_values($constraints))
             );
         }
 
@@ -183,14 +183,14 @@ trait DemandedRepositoryTrait
                 case 'notand':
                     /** @var ConstraintInterface $additionalConstraint */
                     foreach ($additionalConstraints as $additionalConstraint) {
-                        $constraints[] = $query->logicalNot($query->logicalAnd($additionalConstraint));
+                        $constraints[] = $query->logicalNot($query->logicalAnd(...array_values($additionalConstraint)));
                     }
 
                     break;
                 case 'notor':
                     /** @var ConstraintInterface $additionalConstraint */
                     foreach ($additionalConstraints as $additionalConstraint) {
-                        $constraints[] = $query->logicalNot($query->logicalOr($additionalConstraint));
+                        $constraints[] = $query->logicalNot($query->logicalOr(...array_values($additionalConstraint)));
                     }
 
                     break;
