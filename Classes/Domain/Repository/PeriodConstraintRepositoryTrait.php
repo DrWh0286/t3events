@@ -42,8 +42,8 @@ trait PeriodConstraintRepositoryTrait
             case PeriodConstraintRepositoryInterface::PERIOD_FUTURE:
                 if ($respectEndDate) {
                     $periodConstraint[] = $query->logicalOr(
-                        ...array_values($query->greaterThanOrEqual($startDateField, $lowerLimit)),
-                        ...array_values($query->greaterThanOrEqual($endDateField, $lowerLimit))
+                        $query->greaterThanOrEqual($startDateField, $lowerLimit),
+                        $query->greaterThanOrEqual($endDateField, $lowerLimit)
                     );
                 } else {
                     $periodConstraint[] = $query->greaterThanOrEqual($startDateField, $lowerLimit);
@@ -53,8 +53,8 @@ trait PeriodConstraintRepositoryTrait
             case PeriodConstraintRepositoryInterface::PERIOD_PAST:
                 if ($respectEndDate) {
                     $periodConstraint[] = $query->logicalAnd(
-                        ...array_values($query->lessThanOrEqual($endDateField, $upperLimit)),
-                        ...array_values($query->lessThanOrEqual($startDateField, $lowerLimit))
+                        $query->lessThanOrEqual($endDateField, $upperLimit),
+                        $query->lessThanOrEqual($startDateField, $lowerLimit)
                     );
                 } else {
                     $periodConstraint[] = $query->lessThanOrEqual($startDateField, $lowerLimit);
@@ -67,23 +67,23 @@ trait PeriodConstraintRepositoryTrait
                         [
                             $query->logicalAnd(
                                 [
-                                    ...array_values($query->lessThanOrEqual($endDateField, $upperLimit)),
-                                    ...array_values($query->greaterThanOrEqual($endDateField, $lowerLimit)),
-                                    ...array_values($query->lessThanOrEqual($startDateField, $lowerLimit))
+                                    $query->lessThanOrEqual($endDateField, $upperLimit),
+                                    $query->greaterThanOrEqual($endDateField, $lowerLimit),
+                                    $query->lessThanOrEqual($startDateField, $lowerLimit)
                                 ]
                             ),
                             $query->logicalAnd(
                                 [
-                                    ...array_values($query->greaterThanOrEqual($startDateField, $lowerLimit)),
-                                    ...array_values($query->lessThanOrEqual($endDateField, $upperLimit))
+                                    $query->greaterThanOrEqual($startDateField, $lowerLimit),
+                                    $query->lessThanOrEqual($endDateField, $upperLimit)
                                 ]
                             )
                         ]
                     );
                 } else {
                     $periodConstraint[] = $query->logicalAnd(
-                        ...array_values($query->lessThanOrEqual($startDateField, $upperLimit)),
-                        ...array_values($query->greaterThanOrEqual($startDateField, $lowerLimit))
+                        $query->lessThanOrEqual($startDateField, $upperLimit),
+                        $query->greaterThanOrEqual($startDateField, $lowerLimit)
                     );
                 }
 
