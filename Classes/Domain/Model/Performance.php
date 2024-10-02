@@ -188,7 +188,7 @@ class Performance extends AbstractEntity
      *
      * @return \DWenzel\T3events\Domain\Model\Event
      */
-    public function getEvent()
+    public function getEvent(): Event
     {
         if ($this->event instanceof LazyLoadingProxy) {
             $this->event->_loadRealInstance();
@@ -212,7 +212,7 @@ class Performance extends AbstractEntity
      *
      * @return \DWenzel\T3events\Domain\Model\EventLocation eventLocation
      */
-    public function getEventLocation()
+    public function getEventLocation(): \DWenzel\T3events\Domain\Model\EventLocation
     {
         if ($this->eventLocation instanceof LazyLoadingProxy) {
             $this->eventLocation->_loadRealInstance();
@@ -237,7 +237,7 @@ class Performance extends AbstractEntity
      *
      * @return \DateTime $date
      */
-    public function getDate()
+    public function getDate(): \DateTime
     {
         return $this->date;
     }
@@ -263,7 +263,7 @@ class Performance extends AbstractEntity
      *
      * @return \DateTime
      */
-    public function getEndDate()
+    public function getEndDate(): \DateTime
     {
         return $this->endDate;
     }
@@ -283,7 +283,7 @@ class Performance extends AbstractEntity
      *
      * @return int $admission
      */
-    public function getAdmission()
+    public function getAdmission(): int
     {
         return $this->admission;
     }
@@ -304,7 +304,7 @@ class Performance extends AbstractEntity
      *
      * @return int $begin
      */
-    public function getBegin()
+    public function getBegin(): int
     {
         return $this->begin;
     }
@@ -325,7 +325,7 @@ class Performance extends AbstractEntity
      *
      * @return int $end
      */
-    public function getEnd()
+    public function getEnd(): int
     {
         return $this->end;
     }
@@ -346,7 +346,7 @@ class Performance extends AbstractEntity
      *
      * @return string $statusInfo
      */
-    public function getStatusInfo()
+    public function getStatusInfo(): string
     {
         return $this->statusInfo;
     }
@@ -367,7 +367,7 @@ class Performance extends AbstractEntity
      *
      * @return string $image
      */
-    public function getImage()
+    public function getImage(): string
     {
         return $this->image;
     }
@@ -410,7 +410,7 @@ class Performance extends AbstractEntity
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $images
      */
-    public function getImages()
+    public function getImages(): ObjectStorage
     {
         return $this->images;
     }
@@ -453,7 +453,7 @@ class Performance extends AbstractEntity
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $plan
      */
-    public function getPlan()
+    public function getPlan(): ObjectStorage
     {
         return $this->plan;
     }
@@ -474,7 +474,7 @@ class Performance extends AbstractEntity
      *
      * @return boolean $noHandlingFee
      */
-    public function getNoHandlingFee()
+    public function getNoHandlingFee(): bool
     {
         return $this->noHandlingFee;
     }
@@ -505,7 +505,7 @@ class Performance extends AbstractEntity
      *
      * @return \DWenzel\T3events\Domain\Model\PerformanceStatus $status
      */
-    public function getStatus()
+    public function getStatus(): \DWenzel\T3events\Domain\Model\PerformanceStatus
     {
         if ($this->status instanceof LazyLoadingProxy) {
             $this->status->_loadRealInstance();
@@ -530,7 +530,7 @@ class Performance extends AbstractEntity
      *
      * @return string $priceNotice
      */
-    public function getPriceNotice()
+    public function getPriceNotice(): string
     {
         return $this->priceNotice;
     }
@@ -573,7 +573,7 @@ class Performance extends AbstractEntity
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\T3events\Domain\Model\TicketClass> $ticketClass
      */
-    public function getTicketClass()
+    public function getTicketClass(): ObjectStorage
     {
         return $this->ticketClass;
     }
@@ -594,7 +594,7 @@ class Performance extends AbstractEntity
      *
      * @return string additionalLink
      */
-    public function getAdditionalLink()
+    public function getAdditionalLink(): string
     {
         return $this->additionalLink;
     }
@@ -615,7 +615,7 @@ class Performance extends AbstractEntity
      *
      * @return string externalProviderLink
      */
-    public function getExternalProviderLink()
+    public function getExternalProviderLink(): string
     {
         return $this->externalProviderLink;
     }
@@ -636,7 +636,7 @@ class Performance extends AbstractEntity
      *
      * @return integer $providerType
      */
-    public function getProviderType()
+    public function getProviderType(): int
     {
         return $this->providerType;
     }
@@ -657,7 +657,7 @@ class Performance extends AbstractEntity
      *
      * @return integer
      */
-    public function getHidden()
+    public function getHidden(): int
     {
         return $this->hidden;
     }

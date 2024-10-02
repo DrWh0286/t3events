@@ -127,7 +127,7 @@ class Person extends AbstractEntity
      *
      * @return string $type
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -148,7 +148,7 @@ class Person extends AbstractEntity
      *
      * @return string $email
      */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -156,7 +156,7 @@ class Person extends AbstractEntity
     /**
      * @return \DWenzel\T3events\Domain\Model\PersonType
      */
-    public function getPersonType()
+    public function getPersonType(): PersonType
     {
         return $this->personType;
     }
@@ -172,7 +172,7 @@ class Person extends AbstractEntity
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -188,7 +188,7 @@ class Person extends AbstractEntity
     /**
      * @return int
      */
-    public function getGender()
+    public function getGender(): int
     {
         return $this->gender;
     }
@@ -204,7 +204,7 @@ class Person extends AbstractEntity
     /**
      * @return string
      */
-    public function getFirstName()
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
@@ -220,7 +220,7 @@ class Person extends AbstractEntity
     /**
      * @return string
      */
-    public function getLastName()
+    public function getLastName(): string
     {
         return $this->lastName;
     }
@@ -238,7 +238,7 @@ class Person extends AbstractEntity
      *
      * @return string $phone
      */
-    public function getPhone()
+    public function getPhone(): string
     {
         return $this->phone;
     }
@@ -268,7 +268,7 @@ class Person extends AbstractEntity
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -284,7 +284,7 @@ class Person extends AbstractEntity
     /**
      * @return \DateTime
      */
-    public function getBirthday()
+    public function getBirthday(): \DateTime
     {
         return $this->birthday;
     }
@@ -300,7 +300,7 @@ class Person extends AbstractEntity
     /**
      * @return string
      */
-    public function getWww()
+    public function getWww(): string
     {
         return $this->www;
     }
@@ -316,7 +316,7 @@ class Person extends AbstractEntity
     /**
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
      */
-    public function getImages()
+    public function getImages(): ObjectStorage
     {
         return $this->images;
     }

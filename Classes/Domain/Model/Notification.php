@@ -167,7 +167,7 @@ class Notification extends AbstractEntity
      *
      * @return \DateTime
      */
-    public function getSentAt()
+    public function getSentAt(): \DateTime
     {
         return $this->sentAt;
     }

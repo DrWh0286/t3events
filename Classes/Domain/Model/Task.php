@@ -88,7 +88,7 @@ class Task extends AbstractEntity
      *
      * @return string $name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -109,7 +109,7 @@ class Task extends AbstractEntity
      *
      * @return integer $action
      */
-    public function getAction()
+    public function getAction(): int
     {
         return $this->action;
     }
@@ -130,7 +130,7 @@ class Task extends AbstractEntity
      *
      * @return integer
      */
-    public function getPeriodDuration()
+    public function getPeriodDuration(): int
     {
         return $this->periodDuration;
     }
@@ -151,7 +151,7 @@ class Task extends AbstractEntity
      *
      * @return \DWenzel\T3events\Domain\Model\PerformanceStatus $oldStatus
      */
-    public function getOldStatus()
+    public function getOldStatus(): PerformanceStatus
     {
         return $this->oldStatus;
     }
@@ -172,7 +172,7 @@ class Task extends AbstractEntity
      *
      * @return \DWenzel\T3events\Domain\Model\PerformanceStatus $newStatus
      */
-    public function getNewStatus()
+    public function getNewStatus(): PerformanceStatus
     {
         return $this->newStatus;
     }
@@ -193,7 +193,7 @@ class Task extends AbstractEntity
      *
      * @return string $folder
      */
-    public function getFolder()
+    public function getFolder(): string
     {
         return $this->folder;
     }
@@ -214,7 +214,7 @@ class Task extends AbstractEntity
      *
      * @return string A string describing the period constraint. Allowed: all, pastOnly, futureOnly
      */
-    public function getPeriod()
+    public function getPeriod(): string
     {
         return $this->period;
     }

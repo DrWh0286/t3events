@@ -213,7 +213,7 @@ class Event extends AbstractEntity
      *
      * @return int
      */
-    public function getHidden()
+    public function getHidden(): int
     {
         return $this->hidden;
     }
@@ -233,7 +233,7 @@ class Event extends AbstractEntity
      *
      * @return string $subtitle
      */
-    public function getSubtitle()
+    public function getSubtitle(): string
     {
         return $this->subtitle;
     }
@@ -254,7 +254,7 @@ class Event extends AbstractEntity
      *
      * @return string
      */
-    public function getTeaser()
+    public function getTeaser(): string
     {
         return $this->teaser;
     }
@@ -274,7 +274,7 @@ class Event extends AbstractEntity
      *
      * @return string $description
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -295,7 +295,7 @@ class Event extends AbstractEntity
      *
      * @return string $keywords
      */
-    public function getKeywords()
+    public function getKeywords(): string
     {
         return $this->keywords;
     }
@@ -338,7 +338,7 @@ class Event extends AbstractEntity
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $images
      */
-    public function getImages()
+    public function getImages(): ObjectStorage
     {
         return $this->images;
     }
@@ -381,7 +381,7 @@ class Event extends AbstractEntity
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $files
      */
-    public function getFiles()
+    public function getFiles(): ObjectStorage
     {
         return $this->files;
     }
@@ -424,7 +424,7 @@ class Event extends AbstractEntity
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\T3events\Domain\Model\Event>
      */
-    public function getRelated()
+    public function getRelated(): ObjectStorage
     {
         return $this->related;
     }
@@ -467,7 +467,7 @@ class Event extends AbstractEntity
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\T3events\Domain\Model\Genre> $genre
      */
-    public function getGenre()
+    public function getGenre(): ObjectStorage
     {
         return $this->genre;
     }
@@ -488,7 +488,7 @@ class Event extends AbstractEntity
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\T3events\Domain\Model\Venue> $venue
      */
-    public function getVenue()
+    public function getVenue(): ObjectStorage
     {
         return $this->venue;
     }
@@ -531,7 +531,7 @@ class Event extends AbstractEntity
      *
      * @return \DWenzel\T3events\Domain\Model\EventType $eventType
      */
-    public function getEventType()
+    public function getEventType(): EventType
     {
         return $this->eventType;
     }
@@ -552,7 +552,7 @@ class Event extends AbstractEntity
      *
      * @return string headline
      */
-    public function getHeadline()
+    public function getHeadline(): string
     {
         return $this->headline;
     }
@@ -573,7 +573,7 @@ class Event extends AbstractEntity
      *
      * @return \DWenzel\T3events\Domain\Model\Organizer $organizer
      */
-    public function getOrganizer()
+    public function getOrganizer(): Organizer
     {
         return $this->organizer;
     }
@@ -594,7 +594,7 @@ class Event extends AbstractEntity
      *
      * @return \DateTime
      */
-    public function getEarliestDate()
+    public function getEarliestDate(): ?int
     {
         $dates = [];
         foreach ($this->performances as $performance) {
@@ -633,7 +633,7 @@ class Event extends AbstractEntity
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\T3events\Domain\Model\Performance> performances
      */
-    public function getPerformances()
+    public function getPerformances(): ObjectStorage
     {
         return $this->performances;
     }
@@ -654,7 +654,7 @@ class Event extends AbstractEntity
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\T3events\Domain\Model\Audience> $audience
      */
-    public function getAudience()
+    public function getAudience(): ObjectStorage
     {
         return $this->audience;
     }
@@ -695,7 +695,7 @@ class Event extends AbstractEntity
     /**
      * @return \DateTime
      */
-    public function getNewUntil()
+    public function getNewUntil(): \DateTime
     {
         return $this->newUntil;
     }
@@ -711,7 +711,7 @@ class Event extends AbstractEntity
     /**
      * @return \DateTime
      */
-    public function getArchiveDate()
+    public function getArchiveDate(): \DateTime
     {
         return $this->archiveDate;
     }
@@ -727,7 +727,7 @@ class Event extends AbstractEntity
     /**
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\T3events\Domain\Model\Content> contentElements
      */
-    public function getContentElements()
+    public function getContentElements(): ObjectStorage
     {
         return $this->contentElements;
     }

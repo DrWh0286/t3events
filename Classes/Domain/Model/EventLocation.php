@@ -130,7 +130,7 @@ class EventLocation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity imple
      *
      * @return string $name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -151,7 +151,7 @@ class EventLocation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity imple
      *
      * @return string $address
      */
-    public function getAddress()
+    public function getAddress(): string
     {
         return $this->address;
     }
@@ -194,7 +194,7 @@ class EventLocation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity imple
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $images
      */
-    public function getImage()
+    public function getImage(): \TYPO3\CMS\Extbase\Persistence\ObjectStorage
     {
         return $this->image;
     }
@@ -215,7 +215,7 @@ class EventLocation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity imple
      *
      * @return string $zip
      */
-    public function getZip()
+    public function getZip(): string
     {
         return $this->zip;
     }
@@ -236,7 +236,7 @@ class EventLocation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity imple
      *
      * @return string $place
      */
-    public function getPlace()
+    public function getPlace(): string
     {
         return $this->place;
     }
@@ -257,7 +257,7 @@ class EventLocation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity imple
      *
      * @return string $details
      */
-    public function getDetails()
+    public function getDetails(): string
     {
         return $this->details;
     }
@@ -278,7 +278,7 @@ class EventLocation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity imple
      *
      * @return string $www
      */
-    public function getWww()
+    public function getWww(): string
     {
         return $this->www;
     }
@@ -299,7 +299,7 @@ class EventLocation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity imple
      *
      * @return string $country
      */
-    public function getCountry()
+    public function getCountry(): string
     {
         return $this->country;
     }
@@ -320,7 +320,7 @@ class EventLocation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity imple
      *
      * @return float
      */
-    public function getLatitude()
+    public function getLatitude(): float
     {
         return $this->latitude;
     }
@@ -340,7 +340,7 @@ class EventLocation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity imple
      *
      * @return float
      */
-    public function getLongitude()
+    public function getLongitude(): float
     {
         return $this->longitude;
     }

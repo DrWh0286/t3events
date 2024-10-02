@@ -58,7 +58,7 @@ class PerformanceStatus extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return string $title
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -79,7 +79,7 @@ class PerformanceStatus extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return integer $priority
      */
-    public function getPriority()
+    public function getPriority(): int
     {
         return $this->priority;
     }
@@ -100,7 +100,7 @@ class PerformanceStatus extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return string cssClass
      */
-    public function getCssClass()
+    public function getCssClass(): string
     {
         return $this->cssClass;
     }

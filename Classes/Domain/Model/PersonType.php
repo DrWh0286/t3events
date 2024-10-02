@@ -42,7 +42,7 @@ class PersonType extends AbstractValueObject
      *
      * @return string $title
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }

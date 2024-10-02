@@ -30,3 +30,6 @@ services:
 
   DWenzel\T3events\DataProvider\Form\EventPluginFormDataProvider:
     public: true
+
+  DWenzel\T3events\Hooks\ItemsProcFunc:
+    public: true
