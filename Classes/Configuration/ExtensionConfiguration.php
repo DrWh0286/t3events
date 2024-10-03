@@ -22,7 +22,12 @@ namespace DWenzel\T3events\Configuration;
 use DWenzel\T3events\Configuration\Module\Event;
 use DWenzel\T3events\Configuration\Module\Main;
 use DWenzel\T3events\Configuration\Module\Schedule;
-use DWenzel\T3events\Configuration\Plugin\Combined;
+use DWenzel\T3events\Configuration\Plugin\Events;
+use DWenzel\T3events\Configuration\Plugin\EventsDetail;
+use DWenzel\T3events\Configuration\Plugin\EventsQuickmenu;
+use DWenzel\T3events\Configuration\Plugin\Performances;
+use DWenzel\T3events\Configuration\Plugin\PerformancesDetail;
+use DWenzel\T3events\Configuration\Plugin\PerformancesQuickmenu;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 
 /**
@@ -43,7 +48,12 @@ class ExtensionConfiguration extends \DWenzel\T3extensionTools\Configuration\Ext
     ];
 
     protected const PLUGINS_TO_REGISTER = [
-        Combined::class
+        Events::class,
+        EventsDetail::class,
+        EventsQuickmenu::class,
+        Performances::class,
+        PerformancesDetail::class,
+        PerformancesQuickmenu::class
     ];
 
     public const TABLES_ALLOWED_ON_STANDARD_PAGES = [

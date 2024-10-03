@@ -214,6 +214,21 @@
 			<trans-unit id="plugin.combined.title" approved="yes">
 				<source><![CDATA[Events]]></source>
 			</trans-unit>
+			<trans-unit id="plugin.events.detail" approved="yes">
+				<source><![CDATA[Events Detail]]></source>
+			</trans-unit>
+			<trans-unit id="plugin.events.quickmenu" approved="yes">
+				<source><![CDATA[Events Quickmenu]]></source>
+			</trans-unit>
+			<trans-unit id="plugin.performances.title" approved="yes">
+				<source><![CDATA[Performances]]></source>
+			</trans-unit>
+			<trans-unit id="plugin.performances.detail" approved="yes">
+				<source><![CDATA[Performances Detail]]></source>
+			</trans-unit>
+			<trans-unit id="plugin.performances.quickmenu" approved="yes">
+				<source><![CDATA[Performances Quickmenu]]></source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

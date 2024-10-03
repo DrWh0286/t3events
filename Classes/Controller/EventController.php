@@ -83,9 +83,14 @@ class EventController extends AbstractActionController
      */
     public function listAction($overwriteDemand = null): ResponseInterface
     {
+        if (!$overwriteDemand) {
+            if ($this->session->has('tx_t3events_overwriteDemand') && is_string($this->session->get('tx_t3events_overwriteDemand')) && !empty($this->session->get('tx_t3events_overwriteDemand'))) {
+                $overwriteDemand = unserialize($this->session->get('tx_t3events_overwriteDemand'), ['allowed_classes' => false]);
+            }
+        }
+
         $demand = $this->eventDemandFactory->createFromSettings($this->settings);
         $demand->overwriteDemandObject($overwriteDemand, $this->settings);
-
         $events = $this->eventRepository->findDemanded($demand);
 
         /** @var QueryResultInterface $events */
