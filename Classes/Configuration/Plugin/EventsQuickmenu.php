@@ -40,7 +40,7 @@ abstract class EventsQuickmenu implements PluginConfigurationInterface
 
     protected static string $pluginTitle = 'LLL:EXT:t3events/Resources/Private/Language/locallang_be.xlf:plugin.events.quickmenu';
 
-    protected static string $flexForm = 'FILE:EXT:t3events/Configuration/FlexForms/flexform_events.xml';
+    protected static string $flexForm = 'FILE:EXT:t3events/Configuration/FlexForms/flexform_eventsquickmenu.xml';
 
     protected static array $controllerActions = [
         EventController::class => 'quickMenu'

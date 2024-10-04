@@ -229,6 +229,15 @@
 			<trans-unit id="plugin.performances.quickmenu" approved="yes">
 				<source><![CDATA[Performances Quickmenu]]></source>
 			</trans-unit>
+			<trans-unit id="flexforms_general.conjunction" approved="yes">
+				<source><![CDATA[Conjunction]]></source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.conjunction.and" approved="yes">
+				<source><![CDATA[And]]></source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.conjunction.or" approved="yes">
+				<source><![CDATA[Or]]></source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

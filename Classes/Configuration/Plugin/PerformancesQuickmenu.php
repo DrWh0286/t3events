@@ -40,7 +40,7 @@ abstract class PerformancesQuickmenu implements PluginConfigurationInterface
 
     protected static string $pluginTitle = 'LLL:EXT:t3events/Resources/Private/Language/locallang_be.xlf:plugin.performances.quickmenu';
 
-    protected static string $flexForm = 'FILE:EXT:t3events/Configuration/FlexForms/flexform_events.xml';
+    protected static string $flexForm = 'FILE:EXT:t3events/Configuration/FlexForms/flexform_performancesquickmenu.xml';
 
     protected static array $controllerActions = [
         PerformanceController::class => 'quickMenu',

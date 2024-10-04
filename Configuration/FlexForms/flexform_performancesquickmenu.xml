@@ -12,39 +12,25 @@
         <type>array</type>
         <el>
 
-          <settings.order>
+          <settings.showRadiusSearch>
             <TCEforms>
-              <label>LLL:EXT:t3events/Resources/Private/Language/locallang_be.xlf:flexforms_general.sortBy</label>
+              <label>LLL:EXT:t3events/Resources/Private/Language/locallang_be.xlf:flexforms_general.showRadiusSearch</label>
               <config>
-                <type>radio</type>
-                <items type="array">
-                  <numIndex index="0" type="array">
-                    <numIndex index="0">LLL:EXT:t3events/Resources/Private/Language/locallang_be.xlf:flexforms_general.date</numIndex>
-                    <numIndex index="1">performances.date|asc,performances.begin|asc</numIndex>
-                  </numIndex>
-                  <numIndex index="1" type="array">
-                    <numIndex index="0">LLL:EXT:t3events/Resources/Private/Language/locallang_be.xlf:flexforms_general.dateDesc</numIndex>
-                    <numIndex index="1">performances.date|desc,performances.begin|desc</numIndex>
-                  </numIndex>
-                  <numIndex index="2" type="array">
-                    <numIndex index="0">LLL:EXT:t3events/Resources/Private/Language/locallang_be.xlf:flexforms_general.title</numIndex>
-                    <numIndex index="1">event.headline|asc</numIndex>
-                  </numIndex>
-                </items>
+                <type>check</type>
+                <default>0</default>
               </config>
             </TCEforms>
-          </settings.order>
+          </settings.showRadiusSearch>
 
-          <settings.maxItems>
+          <settings.showSearchField>
             <TCEforms>
-              <label>LLL:EXT:t3events/Resources/Private/Language/locallang_be.xlf:flexforms_general.maxItems</label>
+              <label>LLL:EXT:t3events/Resources/Private/Language/locallang_be.xlf:flexforms_general.showSearchField</label>
               <config>
-                <type>input</type>
-                <size>3</size>
-                <eval>int,trim</eval>
+                <type>check</type>
+                <default>1</default>
               </config>
             </TCEforms>
-          </settings.maxItems>
+          </settings.showSearchField>
 
           <view.pluginNamespace>
             <TCEforms>
@@ -222,18 +208,6 @@
               </config>
             </TCEforms>
           </settings.periodDuration>
-          <settings.periodStartDate>
-            <TCEforms>
-              <label>LLL:EXT:t3events/Resources/Private/Language/locallang_be.xlf:flexforms_general.start</label>
-              <displayCond>FIELD:settings.periodType:=:byDate</displayCond>
-              <config>
-                <type>input</type>
-                <size>8</size>
-                <eval>date</eval>
-                <checkbox>1</checkbox>
-              </config>
-            </TCEforms>
-          </settings.periodStartDate>
           <settings.periodEndDate>
             <TCEforms>
               <label>LLL:EXT:t3events/Resources/Private/Language/locallang_be.xlf:flexforms_general.end</label>
@@ -247,6 +221,34 @@
             </TCEforms>
           </settings.periodEndDate>
           <!--- Quick Menu Type -->
+          <settings.quickMenuType>
+            <TCEforms>
+              <label>LLL:EXT:t3events/Resources/Private/Language/locallang_be.xlf:flexforms_general.quick_menu.type</label>
+              <onChange>reload</onChange>
+              <config>
+                <type>select</type>
+                <renderType>selectSingle</renderType>
+                <items>
+                  <numIndex index="0">
+                    <numIndex index="0"></numIndex>
+                    <numIndex index="1"></numIndex>
+                  </numIndex>
+                  <numIndex index="1">
+                    <numIndex index="0">LLL:EXT:t3events/Resources/Private/Language/locallang_be.xlf:flexforms_general.quick_menu.type.genres</numIndex>
+                    <numIndex index="1">genres</numIndex>
+                  </numIndex>
+                  <numIndex index="2">
+                    <numIndex index="0">LLL:EXT:t3events/Resources/Private/Language/locallang_be.xlf:flexforms_general.quick_menu.type.venues</numIndex>
+                    <numIndex index="1">venues</numIndex>
+                  </numIndex>
+                  <numIndex index="3">
+                    <numIndex index="0">LLL:EXT:t3events/Resources/Private/Language/locallang_be.xlf:flexforms_general.quick_menu.type.eventTypes</numIndex>
+                    <numIndex index="1">eventTypes</numIndex>
+                  </numIndex>
+                </items>
+              </config>
+            </TCEforms>
+          </settings.quickMenuType>
           <settings.categoryConjunction>
             <TCEforms>
               <label>LLL:EXT:t3events/Resources/Private/Language/locallang_be.xlf:flexforms_general.conjunction</label>
