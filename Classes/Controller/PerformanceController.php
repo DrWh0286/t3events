@@ -119,11 +119,9 @@ class PerformanceController extends AbstractActionController
     public function listAction(array $overwriteDemand = null): ResponseInterface
     {
         if (!$overwriteDemand) {
-            if (!$this->session->has('tx_t3events_overwriteDemand') || !is_string($this->session->get('tx_t3events_overwriteDemand')) || ($this->session->get('tx_t3events_overwriteDemand') === '' || $this->session->get('tx_t3events_overwriteDemand') === '0')) {
-                throw new RuntimeException('tx_t3events_overwriteDemand is not set or is empty and also no overwriteDemand is set!');
+            if ($this->session->has('tx_t3events_overwriteDemand') && is_string($this->session->get('tx_t3events_overwriteDemand')) && !empty($this->session->get('tx_t3events_overwriteDemand'))) {
+                $overwriteDemand = unserialize($this->session->get('tx_t3events_overwriteDemand'), ['allowed_classes' => false]);
             }
-
-            $overwriteDemand = unserialize($this->session->get('tx_t3events_overwriteDemand'), ['allowed_classes' => false]);
         }
 
         $demand = $this->performanceDemandFactory->createFromSettings($this->settings);
@@ -270,16 +268,4 @@ class PerformanceController extends AbstractActionController
         return $this->performanceDemandFactory->createFromSettings($settings);
     }
 
-    /**
-     * Injects the session service.
-     * This can be used in testing or other purposes where you need to set the session object manually.
-     *
-     * @param \DWenzel\T3events\Session\Typo3Session $session
-     * @return void
-     */
-    public function injectSession(Typo3Session $session): void
-    {
-        $this->session = $session;
-        $this->session->setNamespace($this->namespace);
-    }
 }

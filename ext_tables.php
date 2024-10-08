@@ -11,7 +11,3 @@ $emSettings = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
 require_once \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath(\DWenzel\T3events\Utility\SettingsInterface::EXTENSION_KEY) . 'Classes/Hooks/ItemsProcFunc.php';
 \DWenzel\T3events\Configuration\ExtensionConfiguration::configureTables();
 
-// enable event module
-if ((bool)$emSettings['showEventModule']) {
-    \DWenzel\T3events\Configuration\ExtensionConfiguration::registerAndConfigureModules();
-}

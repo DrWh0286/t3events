@@ -7,11 +7,6 @@ services:
   DWenzel\T3events\:
     resource: '../Classes/*'
 
-  DWenzel\T3events\Controller\Backend\ScheduleController:
-    calls:
-      - injectSession:
-          - '@DWenzel\T3events\Session\Typo3BackendSession'
-
   DWenzel\T3events\Controller\EventController:
     arguments:
       $session: '@DWenzel\T3events\Session\Typo3Session'

@@ -76,4 +76,9 @@ class ScheduleController extends PerformanceController
         $this->view->assignMultiple($performanceControllerShowActionWasExecuted->getTemplateVariables());
         return $this->htmlResponse();
     }
+
+    public function getModuleKey(): string
+    {
+        return 't3events_performance';
+    }
 }

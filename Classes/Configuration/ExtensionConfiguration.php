@@ -41,10 +41,6 @@ class ExtensionConfiguration extends \DWenzel\T3extensionTools\Configuration\Ext
     public const VENDOR = 'DWenzel';
 
     protected const MODULES_TO_REGISTER = [
-        // order matters, register (empty) main module first
-        Main::class,
-        Event::class,
-        Schedule::class
     ];
 
     protected const PLUGINS_TO_REGISTER = [

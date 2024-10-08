@@ -25,7 +25,7 @@ class DemandedRepositoryFactory
         return $repository instanceof DemandedRepositoryInterface
             ? $repository
             : throw new NoDemandedRepositoryFoundForKeyException(
-                'The class ' . $repository::class . ' does not implement DemandedRepositoryInterface!'
+                'The class ' . $repository . ' does not implement DemandedRepositoryInterface!'
             );
     }
 }
