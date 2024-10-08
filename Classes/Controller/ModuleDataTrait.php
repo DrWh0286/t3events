@@ -9,6 +9,7 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Mvc\ResponseInterface;
+use DWenzel\T3events\Utility\SettingsUtility;
 
 /**
  * Class ModuleDataTrait
@@ -26,12 +27,6 @@ trait ModuleDataTrait
      * @var array
      */
     protected $settings;
-
-    /**
-     * @return array
-     * @todo Check, if this is replaced completely now!
-     */
-    //    abstract public function mergeSettings();
 
     /**
      * @return string
@@ -54,8 +49,8 @@ trait ModuleDataTrait
     public function initializeAction(): void
     {
         $this->pageUid = (int)$GLOBALS['TYPO3_REQUEST']->getQueryParams()['id'];
-        // @todo: Replace this!
-        $this->settings = $this->mergeSettings();
+        $settingsUtility = GeneralUtility::makeInstance(SettingsUtility::class);
+        $this->settings = $settingsUtility->mergeSettings($this->settings, $this->actionMethodName, $this);
     }
 
     /**

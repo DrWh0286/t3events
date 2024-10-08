@@ -50,7 +50,8 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
  */
 class EventController extends ActionController
 {
-    use BackendViewTrait;
+    // ToDo TYPO3 12 - Check if this trait is needed
+    // use BackendViewTrait;
     use FormTrait;
     use ModuleDataTrait;
     use NotificationRepositoryTrait;
@@ -203,5 +204,10 @@ class EventController extends ActionController
     public function overrideSettings(array $settings = []): void
     {
         $this->settings = $settings;
+    }
+
+    public function getModuleKey(): string
+    {
+        return 't3events_event';
     }
 }

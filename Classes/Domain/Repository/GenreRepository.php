@@ -28,7 +28,7 @@ use DWenzel\T3events\Domain\Model\Dto\DemandInterface;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 
-class GenreRepository extends AbstractDemandedRepository
+class GenreRepository extends AbstractDemandedRepository implements DemandedRepositoryInterface
 {
     /**
      * Returns an array of constraints created from a given demand object.

@@ -53,14 +53,6 @@ class ModuleDataTraitTest extends TestCase
             use ModuleDataTrait;
 
             /**
-             * @return array
-             */
-            public function mergeSettings()
-            {
-                return ['foo'];
-            }
-
-            /**
              * @return string
              */
             public function getModuleKey()
