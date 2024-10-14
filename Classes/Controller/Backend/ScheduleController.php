@@ -59,13 +59,25 @@ class ScheduleController extends PerformanceController
 
         $demand->overwriteDemandObject($overwriteDemand, $this->settings);
 
+        $performances =  $this->performanceRepository->findDemanded($demand);
+
+        $itemsPerPage = $this->settings['paginate']['itemsPerPage'] ?? 10;
+        $maximumLinks = 5;
+        $currentPage = $this->request->hasArgument('currentPage') ? (int)$this->request->getArgument('currentPage') : 1;
+        $paginator = new \TYPO3\CMS\Extbase\Pagination\QueryResultPaginator($performances, $currentPage, $itemsPerPage);
+        $pagination = new \DWenzel\T3events\NumberedPagination($paginator, $maximumLinks);
+
         $templateVariables = [
-            'performances' => $this->performanceRepository->findDemanded($demand),
+            'performances' => $performances,
             SI::OVERWRITE_DEMAND => $overwriteDemand,
             'demand' => $demand,
             SI::SETTINGS => $this->settings,
             'filterOptions' => $filterOptions,
-            SI::MODULE => SI::ROUTE_SCHEDULE_MODULE
+            SI::MODULE => SI::ROUTE_SCHEDULE_MODULE,
+            'pagination' => [
+                'paginator' => $paginator,
+                'pagination' => $pagination,
+            ]
         ];
 
         /** @var ScheduleControllerListActionWasExecuted $performanceControllerShowActionWasExecuted */

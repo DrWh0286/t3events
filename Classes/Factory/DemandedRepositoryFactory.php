@@ -17,6 +17,7 @@ class DemandedRepositoryFactory
         $namespace = $demandedRepositoryInterface->getNamespaceName();
 
         $repositoryFQCN = $namespace . '\\' . $repositoryName;
+        $repository = null;
 
         if (class_exists($repositoryFQCN)) {
             $repository = GeneralUtility::makeInstance($repositoryFQCN);

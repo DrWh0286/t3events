@@ -162,6 +162,13 @@ class EventController extends ActionController
         $configuration = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
         );
+
+        $itemsPerPage = $this->settings['paginate']['itemsPerPage'] ?? 10;
+        $maximumLinks = 5;
+        $currentPage = $this->request->hasArgument('currentPage') ? (int)$this->request->getArgument('currentPage') : 1;
+        $paginator = new \TYPO3\CMS\Extbase\Pagination\QueryResultPaginator($events, $currentPage, $itemsPerPage);
+        $pagination = new \DWenzel\T3events\NumberedPagination($paginator, $maximumLinks);
+
         $templateVariables = [
             SI::EVENTS => $events,
             SI::DEMAND => $demand,
@@ -169,7 +176,11 @@ class EventController extends ActionController
             'filterOptions' => $this->filterOptionsService->getFilterOptions($this->settings[SI::FILTER] ?? []),
             SI::STORAGE_PID => $configuration[SI::PERSISTENCE][SI::STORAGE_PID] ?? null,
             SI::SETTINGS => $this->settings,
-            SI::MODULE => SI::ROUTE_EVENT_MODULE
+            SI::MODULE => SI::ROUTE_EVENT_MODULE,
+            'pagination' => [
+                'paginator' => $paginator,
+                'pagination' => $pagination,
+            ]
         ];
 
         /** @var BackendEventControllerListActionWasExecuted $eventControllerListActionWasCalled */

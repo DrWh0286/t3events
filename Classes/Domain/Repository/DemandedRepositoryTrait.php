@@ -190,7 +190,7 @@ trait DemandedRepositoryTrait
                 case 'notor':
                     /** @var ConstraintInterface $additionalConstraint */
                     foreach ($additionalConstraints as $additionalConstraint) {
-                        $constraints[] = $query->logicalNot($query->logicalOr(...array_values($additionalConstraint)));
+                        $constraints[] = $query->logicalNot($query->logicalOr($additionalConstraint));
                     }
 
                     break;

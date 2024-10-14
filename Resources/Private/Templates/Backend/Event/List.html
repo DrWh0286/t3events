@@ -33,7 +33,7 @@
                         <th>{f:translate(key: 'label.audience', default: 'Audience')}</th>
                     </tr>
                     </thead>
-                    <f:for each="{paginatedEvents}" as="event">
+                    <f:for each="{pagination.paginator.paginatedItems}" as="event">
                         <tr class="db_list_normal">
                             <td nowrap="nowrap">{event.uid}</td>
                             <td nowrap="nowrap">
@@ -59,7 +59,11 @@
                                                 module: module
                                            )}"
                                     >
-                                        <core:icon identifier="actions-open"/>
+                                        <span class="t3js-icon icon icon-size-small icon-state-default icon-actions-open" data-identifier="actions-open">
+                                            <span class="icon-markup">
+                                                <svg class="icon-color"><use xlink:href="/typo3/sysext/core/Resources/Public/Icons/T3Icons/sprites/actions.svg#actions-open"></use></svg>
+                                            </span>
+                                        </span>
                                     </a>
                                 </div>
 
