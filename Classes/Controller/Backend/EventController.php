@@ -70,11 +70,12 @@ class EventController extends ActionController
         ]
     ];
 
+    private readonly SearchFactory $searchFactory;
+
     public function __construct(
         private readonly ModuleTemplateFactory $moduleTemplateFactory,
         private readonly VenueRepository $venueRepository,
         private readonly AudienceRepository $audienceRepository,
-        private readonly SearchFactory $searchFactory,
         private readonly CompanyRepository $companyRepository,
         private readonly EventDemandFactory $eventDemandFactory,
         private readonly EventRepository $eventRepository,
@@ -86,6 +87,12 @@ class EventController extends ActionController
         private readonly SettingsUtility $settingsUtility,
         protected ModuleDataStorageService $moduleDataStorageService
     ) {
+    }
+
+    // Setter-based injection for TYPO3
+    public function injectSearchFactory(SearchFactory $searchFactory): void
+    {
+        $this->searchFactory = $searchFactory;
     }
 
     /**

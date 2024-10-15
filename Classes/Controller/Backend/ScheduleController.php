@@ -10,6 +10,10 @@ use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException;
 use TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException;
+use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
+use DWenzel\T3events\Domain\Factory\Dto\PerformanceDemandFactory;
+use DWenzel\T3events\Service\FilterOptionsService;
+use DWenzel\T3events\Domain\Repository\PerformanceRepository;
 
 /**
  * Class ScheduleController
@@ -18,6 +22,13 @@ class ScheduleController extends PerformanceController
 {
     use ModuleDataTrait;
     use FormTrait;
+
+    public function __construct(
+        protected readonly PerformanceDemandFactory $performanceDemandFactory,
+        protected readonly FilterOptionsService $filterOptionsService,
+        protected readonly PerformanceRepository $performanceRepository,
+        protected ModuleTemplateFactory $moduleTemplateFactory
+    ) {}
 
     /**
      * Load and persist module data
@@ -86,7 +97,10 @@ class ScheduleController extends PerformanceController
         );
 
         $this->view->assignMultiple($performanceControllerShowActionWasExecuted->getTemplateVariables());
-        return $this->htmlResponse();
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $moduleTemplate->setContent($this->view->render());
+
+        return $this->htmlResponse($moduleTemplate->renderContent());
     }
 
     public function getModuleKey(): string
