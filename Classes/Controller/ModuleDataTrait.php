@@ -10,6 +10,7 @@ use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Mvc\ResponseInterface;
 use DWenzel\T3events\Utility\SettingsUtility;
+use TYPO3\CMS\Extbase\Http\ForwardResponse;
 
 /**
  * Class ModuleDataTrait
@@ -57,12 +58,12 @@ trait ModuleDataTrait
      * Reset action
      * Resets all module data and forwards the request to the list action
      */
-    public function resetAction(): void
+    public function resetAction(): ForwardResponse
     {
         $this->moduleData = GeneralUtility::makeInstance(ModuleData::class);
         $this->moduleDataStorageService->persistModuleData($this->moduleData, $this->getModuleKey());
-        //@todo: This works different now!
-        //        $this->forward('list');
+
+        return new ForwardResponse('list');
     }
 
     /**
