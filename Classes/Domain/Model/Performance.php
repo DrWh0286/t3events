@@ -212,7 +212,7 @@ class Performance extends AbstractEntity
      *
      * @return \DWenzel\T3events\Domain\Model\EventLocation eventLocation
      */
-    public function getEventLocation(): \DWenzel\T3events\Domain\Model\EventLocation
+    public function getEventLocation(): ?\DWenzel\T3events\Domain\Model\EventLocation
     {
         if ($this->eventLocation instanceof LazyLoadingProxy) {
             $this->eventLocation->_loadRealInstance();
@@ -453,7 +453,7 @@ class Performance extends AbstractEntity
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $plan
      */
-    public function getPlan(): ObjectStorage
+    public function getPlan(): ?ObjectStorage
     {
         return $this->plan;
     }
@@ -505,7 +505,7 @@ class Performance extends AbstractEntity
      *
      * @return \DWenzel\T3events\Domain\Model\PerformanceStatus $status
      */
-    public function getStatus(): \DWenzel\T3events\Domain\Model\PerformanceStatus
+    public function getStatus(): ?\DWenzel\T3events\Domain\Model\PerformanceStatus
     {
         if ($this->status instanceof LazyLoadingProxy) {
             $this->status->_loadRealInstance();
