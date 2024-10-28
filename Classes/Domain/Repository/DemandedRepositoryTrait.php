@@ -53,7 +53,7 @@ trait DemandedRepositoryTrait
     public function findMultipleByUid($recordList, $sortField = 'uid', $sortOrder = QueryInterface::ORDER_ASCENDING)
     {
         $query = $this->createQuery();
-        $uids = GeneralUtility::intExplode(',', $recordList, true);
+        $uids = GeneralUtility::intExplode(',', (string)$recordList, true);
         if ((bool)$uids) {
             $query->matching($query->in('uid', $uids));
         }
