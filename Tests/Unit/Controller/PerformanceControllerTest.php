@@ -189,9 +189,6 @@ class PerformanceControllerTest extends UnitTestCase
         $this->contentObject = $this->getMockBuilder(ContentObjectRenderer::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $mockDispatcher = $this->getMockBuilder(Dispatcher::class)
-            ->disableOriginalConstructor()
-            ->getMock();
         $this->request = $this->getMockBuilder(Request::class)->getMock();
         $this->configurationManager = $this->getMockBuilder(ConfigurationManagerInterface::class)
             ->getMockForAbstractClass();
@@ -203,7 +200,6 @@ class PerformanceControllerTest extends UnitTestCase
         $this->eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)->getMock();
 
         $this->subject->setView($this->view);
-        $this->subject->injectSignalSlotDispatcher($mockDispatcher);
         $this->subject->setRequest($this->request);
         $this->subject->injectConfigurationManager($this->configurationManager);
         $this->subject->injectResponseFactory($this->responseFactory);

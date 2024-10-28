@@ -22,9 +22,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Repository;
 
 use DWenzel\T3events\Domain\Repository\VenueRepository;
 use DWenzel\T3events\Tests\Unit\Domain\Model\Dto\MockDemandTrait;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
-use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Test case for class \DWenzel\T3events\Domain\Repository\VenueRepository.
@@ -35,14 +33,18 @@ class VenueRepositoryTest extends UnitTestCase
     use MockDemandTrait;
 
     /**
-     * @var VenueRepository|MockObject
+     * @var VenueRepository
      */
-    protected $fixture;
+    protected VenueRepository $fixture;
 
     protected function setUp(): void
     {
-        $this->objectManager = $this->createMock(ObjectManager::class);
-        $this->fixture = new VenueRepository($this->objectManager);
+        parent::setUp(); // Ensure to call the parent setup
+
+        // Mock any dependencies required by the VenueRepository directly if necessary.
+        // If the VenueRepository does not need an ObjectManager, you can remove this completely.
+        
+        $this->fixture = new VenueRepository(); // Assuming the repository now does not require ObjectManager
     }
 
     /**
@@ -53,7 +55,7 @@ class VenueRepositoryTest extends UnitTestCase
         $demand = $this->getMockDemand();
         $query = $this->getMockQuery();
 
-        $this->assertEquals(
+        $this->assertSame(
             [],
             $this->fixture->createConstraintsFromDemand($query, $demand)
         );

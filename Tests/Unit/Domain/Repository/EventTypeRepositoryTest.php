@@ -5,7 +5,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Repository;
 /***************************************************************
  *  Copyright notice
  *  (c) 2015 Dirk Wenzel <dirk.wenzel@cps-it.de>
- *  All rights reserved
+ *  All rights reserved.
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,8 +22,6 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Repository;
 
 use DWenzel\T3events\Domain\Model\Dto\DemandInterface;
 use DWenzel\T3events\Domain\Repository\EventTypeRepository;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -31,20 +29,22 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 /**
  * Test case for class \DWenzel\T3events\Domain\Repository\EventTypeRepository.
  *
- * @author Dirk Wenzel <dirk.wenzel@cps-it.de>
+ * @author Dirk Wenzel
  * @coversDefaultClass \DWenzel\T3events\Domain\Repository\EventTypeRepository
  */
 class EventTypeRepositoryTest extends UnitTestCase
 {
     /**
-     * @var \DWenzel\T3events\Domain\Repository\EventTypeRepository
+     * @var EventTypeRepository
      */
     protected $fixture;
 
     protected function setUp(): void
     {
-        $this->objectManager = $this->createMock(ObjectManagerInterface::class);
-        $this->fixture = new EventTypeRepository($this->objectManager);
+        parent::setUp();
+
+        // Directly instantiate EventTypeRepository without ObjectManager
+        $this->fixture = new EventTypeRepository();
     }
 
     /**
@@ -60,7 +60,7 @@ class EventTypeRepositoryTest extends UnitTestCase
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
 
-        $this->assertEquals(
+        $this->assertSame(
             [],
             $this->fixture->createConstraintsFromDemand($query, $demand)
         );

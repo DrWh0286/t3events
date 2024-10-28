@@ -8,7 +8,6 @@ use DWenzel\T3events\Dto\NullFilter;
 use DWenzel\T3events\Tests\Unit\Object\MockObjectManagerTrait;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 
 /***************************************************************
  *  Copyright notice
@@ -17,7 +16,7 @@ use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
  *  All rights reserved
  *
  * The GNU General Public License can be found at
- * http://www.gnu.org/copyleft/gpl.html.
+ *  http://www.gnu.org/copyleft/gpl.html.
  * A copy is found in the text file GPL.txt and important notices to the license
  * from the author is found in LICENSE.txt distributed with these scripts.
  * This script is distributed in the hope that it will be useful,
@@ -35,23 +34,19 @@ class FilterFactoryTest extends UnitTestCase
     use MockObjectManagerTrait;
 
     /**
-     * @var FilterFactory|MockObject
+     * @var FilterFactory
      */
-    protected $subject;
+    protected FilterFactory $subject;
 
     /**
-     * @var ObjectManagerInterface|MockObject
-     */
-    protected $objectManager;
-    /**
-     * @var FilterResolverInterface|(FilterResolverInterface&object&MockObject)|(FilterResolverInterface&MockObject)|(object&MockObject)|MockObject
+     * @var FilterResolverInterface|MockObject
      */
     private FilterResolverInterface|MockObject $filterResolver;
 
-
-    /** @noinspection ReturnTypeCanBeDeclaredInspection */
     protected function setUp(): void
     {
+        parent::setUp(); // Ensure that the parent setup method is called
+
         $this->filterResolver = $this->getMockForAbstractClass(FilterResolverInterface::class);
         $this->subject = new FilterFactory($this->filterResolver);
     }
@@ -62,7 +57,10 @@ class FilterFactoryTest extends UnitTestCase
 
         $invalidKey = 'fo0Bar4BAz';
 
-        $this->filterResolver->expects($this->once())->method('resolve')->willReturn($expectedFilter::class);
+        $this->filterResolver
+            ->expects($this->once())
+            ->method('resolve')
+            ->willReturn($expectedFilter::class);
 
         $this->assertEquals(
             $expectedFilter,

@@ -22,7 +22,6 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Repository;
 
 use DWenzel\T3events\Domain\Model\Dto\DemandInterface;
 use DWenzel\T3events\Domain\Repository\CategoryRepository;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -36,14 +35,14 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 class CategoryRepositoryTest extends UnitTestCase
 {
     /**
-     * @var \DWenzel\T3events\Domain\Repository\CategoryRepository
+     * @var CategoryRepository
      */
     protected $fixture;
 
     protected function setUp(): void
     {
-        $this->objectManagerMock = $this->getMockBuilder(ObjectManagerInterface::class)->getMock();
-        $this->fixture = new CategoryRepository($this->objectManagerMock);
+        // Directly instantiate the repository without ObjectManager
+        $this->fixture = new CategoryRepository();
     }
 
     /**

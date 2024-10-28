@@ -22,7 +22,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Repository;
 
 use DWenzel\T3events\Domain\Repository\PersonRepository;
 use DWenzel\T3events\Tests\Unit\Domain\Model\Dto\MockDemandTrait;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
+use DWenzel\T3events\Tests\Unit\Domain\Model\Dto\MockQueryTrait;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -37,14 +37,16 @@ class PersonRepositoryTest extends UnitTestCase
     use MockDemandTrait;
 
     /**
-     * @var PersonRepository|MockObject
+     * @var PersonRepository
      */
-    protected $fixture;
+    protected PersonRepository $fixture;
 
     protected function setUp(): void
     {
-        $this->objectManager = $this->createMock(ObjectManagerInterface::class);
-        $this->fixture = new PersonRepository($this->objectManager);
+        parent::setUp(); // Ensure parent setup is called
+
+        // Direct instantiation of PersonRepository without ObjectManager
+        $this->fixture = new PersonRepository();
     }
 
     /**
@@ -55,7 +57,7 @@ class PersonRepositoryTest extends UnitTestCase
         $demand = $this->getMockDemand();
         $query = $this->getMockQuery();
 
-        $this->assertEquals(
+        $this->assertSame(
             [],
             $this->fixture->createConstraintsFromDemand($query, $demand)
         );

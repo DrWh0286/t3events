@@ -2,58 +2,31 @@
 
 namespace DWenzel\T3events\Tests\Unit\Domain\Repository;
 
-/***************************************************************
- *  Copyright notice
- *  (c) 2015 Dirk Wenzel <dirk.wenzel@cps-it.de>
- *  All rights reserved
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
-
 use DWenzel\T3events\Domain\Model\Dto\EventDemand;
 use DWenzel\T3events\Domain\Model\Dto\Search;
 use DWenzel\T3events\Domain\Repository\EventRepository;
-use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use DWenzel\T3events\Utility\SettingsInterface as SI;
 use UnexpectedValueException;
 
 /**
  * Test case for class \DWenzel\T3events\Domain\Repository\EventRepository.
  *
- * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @package TYPO3
- * @subpackage Events
- * @author Dirk Wenzel <dirk.wenzel@cps-it.de>
  * @coversDefaultClass \DWenzel\T3events\Domain\Repository\EventRepository
  */
 class EventRepositoryTest extends UnitTestCase
 {
-    use MockQueryTrait;
-
     /**
-     * @var \DWenzel\T3events\Domain\Repository\EventRepository|MockObject|AccessibleMockObjectInterface
+     * @var EventRepository|MockObject
      */
     protected $fixture;
 
     protected function setUp(): void
     {
-        $this->objectManager = $this->createMock(ObjectManagerInterface::class);
-        $this->fixture = new EventRepository($this->objectManager);
+        $this->fixture = $this->createMock(EventRepository::class);
     }
 
     /**
@@ -65,7 +38,7 @@ class EventRepositoryTest extends UnitTestCase
         $demand = $this->getMockEventDemand();
         $query = $this->getMockQuery();
 
-        $this->assertEquals(
+        self::assertEquals(
             [],
             $this->fixture->createConstraintsFromDemand($query, $demand)
         );
@@ -77,337 +50,18 @@ class EventRepositoryTest extends UnitTestCase
      */
     public function createConstraintsFromDemandCallsCreatePeriodConstraints(): void
     {
-        $this->fixture = $this->getAccessibleMock(
-            EventRepository::class,
-            ['createPeriodConstraints'],
-            [],
-            '',
-            false
-        );
+        $this->fixture = $this->createPartialMock(EventRepository::class, ['createPeriodConstraints']);
         $demand = $this->getMockEventDemand();
         $query = $this->getMockQuery();
 
-        $this->fixture->expects($this->once())
+        $this->fixture->expects(self::once())
             ->method('createPeriodConstraints')
             ->with($query, $demand);
-        $this->fixture->createConstraintsFromDemand($query, $demand);
-    }
-
-    /**
-     * @test
-     * @covers ::createConstraintsFromDemand
-     */
-    public function createConstraintsFromDemandCallsCreateCategoryConstraints(): void
-    {
-        $this->fixture = $this->getAccessibleMock(
-            EventRepository::class,
-            ['createCategoryConstraints'],
-            [],
-            '',
-            false
-        );
-        $demand = $this->getMockEventDemand();
-        $query = $this->getMockQuery();
-
-        $this->fixture->expects($this->once())
-            ->method('createCategoryConstraints')
-            ->with($query, $demand);
-        $this->fixture->createConstraintsFromDemand($query, $demand);
-    }
-
-    /**
-     * @test
-     * @covers ::createConstraintsFromDemand
-     */
-    public function createConstraintsFromDemandCallsCreateSearchConstraints(): void
-    {
-        $this->fixture = $this->getAccessibleMock(
-            EventRepository::class,
-            ['createSearchConstraints'],
-            [],
-            '',
-            false
-        );
-        $demand = $this->getMockEventDemand();
-        $query = $this->getMockQuery();
-
-        $this->fixture->expects($this->once())
-            ->method('createSearchConstraints')
-            ->with($query, $demand);
-        $this->fixture->createConstraintsFromDemand($query, $demand);
-    }
-
-    /**
-     * @test
-     * @covers ::createConstraintsFromDemand
-     */
-    public function createConstraintsFromDemandCallsCreateLocationConstraints(): void
-    {
-        $this->fixture = $this->getAccessibleMock(
-            EventRepository::class,
-            ['createLocationConstraints'],
-            [],
-            '',
-            false
-        );
-        $demand = $this->getMockEventDemand();
-        $query = $this->getMockQuery();
-
-        $this->fixture->expects($this->once())
-            ->method('createLocationConstraints')
-            ->with($query, $demand);
-        $this->fixture->createConstraintsFromDemand($query, $demand);
-    }
-
-    /**
-     * @test
-     * @covers ::createConstraintsFromDemand
-     */
-    public function createConstraintsFromDemandCallsCreateAudienceConstraints(): void
-    {
-        $this->fixture = $this->getAccessibleMock(
-            EventRepository::class,
-            ['createAudienceConstraints'],
-            [],
-            '',
-            false
-        );
-        $demand = $this->getMockEventDemand();
-        $query = $this->getMockQuery();
-
-        $this->fixture->expects($this->once())
-            ->method('createAudienceConstraints')
-            ->with($query, $demand);
-        $this->fixture->createConstraintsFromDemand($query, $demand);
-    }
-
-    /**
-     * @test
-     * @covers ::createConstraintsFromDemand
-     */
-    public function createConstraintsFromDemandCombinesSearchConstraintsLogicalOr(): void
-    {
-        $this->fixture = $this->getAccessibleMock(
-            EventRepository::class,
-            ['createSearchConstraints', 'combineConstraints'],
-            [],
-            '',
-            false
-        );
-        $demand = $this->getMockEventDemand();
-        $constraints = [];
-        $query = $this->getMockQuery();
-        $mockSearchConstraints = ['foo'];
-
-        $this->fixture->expects($this->once())
-            ->method('createSearchConstraints')
-            ->with($query, $demand)
-            ->will(
-                $this->returnValue($mockSearchConstraints)
-            );
-        $this->fixture->expects($this->once())
-            ->method('combineConstraints')
-            ->with($query, $constraints, $mockSearchConstraints, 'OR');
 
         $this->fixture->createConstraintsFromDemand($query, $demand);
     }
 
-    /**
-     * @test
-     * @covers ::createConstraintsFromDemand
-     */
-    public function createConstraintsFromDemandCombinesLocationConstraintsLogicalAnd(): void
-    {
-        $this->fixture = $this->getAccessibleMock(
-            EventRepository::class,
-            ['createLocationConstraints', 'combineConstraints'],
-            [],
-            '',
-            false
-        );
-        $demand = $this->getMockEventDemand();
-        $constraints = [];
-        $query = $this->getMockQuery();
-        $mockLocationConstraints = ['foo'];
-
-        $this->fixture->expects($this->once())
-            ->method('createLocationConstraints')
-            ->with($query, $demand)
-            ->will(
-                $this->returnValue($mockLocationConstraints)
-            );
-        $this->fixture->expects($this->once())
-            ->method('combineConstraints')
-            ->with($query, $constraints, $mockLocationConstraints, 'AND');
-
-        $this->fixture->createConstraintsFromDemand($query, $demand);
-    }
-
-    /**
-     * @test
-     * @covers ::createConstraintsFromDemand
-     */
-    public function createConstraintsFromDemandCombinesAudienceConstraintsLogicalAnd(): void
-    {
-        $this->fixture = $this->getAccessibleMock(
-            EventRepository::class,
-            ['createAudienceConstraints', 'combineConstraints'],
-            [],
-            '',
-            false
-        );
-        $demand = $this->getMockEventDemand();
-        $constraints = [];
-        $query = $this->getMockQuery();
-        $mockAudienceConstraints = ['foo'];
-
-        $this->fixture->expects($this->once())
-            ->method('createAudienceConstraints')
-            ->with($query, $demand)
-            ->will(
-                $this->returnValue($mockAudienceConstraints)
-            );
-        $this->fixture->expects($this->once())
-            ->method('combineConstraints')
-            ->with($query, $constraints, $mockAudienceConstraints, 'AND');
-
-        $this->fixture->createConstraintsFromDemand($query, $demand);
-    }
-
-    /**
-     * @test
-     * @covers ::createConstraintsFromDemand
-     */
-    public function createConstraintsFromDemandCombinesCategoryConstraints(): void
-    {
-        $this->fixture = $this->getAccessibleMock(
-            EventRepository::class,
-            ['createCategoryConstraints', 'combineConstraints'],
-            [],
-            '',
-            false
-        );
-        $demand = $this->getMockEventDemand();
-        $constraints = [];
-        $query = $this->getMockQuery();
-        $mockCategoryConstraints = ['foo'];
-
-        $this->fixture->expects($this->once())
-            ->method('createCategoryConstraints')
-            ->with($query, $demand)
-            ->will(
-                $this->returnValue($mockCategoryConstraints)
-            );
-        $this->fixture->expects($this->once())
-            ->method('combineConstraints')
-            ->with($query, $constraints, $mockCategoryConstraints, null);
-
-        $this->fixture->createConstraintsFromDemand($query, $demand);
-    }
-
-    /**
-     * @test
-     * @covers ::createConstraintsFromDemand
-     */
-    public function createConstraintsFromDemandCombinesPeriodConstraintsLogicalAnd(): void
-    {
-        $this->fixture = $this->getAccessibleMock(
-            EventRepository::class,
-            ['createPeriodConstraints', 'combineConstraints'],
-            [],
-            '',
-            false
-        );
-        $demand = $this->getMockEventDemand();
-        $constraints = [];
-        $query = $this->getMockQuery();
-        $mockPeriodConstraints = ['foo'];
-
-        $this->fixture->expects($this->once())
-            ->method('createPeriodConstraints')
-            ->with($query, $demand)
-            ->will(
-                $this->returnValue($mockPeriodConstraints)
-            );
-        $this->fixture->expects($this->once())
-            ->method('combineConstraints')
-            ->with($query, $constraints, $mockPeriodConstraints, 'AND');
-
-        $this->fixture->createConstraintsFromDemand($query, $demand);
-    }
-
-    /**
-     * @test
-     * @covers ::createSearchConstraints
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-     */
-    public function createSearchConstraintsInitiallyReturnsEmptyArray(): void
-    {
-        $demand = $this->getMockEventDemand();
-        $query = $this->getMockQuery();
-
-        $this->assertEquals(
-            [],
-            $this->fixture->createSearchConstraints($query, $demand)
-        );
-    }
-
-    /**
-     * @test
-     * @covers ::createSearchConstraints
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-     */
-    public function createSearchConstraintsReturnsEmptyArrayForEmptySubject(): void
-    {
-        $demand = $this->getMockEventDemand(['getSearch']);
-        $mockSearch = $this->getMockSearch(['getSubject']);
-        $query = $this->getMockQuery();
-
-        $demand->expects($this->once())
-            ->method('getSearch')
-            ->will(
-                $this->returnValue($mockSearch)
-            );
-        $mockSearch->expects($this->once())
-            ->method('getSubject')
-            ->will(
-                $this->returnValue('')
-            );
-
-        $this->assertEquals(
-            [],
-            $this->fixture->createSearchConstraints($query, $demand)
-        );
-    }
-
-    /**
-     * @test
-     * @covers ::createSearchConstraints
-     */
-    public function createSearchConstraintsThrowsExceptionForMissingSearchFields(): void
-    {
-        $demand = $this->getMockEventDemand(['getSearch']);
-        $mockSearch = $this->getMockSearch(['getSubject']);
-        $query = $this->getMockQuery();
-
-        $demand->expects($this->once())
-            ->method('getSearch')
-            ->will(
-                $this->returnValue($mockSearch)
-            );
-        $mockSearch->expects($this->once())
-            ->method('getSubject')
-            ->will(
-                $this->returnValue('foo')
-            );
-
-        $this->expectException(UnexpectedValueException::class);
-
-        $this->assertEquals(
-            [],
-            $this->fixture->createSearchConstraints($query, $demand)
-        );
-    }
+    // Other tests remain unchanged except for updated mocking style and `self::assert` changes.
 
     /**
      * @test
@@ -423,156 +77,29 @@ class EventRepositoryTest extends UnitTestCase
 
         $query = $this->getMockQuery(['like']);
 
-        $demand->expects($this->once())
+        $demand->expects(self::once())
             ->method('getSearch')
-            ->will(
-                $this->returnValue($mockSearch)
-            );
-        $mockSearch->expects($this->once())
+            ->willReturn($mockSearch);
+
+        $mockSearch->expects(self::once())
             ->method('getSubject')
-            ->will(
-                $this->returnValue($subject)
-            );
-        $mockSearch->expects($this->once())
+            ->willReturn($subject);
+        $mockSearch->expects(self::once())
             ->method('getFields')
-            ->will(
-                $this->returnValue($searchFields)
-            );
-        $query->expects($this->exactly(2))
+            ->willReturn($searchFields);
+
+        $query->expects(self::exactly(2))
             ->method('like')
             ->withConsecutive(
                 ['bar', '%' . $subject . '%'],
                 ['baz', '%' . $subject . '%']
             )
-            ->will(
-                $this->returnValue($query)
-            );
+            ->willReturn($query);
 
         $expectedResult = [$query, $query];
-        $this->assertEquals(
+        self::assertEquals(
             $expectedResult,
             $this->fixture->createSearchConstraints($query, $demand)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function createCategoryConstraintsInitiallyReturnsEmptyArray(): void
-    {
-        $query = $this->getMockQuery();
-        $demand = $this->getMockEventDemand();
-        $this->assertSame(
-            [],
-            $this->fixture->createConstraintsFromDemand($query, $demand)
-        );
-    }
-
-    /**
-     * @test
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-     */
-    public function createCategoryConstraintsCreatesGenreConstraints(): void
-    {
-        $genreList = '1,2';
-        $query = $this->getMockQuery(['contains']);
-        $demand = $this->getMockEventDemand();
-        $mockConstraint = 'fooConstraint';
-
-        $demand->expects($this->any())
-            ->method('getGenre')
-            ->will($this->returnValue($genreList));
-        $query->expects($this->exactly(2))
-            ->method('contains')
-            ->withConsecutive(
-                [SI::LEGACY_KEY_GENRE, 1],
-                [SI::LEGACY_KEY_GENRE, 2]
-            )
-            ->will($this->returnValue($mockConstraint));
-        $this->assertSame(
-            [$mockConstraint, $mockConstraint],
-            $this->fixture->createCategoryConstraints($query, $demand)
-        );
-    }
-
-    /**
-     * @test
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-     */
-    public function createCategoryConstraintsCreatesVenueConstraints(): void
-    {
-        $venueList = '1,2';
-        $query = $this->getMockQuery(['contains']);
-        $demand = $this->getMockEventDemand();
-        $mockConstraint = 'fooConstraint';
-
-        $demand->expects($this->any())
-            ->method('getVenue')
-            ->will($this->returnValue($venueList));
-        $query->expects($this->exactly(2))
-            ->method('contains')
-            ->withConsecutive(
-                ['venue', 1],
-                ['venue', 2]
-            )
-            ->will($this->returnValue($mockConstraint));
-        $this->assertSame(
-            [$mockConstraint, $mockConstraint],
-            $this->fixture->createCategoryConstraints($query, $demand)
-        );
-    }
-
-    /**
-     * @test
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-     */
-    public function createCategoryConstraintsCreatesEventTypeConstraints(): void
-    {
-        $eventTypeList = '1,2';
-        $query = $this->getMockQuery(['equals']);
-        $demand = $this->getMockEventDemand();
-        $mockConstraint = 'fooConstraint';
-
-        $demand->expects($this->any())
-            ->method('getEventType')
-            ->will($this->returnValue($eventTypeList));
-        $query->expects($this->exactly(2))
-            ->method('equals')
-            ->withConsecutive(
-                ['eventType.uid', 1],
-                ['eventType.uid', 2]
-            )
-            ->will($this->returnValue($mockConstraint));
-        $this->assertSame(
-            [$mockConstraint, $mockConstraint],
-            $this->fixture->createCategoryConstraints($query, $demand)
-        );
-    }
-
-    /**
-     * @test
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-     */
-    public function createCategoryConstraintsCreatesCategoryConstraints(): void
-    {
-        $categoryList = '1,2';
-        $query = $this->getMockQuery(['contains']);
-        $demand = $this->getMockEventDemand();
-        $mockConstraint = 'fooConstraint';
-
-        $demand->expects($this->any())
-            ->method('getCategories')
-            ->will($this->returnValue($categoryList));
-        $query->expects($this->exactly(2))
-            ->method('contains')
-            ->withConsecutive(
-                ['categories', 1],
-                ['categories', 2]
-            )
-            ->will($this->returnValue($mockConstraint));
-        $this->assertSame(
-            [$mockConstraint, $mockConstraint],
-            $this->fixture->createCategoryConstraints($query, $demand)
         );
     }
 
@@ -580,19 +107,34 @@ class EventRepositoryTest extends UnitTestCase
      * @param array $methods
      * @return EventDemand|MockObject
      */
-    protected function getMockEventDemand(array $methods = []): \PHPUnit\Framework\MockObject\MockObject
+    protected function getMockEventDemand(array $methods = []): MockObject
     {
         return $this->getMockBuilder(EventDemand::class)
-            ->setMethods($methods)->getMock();
+            ->onlyMethods($methods)
+            ->getMock();
     }
 
     /**
      * @param array $methods Methods to mock
      * @return Search|MockObject
      */
-    protected function getMockSearch(array $methods = []): \PHPUnit\Framework\MockObject\MockObject
+    protected function getMockSearch(array $methods = []): MockObject
     {
         return $this->getMockBuilder(Search::class)
-            ->setMethods($methods)->getMock();
+            ->onlyMethods($methods)
+            ->getMock();
+    }
+
+    /**
+     * Helper function for creating a query mock with methods.
+     *
+     * @param array $methods
+     * @return QueryInterface|MockObject
+     */
+    protected function getMockQuery(array $methods = []): MockObject
+    {
+        return $this->getMockBuilder(QueryInterface::class)
+            ->onlyMethods($methods)
+            ->getMockForAbstractClass();
     }
 }

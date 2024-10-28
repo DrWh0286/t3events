@@ -25,7 +25,6 @@ use DWenzel\T3events\InvalidRequestException;
 use DWenzel\T3events\Utility\SettingsInterface;
 use DWenzel\T3events\View\ConfigurableViewInterface;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
-use TYPO3\CMS\Backend\View\BackendTemplateView;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -33,6 +32,7 @@ use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3Fluid\Fluid\View\ViewInterface;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
+use TYPO3\CMS\Backend\Template\ModuleTemplate;
 
 /**
  * Trait BackendViewTrait
@@ -61,11 +61,9 @@ trait BackendViewTrait
     protected RequestInterface $request;
 
     /**
-     * The current view, as resolved by resolveView()
-     *
-     * @var ViewInterface
+     * @var ModuleTemplate
      */
-    protected $view;
+    protected ModuleTemplate $moduleTemplate;
 
     /**
      * @return ConfigurationManagerInterface
@@ -77,6 +75,8 @@ trait BackendViewTrait
      */
     public function initializeView(ViewInterface $view): void
     {
+        $this->moduleTemplate = GeneralUtility::makeInstance(ModuleTemplate::class);
+
         if (
             $view instanceof ConfigurableViewInterface &&
             !empty($this->settings[ConfigurableViewInterface::SETTINGS_KEY])
@@ -84,34 +84,30 @@ trait BackendViewTrait
             $view->apply($this->settings[ConfigurableViewInterface::SETTINGS_KEY]);
         }
 
-        if ($view instanceof BackendTemplateView) {
-            $this->configurePageRenderer($view);
-
-            $demandCollection = new ButtonDemandCollection($this->getButtonConfiguration());
-            $this->createButtons($demandCollection);
-        }
+        $this->configurePageRenderer();
+        $demandCollection = new ButtonDemandCollection($this->getButtonConfiguration());
+        $this->createButtons($demandCollection);
     }
 
     /**
-     * @param BackendTemplateView $view
+     * Configure Page Renderer for JS requirements
      */
-    protected function configurePageRenderer(BackendTemplateView $view)
+    protected function configurePageRenderer()
     {
         $rendererConfiguration = $this->getPageRendererConfiguration();
 
         if (empty($rendererConfiguration[SettingsInterface::REQUIRE_JS]) ||
-            !\is_array($rendererConfiguration[SettingsInterface::REQUIRE_JS])) {
+            !is_array($rendererConfiguration[SettingsInterface::REQUIRE_JS])) {
             return;
         }
 
-        $pageRenderer = $view->getModuleTemplate()->getPageRenderer();
-
-        $configuration[SettingsInterface::PATH] = [];
+        $pageRenderer = $this->moduleTemplate->getPageRenderer();
+        $configuration[SettingsInterface::PATHS] = [];
         $modulesToLoad = [];
+
         foreach ($rendererConfiguration[SettingsInterface::REQUIRE_JS] as $identifier => $config) {
             $configuration[SettingsInterface::PATHS][$identifier] = $config[SettingsInterface::PATH];
-            if (isset($config[SettingsInterface::MODULES])
-            && \is_array($config[SettingsInterface::MODULES])) {
+            if (isset($config[SettingsInterface::MODULES]) && is_array($config[SettingsInterface::MODULES])) {
                 foreach ($config[SettingsInterface::MODULES] as $module) {
                     $modulesToLoad[] = $identifier . SettingsInterface::PATH_SEPARATOR . $module;
                 }
@@ -122,7 +118,6 @@ trait BackendViewTrait
         foreach ($modulesToLoad as $moduleToLoad) {
             $pageRenderer->loadRequireJsModule($moduleToLoad);
         }
-
     }
 
     /**
@@ -146,30 +141,24 @@ trait BackendViewTrait
         return $this->uriBuilder;
     }
 
-    protected function getIconFactory()
+    /**
+     * Get IconFactory instance
+     */
+    protected function getIconFactory(): IconFactory
     {
-        if ($this->view instanceof BackendTemplateView) {
-            return $this->view->getModuleTemplate()->getIconFactory();
-        }
-
         return GeneralUtility::makeInstance(IconFactory::class);
     }
 
     /**
-     * Returns a button bar either from module template or freshly instantiated
-     * @return ButtonBar
+     * Returns a ButtonBar instance from ModuleTemplate
      */
     protected function getButtonBar()
     {
-        if ($this->view instanceof BackendTemplateView) {
-            return $this->view->getModuleTemplate()->getDocHeaderComponent()->getButtonBar();
-        }
-
-        return GeneralUtility::makeInstance(ButtonBar::class);
+        return $this->moduleTemplate->getDocHeaderComponent()->getButtonBar();
     }
 
     /**
-     * @return mixed
+     * Retrieves PageRenderer configuration from TypoScript settings
      */
     protected function getPageRendererConfiguration()
     {

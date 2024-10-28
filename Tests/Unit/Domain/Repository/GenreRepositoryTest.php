@@ -5,7 +5,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Repository;
 /***************************************************************
  *  Copyright notice
  *  (c) 2015 Dirk Wenzel <dirk.wenzel@cps-it.de>
- *  All rights reserved
+ *  All rights reserved.
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,8 +23,6 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Repository;
 use DWenzel\T3events\Domain\Model\Dto\DemandInterface;
 use DWenzel\T3events\Domain\Repository\GenreRepository;
 use DWenzel\T3events\Tests\Unit\Domain\Model\Dto\MockDemandTrait;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -32,7 +30,6 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 /**
  * Test case for class \DWenzel\T3events\Domain\Repository\GenreRepository.
  *
- * @author Dirk Wenzel <dirk.wenzel@cps-it.de>
  * @coversDefaultClass \DWenzel\T3events\Domain\Repository\GenreRepository
  */
 class GenreRepositoryTest extends UnitTestCase
@@ -41,14 +38,16 @@ class GenreRepositoryTest extends UnitTestCase
     use MockQueryTrait;
 
     /**
-     * @var \DWenzel\T3events\Domain\Repository\GenreRepository
+     * @var GenreRepository
      */
     protected $fixture;
 
     protected function setUp(): void
     {
-        $this->objectManager = $this->createMock(ObjectManagerInterface::class);
-        $this->fixture = new GenreRepository($this->objectManager);
+        parent::setUp();
+
+        // Direct instantiation of GenreRepository without ObjectManager
+        $this->fixture = new GenreRepository();
     }
 
     /**
@@ -60,7 +59,7 @@ class GenreRepositoryTest extends UnitTestCase
         $demand = $this->getMockDemand();
         $query = $this->getMockQuery();
 
-        $this->assertEquals(
+        $this->assertSame(
             [],
             $this->fixture->createConstraintsFromDemand($query, $demand)
         );

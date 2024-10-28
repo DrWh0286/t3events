@@ -5,7 +5,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Repository;
 /***************************************************************
  *  Copyright notice
  *  (c) 2017 Erik Rauchstein <erik.rauchstein@cps-it.de>
- *  All rights reserved
+ *  All rights reserved.
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ namespace DWenzel\T3events\Tests\Unit\Domain\Repository;
 
 use DWenzel\T3events\Domain\Repository\PerformanceStatusRepository;
 use DWenzel\T3events\Tests\Unit\Domain\Model\Dto\MockDemandTrait;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
+use DWenzel\T3events\Tests\Unit\Domain\Model\Dto\MockQueryTrait;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -35,14 +35,16 @@ class PerformanceStatusRepositoryTest extends UnitTestCase
     use MockQueryTrait;
 
     /**
-     * @var PerformanceStatusRepository|MockObject
+     * @var PerformanceStatusRepository
      */
     protected $fixture;
 
     protected function setUp(): void
     {
-        $this->objectManager = $this->createMock(ObjectManagerInterface::class);
-        $this->fixture = new PerformanceStatusRepository($this->objectManager);
+        parent::setUp();
+
+        // Direct instantiation of PerformanceStatusRepository without ObjectManager
+        $this->fixture = new PerformanceStatusRepository();
     }
 
     /**
@@ -53,7 +55,7 @@ class PerformanceStatusRepositoryTest extends UnitTestCase
         $demand = $this->getMockDemand();
         $query = $this->getMockQuery();
 
-        $this->assertEquals(
+        $this->assertSame(
             [],
             $this->fixture->createConstraintsFromDemand($query, $demand)
         );

@@ -4,7 +4,6 @@ namespace DWenzel\T3events\Tests\Unit\Object;
 
 use PHPUnit\Framework\MockObject\MockBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /***************************************************************
  *  Copyright notice
@@ -12,27 +11,23 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
  *  (c) 2018 Dirk Wenzel <wenzel@cps-it.de>
  *  All rights reserved
  *
- * The GNU General Public License can be found at
- * http://www.gnu.org/copyleft/gpl.html.
- * A copy is found in the text file GPL.txt and important notices to the license
- * from the author is found in LICENSE.txt distributed with these scripts.
- * This script is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * This copyright notice MUST APPEAR in all copies of the script!
+ *  The GNU General Public License can be found at
+ *  http://www.gnu.org/copyleft/gpl.html.
+ *  A copy is found in the text file GPL.txt and important notices to the license
+ *  from the author is found in LICENSE.txt distributed with these scripts.
+ *  This script is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
 trait MockObjectManagerTrait
 {
     /**
-     * @var MockObject*/
-    protected $subject;
-
-    /**
-     * @var ObjectManager|MockObject
+     * @var MockObject
      */
-    protected $objectManager;
+    protected MockObject $subject;
 
     /**
      * Returns a builder object to create mock objects using a fluent interface.
@@ -41,15 +36,17 @@ trait MockObjectManagerTrait
      *
      * @return MockBuilder
      */
-    abstract public function getMockBuilder(string $className): MockBuilder;
+    abstract public function getMockBuilder(string|string[] $className): MockBuilder;
 
     /**
-     * @return ObjectManager|MockObject
+     * @return MockObject
      */
-    protected function getMockObjectManager()
+    protected function getMockObject(): MockObject
     {
-        return $this->getMockBuilder(ObjectManager::class)
+        // Create a mock object for the subject directly
+        return $this->getMockBuilder($this->subject::class)
             ->disableOriginalConstructor()
-            ->setMethods(['get'])->getMock();
+            ->onlyMethods(['methodName1', 'methodName2']) // Adjust with actual method names you want to mock
+            ->getMock();
     }
 }
