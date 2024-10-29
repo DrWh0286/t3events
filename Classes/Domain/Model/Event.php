@@ -531,7 +531,7 @@ class Event extends AbstractEntity
      *
      * @return \DWenzel\T3events\Domain\Model\EventType $eventType
      */
-    public function getEventType(): EventType
+    public function getEventType(): ?EventType
     {
         return $this->eventType;
     }

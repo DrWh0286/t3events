@@ -105,12 +105,22 @@ class EventController extends AbstractActionController
             );
         }
 
+        $itemsPerPage = $this->settings['paginate']['itemsPerPage'] ?? 10;
+        $maximumLinks = 5;
+        $currentPage = $this->request->hasArgument('currentPage') ? (int)$this->request->getArgument('currentPage') : 1;
+        $paginator = new \TYPO3\CMS\Extbase\Pagination\QueryResultPaginator($events, $currentPage, $itemsPerPage);
+        $pagination = new \DWenzel\T3events\NumberedPagination($paginator, $maximumLinks);
+
         $templateVariables = [
             'events' => $events,
             'demand' => $demand,
             SI::SETTINGS => $this->settings,
             SI::OVERWRITE_DEMAND => $overwriteDemand,
-            'data' => $this->request->getAttribute('currentContentObject')->data
+            'data' => $this->request->getAttribute('currentContentObject')->data,
+            'pagination' => [
+                'paginator' => $paginator,
+                'pagination' => $pagination,
+            ]
         ];
 
         /** @var EventControllerListActionWasExecuted $eventControllerListActionWasExecuted */
