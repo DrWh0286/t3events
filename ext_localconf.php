@@ -3,8 +3,9 @@
 if (!defined('TYPO3')) {
     die('Access denied.');
 }
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
-\DWenzel\T3events\Configuration\ExtensionConfiguration::configurePlugins();
+// \DWenzel\T3events\Configuration\ExtensionConfiguration::configurePlugins();
 // Modify flexform values
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_befunc.php']['getFlexFormDSClass']['t3events'] =
     \DWenzel\T3events\Hooks\BackendUtility::class;
@@ -59,3 +60,72 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1610471915] = [
     'priority' => 40,
     'class' => \DWenzel\T3events\Form\Element\PeriodConstraintLegendNode::class,
 ];
+
+call_user_func(function () {
+    ExtensionUtility::configurePlugin(
+        'DWenzel.T3events',
+        'Events',
+        [
+            EventController::class => 'list, show'
+        ],
+        // non-cacheable actions
+        [
+            EventController::class => ''
+        ]
+    );
+    ExtensionUtility::configurePlugin(
+        'DWenzel.T3events',
+        'EventsDetail',
+        [
+            EventController::class => 'show'
+        ],
+        // non-cacheable actions
+        [
+            EventController::class => ''
+        ]
+    );
+    ExtensionUtility::configurePlugin(
+        'DWenzel.T3events',
+        'EventsQuickmenu',
+        [
+            EventController::class => 'quickMenu'
+        ],
+        // non-cacheable actions
+        [
+            EventController::class => ''
+        ]
+    );
+    ExtensionUtility::configurePlugin(
+        'DWenzel.T3events',
+        'Performances',
+        [
+            PerformanceController::class => 'list, show'
+        ],
+        // non-cacheable actions
+        [
+            PerformanceController::class => ''
+        ]
+    );
+    ExtensionUtility::configurePlugin(
+        'DWenzel.T3events',
+        'PerformancesDetail',
+        [
+            PerformanceController::class => 'show'
+        ],
+        // non-cacheable actions
+        [
+            PerformanceController::class => ''
+        ]
+    );
+    ExtensionUtility::configurePlugin(
+        'DWenzel.T3events',
+        'PerformancesQuickmenu',
+        [
+            PerformanceController::class => 'quickMenu'
+        ],
+        // non-cacheable actions
+        [
+            PerformanceController::class => ''
+        ]
+    );
+});
