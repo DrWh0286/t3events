@@ -188,7 +188,7 @@ class Performance extends AbstractEntity
      *
      * @return \DWenzel\T3events\Domain\Model\Event
      */
-    public function getEvent(): Event
+    public function getEvent(): ?Event
     {
         if ($this->event instanceof LazyLoadingProxy) {
             $this->event->_loadRealInstance();
