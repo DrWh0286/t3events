@@ -4,6 +4,8 @@ if (!defined('TYPO3')) {
     die('Access denied.');
 }
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+use DWenzel\T3events\Controller\EventController;
+use DWenzel\T3events\Controller\PerformanceController;
 
 \DWenzel\T3events\Configuration\ExtensionConfiguration::configurePlugins();
 // Modify flexform values
@@ -60,73 +62,3 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1610471915] = [
     'priority' => 40,
     'class' => \DWenzel\T3events\Form\Element\PeriodConstraintLegendNode::class,
 ];
-
-// ToDo TYPO3 12 - Check if we should do it this way or we keep using \DWenzel\T3events\Configuration\ExtensionConfiguration::configurePlugins();
-// call_user_func(function () {
-//     ExtensionUtility::configurePlugin(
-//         'T3events',
-//         'Events',
-//         [
-//             EventController::class => 'list, show'
-//         ],
-//         // non-cacheable actions
-//         [
-//             EventController::class => ''
-//         ]
-//     );
-//     ExtensionUtility::configurePlugin(
-//         'T3events',
-//         'EventsDetail',
-//         [
-//             EventController::class => 'show'
-//         ],
-//         // non-cacheable actions
-//         [
-//             EventController::class => ''
-//         ]
-//     );
-//     ExtensionUtility::configurePlugin(
-//         'T3events',
-//         'EventsQuickmenu',
-//         [
-//             EventController::class => 'quickMenu'
-//         ],
-//         // non-cacheable actions
-//         [
-//             EventController::class => ''
-//         ]
-//     );
-//     ExtensionUtility::configurePlugin(
-//         'T3events',
-//         'Performances',
-//         [
-//             PerformanceController::class => 'list, show'
-//         ],
-//         // non-cacheable actions
-//         [
-//             PerformanceController::class => ''
-//         ]
-//     );
-//     ExtensionUtility::configurePlugin(
-//         'T3events',
-//         'PerformancesDetail',
-//         [
-//             PerformanceController::class => 'show'
-//         ],
-//         // non-cacheable actions
-//         [
-//             PerformanceController::class => ''
-//         ]
-//     );
-//     ExtensionUtility::configurePlugin(
-//         'T3events',
-//         'PerformancesQuickmenu',
-//         [
-//             PerformanceController::class => 'quickMenu'
-//         ],
-//         // non-cacheable actions
-//         [
-//             PerformanceController::class => ''
-//         ]
-//     );
-// });
