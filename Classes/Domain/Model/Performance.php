@@ -263,7 +263,7 @@ class Performance extends AbstractEntity
      *
      * @return \DateTime
      */
-    public function getEndDate(): \DateTime
+    public function getEndDate(): ?\DateTime
     {
         return $this->endDate;
     }
