@@ -254,7 +254,7 @@ class Event extends AbstractEntity
      *
      * @return string
      */
-    public function getTeaser(): string
+    public function getTeaser(): ?string
     {
         return $this->teaser;
     }
