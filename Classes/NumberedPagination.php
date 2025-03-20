@@ -14,7 +14,7 @@ final class NumberedPagination implements PaginationInterface
      */
     protected $paginator;
 
-    protected $maximumNumberOfLinks = 10;
+    protected $maximumNumberOfLinks = 1000;
     protected $displayRangeStart = 0;
     protected $displayRangeEnd = 0;
     protected $hasLessPages = false;

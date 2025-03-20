@@ -128,12 +128,11 @@ class PerformanceController extends AbstractActionController
         $demand->overwriteDemandObject($overwriteDemand, $this->settings);
 
         $performances = $this->performanceRepository->findDemanded($demand);
-        
+
         $itemsPerPage = $this->settings['paginate']['itemsPerPage'] ?? 10;
-        $maximumLinks = 5;
         $currentPage = $this->request->hasArgument('currentPage') ? (int)$this->request->getArgument('currentPage') : 1;
         $paginator = new \TYPO3\CMS\Extbase\Pagination\QueryResultPaginator($performances, $currentPage, $itemsPerPage);
-        $pagination = new \DWenzel\T3events\NumberedPagination($paginator, $maximumLinks);
+        $pagination = new \DWenzel\T3events\NumberedPagination($paginator);
 
         $templateVariables = [
             'performances' => $performances,
